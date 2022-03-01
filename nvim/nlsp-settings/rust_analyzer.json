@@ -1,0 +1,7 @@
+{
+    "rust-analyzer.lens.enable": true,
+    "rust-analyzer.inlayHints.enable": true,
+    "rust-analyzer.checkOnSave.enable": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.completion.autoimport.enable": true
+}
