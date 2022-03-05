@@ -249,7 +249,6 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<cmd>BufferPrevious<CR>', { noremap = tru
 require('nvim-autopairs').setup{}
 require('project_nvim').setup{}
 
-vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_respect_buf_cwd = 0
 require('nvim-tree').setup{
   update_cwd = true,
@@ -262,7 +261,8 @@ require('nvim-tree').setup{
     auto_resize = true,
     hide_root_folder = false,
     width = 30,
-  }
+  },
+  quit_on_open = 0
 }
 
 vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })

@@ -24,3 +24,6 @@ abbr -a grep 'rg' # use ripgrep instead of grep, but don't relearn old habits
 
 # set cursor to block always
 set -g fish_cursor_insert 'block' 'blink'
+
+# set theme of bat (cat alternative with syntax highlighting)
+set -gx BAT_THEME "gruvbox-dark"
