@@ -6,3 +6,6 @@ style = "bold red"
 
 [time]
 disabled = false
+
+[gcloud]
+disabled = true
