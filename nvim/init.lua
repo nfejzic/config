@@ -11,7 +11,7 @@ require('plugins')
 require('config_lsp')
 
 -- lsp-lightbulb
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 vim.cmd [[
   set nofoldenable
@@ -52,7 +52,7 @@ vim.o.smartcase = true
 
 --Decrease update time
 vim.o.updatetime = 250
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = 'yes:3'
 vim.o.cmdheight = 2
 vim.o.showmode = false
 
@@ -117,6 +117,7 @@ vim.cmd [[
 -- vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 -- vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 -- vim.g.indent_blankline_show_trailing_blankline_indent = false
+vim.g.indent_blankline_filetype = {'vim', 'NvimTree', 'html', 'php'}
 
 -- Gitsigns
 require('gitsigns').setup {
@@ -154,12 +155,12 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {
-            "html", "html5",
-        },
-    custom_captures = {
-      -- with custom nfejzic/gruvbox theme
-      ["mutable_specifier"] = "TSMutableSpecifier",
+        "html", "html5",
     },
+    -- custom_captures = {
+      -- with custom nfejzic/gruvbox theme
+      -- ["mutable_specifier"] = "TSMutableSpecifier",
+    -- },
   },
   playground = {
     enable = true,

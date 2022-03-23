@@ -102,7 +102,7 @@ return require('packer').startup(function(use)
 
     -- Themes
     use 'nfejzic/gruvbox.nvim'
-    -- use 'RRethy/nvim-base16'
+    use 'RRethy/nvim-base16'
 
     -- Tabline
     use { 'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'} }
