@@ -5,8 +5,10 @@ local nlspsettings = require 'nlspsettings'
 
 nlspsettings.setup({
   config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
+  local_settings_dir = ".nlsp-settings",
   local_settings_root_markers = { '.git' },
-  jsonls_append_default_schemas = true
+  append_default_schemas = true,
+  loader = 'json'
 })
 
 local on_attach = function(client, bufnr)
@@ -91,14 +93,14 @@ lsp_installer.on_server_ready(function(server)
             server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
         }
         server:attach_buffers()
-    -- elseif server.name == "jsonls" then
-    --   opts.settings = {
-    --     json = { schemas = require('nlspsettings.jsonls').get_default_schemas() }
-    --   }
-    --
-    --   server:setup(opts)
+--    elseif server.name == "jsonls" then 
+--        server:setup {
+--            on_attach = on_attach,
+--            client.resolved_capabilities.document_formatting = false
+--            client.resolved_capabilities.document_range_formatting = false
+--        }
     elseif server.name == "tsserver" then
-      server:setup{
+      server:setup {
         on_attach = function(client, bufnr)
           client.resolved_capabilities.document_formatting = false
           client.resolved_capabilities.document_range_formatting = false
@@ -116,31 +118,35 @@ lsp_installer.on_server_ready(function(server)
     end
 end)
 
-local prettier = require('prettier')
-
-prettier.setup({
-  bin = 'prettierd',
-  filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "html5",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "yaml",
-  }
-})
+-- local prettier = require('prettier')
+--
+-- prettier.setup({
+--   bin = 'prettierd',
+--   filetypes = {
+--     "css",
+--     "graphql",
+--     "html",
+--     "html5",
+--     "less",
+--     "markdown",
+--     "scss",
+--     "yaml",
+--     "json",
+--     "vue",
+--   }
+-- })
 
 local null_ls = require('null-ls');
 null_ls.setup({
   sources = {
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+            disabled_filetypes = { "json", "vue" },
+        }),
     },
     on_attach = on_attach,
+    disabled_filetypes = { "json", "vue" }
 })
 
 -- Example custom server
@@ -148,15 +154,6 @@ null_ls.setup({
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
-
--- local luadev = require("lua-dev").setup({
-  -- add any options here, or leave empty to use the default settings
-  -- lspconfig = {
-  --   cmd = {"lua-language-server"}
-  -- },
--- })
-
--- lspconfig.sumneko_lua.setup(luadev)
 
 -- luasnip setup
 local luasnip = require 'luasnip'

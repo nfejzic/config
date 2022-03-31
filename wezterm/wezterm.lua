@@ -6,12 +6,16 @@ gruvbox_dark_hard.background = "#1d2021"
 -- this is a simple comment to check how does this font look like
 return {
     -- font = wezterm.font("FiraCode Nerd Font"),
-    font = wezterm.font("Fira Code"),
+    -- font = wezterm.font("Fira Code"),
     -- font = wezterm.font("Noto Sans Mono"),
     -- font = wezterm.font("Source Code Pro"),
+    -- font = wezterm.font("Hack"),
+    font = wezterm.font("JetBrains Mono"),
     font_size = 12,
     freetype_load_target = "Light",
     
+    -- l1gq@a
+    -- @some_thing
     color_schemes = {
         ["Gruvbox Dark Hard"] = gruvbox_dark_hard
     },

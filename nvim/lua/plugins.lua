@@ -18,7 +18,8 @@ return require('packer').startup(function(use)
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
     -- using prettier as formatter (scss, css etc.)
-    use 'MunifTanjim/prettier.nvim'
+    -- use 'MunifTanjim/prettier.nvim'
+    -- use 'prettier/vim-prettier'
 
     -- Autocomplete
     use 'hrsh7th/cmp-nvim-lsp'

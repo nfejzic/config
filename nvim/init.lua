@@ -67,7 +67,7 @@ vim.cmd([[colorscheme gruvbox]])
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 
 -- use prettierd for faster formatting
-vim.b.prettier_exec_cmd = "prettierd"
+-- vim.b.prettier_exec_cmd = "prettierd"
 
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
@@ -157,10 +157,10 @@ require('nvim-treesitter.configs').setup {
     disable = {
         "html", "html5",
     },
-    -- custom_captures = {
+    custom_captures = {
       -- with custom nfejzic/gruvbox theme
-      -- ["mutable_specifier"] = "TSMutableSpecifier",
-    -- },
+      -- ["ref_specifier"] = "TSConstant",
+    },
   },
   playground = {
     enable = true,
@@ -236,7 +236,7 @@ vim.cmd [[
   augroup Format_on_save
     autocmd!
     autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()
-    autocmd BufWritePre *.*css,*.less,*.html,*.ts :Prettier<CR>
+    " autocmd BufWritePre *.*css,*.less,*.html,*.ts,*.vue :Prettier<CR>
   augroup end
 ]]
 
