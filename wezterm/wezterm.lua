@@ -1,7 +1,14 @@
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 
 local gruvbox_dark_hard = wezterm.get_builtin_color_schemes()["Gruvbox Dark"]
 gruvbox_dark_hard.background = "#1d2021"
+
+
+wezterm.on("gui-startup", function()
+    local _, _, window = mux.spawn_window {}
+    window:gui_window():maximize()
+end)
 
 -- this is a simple comment to check how does this font look like
 return {
@@ -35,10 +42,8 @@ return {
         top = "0.0cell",
         bottom = 0,
     },
-    window_decorations = "NONE",
 
-    initial_rows = 200,
-    initial_cols = 400,
+    window_decorations = "RESIZE",
 
     warn_about_missing_glyphs = false
 }
