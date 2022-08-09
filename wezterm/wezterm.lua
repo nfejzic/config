@@ -16,7 +16,7 @@ return {
     -- font = wezterm.font("Noto Sans Mono"),
     -- font = wezterm.font("Source Code Pro"),
     -- font = wezterm.font("Hack"),
-    font = wezterm.font("JetBrains Mono"), -- ->
+    font = wezterm.font("JetBrains Mono Regular"), -- ->
     -- font = wezterm.font("Cascadia Code"),
     font_size = 11,
     freetype_load_target = "Light",
