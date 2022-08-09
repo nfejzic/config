@@ -119,30 +119,27 @@ vim.cmd([[colorscheme catppuccin]])
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 
--- use prettierd for faster formatting
--- vim.b.prettier_exec_cmd = "prettierd"
-
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
 
 --Set statusbar
 require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-    -- component_separators = { left = '', right = ''},
-    -- section_separators = { left = '', right = ''},
-  },
-  sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'diff', 'branch' },
-    lualine_c = { 'filename' },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' }
-  },
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        -- component_separators = { left = '', right = ''},
+        -- section_separators = { left = '', right = ''},
+    },
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'diff', 'branch' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+    },
 }
 
 -- global statusline
@@ -177,33 +174,33 @@ vim.g.indent_blankline_filetype = { 'vim', 'NvimTree', 'html', 'php' }
 
 -- Telescope
 require('telescope').setup {
-  defaults = {
-    file_ignore_patterns = {
-      "node_modules"
+    defaults = {
+        file_ignore_patterns = {
+            "node_modules"
+        },
+        mappings = {
+            i = {
+                -- ['<C-u>'] = false,
+                -- ['<C-d>'] = false,
+            },
+        },
+        layout_strategy = 'vertical',
+        -- vimgrep_arguments = {
+        --   'rg',
+        --   '--color=never',
+        --   '--no-heading',
+        --   '--with-filename',
+        --   '--line-number',
+        --   '--column',
+        --   '--smart-case',
+        --   '--hidden',
+        -- }
     },
-    mappings = {
-      i = {
-        -- ['<C-u>'] = false,
-        -- ['<C-d>'] = false,
-      },
-    },
-    layout_strategy = 'vertical',
-    -- vimgrep_arguments = {
-    --   'rg',
-    --   '--color=never',
-    --   '--no-heading',
-    --   '--with-filename',
-    --   '--line-number',
-    --   '--column',
-    --   '--smart-case',
-    --   '--hidden',
-    -- }
-  },
-  extensions = {
-    ['ui-select'] = {
-      require('telescope.themes').get_cursor()
+    extensions = {
+        ['ui-select'] = {
+            require('telescope.themes').get_cursor()
+        }
     }
-  }
 }
 
 -- Use Telescope for LSP Code Actions
@@ -216,75 +213,75 @@ require('telescope').load_extension 'projects'
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = {
-      "html", "html5"
+    highlight = {
+        enable = true, -- false will disable the whole extension
+        disable = {
+            "html", "html5"
+        },
+        custom_captures = {
+            -- with custom nfejzic/gruvbox theme
+            -- ["ref_specifier"] = "TSConstant",
+        },
     },
-    custom_captures = {
-      -- with custom nfejzic/gruvbox theme
-      -- ["ref_specifier"] = "TSConstant",
+    playground = {
+        enable = true,
+        disable = { "c" },
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {},
     },
-  },
-  playground = {
-    enable = true,
-    disable = { "c" },
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {},
-  },
-  incremental_selection = {
-    enable = false,
-    disable = { "c", "vue" },
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
+    incremental_selection = {
+        enable = false,
+        disable = { "c", "vue" },
+        keymaps = {
+            init_selection = 'gnn',
+            node_incremental = 'grn',
+            scope_incremental = 'grc',
+            node_decremental = 'grm',
+        },
     },
-  },
-  indent = {
-    enable = true,
-    disable = { "c", "html5", "html", "vue" }
-  },
-  context_commentstring = {
-    enable = true
-  },
-  textobjects = {
-    select = {
-      enable = false,
-      disable = { "c" },
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
+    indent = {
+        enable = true,
+        disable = { "c", "html5", "html", "vue" }
     },
-    move = {
-      enable = true,
-      disable = { "c" },
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
+    context_commentstring = {
+        enable = true
     },
-  },
+    textobjects = {
+        select = {
+            enable = false,
+            disable = { "c" },
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+            },
+        },
+        move = {
+            enable = true,
+            disable = { "c" },
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                [']m'] = '@function.outer',
+                [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+                [']M'] = '@function.outer',
+                [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+                ['[m'] = '@function.outer',
+                ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+                ['[M'] = '@function.outer',
+                ['[]'] = '@class.outer',
+            },
+        },
+    },
 }
 
 -- Diagnostic keymaps
@@ -313,14 +310,14 @@ require('nvim-autopairs').setup {}
 require('project_nvim').setup {}
 
 require('nvim-tree').setup {
-  sync_root_with_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_root = true,
-  },
-  view = {
-    side = 'left',
-  },
+    sync_root_with_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_root = true,
+    },
+    view = {
+        side = 'left',
+    },
 }
 
 vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
@@ -330,110 +327,110 @@ vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>NvimTreeToggle<CR>', { noremap 
 local wk = require('which-key')
 
 wk.register({
-  ['<leader>'] = {
-    f = {
-      name = "Find/File",
-      f = { "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--hidden', '--follow', '--ignore-file', '.gitignore' } })<CR>",
-        "Find file" },
-      b = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })<CR>',
-        "Fuzzy search in buffer" },
-      t = { "<cmd>NvimTreeToggle<CR>", "Open File Tree" },
-      p = { "<cmd>Telescope projects<CR>", "Recent projects" },
-      d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." }
-    },
-    b = {
-      name = "Buffer",
-      c = "Close buffer",
-      b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", 'Telescope search buffers' },
-    },
-    s = {
-      name = "Search",
-      d = { "<cmd>lua require('telescope.builtin').grep_string()<CR>", 'Grep string' },
-      l = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", 'Live grep string' },
-      L = { "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function () return {'--case-sensitive'} end })<CR>",
-        'Live grep string' },
-      s = { "<cmd>lua require('telescope.builtin').treesitter()<CR>", 'Treesitter Document Symbols' },
-    },
-    k = {
-      name = "Collapse / Fold",
-      k = { "<cmd>foldclose<CR>", "Fold" },
-      o = { "<cmd>foldopen<CR>", "Unfold (open fold)" },
-      O = { "zR", "Unfold all (open fold)" },
-    },
-    ['<space>'] = { "<C-^>", 'Switch to previous buffer' },
-    e = "Lsp Diagnostics popup",
-    ['?'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
-  }
+    ['<leader>'] = {
+        f = {
+            name = "Find/File",
+            f = { "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--hidden', '--follow', '--ignore-file', '.gitignore' } })<CR>",
+                "Find file" },
+            b = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })<CR>',
+                "Fuzzy search in buffer" },
+            t = { "<cmd>NvimTreeToggle<CR>", "Open File Tree" },
+            p = { "<cmd>Telescope projects<CR>", "Recent projects" },
+            d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." }
+        },
+        b = {
+            name = "Buffer",
+            c = "Close buffer",
+            b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", 'Telescope search buffers' },
+        },
+        s = {
+            name = "Search",
+            d = { "<cmd>lua require('telescope.builtin').grep_string()<CR>", 'Grep string' },
+            l = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", 'Live grep string' },
+            L = { "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function () return {'--case-sensitive'} end })<CR>",
+                'Live grep string' },
+            s = { "<cmd>lua require('telescope.builtin').treesitter()<CR>", 'Treesitter Document Symbols' },
+        },
+        k = {
+            name = "Collapse / Fold",
+            k = { "<cmd>foldclose<CR>", "Fold" },
+            o = { "<cmd>foldopen<CR>", "Unfold (open fold)" },
+            O = { "zR", "Unfold all (open fold)" },
+        },
+        ['<space>'] = { "<C-^>", 'Switch to previous buffer' },
+        e = "Lsp Diagnostics popup",
+        ['?'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
+    }
 })
 
 -- Gitsigns
 local has_gitsigns, _ = pcall(require, 'gitsigns.nvim')
 
 if has_gitsigns then
-  require("gitsigns").setup {
-    signs = {
-      -- add = { text = '+' },
-      -- change = { text = '~' },
-      -- delete = { text = '_' },
-      -- topdelete = { text = '‾' },
-      -- changedelete = { text = '~' },
-    },
-    current_line_blame = true,
-    -- current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  }
-
-  wk.register({
-    ['<leader>'] = {
-      g = {
-        name = 'Git',
-        j = { '<cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
-        k = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
-        p = { '<cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
-        s = { '<cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
-        u = { '<cmd>Gitsigns stage_hunk<CR>', 'Unstage hunk' },
-        r = { '<cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
-        d = { '<cmd>Gitsigns diffthis<CR>', 'Diff this' },
-        q = { '<cmd>Gitsigns setqflist<CR>', 'Show changes in quickfix list' },
-      }
+    require("gitsigns").setup {
+        signs = {
+            -- add = { text = '+' },
+            -- change = { text = '~' },
+            -- delete = { text = '_' },
+            -- topdelete = { text = '‾' },
+            -- changedelete = { text = '~' },
+        },
+        current_line_blame = true,
+        -- current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     }
-  })
+
+    wk.register({
+        ['<leader>'] = {
+            g = {
+                name = 'Git',
+                j = { '<cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
+                k = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
+                p = { '<cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
+                s = { '<cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
+                u = { '<cmd>Gitsigns stage_hunk<CR>', 'Unstage hunk' },
+                r = { '<cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
+                d = { '<cmd>Gitsigns diffthis<CR>', 'Diff this' },
+                q = { '<cmd>Gitsigns setqflist<CR>', 'Show changes in quickfix list' },
+            }
+        }
+    })
 end
 
 -- fugitive specific, also requires 'tpope/vim-fugitive'
 wk.register({
-  ['<leader>'] = {
-    g = {
-      name = 'Git',
-      g = { '<cmd>G<CR>', 'Git status' }
-    },
-    -- Git merge:
-    m = {
-      name = 'Merge',
-      h = { '<cmd>diffget //2<CR>', 'Use ours' },
-      l = { '<cmd>diffget //2<CR>', 'Use theirs' },
+    ['<leader>'] = {
+        g = {
+            name = 'Git',
+            g = { '<cmd>G<CR>', 'Git status' }
+        },
+        -- Git merge:
+        m = {
+            name = 'Merge',
+            h = { '<cmd>diffget //2<CR>', 'Use ours' },
+            l = { '<cmd>diffget //2<CR>', 'Use theirs' },
+        }
     }
-  }
 })
 
 local has_trouble, trouble = pcall(require, "trouble")
 
 if has_trouble then
-  trouble.setup {}
+    trouble.setup {}
 
-  wk.register({
-    t = {
-      name = "Trouble",
-      q = { '<cmd>TroubleToggle quickfix<CR>', 'Quickfix' },
-      l = { '<cmd>TroubleToggle loclist<CR>', 'Loclist' },
-      d = { '<cmd>TroubleToggle document_diagnostics<CR>', 'Document Diagnostics' },
-      w = { '<cmd>TroubleToggle workspace_diagnostics<CR>', 'Workspace Diagnostics' },
-      t = { '<cmd>TodoTrouble<CR>', 'TODO / FIXME etc.' },
-    }
-  })
+    wk.register({
+        t = {
+            name = "Trouble",
+            q = { '<cmd>TroubleToggle quickfix<CR>', 'Quickfix' },
+            l = { '<cmd>TroubleToggle loclist<CR>', 'Loclist' },
+            d = { '<cmd>TroubleToggle document_diagnostics<CR>', 'Document Diagnostics' },
+            w = { '<cmd>TroubleToggle workspace_diagnostics<CR>', 'Workspace Diagnostics' },
+            t = { '<cmd>TodoTrouble<CR>', 'TODO / FIXME etc.' },
+        }
+    })
 end
 
 vim.g.bufferline = {
-  animation = false,
+    animation = false,
 }
 
 require('colorizer').setup()
