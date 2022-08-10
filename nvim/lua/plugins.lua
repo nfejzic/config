@@ -124,7 +124,6 @@ return require('packer').startup(function(use)
     }
 
     -- Themes
-    use 'nfejzic/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
     use 'EdenEast/nightfox.nvim'
     use 'RRethy/nvim-base16'
