@@ -63,6 +63,7 @@ vim.o.termguicolors = true
 -- vim.cmd('colorscheme gruvbox-material')
 vim.g.gruvbox_contrast_dark = 'hard'
 
+local colors = require("catppuccin.palettes").get_palette()
 require("catppuccin").setup({
     styles = {
         comments = { "italic" },
@@ -106,6 +107,11 @@ require("catppuccin").setup({
         telekasten = true,
         symbols_outline = true,
     },
+    custom_highlights = {
+        TSNamespace = { style = {} },
+        rustTSRefSpecifier = { fg = colors.yellow, style = {} },
+        rustTSMutableSpecifier = { fg = colors.yellow, style = {} }
+    }
 })
 
 vim.g.tokyonight_style = "night"
@@ -220,7 +226,9 @@ require('nvim-treesitter.configs').setup {
         },
         custom_captures = {
             -- with custom nfejzic/gruvbox theme
-            -- ["ref_specifier"] = "TSConstant",
+            ["ref_specifier"] = "rustTSRefSpecifier",
+            ["mutable_specifier"] = "rustTSMutableSpecifier",
+
         },
     },
     playground = {
