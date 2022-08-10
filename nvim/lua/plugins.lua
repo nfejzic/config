@@ -33,8 +33,8 @@ return require('packer').startup(function(use)
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
     use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
     }
 
     -- using prettier as formatter (scss, css etc.)
@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
 
     -- Debugging
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
     -- Syntax (TreeSitter)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -68,22 +68,22 @@ return require('packer').startup(function(use)
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {'nvim-lua/plenary.nvim'}
+        requires = { 'nvim-lua/plenary.nvim' }
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use {'nvim-telescope/telescope-ui-select.nvim' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
 
     -- Show TODO, FIX, HACK comments in telescope
     use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("todo-comments").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("todo-comments").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
     }
 
     use 'lukas-reineke/indent-blankline.nvim'
@@ -96,15 +96,15 @@ return require('packer').startup(function(use)
     -- Git
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- git signs in gutter
     use { -- GitHub PR UI
-      'pwntester/octo.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
-        'kyazdani42/nvim-web-devicons',
-      },
-      config = function ()
-        require"octo".setup()
-      end
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function()
+            require "octo".setup()
+        end
     }
     use 'TimUntersberger/neogit'
     use 'tpope/vim-fugitive'
@@ -119,11 +119,12 @@ return require('packer').startup(function(use)
     use {
         'kyazdani42/nvim-tree.lua',
         requires = {
-          'kyazdani42/nvim-web-devicons', -- optional, for file icon
+            'kyazdani42/nvim-web-devicons', -- optional, for file icon
         },
     }
 
     -- Themes
+    -- use 'nfejzic/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
     use 'EdenEast/nightfox.nvim'
     use 'RRethy/nvim-base16'
@@ -131,7 +132,7 @@ return require('packer').startup(function(use)
     use 'ishan9299/nvim-solarized-lua'
     use { "catppuccin/nvim", as = "catppuccin" }
     -- Tabline
-    use { 'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'} }
+    use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
     -- Easier lua dev (working with init.lua)
     -- use 'folke/lua-dev.nvim'
