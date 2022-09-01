@@ -250,14 +250,14 @@ require('nvim-treesitter.configs').setup {
     },
     indent = {
         enable = true,
-        disable = { "c", "html5", "html", "vue" }
+        disable = { "c", "html5", "html" }
     },
     context_commentstring = {
         enable = true
     },
     textobjects = {
         select = {
-            enable = false,
+            enable = true,
             disable = { "c" },
             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
             keymaps = {
@@ -298,14 +298,6 @@ vim.api.nvim_set_keymap('n', '<leader>lk', '<cmd>lua vim.diagnostic.goto_prev()<
 vim.api.nvim_set_keymap('n', '<leader>lj', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
-
--- Format on save
-vim.cmd [[
-  augroup Format_on_save
-    autocmd!
-    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
-  augroup end
-]]
 
 -- These commands will navigate through buffers in order regardless of which mode you are using
 -- e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering

@@ -134,9 +134,6 @@ return require('packer').startup(function(use)
     -- Tabline
     use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
-    -- Easier lua dev (working with init.lua)
-    -- use 'folke/lua-dev.nvim'
-
     -- Languages (indentation and more)
     use 'sheerun/vim-polyglot'
     use 'windwp/nvim-autopairs'

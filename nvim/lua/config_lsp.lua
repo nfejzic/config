@@ -14,10 +14,25 @@ nlspsettings.setup({
   loader = 'json'
 })
 
+local lsp_formatting = function(bufnr)
+  -- TODO: remove following line of code when resolved_capabilities support is dropped
+  vim.lsp.buf.formatting_sync()
+  -- TODO: uncomment following code when resolved_capabilities support is dropped
+  -- vim.lsp.buf.format({
+  --   filter = function(clients)
+  --     -- filter out clients that you don't want to use
+  --     return vim.tbl_filter(function(client)
+  --       return client.name ~= "tsserver" | client.name ~= "jsonls"
+  --     end, clients)
+  --   end,
+  --   bufnr = bufnr,
+  -- })
+end
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 -- Add some commands and keybindings when server loads
 local on_attach = function(client, bufnr)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_sync()' ]]
-
   local wk = require('which-key')
 
   wk.register({
@@ -62,6 +77,26 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
+
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      'Format',
+      function()
+        lsp_formatting(bufnr)
+      end,
+      { nargs = 0 }
+    )
+  end
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -182,11 +217,11 @@ mason_lsp.setup_handlers {
           },
           useWorkspaceDependencies = true,
           experimental = {
-            templateInterpolationService = false,
+            templateInterpolationService = true,
           },
         },
         format = {
-          enable = false,
+          enable = true,
           options = {
             useTabs = false,
             tabSize = 2,
@@ -215,7 +250,7 @@ mason_lsp.setup_handlers {
 local null_ls = require('null-ls');
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.stylelint,
+    null_ls.builtins.diagnostics.commitlint,
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.eslint_d,
