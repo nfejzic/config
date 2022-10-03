@@ -9,11 +9,10 @@ wezterm.on("gui-startup", function()
     window:gui_window():maximize()
 end)
 
--- this is a simple comment to check how does this font look like
 return {
-    font = wezterm.font("JetBrains Mono"),
-    -- font = wezterm.font("Cascadia Code"),
-    font_size = 11,
+    -- font = wezterm.font("JetBrains Mono"),
+    font = wezterm.font("Cascadia Code"),
+    font_size = 12,
     freetype_load_target = "Light",
 
     -- enable cursive italic form for Cascadia Code font
