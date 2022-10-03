@@ -114,13 +114,15 @@ require("catppuccin").setup({
     }
 })
 
+require("gruvbox").setup({
+    italic = false,
+    contrast = "hard", -- can be "hard", "soft" or empty string
+})
+
 vim.g.tokyonight_style = "night"
 vim.g.catppuccin_flavour = "mocha"
-vim.cmd([[colorscheme catppuccin]])
--- vim.cmd([[colorscheme solarized]])
 -- vim.cmd([[colorscheme gruvbox]])
--- vim.cmd([[colorscheme tokyonight]])
--- vim.cmd([[colorscheme nightfox]])
+vim.cmd([[colorscheme catppuccin]])
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
@@ -401,7 +403,7 @@ wk.register({
     ['<leader>'] = {
         g = {
             name = 'Git',
-            g = { '<cmd>G<CR>', 'Git status' }
+            G = { '<cmd>G<CR>', 'Git status' }
         },
         -- Git merge:
         m = {
@@ -411,6 +413,43 @@ wk.register({
         }
     }
 })
+
+local has_diffview, _ = pcall(require, "diffview")
+
+
+if has_diffview then
+    wk.register({
+        ['<leader>'] = {
+            g = {
+                name = 'Git',
+                g = { '<cmd>:DiffviewOpen<CR>', 'Open Diff View' },
+                c = { '<cmd>:DiffviewClose<CR>', 'Close Diff View' },
+            }
+
+        }
+    })
+
+    function setDiffviewKeybinds()
+        vim.keymap.set('n', '<leader>gt', '<cmd>:DiffviewToggleFiles<CR>', {
+            desc = 'Toggle Diff View Files'
+        })
+    end
+
+    vim.api.nvim_create_augroup("bufcheck", { clear = true })
+    vim.api.nvim_create_autocmd("Filetype", {
+        group = "bufcheck",
+        pattern = { "DiffviewFiles" },
+        callback = setDiffviewKeybinds
+    })
+
+    require('diffview').setup({
+        view = {
+            merge_tool = {
+                layout = "diff3_mixed"
+            }
+        }
+    })
+end
 
 local has_trouble, trouble = pcall(require, "trouble")
 
