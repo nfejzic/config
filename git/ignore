@@ -1,2 +1,4 @@
 .nlsp-settings/
 .null-ls-root
+.husky
+.idea
