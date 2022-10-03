@@ -15,6 +15,9 @@ abbr -a ll 'exa -l'
 abbr -a lla 'exa -la'
 abbr -a nv 'nvim'
 abbr -a vim 'nvim'
+abbr -a wstorm 'webstorm'
+abbr -a worm 'webstorm'
+abbr -a wm 'webstorm'
 abbr -a work 'cd ~/Developer/Tomes/idana-local-setup/'
 abbr -a ta 'tmux attach -t'
 abbr -a tk 'tmux kill-session -t'
@@ -49,4 +52,4 @@ abbr -a dbox-lamp-down 'docker-compose down' # stop the lamp stack
 set -g fish_cursor_insert 'block' 'blink'
 
 # set theme of bat (cat alternative with syntax highlighting)
-set -gx BAT_THEME "gruvbox-dark"
+set -gx BAT_THEME "Catppuccin-mocha"
