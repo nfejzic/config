@@ -19,11 +19,21 @@ abbr -a wstorm 'webstorm'
 abbr -a worm 'webstorm'
 abbr -a wm 'webstorm'
 abbr -a work 'cd ~/Developer/Tomes/idana-local-setup/'
+abbr -a grep 'rg' # use ripgrep instead of grep, but don't relearn old habits
+
+# tmux
 abbr -a ta 'tmux attach -t'
 abbr -a tk 'tmux kill-session -t'
 abbr -a tn 'tmux new -s'
 abbr -a tl 'tmux ls'
-abbr -a grep 'rg' # use ripgrep instead of grep, but don't relearn old habits
+
+# zellij
+abbr -a ja 'zellij attach'
+abbr -a jk 'zellij kill-sessions'
+abbr -a jn 'zellij --session'
+abbr -a jtn 'zellij --layout tomes --session'
+abbr -a jen 'zellij --layout tomes_edit --session'
+abbr -a jl 'zellij list-sessions'
 
 # Git
 abbr -a gs 'git status'
@@ -36,6 +46,7 @@ abbr -a gc 'git commit'
 abbr -a gk 'git checkout'
 abbr -a gp 'git pull'
 abbr -a gpp 'git push'
+abbr -a gbd 'git branch -vv | rg gone | awk \'{print $1}\' | xargs -p -I _ git branch -D _'
 abbr -a gw 'git worktree'
 abbr -a gwa 'git worktree add' # checkout branch (directory) in worktree
 abbr -a gwr 'git worktree remove' # remove branch (directory) in worktree
@@ -53,3 +64,11 @@ set -g fish_cursor_insert 'block' 'blink'
 
 # set theme of bat (cat alternative with syntax highlighting)
 set -gx BAT_THEME "Catppuccin-mocha"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/nfejzic/.local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+
+# set default editor
+set -gx EDITOR 'nvim'
