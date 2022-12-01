@@ -9,3 +9,6 @@ disabled = false
 
 [gcloud]
 disabled = true
+
+[conda]
+disabled = true
