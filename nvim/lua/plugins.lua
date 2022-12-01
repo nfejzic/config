@@ -120,10 +120,13 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'kyazdani42/nvim-tree.lua',
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
         requires = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icon
-        },
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        }
     }
 
     -- Themes
@@ -135,11 +138,13 @@ return require('packer').startup(function(use)
     -- use 'shaunsingh/solarized.nvim'
     use 'ishan9299/nvim-solarized-lua'
     use { "catppuccin/nvim", as = "catppuccin" }
+    use 'shaunsingh/nord.nvim'
     -- Tabline
     use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
     -- Languages (indentation and more)
-    use 'sheerun/vim-polyglot'
+    -- use 'sheerun/vim-polyglot'
+    use 'tpope/vim-sleuth'
     use 'windwp/nvim-autopairs'
 
     -- Projects
@@ -156,4 +161,28 @@ return require('packer').startup(function(use)
 
     -- Surround
     use 'tpope/vim-surround'
+
+    -- kdl syntax and indent
+    use 'imsnif/kdl.vim'
+
+    -- prettier UI
+    -- use({
+    --     "folke/noice.nvim",
+    --     config = function()
+    --         require("noice").setup({
+    --             -- add any options here
+    --         })
+    --     end,
+    --     requires = {
+    --         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    --         "MunifTanjim/nui.nvim",
+    --         -- OPTIONAL:
+    --         --   `nvim-notify` is only needed, if you want to use the notification view.
+    --         --   If not available, we use `mini` as the fallback
+    --         "rcarriga/nvim-notify",
+    --     }
+    -- })
+
+    use 'stevearc/dressing.nvim'
+    use 'lewis6991/impatient.nvim'
 end)

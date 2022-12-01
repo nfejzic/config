@@ -1,9 +1,16 @@
+require('impatient')
+
 vim.o.smarttab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.relativenumber = true
+vim.o.nu = true
+
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1 -- use neotree instead
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 -- load plugins
 
@@ -24,9 +31,6 @@ vim.cmd [[
   augroup end
 ]]
 
---Set highlight on search
-vim.o.hlsearch = false
-
 --Make line numbers default
 vim.wo.number = true
 
@@ -37,10 +41,13 @@ vim.o.mouse = 'a'
 vim.o.wrap = false
 
 --Set padding when scrolling
-vim.o.scrolloff = 2
+vim.o.scrolloff = 4
 
 --Enable break indent
 vim.o.breakindent = true
+
+--Enable indentation detection
+vim.o.indexexpr = true
 
 --Save undo history
 vim.opt.undofile = true
@@ -48,13 +55,17 @@ vim.opt.undofile = true
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+--Set highlight on search
+vim.o.hlsearch = false
+vim.o.incsearch = true
+
 
 --Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 
 vim.o.signcolumn = 'yes:2'
 
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 vim.o.showmode = false
 
 --Colorscheme gruvbox dark hard (original, not material)
@@ -62,6 +73,12 @@ vim.o.termguicolors = true
 -- vim.o.background = 'light'
 -- vim.cmd('colorscheme gruvbox-material')
 vim.g.gruvbox_contrast_dark = 'hard'
+
+require('neo-tree').setup({
+    filesystem = {
+        hijack_netrw_behavior = "open_current"
+    }
+})
 
 local colors = require("catppuccin.palettes").get_palette()
 require("catppuccin").setup({
@@ -252,7 +269,6 @@ require('nvim-treesitter.configs').setup {
     },
     indent = {
         enable = true,
-        disable = { "c", "html5", "html" }
     },
     context_commentstring = {
         enable = true
@@ -311,18 +327,7 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<cmd>BufferPrevious<CR>', { noremap = tru
 require('nvim-autopairs').setup {}
 require('project_nvim').setup {}
 
-require('nvim-tree').setup {
-    sync_root_with_cwd = true,
-    update_focused_file = {
-        enable = true,
-        update_root = true,
-    },
-    view = {
-        side = 'left',
-    },
-}
-
-vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>Neotree toggle<CR>', { noremap = true, silent = true })
 
 --Add leader shortcuts
 
@@ -336,9 +341,10 @@ wk.register({
                 "Find file" },
             b = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })<CR>',
                 "Fuzzy search in buffer" },
-            t = { "<cmd>NvimTreeToggle<CR>", "Open File Tree" },
+            t = { "<cmd>Neotree toggle<CR>", "Open File Tree" },
             p = { "<cmd>Telescope projects<CR>", "Recent projects" },
-            d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." }
+            d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." },
+            g = { "<cmd>Telescope git_status<CR>", "git - modified files" },
         },
         b = {
             name = "Buffer",
@@ -366,7 +372,7 @@ wk.register({
 })
 
 -- Gitsigns
-local has_gitsigns, _ = pcall(require, 'gitsigns.nvim')
+local has_gitsigns, _ = pcall(require, 'gitsigns')
 
 if has_gitsigns then
     require("gitsigns").setup {
@@ -377,6 +383,7 @@ if has_gitsigns then
             -- topdelete = { text = '‾' },
             -- changedelete = { text = '~' },
         },
+        numhl = true,
         current_line_blame = true,
         -- current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     }
@@ -473,3 +480,38 @@ vim.g.bufferline = {
 }
 
 require('colorizer').setup()
+
+require('dressing').setup({
+    input = {
+        start_in_insert = false,
+        insert_only = false,
+    }
+})
+
+-- require("noice").setup({
+--     cmdline = {
+--         enabled = false,
+--     },
+--     messages = {
+--         enabled = false
+--     },
+--     popupmenu = {
+--         enabled = false,
+--     },
+--     lsp = {
+--         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+--         override = {
+--             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+--             ["vim.lsp.util.stylize_markdown"] = true,
+--             ["cmp.entry.get_documentation"] = true,
+--         },
+--     },
+--     -- you can enable a preset for easier configuration
+--     presets = {
+--         bottom_search = true, -- use a classic bottom cmdline for search
+--         --     command_palette = true, -- position the cmdline and popupmenu together
+--         --     long_message_to_split = true, -- long messages will be sent to a split
+--         --     inc_rename = false, -- enables an input dialog for inc-rename.nvim
+--         --     lsp_doc_border = true, -- add a border to hover docs and signature help
+--     },
+-- })
