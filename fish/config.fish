@@ -29,7 +29,7 @@ abbr -a tl 'tmux ls'
 
 # zellij
 abbr -a ja 'zellij attach'
-abbr -a jk 'zellij kill-sessions'
+abbr -a jk 'zellij kill-session'
 abbr -a jn 'zellij --session'
 abbr -a jtn 'zellij --layout tomes --session'
 abbr -a jen 'zellij --layout tomes_edit --session'
