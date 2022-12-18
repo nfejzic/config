@@ -7,6 +7,8 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.relativenumber = true
 vim.o.nu = true
+vim.o.guicursor = ''
+
 
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1 -- use neotree instead
@@ -73,12 +75,6 @@ vim.o.termguicolors = true
 -- vim.o.background = 'light'
 -- vim.cmd('colorscheme gruvbox-material')
 vim.g.gruvbox_contrast_dark = 'hard'
-
-require('neo-tree').setup({
-    filesystem = {
-        hijack_netrw_behavior = "open_current"
-    }
-})
 
 local colors = require("catppuccin.palettes").get_palette()
 require("catppuccin").setup({
@@ -488,30 +484,19 @@ require('dressing').setup({
     }
 })
 
--- require("noice").setup({
---     cmdline = {
---         enabled = false,
---     },
---     messages = {
---         enabled = false
---     },
---     popupmenu = {
---         enabled = false,
---     },
---     lsp = {
---         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
---         override = {
---             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
---             ["vim.lsp.util.stylize_markdown"] = true,
---             ["cmp.entry.get_documentation"] = true,
---         },
---     },
---     -- you can enable a preset for easier configuration
---     presets = {
---         bottom_search = true, -- use a classic bottom cmdline for search
---         --     command_palette = true, -- position the cmdline and popupmenu together
---         --     long_message_to_split = true, -- long messages will be sent to a split
---         --     inc_rename = false, -- enables an input dialog for inc-rename.nvim
---         --     lsp_doc_border = true, -- add a border to hover docs and signature help
---     },
--- })
+require('neo-tree').setup({
+    popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
+    source_selector = {
+        winbar = true, -- toggle to show selector on winbar
+    },
+    filesystem = {
+        follow_current_file = false, -- This will find and focus the file in the active buffer every time
+        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+        use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+    },
+    buffers = {
+        bind_to_cwd = true,
+        follow_current_file = true, -- This will find and focus the file in the active buffer every time
+        -- the current file is changed while the tree is open.
+    },
+})
