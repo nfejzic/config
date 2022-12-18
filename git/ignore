@@ -2,3 +2,4 @@
 .null-ls-root
 .husky
 .idea
+.*env*
