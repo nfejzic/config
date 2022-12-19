@@ -1,7 +1,7 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 return require('packer').startup(function(use)
-    -- Packer can manage itself
+    -- Packer
     use 'wbthomason/packer.nvim'
 
     -- "gc" to comment visual regions/lines
@@ -32,14 +32,11 @@ return require('packer').startup(function(use)
     -- Typescript utilities
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
+    -- Nicer 'quickfix' for LSP diagnostics (and others, like TODO lists)
     use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
     }
-
-    -- using prettier as formatter (scss, css etc.)
-    -- use 'MunifTanjim/prettier.nvim'
-    -- use 'prettier/vim-prettier'
 
     -- Autocomplete
     use 'hrsh7th/cmp-nvim-lsp'
@@ -51,7 +48,6 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use 'mattn/emmet-vim' -- emmet for html etc
-    -- use "rafamadriz/friendly-snippets"
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
@@ -62,7 +58,7 @@ return require('packer').startup(function(use)
 
     -- Syntax (TreeSitter)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    -- use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
     -- use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'nvim-treesitter/playground'
 
@@ -79,11 +75,7 @@ return require('packer').startup(function(use)
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
         config = function()
-            require("todo-comments").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
+            require("todo-comments").setup {}
         end
     }
 
@@ -92,7 +84,6 @@ return require('packer').startup(function(use)
     -- UI
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use 'luukvbaal/stabilize.nvim' -- Stabilize nvim windows
-    -- use 'crivotz/nvim-colorizer.lua'
 
     -- Git
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- git signs in gutter
@@ -107,11 +98,17 @@ return require('packer').startup(function(use)
             require "octo".setup()
         end
     }
+
+    -- magit clone for neovim
     use 'TimUntersberger/neogit'
+
+    -- git stuff from the tpope
     use 'tpope/vim-fugitive'
-    -- Packer
+
+    -- git diff view and merge tool
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
+    -- show help popup for keymaps (like in emacs)
     use {
         "folke/which-key.nvim",
         config = function()
@@ -119,6 +116,7 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- nice file tree
     use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -127,45 +125,29 @@ return require('packer').startup(function(use)
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
             {
-                -- only needed if you want to use the commands with "_with_window_picker" suffix
+                -- needed to use the commands with "_with_window_picker" suffix
                 's1n7ax/nvim-window-picker',
                 tag = "v1.*",
-                config = function()
-                    require 'window-picker'.setup({
-                        autoselect_one = true,
-                        include_current = false,
-                        filter_rules = {
-                            -- filter using buffer options
-                            bo = {
-                                -- if the file type is one of following, the window will be ignored
-                                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
-
-                                -- if the buffer type is one of following, the window will be ignored
-                                buftype = { 'terminal', "quickfix" },
-                            },
-                        },
-                        other_win_hl_color = '#e35e4f',
-                    })
-                end,
             }
         }
     }
 
-    -- Themes
+    -- gruvbox with slight modification
     use 'nfejzic/gruvbox.nvim'
-    -- use 'ellisonleao/gruvbox.nvim'
+
+    -- some nice themes
     use 'folke/tokyonight.nvim'
     use 'EdenEast/nightfox.nvim'
     use 'RRethy/nvim-base16'
-    -- use 'shaunsingh/solarized.nvim'
     use 'ishan9299/nvim-solarized-lua'
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'shaunsingh/nord.nvim'
+
     -- Tabline
     use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
     -- Languages (indentation and more)
-    -- use 'sheerun/vim-polyglot'
+    -- use 'sheerun/vim-polyglot' -- is very slow in some files!
     use 'tpope/vim-sleuth'
     use 'windwp/nvim-autopairs'
 
@@ -187,24 +169,9 @@ return require('packer').startup(function(use)
     -- kdl syntax and indent
     use 'imsnif/kdl.vim'
 
-    -- prettier UI
-    -- use({
-    --     "folke/noice.nvim",
-    --     config = function()
-    --         require("noice").setup({
-    --             -- add any options here
-    --         })
-    --     end,
-    --     requires = {
-    --         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    --         "MunifTanjim/nui.nvim",
-    --         -- OPTIONAL:
-    --         --   `nvim-notify` is only needed, if you want to use the notification view.
-    --         --   If not available, we use `mini` as the fallback
-    --         "rcarriga/nvim-notify",
-    --     }
-    -- })
-
+    -- nice ui enhancements
     use 'stevearc/dressing.nvim'
+
+    -- plugin caching for faster loading
     use 'lewis6991/impatient.nvim'
 end)

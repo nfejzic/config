@@ -3,6 +3,7 @@ local lspconfig = require 'lspconfig'
 local nlspsettings = require 'nlspsettings'
 
 require("mason").setup()
+
 local mason_lsp = require("mason-lspconfig")
 mason_lsp.setup()
 
@@ -27,26 +28,30 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 -- Add some commands and keybindings when server loads
 local on_attach = function(client, bufnr)
     local wk = require('which-key')
+    -- Diagnostic keymaps
 
     wk.register({
         ['<leader>'] = {
             l = {
                 name = 'LSP',
-                p = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Show hover popup' },
-                h = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Show signature help' },
-                n = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'Refactor Rename' },
-                j = { 'Go to next LSP diagnostics problem' },
-                k = { 'Go to previous LSP diagnostics problem' },
+                D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declaration" },
+                M = { "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
+                    "Show diagnostics messages in all buffers" },
+                d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", 'Show definitions' },
+                e = { "<cmd>lua vim.diagnostic.open_float()<CR>", 'Show diagnostics message' },
+                h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", 'Show signature help' },
                 i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", 'Show implemnetations' },
+                j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Go to next LSP diagnostics problem" },
+                k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", 'Go to previous LSP diagnostics problem' },
                 m = { "<cmd>lua require('telescope.builtin').diagnostics({ bufnr=0 })<CR>",
                     'Show diagnostics messages in current buffer' },
-                M = { "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
-                    'Show diagnostics messages in all buffers' },
-                s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", 'Search document symbols' },
-                w = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", 'Search workspace symbols' },
-                D = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Go to Declaration' },
-                d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", 'Show definitions' },
-                r = { '<cmd>lua require("telescope.builtin").lsp_references()<CR>', 'Go to References' },
+                n = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Refactor Rename" },
+                p = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover popup" },
+                q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Populate loclist with diagnostics" },
+                r = { "<cmd>lua require('telescope.builtin').lsp_references()<CR>", "Go to References" },
+                s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", "Search document symbols" },
+                w = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", "Search workspace symbols" },
+
             },
             w = {
                 name = "LSP Workspace",
@@ -64,9 +69,7 @@ local on_attach = function(client, bufnr)
         }
     }, { mode = 'v' })
 
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -105,6 +108,7 @@ local opts = {
     capabilities = globalCapabilities
 }
 
+-- configure language servers
 mason_lsp.setup_handlers {
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
@@ -193,7 +197,7 @@ mason_lsp.setup_handlers {
             settings = {
                 Lua = {
                     diagnostics = {
-                        globals = { "vim" }
+                        globals = { "vim", "packer_plugins" }
                     }
                 }
             }
@@ -242,6 +246,7 @@ mason_lsp.setup_handlers {
     end
 }
 
+-- prettier etc for vue, ts, js, html etc
 local null_ls = require('null-ls');
 null_ls.setup({
     sources = {
@@ -253,60 +258,6 @@ null_ls.setup({
     capabilities = globalCapabilities,
 })
 
--- luasnip setup
-local luasnip = require 'luasnip'
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-local lspkind = require 'lspkind'
-cmp.setup {
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    formatting = {
-        format = lspkind.cmp_format({})
-    },
-    mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
-        },
-        ['<Tab>'] = function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end,
-        ['<S-Tab>'] = function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end,
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
-        { name = 'buffer' },
-        { name = 'nvim_lsp_signature_help' }
-    },
-}
-
 -- use pretty gutter signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -314,4 +265,5 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- indicate loading of LSP
 require('fidget').setup()
