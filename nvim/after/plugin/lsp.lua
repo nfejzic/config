@@ -27,40 +27,53 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 -- Add some commands and keybindings when server loads
 local on_attach = function(client, bufnr)
-    local wk = require('which-key')
-    -- Diagnostic keymaps
+    local wk = require("wk")
+    local telescope_builtin = require('telescope.builtin')
 
+    local show_diagnostics = function()
+        telescope_builtin.diagnostics({ bufnr = 0 })
+    end
+
+    -- Diagnostic keymaps
     wk.register({
         ['<leader>'] = {
             l = {
                 name = 'LSP',
-                D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declaration" },
-                M = { "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
-                    "Show diagnostics messages in all buffers" },
-                d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", 'Show definitions' },
-                e = { "<cmd>lua vim.diagnostic.open_float()<CR>", 'Show diagnostics message' },
-                h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", 'Show signature help' },
-                i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", 'Show implemnetations' },
-                j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Go to next LSP diagnostics problem" },
-                k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", 'Go to previous LSP diagnostics problem' },
-                m = { "<cmd>lua require('telescope.builtin').diagnostics({ bufnr=0 })<CR>",
-                    'Show diagnostics messages in current buffer' },
-                n = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Refactor Rename" },
-                p = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover popup" },
-                q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Populate loclist with diagnostics" },
-                r = { "<cmd>lua require('telescope.builtin').lsp_references()<CR>", "Go to References" },
-                s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", "Search document symbols" },
-                w = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", "Search workspace symbols" },
-
+                D = { vim.lsp.buf.declaration, "Go to Declaration" },
+                e = { vim.diagnostic.open_float, 'Show diagnostics message' },
+                h = { vim.lsp.buf.signature_help, 'Show signature help' },
+                j = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" },
+                k = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' },
+                n = { vim.lsp.buf.rename, "Refactor Rename" },
+                p = { vim.lsp.buf.hover, "Show hover popup" },
+                q = { vim.diagnostic.setloclist, "Populate loclist with diagnostics" },
+                r = { telescope_builtin.lsp_references, "Go to References" },
+                s = { telescope_builtin.lsp_document_symbols, "Search document symbols" },
+                w = { telescope_builtin.lsp_workspace_symbols, "Search workspace symbols" },
+                M = { telescope_builtin.diagnostics, "Show diagnostics messages in all buffers" },
+                d = { telescope_builtin.lsp_definitions, 'Show definitions' },
+                i = { telescope_builtin.lsp_implementations, 'Show implemnetations' },
+                m = { show_diagnostics, 'Show diagnostics messages in current buffer' },
             },
             w = {
                 name = "LSP Workspace",
-                a = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add workspace folder' },
-                r = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove workspace folder' },
-                l = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', 'List workspace folders' },
+                a = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+                r = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
+                l = { function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' },
             },
             ['.'] = { vim.lsp.buf.code_action, 'Show code actions' }
-        }
+        },
+        g = {
+            -- alternative keymaps
+            d = { telescope_builtin.lsp_definitions, 'Show definitions' },
+            r = { telescope_builtin.lsp_references, "Go to References" },
+            I = { telescope_builtin.lsp_implementations, 'Show implemnetations' },
+            D = { vim.lsp.buf.declaration, "Go to Declaration" },
+            t = { vim.lsp.buf.type_definition, "Go to Type Definition" },
+            h = { vim.diagnostic.open_float, 'Show diagnostics message/help' },
+            H = { '<cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics messages in current buffer' },
+        },
+        K = { vim.lsp.buf.hover, "LSP Hover" },
     })
 
     wk.register({
@@ -190,8 +203,8 @@ mason_lsp.setup_handlers {
             }
         }
     end,
-    ["sumneko_lua"] = function()
-        lspconfig.sumneko_lua.setup {
+    ["lua_ls"] = function()
+        lspconfig.lua_ls.setup {
             on_attach = on_attach,
             capabilities = globalCapabilities,
             settings = {

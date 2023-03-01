@@ -1,6 +1,6 @@
 local wk = require('which-key')
 
-function toggle_dap_sidebar(opt)
+local function toggle_dap_sidebar(opt)
   opt = opt or 'scopes'
 
   local widgets = require('dap.ui.widgets')
@@ -12,35 +12,35 @@ function toggle_dap_sidebar(opt)
     sidebar = widgets.sidebar(widgets.scopes)
   end
 
-  sidebar.toggle()
+  return sidebar.toggle
 end
 
 -- Prepare keybindings
 wk.register({
   ['<leader>'] = {
-    -- Debug: 
+    -- Debug:
     d = {
       name = 'Debug / DAP',
 
       -- Breakpoints
-      a = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "Remove all breakpoints" },
-      p = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle breakpoint" },
+      a = { require 'dap'.clear_breakpoints, "Remove all breakpoints" },
+      p = { require 'dap'.toggle_breakpoint, "Toggle breakpoint" },
 
       -- Stepping through debug
-      c = { "<cmd>lua require'dap'.continue()<CR>", "Debug Continue" },
-      i = { "<cmd>lua require'dap'.step_into()<CR>", "Debug Step Into" },
-      o = { "<cmd>lua require'dap'.step_out()<CR>", "Debug Step Out" },
-      j = { "<cmd>lua require'dap'.step_over()<CR>", "Debug Step Over" },
-      k = { "<cmd>lua require'dap'.step_back()<CR>", "Debug Step Back" },
+      c = { require 'dap'.continue, "Debug Continue" },
+      i = { require 'dap'.step_into, "Debug Step Into" },
+      o = { require 'dap'.step_out, "Debug Step Out" },
+      j = { require 'dap'.step_over, "Debug Step Over" },
+      k = { require 'dap'.step_back, "Debug Step Back" },
 
       -- REPL toggle
-      r = { "<cmd>lua require'dap'.repl.toggle()<CR>", "Debug Toggle REPL" },
+      r = { require 'dap'.repl.toggle, "Debug Toggle REPL" },
 
       -- DAP Widgets (Sidebars)
-      h = { "<cmd>lua require('dap.ui.widgets').hover()<CR>", "Value under cursor in floating window" },
-      s = { "<cmd>lua toggle_dap_sidebar('scopes')<CR>", "Scopes" },
-      f = { "<cmd>lua toggle_dap_sidebar('frames')<CR>", "Scopes" },
-      u = { "<cmd>lua require('dapui').toggle()<CR>", "Toggle DAP UI" },
+      h = { require('dap.ui.widgets').hover, "Value under cursor in floating window" },
+      s = { toggle_dap_sidebar('scopes'), "Scopes" },
+      f = { toggle_dap_sidebar('frames'), "Frames" },
+      u = { require('dapui').toggle, "Toggle DAP UI" },
     }
   }
 })
@@ -79,11 +79,74 @@ dap.configurations.cpp = {
     -- lldb-vscode will receive a `SIGWINCH` signal which can cause problems
     -- To avoid that uncomment the following option
     -- See https://github.com/mfussenegger/nvim-dap/issues/236#issuecomment-1066306073
-    postRunCommands = {'process handle -p true -s false -n false SIGWINCH'}
+    postRunCommands = { 'process handle -p true -s false -n false SIGWINCH' }
   },
 }
-
 
 -- use this for rust and c:
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+
+-- javascript / typescript setup
+require("dap-vscode-js").setup({
+  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+  -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+  -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+  -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+})
+
+for _, language in ipairs({ 'typescript', 'javascript' }) do
+  dap.configurations[language] = {
+    {
+      name = 'Launch',
+      type = 'pwa-node',
+      request = 'launch',
+      program = '${file}',
+      rootPath = '${workspaceFolder}',
+      cwd = '${workspaceFolder}',
+      sourceMaps = true,
+      skipFiles = { '<node_internals>/**' },
+      protocol = 'inspector',
+      console = 'integratedTerminal',
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      },
+    },
+    {
+      name = 'Attach to node process',
+      type = 'pwa-node',
+      request = 'attach',
+      rootPath = '${workspaceFolder}',
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      },
+      processId = require('dap.utils').pick_process,
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Jest debug current file",
+      -- trace = true, -- include debugger info
+      runtimeExecutable = "npx",
+      runtimeArgs = {
+        "jest",
+        "--no-coverage",
+        "${file}"
+      },
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+      internalConsoleOptions = "neverOpen",
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      },
+    }
+  }
+end

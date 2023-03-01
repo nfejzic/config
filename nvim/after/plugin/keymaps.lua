@@ -1,4 +1,4 @@
-local wk = require('which-key')
+local wk = require("wk")
 
 wk.register({
   ['<leader>'] = {
@@ -9,6 +9,7 @@ wk.register({
       b = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })<CR>',
         "Fuzzy search in buffer" },
       t = { "<cmd>Neotree toggle<CR>", "Open File Tree" },
+      r = { "<cmd>Neotree reveal<CR>", "Reveal current file in the sidebar" },
       p = { "<cmd>Telescope projects<CR>", "Recent projects" },
       d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." },
       g = { "<cmd>Telescope git_status<CR>", "git - modified files" },
@@ -30,14 +31,14 @@ wk.register({
     k = {
       name = "Collapse / Fold",
       k = { "<cmd>foldclose<CR>", "Fold" },
+      K = { "<cmd>foldclose<CR>", "Fold all" },
       o = { "<cmd>foldopen<CR>", "Unfold (open fold)" },
       O = { "zR", "Unfold all (open fold)" },
     },
     ['<space>'] = { "<C-^>", 'Switch to previous buffer' },
     e = "Lsp Diagnostics popup",
     ['?'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
-  }
+  },
+  ['<C-l>'] = { "<cmd>BufferNext<CR>", "Go to next buffer" },
+  ['<C-h>'] = { "<cmd>BufferPrevious<CR>", "Go to previous buffer" },
 })
-
-vim.api.nvim_set_keymap('n', '<C-l>', '<cmd>BufferNext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<cmd>BufferPrevious<CR>', { noremap = true, silent = true })

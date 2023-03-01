@@ -56,6 +56,13 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
+    -- for javascript / typescript debugging
+    use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
+    use {
+        "microsoft/vscode-js-debug",
+        opt = true,
+        run = "npm install --legacy-peer-deps && npm run compile"
+    }
     -- Syntax (TreeSitter)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -111,9 +118,6 @@ return require('packer').startup(function(use)
     -- show help popup for keymaps (like in emacs)
     use {
         "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {}
-        end
     }
 
     -- nice file tree
@@ -144,7 +148,7 @@ return require('packer').startup(function(use)
     use 'shaunsingh/nord.nvim'
 
     -- Tabline
-    use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
+    -- use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
     -- Languages (indentation and more)
     -- use 'sheerun/vim-polyglot' -- is very slow in some files!

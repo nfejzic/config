@@ -1,5 +1,9 @@
 require('impatient')
 
+--Remap space as leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 vim.o.smarttab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
@@ -7,22 +11,25 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.relativenumber = true
 vim.o.nu = true
-vim.o.guicursor = ''
 
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1 -- use neotree instead
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+-- add marker at 80 chars length and wrap text
+vim.o.colorcolumn = "80"
+vim.o.formatoptions = 'jcrqlt'
+vim.o.textwidth = 80
+
 -- load plugins
 require("plugins")
 
 vim.cmd [[
-  set nofoldenable
   augroup on_open
     autocmd!
     autocmd BufWinEnter *.html5 silent! :set filetype=html " contao specific
     autocmd BufWinEnter *.html5 silent! :set syntax=php " contao specific
-    autocmd BufWinEnter *.html5 silent! :IndentBlanklineEnable 
+    autocmd BufWinEnter *.html5 silent! :IndentBlanklineEnable
     autocmd BufWinEnter *.php silent! :set syntax=php
     autocmd BufWinEnter *.scss silent! :set syntax=scss
     autocmd BufWinEnter *.vue silent! :set shiftwidth=2
@@ -75,14 +82,14 @@ vim.o.clipboard = "unnamedplus"
 -- global statusline
 vim.o.laststatus = 3
 
---Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- fold using treesitter
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevelstart = 99
 
 --Remap for dealing with word wrap
-vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 -- Highlight on yank
 vim.cmd [[
@@ -96,15 +103,18 @@ vim.cmd [[
 vim.g.indent_blankline_filetype = { 'vim', 'NvimTree', 'html', 'php' }
 
 
--- These commands will navigate through buffers in order regardless of which mode you are using
--- e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+-- These commands will navigate through buffers in order regardless of which
+-- mode you are using e.g. if you change the order of buffers :bnext and
+-- :bprevious will not respect the custom ordering
 
 vim.g.bufferline = {
     animation = false,
 }
 
 require('nvim-autopairs').setup {}
-require('project_nvim').setup {}
+require('project_nvim').setup {
+    manual_mode = true
+}
 require('colorizer').setup()
 require('dressing').setup({
     input = {
@@ -112,3 +122,18 @@ require('dressing').setup({
         insert_only = false,
     }
 })
+
+-- don't continue comments on 'o' and 'O' commands
+local augroup = vim.api.nvim_create_augroup("Formatoptions", {})
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = augroup,
+    pattern = "*",
+    callback = function()
+        -- vim.cmd("%foldopen!")
+        vim.o.formatoptions = 'jcrql'
+    end
+})
+
+for _, adapter in ipairs(require("dap").adapters) do
+    print(adapter)
+end
