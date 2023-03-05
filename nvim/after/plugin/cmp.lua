@@ -73,7 +73,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'git' }
+    { name = 'gh_issues' }
   },
 
   experimental = {
@@ -97,5 +97,3 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
-
-require('cmp_git').setup()

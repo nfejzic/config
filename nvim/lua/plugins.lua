@@ -48,7 +48,6 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use 'mattn/emmet-vim' -- emmet for html etc
-    use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
