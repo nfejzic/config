@@ -14,6 +14,12 @@ require("gitsigns").setup {
 }
 
 wk.register({
+  [']'] = {
+    g = { '<cmd>Gitsigns next_hunk<CR>', 'Next git hunk' },
+  },
+  ['['] = {
+    g = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous git hunk' },
+  },
   ['<leader>'] = {
     g = {
       name = 'Git',

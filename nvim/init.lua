@@ -79,6 +79,21 @@ vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
 
+if vim.fn.executable('gpaste-client') == 1 then
+    vim.g.clipboard = {
+        name = 'gpaste',
+        copy = {
+                ["+"] = { 'gpaste-client', "add" },
+                ["*"] = { 'gpaste-client', "add" },
+        },
+        paste = {
+                ["+"] = { 'gpaste-client', '--use-index', 'get', '0' },
+                ["*"] = { 'gpaste-client', '--use-index', 'get', '0' },
+        },
+        cache_enabled = true,
+    }
+end
+
 -- global statusline
 vim.o.laststatus = 3
 

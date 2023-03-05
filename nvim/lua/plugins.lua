@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use 'mattn/emmet-vim' -- emmet for html etc
+    use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
@@ -94,7 +95,7 @@ return require('packer').startup(function(use)
 
     -- Git
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- git signs in gutter
-    use { -- GitHub PR UI
+    use {                                                                     -- GitHub PR UI
         'pwntester/octo.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
@@ -107,7 +108,7 @@ return require('packer').startup(function(use)
     }
 
     -- magit clone for neovim
-    use 'TimUntersberger/neogit'
+    -- use 'TimUntersberger/neogit'
 
     -- git stuff from the tpope
     use 'tpope/vim-fugitive'

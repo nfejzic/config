@@ -41,6 +41,7 @@ require("catppuccin").setup({
     notify = true,
     telekasten = true,
     symbols_outline = true,
+    octo = true
   },
   custom_highlights = {
     TSNamespace = { style = {} },
