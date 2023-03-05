@@ -10,10 +10,12 @@ wezterm.on("gui-startup", function()
 end)
 
 return {
+    -- font = wezterm.font("IBM Plex Mono"),
     font = wezterm.font("JetBrains Mono"),
     -- font = wezterm.font("Cascadia Code"),
-    font_size = 11,
-    freetype_load_target = "Light",
+    font_size = 13,
+    -- line_height = 1.2,
+    -- freetype_load_target = "Light",
 
     -- enable cursive italic form for Cascadia Code font
     -- harfbuzz_features = { "calt", "ss01" },
