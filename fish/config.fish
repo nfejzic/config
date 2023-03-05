@@ -14,7 +14,6 @@ abbr -a la 'exa -a'
 abbr -a ll 'exa -l'
 abbr -a lla 'exa -la'
 abbr -a nv 'nvim'
-abbr -a vim 'nvim'
 abbr -a wstorm 'webstorm'
 abbr -a worm 'webstorm'
 abbr -a wm 'webstorm'
@@ -30,6 +29,7 @@ abbr -a tl 'tmux ls'
 # zellij
 abbr -a ja 'zellij attach'
 abbr -a jk 'zellij kill-session'
+abbr -a jka 'zellij kill-all-sessions'
 abbr -a jn 'zellij --session'
 abbr -a jtn 'zellij --layout tomes --session'
 abbr -a jen 'zellij --layout tomes_edit --session'
@@ -40,6 +40,7 @@ abbr -a gs 'git status'
 abbr -a gss 'git status -s' # short version
 abbr -a gd 'git diff'
 abbr -a gdd 'git diff --staged'
+abbr -a gds 'git diff --stat'
 abbr -a ga 'git add'
 abbr -a gr 'git remove'
 abbr -a gc 'git commit'
@@ -72,3 +73,24 @@ eval /home/nfejzic/.local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 
 # set default editor
 set -gx EDITOR 'nvim'
+set -gx VISUAL 'nvim'
+
+if type -q "/home/$USER/.local/share/bob/nvim-bin/nvim"
+    set -gx SUDO_EDITOR "/home/$USER/.local/share/bob/nvim-bin/nvim"
+else if type -q nvim
+    set -qx SUDO_EDITOR 'nvim'
+else if type -q vim
+    set -qx SUDO_EDITOR 'vim'
+else 
+    set -qx SUDO_EDITOR 'vi'
+end
+
+# add copy abbreviation only if one of the providers is available
+set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
+for clipboard in $clipboard_providers 
+    if type -q $clipboard
+        abbr -a copy $clipboard
+        abbr -a cpy "$(abbr | rg copy | awk '{print $5}')" 
+        break
+    end
+end
