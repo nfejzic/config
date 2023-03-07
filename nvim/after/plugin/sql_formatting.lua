@@ -67,10 +67,6 @@ local format_sql = function(opts)
             local formatted = run_sql_formatter(text)
 
             for idx, line in ipairs(formatted) do
-                if idx < 2 then
-                    print(idx)
-                end
-
                 if line ~= "" then
                     formatted[idx] = indentation .. line
                 end
