@@ -67,26 +67,42 @@ local format_sql = function(opts)
             local formatted = run_sql_formatter(text)
 
             for idx, line in ipairs(formatted) do
+                if idx < 2 then
+                    print(idx)
+                end
+
                 if line ~= "" then
                     formatted[idx] = indentation .. line
                 end
             end
 
+            -- insert blank line, so that SQL starts in newline
+            table.insert(formatted, 1, "")
+
             if formatted[#formatted] == "" then
-                table.remove(formatted)
+                formatted[#formatted] = indentation
             end
 
-            -- remove last line if empty
             table.insert(changes, 1, {
-                start = range[1] + 1,
-                final = range[3],
+                start_row = range[1],
+                start_col = range[2] + 1,
+                end_row = range[3],
+                end_col = range[4] - 1,
                 formatted = formatted
             })
         end
     end
 
     for _, change in ipairs(changes) do
-        vim.api.nvim_buf_set_lines(bufnr, change.start, change.final, false, change.formatted)
+        vim.api.nvim_buf_set_text(
+            bufnr,
+            change.start_row,
+            change.start_col,
+            change.end_row,
+            change.end_col,
+            change.formatted
+        )
+        -- vim.api.nvim_buf_set_lines(bufnr, change.start, change.final, false, change.formatted)
     end
 end
 
