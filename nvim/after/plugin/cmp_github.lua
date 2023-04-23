@@ -12,9 +12,7 @@ source.new = function()
   return self
 end
 
-source.complete = function(self, _, callback)
-  local bufnr = vim.api.nvim_get_current_buf()
-
+local function getCompletions(self, _, bufnr, callback)
   -- This just makes sure that we only hit the GH API once per session.
   --
   -- You could remove this if you wanted, but this just makes it so we're
@@ -94,6 +92,23 @@ source.complete = function(self, _, callback)
   else
     callback { items = self.cache[bufnr], isIncomplete = false }
   end
+end
+
+source.complete = function(self, _, callback)
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  Job:new({
+    "git",
+    "remote",
+    "-vv",
+    on_exit = function(job)
+      local result = job:result()
+
+      if result[1] ~= nil and string.find(result[1], "github") then
+        getCompletions(self, _, bufnr, callback)
+      end
+    end
+  }):start()
 end
 
 source.get_trigger_characters = function()
