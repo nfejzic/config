@@ -94,3 +94,6 @@ for clipboard in $clipboard_providers
         break
     end
 end
+
+# theme_gruvbox dark hard
+# fish_config theme save "Catppuccin Mocha"
