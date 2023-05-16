@@ -60,6 +60,8 @@ abbr -a glpv 'git log --graph --abbrev-commit --decorate --format=format:"%C(bol
 abbr -a dbox-lamp-up 'docker-compose up -d httpd php mysql bind' # launch lamp stack + bind
 abbr -a dbox-lamp-down 'docker-compose down' # stop the lamp stack
 
+abbr -a gitui 'gitui -t mocha.ron'
+
 # set cursor to block always
 set -g fish_cursor_insert 'block' 'blink'
 
@@ -68,7 +70,7 @@ set -gx BAT_THEME "Catppuccin-mocha"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /home/nfejzic/.local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# eval /home/nfejzic/.local/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
 # set default editor
