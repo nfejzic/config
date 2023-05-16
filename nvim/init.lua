@@ -1,5 +1,3 @@
-require('impatient')
-
 --Remap space as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -83,12 +81,12 @@ if vim.fn.executable('gpaste-client') == 1 then
     vim.g.clipboard = {
         name = 'gpaste',
         copy = {
-                ["+"] = { 'gpaste-client', "add" },
-                ["*"] = { 'gpaste-client', "add" },
+            ["+"] = { 'gpaste-client', "add" },
+            ["*"] = { 'gpaste-client', "add" },
         },
         paste = {
-                ["+"] = { 'gpaste-client', '--use-index', 'get', '0' },
-                ["*"] = { 'gpaste-client', '--use-index', 'get', '0' },
+            ["+"] = { 'gpaste-client', '--use-index', 'get', '0' },
+            ["*"] = { 'gpaste-client', '--use-index', 'get', '0' },
         },
         cache_enabled = true,
     }
@@ -156,5 +154,3 @@ end
 vim.o.background = "dark"
 
 -- colorscheme set in colorscheme config file
--- after/plugin/catppuccin.lua
--- after/plugin/gruvbox.lua

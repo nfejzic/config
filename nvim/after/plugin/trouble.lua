@@ -1,7 +1,7 @@
 local wk = require('which-key')
-local trouble = require("trouble")
+local trouble_exists, trouble = pcall(require, "trouble")
 
-if packer_plugins["trouble"] then
+if trouble_exists then
   trouble.setup {}
   wk.register({
     t = {

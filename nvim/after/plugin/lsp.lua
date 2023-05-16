@@ -57,7 +57,7 @@ local on_attach = function(client, bufnr)
 
     -- Diagnostic keymaps
     wk.register({
-            ['<leader>'] = {
+        ['<leader>'] = {
             l = {
                 name = 'LSP',
                 D = { vim.lsp.buf.declaration, "Go to Declaration" },
@@ -82,7 +82,7 @@ local on_attach = function(client, bufnr)
                 r = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
                 l = { function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' },
             },
-                ['.'] = { vim.lsp.buf.code_action, 'Show code actions' }
+            ['.'] = { vim.lsp.buf.code_action, 'Show code actions' }
         },
         g = {
             -- alternative keymaps
@@ -95,13 +95,13 @@ local on_attach = function(client, bufnr)
             H = { '<cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics messages in current buffer' },
         },
         K = { vim.lsp.buf.hover, "LSP Hover" },
-            [']'] = { d = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" } },
-            ['['] = { d = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' } },
+        [']'] = { d = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" } },
+        ['['] = { d = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' } },
     })
 
     wk.register({
-            ['<leader>'] = {
-                ['.'] = { vim.lsp.buf.code_action, 'Show code actions' }
+        ['<leader>'] = {
+            ['.'] = { vim.lsp.buf.code_action, 'Show code actions' }
         }
     }, { mode = 'v' })
 
@@ -151,7 +151,7 @@ mason_lsp.setup_handlers {
         lspconfig[server_name].setup(opts)
     end,
     -- Next, targeted overrides for specific servers.
-        ["rust_analyzer"] = function()
+    ["rust_analyzer"] = function()
         -- Initialize the LSP via rust-tools instead
         require("rust-tools").setup {
             -- The "server" property provided in rust-tools setup function are the
@@ -175,7 +175,7 @@ mason_lsp.setup_handlers {
             },
         }
     end,
-        ["tsserver"] = function()
+    ["tsserver"] = function()
         lspconfig["tsserver"].setup {
             on_attach = function(client, bufnr)
                 client.server_capabilities.document_formatting = false
@@ -189,7 +189,7 @@ mason_lsp.setup_handlers {
             end
         }
     end,
-        ["jsonls"] = function()
+    ["jsonls"] = function()
         lspconfig["jsonls"].setup({
             on_attach = function(client, bufnr)
                 client.server_capabilities.document_formatting = false
@@ -199,10 +199,10 @@ mason_lsp.setup_handlers {
             end
         })
     end,
-        ["emmet_ls"] = function()
+    ["emmet_ls"] = function()
         lspconfig["emmet_ls"].setup { capabilities = globalCapabilities }
     end,
-        ["eslint"] = function()
+    ["eslint"] = function()
         lspconfig["eslint"].setup {
             on_attach = on_attach,
             capabilities = globalCapabilities,
@@ -224,20 +224,20 @@ mason_lsp.setup_handlers {
             }
         }
     end,
-        ["lua_ls"] = function()
+    ["lua_ls"] = function()
         lspconfig.lua_ls.setup {
             on_attach = on_attach,
             capabilities = globalCapabilities,
             settings = {
                 Lua = {
                     diagnostics = {
-                        globals = { "vim", "packer_plugins" }
+                        globals = { "vim" }
                     }
                 }
             }
         }
     end,
-        ["vuels"] = function()
+    ["vuels"] = function()
         lspconfig["vuels"].setup {
             on_attach = on_attach,
             capabilities = globalCapabilities,
