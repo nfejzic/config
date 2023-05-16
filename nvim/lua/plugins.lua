@@ -47,7 +47,12 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-    use 'mattn/emmet-vim' -- emmet for html etc
+    use 'mattn/emmet-vim'            -- emmet for html etc
+    use { "zbirenbaum/copilot.lua" } -- lua impl of Github Copilot
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+    }
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
