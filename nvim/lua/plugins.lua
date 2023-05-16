@@ -153,7 +153,7 @@ return require('packer').startup(function(use)
     -- Languages (indentation and more)
     -- use 'sheerun/vim-polyglot' -- is very slow in some files!
     use 'tpope/vim-sleuth'
-    use 'windwp/nvim-autopairs'
+    -- use 'windwp/nvim-autopairs'
 
     -- Projects
     use "ahmedkhalf/project.nvim"

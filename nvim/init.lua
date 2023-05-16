@@ -126,7 +126,7 @@ vim.g.bufferline = {
     animation = false,
 }
 
-require('nvim-autopairs').setup {}
+-- require('nvim-autopairs').setup {}
 require('project_nvim').setup {
     manual_mode = true
 }
@@ -152,3 +152,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 for _, adapter in ipairs(require("dap").adapters) do
     print(adapter)
 end
+
+vim.o.background = "dark"
+
+-- colorscheme set in colorscheme config file
+-- after/plugin/catppuccin.lua
+-- after/plugin/gruvbox.lua
