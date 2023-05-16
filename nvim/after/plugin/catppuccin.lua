@@ -45,10 +45,18 @@ require("catppuccin").setup({
   },
   custom_highlights = {
     TSNamespace = { style = {} },
-    rustTSRefSpecifier = { fg = colors.yellow, style = {} },
-    rustTSMutableSpecifier = { fg = colors.yellow, style = {} }
+    rustTSRefSpecifier = { fg = colors.sky, style = {} },
+  },
+  -- make it very dark
+  color_overrides = {
+    mocha = {
+      base = colors.crust,
+      mantle = colors.base,
+      crust = colors.mantle,
+      surface0 = colors.base
+    }
   }
 })
 
 vim.g.catppuccin_flavour = "mocha"
-vim.cmd([[colorscheme catppuccin]])
+vim.cmd("colorscheme catppuccin")
