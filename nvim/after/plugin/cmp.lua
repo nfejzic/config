@@ -44,32 +44,33 @@ cmp.setup {
   },
 
   mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-        ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-k>'] = cmp.mapping.complete(),
-        ['<C-j>'] = cmp.mapping(
+    ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+    ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<C-k>'] = cmp.mapping.complete(),
+    ['<C-j>'] = cmp.mapping(
       cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
+        behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
       { 'i', 'c' }
     ),
-        ['<M-j>'] = cmp.mapping(
+    ['<M-j>'] = cmp.mapping(
       cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
+        behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       },
       { 'i', 'c' }
     ),
-        ['<tab>'] = cmp.config.disable,
+    ['<tab>'] = cmp.config.disable,
   },
 
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
+    { name = "copilot",                group_index = 2 },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
@@ -77,7 +78,7 @@ cmp.setup {
   },
 
   experimental = {
-    ghost_text = true,
+    ghost_text = { hl_group = "Comment" },
     native_menu = false
   }
 }
