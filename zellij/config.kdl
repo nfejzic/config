@@ -2,6 +2,28 @@ default_layout "compact"
 
 theme "catppuccin-mocha"
 
+keybinds {
+  normal {
+    bind "Alt g" { Run "gitui" "-t" "mocha.ron"; TogglePaneEmbedOrFloating; }
+    bind "Alt d" { CloseFocus; }
+  }
+
+  locked {
+    bind "Alt h" { MoveFocus "Left"; }
+    bind "Alt l" { MoveFocus "Right"; }
+    bind "Alt j" { MoveFocus "Down"; }
+    bind "Alt k" { MoveFocus "Up"; }
+    bind "Alt n" { GoToNextTab; }
+    bind "Alt f" { ToggleFocusFullscreen; }
+    bind "Alt p" { GoToPreviousTab; }
+    bind "Alt >" { Resize "Increase"; }
+    bind "Alt <" { Resize "Decrease"; }
+
+    bind "Alt g" { Run "gitui" "-t" "mocha.ron"; TogglePaneEmbedOrFloating; }
+    bind "Alt d" { CloseFocus; }
+  }
+}
+
 themes {
   catppuccin-mocha {
     bg "#585b70"
@@ -44,13 +66,4 @@ themes {
     white 251 241 199
     orange 214 93 14
   }
-}
-
-keybinds {
-    locked {
-       bind "Alt h" { MoveFocusOrTab "Left"; }
-       bind "Alt l" { MoveFocusOrTab "Right"; }
-       bind "Alt j" { MoveFocusOrTab "Down"; }
-       bind "Alt k" { MoveFocusOrTab "Up"; }
-    }
 }
