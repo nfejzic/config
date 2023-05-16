@@ -137,7 +137,10 @@ return require('packer').startup(function(use)
     }
 
     -- gruvbox with slight modification
-    use 'nfejzic/gruvbox.nvim'
+    -- use 'nfejzic/gruvbox.nvim'
+
+    -- original gruvbox colorscheme
+    use 'ellisonleao/gruvbox.nvim'
 
     -- some nice themes
     use 'folke/tokyonight.nvim'
