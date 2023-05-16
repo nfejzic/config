@@ -6,17 +6,15 @@ require('nvim-treesitter.configs').setup {
     disable = {
       "html", "html5"
     },
-    custom_captures = {
-      -- with custom nfejzic/gruvbox theme
-      ["ref_specifier"] = "rustTSRefSpecifier",
-      ["mutable_specifier"] = "rustTSMutableSpecifier",
-
-    },
+    -- custom_captures = {
+    --       ["ref_specifier"] = "rustTSRefSpecifier",
+    --       ["mutable_specifier"] = "rustTSMutableSpecifier",
+    -- },
   },
   playground = {
     enable = true,
     disable = { "c" },
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
     keybindings = {},
   },
@@ -43,10 +41,10 @@ require('nvim-treesitter.configs').setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
       },
     },
     move = {
@@ -54,28 +52,28 @@ require('nvim-treesitter.configs').setup {
       disable = { "c" },
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-        [']c'] = '@comment.outer',
-        [']p'] = '@parameter.outer',
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
+            [']c'] = '@comment.outer',
+            [']p'] = '@parameter.outer',
       },
       goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-        [']C'] = '@comment.outer',
-        [']P'] = '@parameter.outer',
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
+            [']C'] = '@comment.outer',
+            [']P'] = '@parameter.outer',
       },
       goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-        ['[c'] = '@comment.outer',
-        ['[p'] = '@parameter.outer',
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
+            ['[c'] = '@comment.outer',
+            ['[p'] = '@parameter.outer',
       },
       goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-        ['[C'] = '@comment.outer',
-        ['[P'] = '@parameter.outer',
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
+            ['[C'] = '@comment.outer',
+            ['[P'] = '@parameter.outer',
       },
     },
   },

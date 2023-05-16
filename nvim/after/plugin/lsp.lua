@@ -96,7 +96,7 @@ local on_attach = function(client, bufnr)
         },
         K = { vim.lsp.buf.hover, "LSP Hover" },
             [']'] = { d = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" } },
-            ['['] = { k = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' } },
+            ['['] = { d = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' } },
     })
 
     wk.register({
@@ -136,8 +136,6 @@ globalCapabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
     capabilities = globalCapabilities,
 })
-
-lspconfig.emmet_ls.setup { capabilities = globalCapabilities }
 
 local opts = {
     on_attach = on_attach,

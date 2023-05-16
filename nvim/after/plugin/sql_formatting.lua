@@ -4,13 +4,22 @@ if not require("mason-registry").is_installed("sql-formatter") then
     pkg:install()
 end
 
-local embedded_sql = vim.treesitter.parse_query(
+local embedded_sql = vim.treesitter.query.parse(
     "typescript",
     [[
 (pair
     key: (property_identifier) @_key (#eq? @_key "sql")
     value: (template_string) @sql
     (#offset! @sql 0 1 0 -1))
+; tagged SQL, i.e. mysql`SELECT * FROM ...`
+(pair
+    key: (property_identifier) @_key (#eq? @_key "sql")
+    value: (call_expression
+                function: (identifier)
+                arguments: (template_string) @sql
+                (#offset! @sql 0 1 0 -1)
+           )
+)
     ]]
 )
 
@@ -54,21 +63,28 @@ local format_sql = function(opts)
     local root = get_root(bufnr)
 
     local changes = {}
+    local indentation = ""
     for id, node in embedded_sql:iter_captures(root, bufnr, start_line, end_line) do
         local name = embedded_sql.captures[id]
+        if name == "_key" then
+            local range = { node:range() }
+            indentation = string.rep(" ", range[2])
+        end
+
         if name == "sql" then
             -- { start_row, start_col, end_row, end_col }
             local range = { node:range() }
-            local indentation = string.rep(" ", range[2])
+            -- local indentation = string.rep(" ", range[2])
 
             local text = vim.treesitter.get_node_text(node, bufnr)
             text = string.sub(text, 2, -2)
 
             local formatted = run_sql_formatter(text)
 
+            local sql_indentation = indentation .. "  "
             for idx, line in ipairs(formatted) do
                 if line ~= "" then
-                    formatted[idx] = indentation .. line
+                    formatted[idx] = sql_indentation .. line
                 end
             end
 

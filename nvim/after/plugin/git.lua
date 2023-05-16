@@ -10,17 +10,20 @@ require("gitsigns").setup {
   },
   numhl = true,
   current_line_blame = true,
+  preview_config = {
+    border = 'rounded'
+  }
   -- current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
 }
 
 wk.register({
-  [']'] = {
+      [']'] = {
     g = { '<cmd>Gitsigns next_hunk<CR>', 'Next git hunk' },
   },
-  ['['] = {
+      ['['] = {
     g = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous git hunk' },
   },
-  ['<leader>'] = {
+      ['<leader>'] = {
     g = {
       name = 'Git',
       j = { '<cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
@@ -37,7 +40,7 @@ wk.register({
 
 -- fugitive specific, also requires 'tpope/vim-fugitive'
 wk.register({
-  ['<leader>'] = {
+      ['<leader>'] = {
     g = {
       name = 'Git',
       G = { '<cmd>G<CR>', 'Git status' }
@@ -52,7 +55,7 @@ wk.register({
 })
 
 wk.register({
-  ['<leader>'] = {
+      ['<leader>'] = {
     g = {
       name = 'Git',
       g = { '<cmd>:DiffviewOpen<CR>', 'Open Diff View' },

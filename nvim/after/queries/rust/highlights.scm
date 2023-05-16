@@ -1,4 +1,3 @@
-; (mutable_specifier) @mutable_specifier
-; "&" @mutable_specifier
-"ref" @ref_specifier
-(mutable_specifier) @mutable_specifier
+; extends
+("ref") @ref_specifier
+(mutable_specifier) @mut_specifier
