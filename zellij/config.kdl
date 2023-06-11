@@ -1,6 +1,6 @@
 default_layout "compact"
 
-theme "catppuccin-mocha"
+theme "gruvbox-dark"
 
 keybinds {
   normal {
