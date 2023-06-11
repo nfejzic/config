@@ -10,13 +10,15 @@ wezterm.on("gui-startup", function()
 end)
 
 return {
-    font = wezterm.font("JetBrains Mono"),
+    font = wezterm.font("Jetbrains Mono"),
     font_size = 13,
-    freetype_load_target = "Light",
+
     color_schemes = {
-            ["Catppuccin Dark"] = catppuccin_mocha_hard
+        ["Catppuccin Dark"] = catppuccin_mocha_hard
     },
-    color_scheme = "Catppuccin Dark",
+    -- color_scheme = "Catppuccin Dark",
+    color_scheme = "GruvboxDarkHard",
+
     hide_tab_bar_if_only_one_tab = true,
     window_padding = {
         left = "0.0cell",
