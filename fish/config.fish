@@ -4,6 +4,14 @@ set fish_greeting
 # to update PATH variable in fish run following command in one shell session: 
 # set -U fish_user_paths <PATH> $fish_user_paths
 
+# linuxbrew
+set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew";
+set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar";
+set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew";
+set -q PATH; or set PATH ''; set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH;
+set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH;
+set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH;
+
 # That will permanently prepend the <PATH> to user paths universal variable
 
 abbr -a c 'code .'
@@ -74,18 +82,22 @@ set -gx BAT_THEME "Catppuccin-mocha"
 # <<< conda initialize <<<
 
 # set default editor
-set -gx EDITOR 'nvim'
-set -gx VISUAL 'nvim'
+set -gx EDITOR 'hx'
+set -gx VISUAL 'hx'
+# set -gx EDITOR 'nvim'
+# set -gx VISUAL 'nvim'
 
-if type -q "/home/$USER/.local/share/bob/nvim-bin/nvim"
-    set -gx SUDO_EDITOR "/home/$USER/.local/share/bob/nvim-bin/nvim"
-else if type -q nvim
-    set -qx SUDO_EDITOR 'nvim'
-else if type -q vim
-    set -qx SUDO_EDITOR 'vim'
-else 
-    set -qx SUDO_EDITOR 'vi'
-end
+set -gx SUDO_EDITOR 'hx'
+
+# if type -q "/home/$USER/.local/share/bob/nvim-bin/nvim"
+#     set -gx SUDO_EDITOR "/home/$USER/.local/share/bob/nvim-bin/nvim"
+# else if type -q nvim
+#     set -qx SUDO_EDITOR 'nvim'
+# else if type -q vim
+#     set -qx SUDO_EDITOR 'vim'
+# else 
+#     set -qx SUDO_EDITOR 'vi'
+# end
 
 # add copy abbreviation only if one of the providers is available
 set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
