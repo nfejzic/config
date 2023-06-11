@@ -1,5 +1,12 @@
 inherits = "catppuccin_mocha"
 
+"ui.virtual.inlay-hint" = { fg = "overlay1", bg = "crust" }
+
+"diagnostic.error" = { underline = { color = "red", style = "line" } }
+"diagnostic.warning" = { underline = { color = "yellow", style = "line" } }
+"diagnostic.info" = { underline = { color = "sky", style = "line" } }
+"diagnostic.hint" = { underline = { color = "teal", style = "line" } }
+
 [palette]
 surface0 = "#181825"
 
