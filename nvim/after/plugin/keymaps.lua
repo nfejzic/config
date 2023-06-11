@@ -1,7 +1,7 @@
 local wk = require("wk")
 
 wk.register({
-      ['<leader>'] = {
+  ['<leader>'] = {
     f = {
       name = "Find/File",
       f = {
@@ -37,18 +37,31 @@ wk.register({
       o = { "<cmd>foldopen<CR>", "Unfold (open fold)" },
       O = { "zR", "Unfold all (open fold)" },
     },
-        ['<space>'] = { "<C-^>", 'Switch to previous buffer' },
+    ['<space>'] = { "<C-^>", 'Switch to previous buffer' },
     e = "Lsp Diagnostics popup",
-        ['?'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
+    ['?'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
   },
   -- ['<C-l>'] = { "<cmd>BufferNext<CR>", "Go to next buffer" },
   -- ['<C-h>'] = { "<cmd>BufferPrevious<CR>", "Go to previous buffer" },
-      [']'] = {
+  [']'] = {
     q = { '<cmd>cn<CR>', 'Next quickfix entry' },
     b = { "<cmd>bnext<CR>", "Go to next buffer" },
   },
-      ['['] = {
+  ['['] = {
     q = { '<cmd>cp<CR>', 'Previous quickfix entry' },
     b = { "<cmd>bprevious<CR>", "Go to previous buffer" },
   }
 })
+
+local trouble_exists, trouble = pcall(require, "trouble")
+
+if trouble_exists then
+  wk.register({
+    [']'] = {
+      t = { function() trouble.next({ skip_groups = true, jump = true }) end, 'Next Trouble entry' },
+    },
+    ['['] = {
+      t = { function() trouble.previous({ skip_groups = true, jump = true }) end, 'Previous Trouble entry' },
+    }
+  })
+end

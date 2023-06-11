@@ -21,6 +21,13 @@ require("lazy").setup({
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
+    {
+        "lvimuser/lsp-inlayhints.nvim",
+        branch = "anticonceal",
+        config = function()
+            require("lsp-inlayhints").setup()
+        end
+    },
 
     -- loading status for LSPs
     { 'j-hui/fidget.nvim' },
@@ -102,7 +109,7 @@ require("lazy").setup({
     { 'lukas-reineke/indent-blankline.nvim' },
 
     -- UI
-    { 'nvim-lualine/lualine.nvim',          dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
+    { 'nvim-lualine/lualine.nvim',          dependencies = { 'kyazdani42/nvim-web-devicons', lazy = false } },
     { 'luukvbaal/stabilize.nvim' }, -- Stabilize nvim windows
 
     -- Git
@@ -168,6 +175,13 @@ require("lazy").setup({
             vim.cmd("colorscheme catppuccin")
         end
     },
+    {
+        'rose-pine/neovim',
+        name = 'rose-pine',
+        -- config = function()
+        --     vim.cmd("colorscheme rose-pine")
+        -- end
+    },
     { 'shaunsingh/nord.nvim' },
 
     -- Tabline
@@ -176,7 +190,9 @@ require("lazy").setup({
     -- Languages (indentation and more)
     -- use 'sheerun/vim-polyglot' -- is very slow in some files!
     { 'tpope/vim-sleuth' },
-    -- use 'windwp/nvim-autopairs'
+
+    -- automatically add pairs for (), {}, etc
+    { 'windwp/nvim-autopairs' },
 
     -- Projects
     { "ahmedkhalf/project.nvim" },

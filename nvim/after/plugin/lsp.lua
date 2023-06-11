@@ -107,7 +107,11 @@ local on_attach = function(client, bufnr)
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method("textDocument/inlayHints") then
+        require("lsp-inlayhints").on_attach(client, bufnr)
+    end
+
+    if client.supports_method("textDocument/formatting") and client.name ~= "volar" then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
@@ -127,6 +131,7 @@ local on_attach = function(client, bufnr)
         )
     end
 end
+
 
 -- nvim-cmp supports additional completion capabilities
 local globalCapabilities = vim.lsp.protocol.make_client_capabilities()
@@ -154,6 +159,7 @@ mason_lsp.setup_handlers {
     ["rust_analyzer"] = function()
         -- Initialize the LSP via rust-tools instead
         require("rust-tools").setup {
+            autoSetHints = false,
             -- The "server" property provided in rust-tools setup function are the
             -- settings rust-tools will provide to lspconfig during init.            --
             -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
@@ -161,7 +167,8 @@ mason_lsp.setup_handlers {
             -- capabilities = globalCapabilities,
             tools = {
                 inlay_hints = {
-                    highlight = "InlayHint",
+                    auto = false,
+                    -- highlight = "InlayHint",
                 }
             },
             server = {
@@ -169,7 +176,7 @@ mason_lsp.setup_handlers {
                 capabilities = globalCapabilities,
                 hover = {
                     links = {
-                        enable = false
+                        enable = true
                     }
                 }
             },
@@ -177,6 +184,20 @@ mason_lsp.setup_handlers {
     end,
     ["tsserver"] = function()
         lspconfig["tsserver"].setup {
+            settings = {
+                typescript = {
+                    inlayHints = {
+                        includeInlayParameterNameHints = 'all',
+                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                        includeInlayFunctionParameterTypeHints = true,
+                        includeInlayVariableTypeHints = true,
+                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                        includeInlayPropertyDeclarationTypeHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayEnumMemberValueHints = true,
+                    }
+                }
+            },
             on_attach = function(client, bufnr)
                 client.server_capabilities.document_formatting = false
                 client.server_capabilities.document_range_formatting = false
@@ -230,6 +251,9 @@ mason_lsp.setup_handlers {
             capabilities = globalCapabilities,
             settings = {
                 Lua = {
+                    hint = {
+                        enable = true,
+                    },
                     diagnostics = {
                         globals = { "vim" }
                     }
@@ -262,10 +286,10 @@ mason_lsp.setup_handlers {
                     scriptInitialIndent = false,
                     styleInitialIndent = false,
                     defaultFormatter = {
-                        ts = "prettier",
-                        js = "prettier",
-                        html = "prettier",
-                        scss = "prettier",
+                        ts = "prettier-eslint",
+                        js = "prettier-eslint",
+                        html = "prettier-eslint",
+                        scss = "prettier-eslint",
                     },
                 },
                 validation = {

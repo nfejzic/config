@@ -16,8 +16,16 @@ vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 -- add marker at 80 chars length and wrap text
 vim.o.colorcolumn = "80"
-vim.o.formatoptions = 'jcrqlt'
 vim.o.textwidth = 80
+-- vim.o.formatoptions = 'jcrqlt'
+
+-- set colorcolumn for git commit editing to 50 and 72 characters
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "gitcommit",
+    callback = function()
+        vim.o.colorcolumn = "50,72"
+    end
+})
 
 -- load plugins
 require("plugins")
@@ -124,7 +132,7 @@ vim.g.bufferline = {
     animation = false,
 }
 
--- require('nvim-autopairs').setup {}
+require('nvim-autopairs').setup {}
 require('project_nvim').setup {
     manual_mode = true
 }
@@ -137,15 +145,15 @@ require('dressing').setup({
 })
 
 -- don't continue comments on 'o' and 'O' commands
-local augroup = vim.api.nvim_create_augroup("Formatoptions", {})
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = augroup,
-    pattern = "*",
-    callback = function()
-        -- vim.cmd("%foldopen!")
-        vim.o.formatoptions = 'jcrql'
-    end
-})
+-- local augroup = vim.api.nvim_create_augroup("Formatoptions", {})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     group = augroup,
+--     pattern = "*",
+--     callback = function()
+--         -- vim.cmd("%foldopen!")
+--         vim.o.formatoptions = 'jcrql'
+--     end
+-- })
 
 for _, adapter in ipairs(require("dap").adapters) do
     print(adapter)
