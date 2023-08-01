@@ -32,7 +32,7 @@ local function getCompletions(self, _, bufnr, callback)
             local result = job:result()
             local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
             if not ok then
-              vim.notify "Failed to parse gh result"
+              vim.notify("Failed to parse gh result")
               return
             end
 
@@ -66,7 +66,7 @@ local function getCompletions(self, _, bufnr, callback)
             local result = job:result()
             local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
             if not ok then
-              vim.notify "Failed to parse gh result"
+              vim.notify("Failed to parse gh result")
               return
             end
 

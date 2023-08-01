@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 
+    { 'nvim-lua/plenary.nvim' },
+
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim' },
 
