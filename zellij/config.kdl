@@ -1,7 +1,6 @@
 default_layout "compact"
 
-theme "gruvbox-dark"
-
+theme "gruvbox-dark-hard"
 keybinds {
   normal {
     bind "Alt g" { Run "gitui" "-t" "mocha.ron"; TogglePaneEmbedOrFloating; }
@@ -65,5 +64,47 @@ themes {
     cyan 104 157 106
     white 251 241 199
     orange 214 93 14
+  }
+
+  gruvbox-dark-hard {
+    fg 213 196 161
+    bg 60 56 54 // was: 40 40 40
+    black 29 32 33
+    red 204 36 29
+    green 69 133 136 // swapped with blue
+    yellow 215 153 33
+    blue  152 151 26 // swapped with green
+    magenta 177 98 134
+    cyan 104 157 106
+    white 251 241 199
+    orange 214 93 14
+  }
+
+  tokyonight_night {
+    fg 192 202 245
+    bg 40 52 87
+    black 21 22 30
+    red 247 118 142
+    green 158 206 106
+    yellow 224 176 104
+    blue 122 162 247
+    magenta 187 154 247
+    cyan 125 207 255
+    white 169 177 214
+    orange 255 158 100
+  }
+
+  rose-pine {
+    bg "#191724"
+    fg "#e0def4"
+    red "#eb6f92"
+    green "#31748f"
+    blue "#9ccfd8"
+    yellow "#f6c177"
+    magenta "#c4a7e7"
+    orange "#fe640b"
+    cyan "#ebbcba"
+    black "#26233a"
+    white "#e0def4"
   }
 }
