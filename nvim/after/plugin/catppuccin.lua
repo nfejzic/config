@@ -1,5 +1,7 @@
-local colors = require("catppuccin.palettes").get_palette "mocha"
+local colors = require("catppuccin.palettes").get_palette("mocha")
+
 require("catppuccin").setup({
+  transparent_background = false,
   styles = {
     comments = { "italic" },
     conditionals = {},
@@ -28,7 +30,6 @@ require("catppuccin").setup({
       enabled = true,
       colored_indent_levels = false,
     },
-    lsp_trouble = true,
     markdown = true,
     native_lsp = {
       enabled = true,
@@ -45,17 +46,18 @@ require("catppuccin").setup({
     which_key = true,
   },
   custom_highlights = {
-    TSNamespace = { style = {} },
+    -- TSNamespace = { style = {} },
     rustTSRefSpecifier = { fg = colors.sky, style = {} },
+    NormalFloat = { fg = colors.text, bg = "none" },
   },
   -- make it very dark
   color_overrides = {
-    mocha = {
-      base = colors.crust,
-      mantle = colors.base,
-      crust = colors.mantle,
-      surface0 = colors.base
-    }
+    -- mocha = {
+    --   base = colors.crust,
+    --   mantle = colors.base,
+    --   crust = colors.mantle,
+    --   surface0 = colors.base
+    -- }
   }
 })
 

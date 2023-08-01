@@ -52,16 +52,3 @@ wk.register({
     b = { "<cmd>bprevious<CR>", "Go to previous buffer" },
   }
 })
-
-local trouble_exists, trouble = pcall(require, "trouble")
-
-if trouble_exists then
-  wk.register({
-    [']'] = {
-      t = { function() trouble.next({ skip_groups = true, jump = true }) end, 'Next Trouble entry' },
-    },
-    ['['] = {
-      t = { function() trouble.previous({ skip_groups = true, jump = true }) end, 'Previous Trouble entry' },
-    }
-  })
-end

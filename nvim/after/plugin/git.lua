@@ -17,20 +17,21 @@ require("gitsigns").setup {
 }
 
 wk.register({
-      [']'] = {
+  [']'] = {
     g = { '<cmd>Gitsigns next_hunk<CR>', 'Next git hunk' },
   },
-      ['['] = {
+  ['['] = {
     g = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous git hunk' },
   },
-      ['<leader>'] = {
+  ['<leader>'] = {
     g = {
       name = 'Git',
+      b = { '<cmd>Gitsigns blame_line<CR>', 'Blame current line' },
       j = { '<cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
       k = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
       p = { '<cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
       s = { '<cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
-      u = { '<cmd>Gitsigns stage_hunk<CR>', 'Unstage hunk' },
+      u = { '<cmd>Gitsigns undo_stage_hunk<CR>', 'Undo stage hunk' },
       r = { '<cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
       d = { '<cmd>Gitsigns diffthis<CR>', 'Diff this' },
       q = { '<cmd>Gitsigns setqflist<CR>', 'Show changes in quickfix list' },
@@ -40,7 +41,7 @@ wk.register({
 
 -- fugitive specific, also requires 'tpope/vim-fugitive'
 wk.register({
-      ['<leader>'] = {
+  ['<leader>'] = {
     g = {
       name = 'Git',
       G = { '<cmd>G<CR>', 'Git status' }
@@ -55,7 +56,7 @@ wk.register({
 })
 
 wk.register({
-      ['<leader>'] = {
+  ['<leader>'] = {
     g = {
       name = 'Git',
       g = { '<cmd>:DiffviewOpen<CR>', 'Open Diff View' },

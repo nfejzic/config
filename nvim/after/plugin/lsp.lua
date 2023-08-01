@@ -36,15 +36,22 @@ nlspsettings.setup({
     loader = 'json'
 })
 
-local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format(
-        {
-            filter = function(client) return client.name ~= "tsserver" or client.name ~= "jsonls" end,
-            bufnr = bufnr,
-        })
+local should_format_with_client = function(client)
+    return
+        client.name ~= "tsserver"
+        and client.name ~= "jsonls"
+        and client.name ~= "copilot"
+        and client.name ~= "volar"
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local lsp_formatting = function(bufnr)
+    vim.lsp.buf.format({
+        -- timeout_ms = 2000,
+        -- bufnr = bufnr,
+        async = false,
+    })
+    vim.notify("Formatted buffer", "info", { title = "LSP" })
+end
 
 -- Add some commands and keybindings when server loads
 local on_attach = function(client, bufnr)
@@ -62,7 +69,7 @@ local on_attach = function(client, bufnr)
                 name = 'LSP',
                 D = { vim.lsp.buf.declaration, "Go to Declaration" },
                 e = { vim.diagnostic.open_float, 'Show diagnostics message' },
-                h = { vim.lsp.buf.signature_help, 'Show signature help' },
+                -- h = { vim.lsp.buf.signature_help, 'Show signature help' },
                 j = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" },
                 k = { vim.diagnostic.goto_prev, 'Go to previous LSP diagnostics problem' },
                 n = { vim.lsp.buf.rename, "Refactor Rename" },
@@ -73,7 +80,7 @@ local on_attach = function(client, bufnr)
                 w = { telescope_builtin.lsp_workspace_symbols, "Search workspace symbols" },
                 M = { telescope_builtin.diagnostics, "Show diagnostics messages in all buffers" },
                 d = { telescope_builtin.lsp_definitions, 'Show definitions' },
-                i = { telescope_builtin.lsp_implementations, 'Show implemnetations' },
+                i = { telescope_builtin.lsp_implementations, 'Show implementations' },
                 m = { show_diagnostics, 'Show diagnostics messages in current buffer' },
             },
             w = {
@@ -92,7 +99,6 @@ local on_attach = function(client, bufnr)
             D = { vim.lsp.buf.declaration, "Go to Declaration" },
             t = { vim.lsp.buf.type_definition, "Go to Type Definition" },
             h = { vim.diagnostic.open_float, 'Show diagnostics message/help' },
-            H = { '<cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics messages in current buffer' },
         },
         K = { vim.lsp.buf.hover, "LSP Hover" },
         [']'] = { d = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" } },
@@ -107,28 +113,52 @@ local on_attach = function(client, bufnr)
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    if client.supports_method("textDocument/inlayHints") then
-        require("lsp-inlayhints").on_attach(client, bufnr)
-    end
+    if client.supports_method("textDocument/inlayHint") then
+        vim.api.nvim_create_user_command(
+            'LspToggleInlayHints',
+            function() vim.lsp.buf.inlay_hint(0, nil) end,
+            {}
+        )
 
-    if client.supports_method("textDocument/formatting") and client.name ~= "volar" then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                lsp_formatting(bufnr)
-            end,
+        wk.register({
+            ['<leader>'] = {
+                l = {
+                    h = { "<cmd>LspToggleInlayHints<cr>", "Toggle inlay hints" }
+                }
+            }
         })
 
-        vim.api.nvim_buf_create_user_command(
-            bufnr,
-            'Format',
-            function()
-                lsp_formatting(bufnr)
-            end,
-            { nargs = 0 }
-        )
+        vim.lsp.buf.inlay_hint(0, true)
+    end
+
+    if client.supports_method("textDocument/formatting") and should_format_with_client(client) then
+        if should_format_with_client(client) then
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                pattern = '*',
+                group = augroup,
+                callback = function()
+                    lsp_formatting(bufnr)
+                end
+            })
+
+            vim.api.nvim_buf_create_user_command(
+                bufnr,
+                'Format',
+                function()
+                    lsp_formatting(bufnr)
+                end,
+                {}
+            )
+
+            wk.register({
+                ['<leader>'] = {
+                    l = {
+                        f = { "<cmd>Format<cr>", "Format buffer" }
+                    }
+                }
+            })
+        end
     end
 end
 
@@ -199,8 +229,7 @@ mason_lsp.setup_handlers {
                 }
             },
             on_attach = function(client, bufnr)
-                client.server_capabilities.document_formatting = false
-                client.server_capabilities.document_range_formatting = false
+                client.server_capabilities.documentFormattingProvider = false
 
                 local ts_utils = require("nvim-lsp-ts-utils")
                 ts_utils.setup({})
@@ -278,7 +307,7 @@ mason_lsp.setup_handlers {
                     },
                 },
                 format = {
-                    enable = true,
+                    enable = false,
                     options = {
                         useTabs = false,
                         tabSize = 2,

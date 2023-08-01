@@ -27,6 +27,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+-- set colorcolumn for rust files to 100 (as that's the default in rustfmt)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "rust",
+    callback = function()
+        vim.o.colorcolumn = "100"
+    end
+})
+
 -- load plugins
 require("plugins")
 
@@ -35,7 +43,7 @@ vim.cmd [[
     autocmd!
     autocmd BufWinEnter *.html5 silent! :set filetype=html " contao specific
     autocmd BufWinEnter *.html5 silent! :set syntax=php " contao specific
-    autocmd BufWinEnter *.html5 silent! :IndentBlanklineEnable
+    " autocmd BufWinEnter *.html5 silent! :IndentBlanklineEnable
     autocmd BufWinEnter *.php silent! :set syntax=php
     autocmd BufWinEnter *.scss silent! :set syntax=scss
     autocmd BufWinEnter *.vue silent! :set shiftwidth=2
@@ -59,6 +67,9 @@ vim.o.breakindent = true
 
 --Save undo history
 vim.opt.undofile = true
+
+-- disable swap files
+vim.opt.swapfile = false
 
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -132,7 +143,7 @@ vim.g.bufferline = {
     animation = false,
 }
 
-require('nvim-autopairs').setup {}
+-- require('nvim-autopairs').setup {}
 require('project_nvim').setup {
     manual_mode = true
 }
@@ -141,6 +152,9 @@ require('dressing').setup({
     input = {
         start_in_insert = false,
         insert_only = false,
+        win_options = {
+            winblend = 0,
+        }
     }
 })
 
@@ -159,6 +173,9 @@ for _, adapter in ipairs(require("dap").adapters) do
     print(adapter)
 end
 
-vim.o.background = "dark"
+-- vim.o.background = "light"
 
--- colorscheme set in colorscheme config file
+-- vim.cmd("colorscheme catppuccin")
+-- vim.g.gruvbox_material_foreground = "original"
+-- vim.g.gruvbox_material_background = "hard"
+-- vim.cmd("colorscheme rose-pine")

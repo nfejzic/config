@@ -1,18 +1,17 @@
-local trouble = require('trouble.providers.telescope')
-
 require('telescope').setup {
   defaults = {
     file_ignore_patterns = {
       "node_modules"
     },
     layout_strategy = 'vertical',
+    layout_config = {
+      vertical = {
+        preview_cutoff = 25,
+      }
+    },
     mappings = {
       n = {
         ['dd'] = require('telescope.actions').delete_buffer,
-        ["<C-t>"] = trouble.open_with_trouble,
-      },
-      i = {
-        ["<C-t>"] = trouble.open_with_trouble,
       },
     },
   },

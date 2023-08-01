@@ -19,13 +19,13 @@ require('nvim-treesitter.configs').setup {
     keybindings = {},
   },
   incremental_selection = {
-    enable = false,
+    enable = true,
     disable = { "c", "vue" },
     keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
+      init_selection = '<A-o>',
+      node_incremental = '<A-o>',
       scope_incremental = 'grc',
-      node_decremental = 'grm',
+      node_decremental = '<A-i>',
     },
   },
   indent = {
@@ -41,10 +41,10 @@ require('nvim-treesitter.configs').setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
       },
     },
     move = {
@@ -52,28 +52,28 @@ require('nvim-treesitter.configs').setup {
       disable = { "c" },
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-            [']m'] = '@function.outer',
-            [']]'] = '@class.outer',
-            [']c'] = '@comment.outer',
-            [']p'] = '@parameter.outer',
+        [']f'] = '@function.outer',
+        [']]'] = '@class.outer',
+        [']c'] = '@comment.outer',
+        [']a'] = '@parameter.outer',
       },
       goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
-            [']C'] = '@comment.outer',
-            [']P'] = '@parameter.outer',
+        [']F'] = '@function.outer',
+        [']['] = '@class.outer',
+        [']C'] = '@comment.outer',
+        [']A'] = '@parameter.outer',
       },
       goto_previous_start = {
-            ['[m'] = '@function.outer',
-            ['[['] = '@class.outer',
-            ['[c'] = '@comment.outer',
-            ['[p'] = '@parameter.outer',
+        ['[f'] = '@function.outer',
+        ['[['] = '@class.outer',
+        ['[c'] = '@comment.outer',
+        ['[a'] = '@parameter.outer',
       },
       goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
-            ['[C'] = '@comment.outer',
-            ['[P'] = '@parameter.outer',
+        ['[F'] = '@function.outer',
+        ['[]'] = '@class.outer',
+        ['[C'] = '@comment.outer',
+        ['[A'] = '@parameter.outer',
       },
     },
   },

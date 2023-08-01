@@ -2,8 +2,9 @@ require('neo-tree').setup({
     popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
     use_default_mappings = false,
     use_popups_for_input = true,    -- If false, inputs will use vim.ui.input() instead of custom floats.
+    enable_normal_mode_for_inputs = true,
     source_selector = {
-        winbar = true,              -- toggle to show selector on winbar
+        winbar = true, -- toggle to show selector on winbar
     },
     window = {
         mappings = {
@@ -38,20 +39,20 @@ require('neo-tree').setup({
                     show_path = "none" -- "none", "relative", "absolute"
                 }
             },
-            ["A"] = "add_directory",     -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+            ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
             ["d"] = "delete",
             ["r"] = "rename",
             ["y"] = "copy_to_clipboard",
             ["x"] = "cut_to_clipboard",
             ["p"] = "paste_from_clipboard",
-            ["c"] = "copy",     -- takes text input for destination, also accepts the optional config.show_path option like "add":
+            ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
             -- ["c"] = {
             --  "copy",
             --  config = {
             --    show_path = "none" -- "none", "relative", "absolute"
             --  }
             --}
-            ["m"] = "move",     -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
             ["q"] = "close_window",
             ["R"] = "refresh",
             ["?"] = "show_help",
@@ -74,7 +75,9 @@ require('neo-tree').setup({
         }
     },
     filesystem = {
-        follow_current_file = false,            -- This will find and focus the file in the active buffer every time
+        follow_current_file = {
+            enabled = false,                    -- This will find and focus the file in the active buffer every time
+        },
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
         use_libuv_file_watcher = false,         -- This will use the OS level file watchers to detect changes
         window = {
@@ -93,8 +96,12 @@ require('neo-tree').setup({
     },
     buffers = {
         bind_to_cwd = true,
-        follow_current_file = true, -- This will find and focus the file in the active buffer every time
+
+        -- This will find and focus the file in the active buffer every time
         -- the current file is changed while the tree is open.
+        follow_current_file = {
+            enabled = true,
+        },
         mapping_options = {
             noremap = true,
             nowait = true,

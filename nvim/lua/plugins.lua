@@ -21,16 +21,19 @@ require("lazy").setup({
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
-    {
-        "lvimuser/lsp-inlayhints.nvim",
-        branch = "anticonceal",
-        config = function()
-            require("lsp-inlayhints").setup()
-        end
-    },
 
     -- loading status for LSPs
-    { 'j-hui/fidget.nvim' },
+    {
+        'j-hui/fidget.nvim',
+        tag = "legacy",
+        config = function()
+            require('fidget').setup({
+                window = {
+                    blend = 0,
+                }
+            })
+        end
+    },
 
     -- Lightbulb in statusbar
     { 'kosayoda/nvim-lightbulb' },
@@ -46,12 +49,6 @@ require("lazy").setup({
 
     -- Typescript utilities
     { "jose-elias-alvarez/nvim-lsp-ts-utils" },
-
-    -- Nicer 'quickfix' for LSP diagnostics (and others, like TODO lists)
-    {
-        "folke/trouble.nvim",
-        dependencies = "kyazdani42/nvim-web-devicons",
-    },
 
     -- Autocomplete
     { 'hrsh7th/cmp-nvim-lsp' },
@@ -88,6 +85,7 @@ require("lazy").setup({
     { 'nvim-treesitter/nvim-treesitter-textobjects' },
     -- use 'JoosepAlviste/nvim-ts-context-commentstring'
     { 'nvim-treesitter/playground' },
+    { 'nvim-treesitter/nvim-treesitter-context' },
 
     -- Telescope
     {
@@ -106,35 +104,42 @@ require("lazy").setup({
         end
     },
 
-    { 'lukas-reineke/indent-blankline.nvim' },
+    -- { 'lukas-reineke/indent-blankline.nvim',
+    --     config = function()
+    --         require('indent_blankline').setup({
+    --             show_current_context = true,
+    --             show_current_context_start = true,
+    --         })
+    --     end
+    -- },
 
     -- UI
-    { 'nvim-lualine/lualine.nvim',          dependencies = { 'kyazdani42/nvim-web-devicons', lazy = false } },
+    { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = false } },
     { 'luukvbaal/stabilize.nvim' }, -- Stabilize nvim windows
 
     -- Git
-    { 'lewis6991/gitsigns.nvim',            dependencies = { 'nvim-lua/plenary.nvim' } }, -- git signs in gutter
-    {
-        -- GitHub PR UI
-        'pwntester/octo.nvim',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-            'kyazdani42/nvim-web-devicons',
-        },
-        config = function()
-            require "octo".setup()
-        end
-    },
+    { 'lewis6991/gitsigns.nvim',   dependencies = { 'nvim-lua/plenary.nvim' } }, -- git signs in gutter
+    -- {
+    --     -- GitHub PR UI
+    --     'pwntester/octo.nvim',
+    --     dependencies = {
+    --         'nvim-lua/plenary.nvim',
+    --         'nvim-telescope/telescope.nvim',
+    --         'kyazdani42/nvim-web-devicons',
+    --     },
+    --     config = function()
+    --         require "octo".setup()
+    --     end
+    -- },
 
     -- magit clone for neovim
     -- use 'TimUntersberger/neogit'
 
     -- git stuff from the tpope
-    { 'tpope/vim-fugitive' },
+    -- { 'tpope/vim-fugitive' },
 
     -- git diff view and merge tool
-    { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+    { 'sindrets/diffview.nvim',    dependencies = 'nvim-lua/plenary.nvim' },
 
     -- show help popup for keymaps (like in emacs)
     {
@@ -144,15 +149,14 @@ require("lazy").setup({
     -- nice file tree
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        branch = "v3.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
             {
-                -- needed to use the commands with "_with_window_picker" suffix
                 's1n7ax/nvim-window-picker',
-                version = "v1.*",
+                version = "v2.*",
             }
         }
     },
@@ -162,8 +166,10 @@ require("lazy").setup({
 
     -- original gruvbox colorscheme
     { 'ellisonleao/gruvbox.nvim' },
+    { 'sainnhe/gruvbox-material' },
 
     -- some nice themes
+    { 'rebelot/kanagawa.nvim' },
     { 'folke/tokyonight.nvim' },
     { 'EdenEast/nightfox.nvim' },
     { 'RRethy/nvim-base16' },
@@ -171,9 +177,9 @@ require("lazy").setup({
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        config = function()
-            vim.cmd("colorscheme catppuccin")
-        end
+        -- config = function()
+        -- vim.cmd("colorscheme catppuccin")
+        -- end
     },
     {
         'rose-pine/neovim',
@@ -192,7 +198,7 @@ require("lazy").setup({
     { 'tpope/vim-sleuth' },
 
     -- automatically add pairs for (), {}, etc
-    { 'windwp/nvim-autopairs' },
+    -- { 'windwp/nvim-autopairs' },
 
     -- Projects
     { "ahmedkhalf/project.nvim" },
@@ -213,8 +219,10 @@ require("lazy").setup({
     { 'imsnif/kdl.vim' },
 
     -- nice ui enhancements
-    { 'stevearc/dressing.nvim' },
-
-    -- plugin caching for faster loading
-    { 'lewis6991/impatient.nvim' },
+    {
+        'stevearc/dressing.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+        }
+    },
 }, {})

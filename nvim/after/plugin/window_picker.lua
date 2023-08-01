@@ -1,9 +1,9 @@
-local colors = require("catppuccin.palettes").get_palette "mocha"
-
 require 'window-picker'.setup({
     autoselect_one = true,
-    include_current = false,
+    hint = 'floating-big-letter',
+    -- include_current = true,
     filter_rules = {
+        include_current_win = false,
         -- filter using buffer options
         bo = {
             -- if the file type is one of following, the window will be ignored
@@ -13,6 +13,4 @@ require 'window-picker'.setup({
             buftype = { 'terminal', "quickfix" },
         },
     },
-    other_win_hl_color = colors.flamingo,
-    fg_color = colors.base
 })
