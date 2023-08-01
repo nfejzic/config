@@ -16,9 +16,9 @@ gruvbox_dark_hard.background = "#1d2021"
 local theme = "Gruvbox Dark Hard"
 -- local theme = "Kanagawa (Gogh)"
 
-if wezterm.gui.get_appearance():find "Light" then
-  theme = "Gruvbox Light"
-end
+-- if wezterm.gui.get_appearance():find "Light" then
+--   theme = "Gruvbox Light"
+-- end
 
 return {
   font = wezterm.font("JetBrains Mono"),
