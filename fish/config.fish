@@ -14,7 +14,7 @@ set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/home/linuxbrew/.linuxbre
 
 # That will permanently prepend the <PATH> to user paths universal variable
 
-abbr -a c 'code .'
+abbr -a c 'nvim'
 abbr -a cc 'clang'
 abbr -a l 'exa'
 abbr -a ls 'exa'
@@ -74,7 +74,7 @@ abbr -a gitui 'gitui -t mocha.ron'
 set -g fish_cursor_insert 'block' 'blink'
 
 # set theme of bat (cat alternative with syntax highlighting)
-set -gx BAT_THEME "Catppuccin-mocha"
+set -gx BAT_THEME "gruvbox-dark"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -82,29 +82,29 @@ set -gx BAT_THEME "Catppuccin-mocha"
 # <<< conda initialize <<<
 
 # set default editor
-set -gx EDITOR 'hx'
-set -gx VISUAL 'hx'
-# set -gx EDITOR 'nvim'
-# set -gx VISUAL 'nvim'
+# set -gx EDITOR 'hx'
+# set -gx VISUAL 'hx'
+set -gx EDITOR 'nvim'
+set -gx VISUAL 'nvim'
 
-set -gx SUDO_EDITOR 'hx'
+# set -gx SUDO_EDITOR 'hx'
 
-# if type -q "/home/$USER/.local/share/bob/nvim-bin/nvim"
-#     set -gx SUDO_EDITOR "/home/$USER/.local/share/bob/nvim-bin/nvim"
-# else if type -q nvim
-#     set -qx SUDO_EDITOR 'nvim'
-# else if type -q vim
-#     set -qx SUDO_EDITOR 'vim'
-# else 
-#     set -qx SUDO_EDITOR 'vi'
-# end
+if type -q "/home/$USER/.local/share/bob/nvim-bin/nvim"
+    set -gx SUDO_EDITOR "/home/$USER/.local/share/bob/nvim-bin/nvim"
+else if type -q nvim
+    set -qx SUDO_EDITOR 'nvim'
+else if type -q vim
+    set -qx SUDO_EDITOR 'vim'
+else 
+    set -qx SUDO_EDITOR 'vi'
+end
 
 # add copy abbreviation only if one of the providers is available
 set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
 for clipboard in $clipboard_providers 
     if type -q $clipboard
         abbr -a copy $clipboard
-        abbr -a cpy "$(abbr | rg copy | awk '{print $5}')" 
+        # abbr -a cpy "$(abbr | rg copy | awk '{print $5}')" 
         break
     end
 end
