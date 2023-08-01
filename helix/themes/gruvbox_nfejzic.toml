@@ -3,13 +3,25 @@
 
 inherits = "gruvbox_dark_hard"
 
+"keyword.storage.modifier" = { fg = "yellow1" }
+"operator" = "fg0"
+
 "ui.selection" = { bg = "bg1" }
 "ui.selection.primary" = { bg = "bg2" }
 "ui.cursor" = { bg = "bg2" }
 "ui.cursor.primary" = { bg = "bg4" }
 "ui.cursor.match" = { bg = "bg2" }
 
-"diagnostic.error" = { underline = { color = "red0", style = "curl"} }
+"diagnostic.warning" = { underline = { color = "orange1", style = "line" } }
+"diagnostic.error" = { underline = { color = "red1", style = "line" } }
+"diagnostic.info" = { underline = { color = "aqua1", style = "line" } }
+"diagnostic.hint" = { underline = { color = "blue1", style = "line" } }
+
+"function" = { fg = "blue1" }
+"variable.other.member" = "fg2"
+
+"special" = "yellow1"
+"punctuation" = "yellow1"
 
 [palette]
 bg0 = "#1d2021" # main background
