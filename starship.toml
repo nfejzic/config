@@ -1,0 +1,15 @@
+add_newline = true
+
+[hostname]
+ssh_only = false
+format = '[$hostname](bold red) in '
+disabled = false
+
+[time]
+disabled = false
+
+[gcloud]
+disabled = true
+
+[conda]
+disabled = true
