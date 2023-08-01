@@ -1,5 +1,17 @@
+.DS_Store
+
+# fish files
+fish/completions/*
+fish/conf.d/nvm.fish
+fish/functions/*
+fish/functions/fisher.fish
 fish/fish_variables
-nvim/plugin/packer_compiled.lua
+
+# helix files
 helix/runtime
+
+# neovim files
+nvim/lazy-lock.json
+nvim/plugin/packer_compiled.lua
 
 .luarc.json
