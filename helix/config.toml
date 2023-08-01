@@ -10,6 +10,11 @@ color-modes = true
 line-number = "relative"
 idle-timeout = 0
 rulers = [ 80 ]
+bufferline = "multiple"
+
+[editor.file-picker]
+hidden = false
+follow-symlinks = true
 
 [editor.statusline]
 left = ["mode", "spinner"]
@@ -24,3 +29,8 @@ display-inlay-hints = true
 [editor.cursor-shape]
 insert = "bar"
 select = "underline"
+
+[keys.normal]
+"}" = [ "goto_next_paragraph" ]
+"{" = [ "goto_prev_paragraph" ]
+"X" = [ "extend_line_above" ]
