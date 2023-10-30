@@ -98,13 +98,13 @@ require("lazy").setup({
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Show TODO, FIX, HACK comments in telescope
-    {
-        "folke/todo-comments.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-        config = function()
-            require("todo-comments").setup {}
-        end
-    },
+    -- {
+    --     "folke/todo-comments.nvim",
+    --     dependencies = "nvim-lua/plenary.nvim",
+    --     config = function()
+    --         require("todo-comments").setup {}
+    --     end
+    -- },
 
     -- { 'lukas-reineke/indent-blankline.nvim',
     --     config = function()
@@ -116,32 +116,19 @@ require("lazy").setup({
     -- },
 
     -- UI
-    { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = false } },
+    { 'nvim-lualine/lualine.nvim',
+        -- dependencies = {
+        -- 'kyazdani42/nvim-web-devicons',
+        -- lazy = false
+        -- }
+    },
     { 'luukvbaal/stabilize.nvim' }, -- Stabilize nvim windows
 
     -- Git
-    { 'lewis6991/gitsigns.nvim',   dependencies = { 'nvim-lua/plenary.nvim' } }, -- git signs in gutter
-    -- {
-    --     -- GitHub PR UI
-    --     'pwntester/octo.nvim',
-    --     dependencies = {
-    --         'nvim-lua/plenary.nvim',
-    --         'nvim-telescope/telescope.nvim',
-    --         'kyazdani42/nvim-web-devicons',
-    --     },
-    --     config = function()
-    --         require "octo".setup()
-    --     end
-    -- },
-
-    -- magit clone for neovim
-    -- use 'TimUntersberger/neogit'
-
-    -- git stuff from the tpope
-    -- { 'tpope/vim-fugitive' },
+    { 'lewis6991/gitsigns.nvim', dependencies = { 'nvim-lua/plenary.nvim' } }, -- git signs in gutter
 
     -- git diff view and merge tool
-    { 'sindrets/diffview.nvim',    dependencies = 'nvim-lua/plenary.nvim' },
+    { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim' },
 
     -- show help popup for keymaps (like in emacs)
     {
@@ -154,7 +141,7 @@ require("lazy").setup({
         branch = "v3.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
             {
                 's1n7ax/nvim-window-picker',
@@ -174,7 +161,8 @@ require("lazy").setup({
     { 'rebelot/kanagawa.nvim' },
     { 'folke/tokyonight.nvim' },
     { 'EdenEast/nightfox.nvim' },
-    { 'RRethy/nvim-base16' },
+    -- { 'RRethy/nvim-base16' },
+    { 'wincent/base16-nvim' },
     { 'ishan9299/nvim-solarized-lua' },
     {
         "catppuccin/nvim",
@@ -191,6 +179,7 @@ require("lazy").setup({
         -- end
     },
     { 'shaunsingh/nord.nvim' },
+    { 'savq/melange-nvim' },
 
     -- Tabline
     -- use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
@@ -209,7 +198,7 @@ require("lazy").setup({
     { 'AndrewRadev/tagalong.vim' },
 
     -- Add BG color for hex color values
-    { 'norcalli/nvim-colorizer.lua' },
+    -- { 'norcalli/nvim-colorizer.lua' },
 
     -- Enable repeat for more actions
     { 'tpope/vim-repeat' },

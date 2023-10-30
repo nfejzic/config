@@ -1,6 +1,7 @@
 local wk = require('which-key')
+local gs = require("gitsigns")
 
-require("gitsigns").setup {
+gs.setup {
   signs = {
     -- add = { text = '+' },
     -- change = { text = '~' },
@@ -8,8 +9,8 @@ require("gitsigns").setup {
     -- topdelete = { text = '‾' },
     -- changedelete = { text = '~' },
   },
-  numhl = true,
-  current_line_blame = true,
+  numhl = false,
+  current_line_blame = false,
   preview_config = {
     border = 'rounded'
   }
@@ -27,30 +28,17 @@ wk.register({
     g = {
       name = 'Git',
       b = { '<cmd>Gitsigns blame_line<CR>', 'Blame current line' },
+      B = { function() gs.blame_line({ full = true }) end,
+        'Blame current line with full commit message and hunk preview' },
       j = { '<cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
       k = { '<cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
       p = { '<cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
+      P = { '<cmd>Gitsigns preview_hunk_inline<CR>', 'Preview hunk inline' },
       s = { '<cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
       u = { '<cmd>Gitsigns undo_stage_hunk<CR>', 'Undo stage hunk' },
       r = { '<cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
       d = { '<cmd>Gitsigns diffthis<CR>', 'Diff this' },
       q = { '<cmd>Gitsigns setqflist<CR>', 'Show changes in quickfix list' },
-    }
-  }
-})
-
--- fugitive specific, also requires 'tpope/vim-fugitive'
-wk.register({
-  ['<leader>'] = {
-    g = {
-      name = 'Git',
-      G = { '<cmd>G<CR>', 'Git status' }
-    },
-    -- Git merge:
-    m = {
-      name = 'Merge',
-      h = { '<cmd>diffget //2<CR>', 'Use ours' },
-      l = { '<cmd>diffget //2<CR>', 'Use theirs' },
     }
   }
 })
@@ -66,7 +54,7 @@ wk.register({
   }
 })
 
-function setDiffviewKeybinds()
+local function setDiffviewKeybinds()
   vim.keymap.set('n', '<leader>gt', '<cmd>:DiffviewToggleFiles<CR>', {
     desc = 'Toggle Diff View Files'
   })

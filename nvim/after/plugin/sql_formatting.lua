@@ -4,27 +4,16 @@ if not require("mason-registry").is_installed("sql-formatter") then
     pkg:install()
 end
 
-local embedded_sql = vim.treesitter.query.parse(
-    "typescript",
-    [[
-(pair
-    key: (property_identifier) @_key (#eq? @_key "sql")
-    value: (template_string) @sql
-    (#offset! @sql 0 1 0 -1))
-; tagged SQL, i.e. mysql`SELECT * FROM ...`
-(pair
-    key: (property_identifier) @_key (#eq? @_key "sql")
-    value: (call_expression
-                function: (identifier)
-                arguments: (template_string) @sql
-                (#offset! @sql 0 1 0 -1)
-           )
-)
-    ]]
-)
+local config_path = vim.fn.stdpath("config")
+local f = assert(io.open(config_path .. "/after/queries/typescript/injections.scm", "r"))
+local queries = f:read("*all")
+f:close()
+
+local embedded_sql = vim.treesitter.query.parse("typescript", queries)
 
 local run_sql_formatter = function(input)
     local res
+
     local id = vim.fn.jobstart({ "sql-formatter" }, {
         stdout_buffered = true,
         on_stdout = function(_, output)
@@ -45,15 +34,10 @@ local get_root = function(bufnr)
     return tree:root()
 end
 
-local format_sql = function(opts)
+local function formatSql(opts)
     local bufnr = vim.api.nvim_get_current_buf()
     local start_line = opts.line1 or 1
     local end_line = opts.line2 or -1
-
-    if start_line == end_line then
-        start_line = 0
-        end_line = -1
-    end
 
     if vim.bo[bufnr].filetype ~= "typescript" then
         vim.notify "can only be used in typescript"
@@ -66,7 +50,7 @@ local format_sql = function(opts)
     local indentation = ""
     for id, node in embedded_sql:iter_captures(root, bufnr, start_line, end_line) do
         local name = embedded_sql.captures[id]
-        if name == "_key" then
+        if name == "_key" or name == "mysql_fn" then
             local range = { node:range() }
             indentation = string.rep(" ", range[2])
         end
@@ -114,7 +98,6 @@ local format_sql = function(opts)
             change.end_col,
             change.formatted
         )
-        -- vim.api.nvim_buf_set_lines(bufnr, change.start, change.final, false, change.formatted)
     end
 end
 
@@ -124,6 +107,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     group = augroup,
     pattern = "*.ts",
     callback = function()
-        vim.api.nvim_buf_create_user_command(0, 'FormatSql', format_sql, { nargs = 0, range = true })
+        vim.api.nvim_buf_create_user_command(0, 'FormatSql', formatSql, { nargs = 0, range = true })
     end
 })

@@ -49,6 +49,8 @@ require("catppuccin").setup({
     -- TSNamespace = { style = {} },
     rustTSRefSpecifier = { fg = colors.sky, style = {} },
     NormalFloat = { fg = colors.text, bg = "none" },
+    LspInlayHint = { link = "Comment" },
+    TreesitterContext = { bg = colors.surface0 },
   },
   -- make it very dark
   color_overrides = {
@@ -62,3 +64,4 @@ require("catppuccin").setup({
 })
 
 vim.g.catppuccin_flavour = "mocha"
+-- vim.cmd("colo catppuccin")

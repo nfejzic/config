@@ -14,3 +14,9 @@
                 (#offset! @sql 0 1 0 -1)
            ) 
 )
+
+(call_expression
+    function: (identifier) @mysql_fn (#eq? @mysql_fn "mysql")
+    arguments: (template_string) @sql
+    (#offset! @sql 0 1 0 -1)
+)

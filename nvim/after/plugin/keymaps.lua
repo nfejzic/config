@@ -5,7 +5,16 @@ wk.register({
     f = {
       name = "Find/File",
       f = {
-        "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--hidden', '--follow', '--ignore-file', '.gitignore' } })<CR>",
+        "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--follow', '--ignore-file', '.gitignore' } })<CR>",
+        "Find file" },
+      F = {
+        function()
+          require('telescope.builtin').find_files({
+            find_command = {
+              'rg', '--files', '--hidden', '--follow', '--ignore-file', '.gitignore'
+            }
+          })
+        end,
         "Find file" },
       t = { "<cmd>Neotree toggle<CR>", "Open File Tree" },
       r = { "<cmd>Neotree reveal<CR>", "Reveal current file in the sidebar" },
@@ -18,16 +27,35 @@ wk.register({
       name = "Buffer",
       c = { "<cmd>BufferClose<CR>", "Close buffer" },
       C = { "<cmd>BufferClose!<CR>", "Close buffer ignore changes" },
-      b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", 'Telescope search buffers' },
+      b = { require('telescope.builtin').buffers, 'Telescope search buffers' },
     },
     s = {
       name = "Search",
-      d = { "<cmd>lua require('telescope.builtin').grep_string()<CR>", 'Grep string' },
-      l = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", 'Live grep string' },
+      d = { require('telescope.builtin').grep_string, 'Grep string' },
+      l = { require('telescope.builtin').live_grep, 'Live grep string' },
       L = {
-        "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function () return {'--case-sensitive'} end })<CR>",
-        'Live grep string' },
-      s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })<CR>',
+        function()
+          require('telescope.builtin').live_grep({
+            additional_args = function()
+              return { '--case-sensitive' }
+            end
+          })
+        end,
+        'Live grep string'
+      },
+      g = {
+        function()
+          require('telescope.builtin').live_grep({
+            additional_args = function()
+              return { '--hidden' }
+            end
+          })
+        end, 'Live grep string'
+      },
+      s = {
+        function()
+          require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })
+        end,
         "Fuzzy search in buffer" },
     },
     k = {

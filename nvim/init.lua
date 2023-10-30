@@ -147,7 +147,7 @@ vim.g.bufferline = {
 require('project_nvim').setup {
     manual_mode = true
 }
-require('colorizer').setup()
+-- require('colorizer').setup()
 require('dressing').setup({
     input = {
         start_in_insert = false,

@@ -1,4 +1,7 @@
 default_layout "compact"
+pane_frames false
+simplified_ui false
+copy_on_select false
 
 theme "gruvbox-dark-hard"
 keybinds {
@@ -17,8 +20,8 @@ keybinds {
     bind "Alt p" { GoToPreviousTab; }
     bind "Alt >" { Resize "Increase"; }
     bind "Alt <" { Resize "Decrease"; }
+    bind "Alt e" { EditScrollback; }
 
-    bind "Alt g" { Run "gitui" "-t" "mocha.ron"; TogglePaneEmbedOrFloating; }
     bind "Alt d" { CloseFocus; }
   }
 }
@@ -69,7 +72,8 @@ themes {
   gruvbox-dark-hard {
     fg 213 196 161
     bg 60 56 54 // was: 40 40 40
-    black 29 32 33
+    black 60 56 54 // was: 40 40 40
+    // black 29 32 33 // background of tab-bar
     red 204 36 29
     green 69 133 136 // swapped with blue
     yellow 215 153 33

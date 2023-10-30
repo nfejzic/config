@@ -14,3 +14,5 @@ require('rose-pine').setup({
     -- StatusLine = { fg = 'love', bg = 'love', blend = 10 },
   }
 })
+
+-- vim.cmd("colo rose-pine")

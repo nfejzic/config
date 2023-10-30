@@ -1,8 +1,8 @@
 # theme = "catppuccin_mocha_hard"
 # NOTE: ~/dotfiles/helix/runtime is symlinked to ~/Developer/oss/helix/runtime for now
 # because helix is installed from source (for some new features like Multiple Language servers in same buffer)
-# theme = "catppuccin_mocha_hard"
-theme = "gruvbox_nfejzic"
+theme = "catppuccin_mocha"
+# theme = "gruvbox_nfejzic"
 
 [editor]
 scrolloff = 3

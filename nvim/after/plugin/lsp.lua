@@ -44,13 +44,22 @@ local should_format_with_client = function(client)
         and client.name ~= "volar"
 end
 
-local lsp_formatting = function(bufnr)
+local function lsp_format()
     vim.lsp.buf.format({
         -- timeout_ms = 2000,
         -- bufnr = bufnr,
         async = false,
+        filter = should_format_with_client
     })
-    vim.notify("Formatted buffer", "info", { title = "LSP" })
+    --
+    -- vim.notify("Formatted buffer", vim.log.levels.INFO, { title = "LSP" })
+end
+
+FormatExpr = function()
+    lsp_format()
+
+    -- prevent vims default formatting with `gq` etc.
+    return 0
 end
 
 -- Add some commands and keybindings when server loads
@@ -116,7 +125,7 @@ local on_attach = function(client, bufnr)
     if client.supports_method("textDocument/inlayHint") then
         vim.api.nvim_create_user_command(
             'LspToggleInlayHints',
-            function() vim.lsp.buf.inlay_hint(0, nil) end,
+            function() vim.lsp.inlay_hint(0, nil) end,
             {}
         )
 
@@ -128,37 +137,37 @@ local on_attach = function(client, bufnr)
             }
         })
 
-        vim.lsp.buf.inlay_hint(0, true)
+        vim.lsp.inlay_hint(0, false) -- disable inlay hints by default
     end
 
-    if client.supports_method("textDocument/formatting") and should_format_with_client(client) then
-        if should_format_with_client(client) then
-            local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-            vim.api.nvim_create_autocmd('BufWritePre', {
-                pattern = '*',
-                group = augroup,
-                callback = function()
-                    lsp_formatting(bufnr)
-                end
-            })
+    if client.supports_method("textDocument/formatting") then
+        local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
-            vim.api.nvim_buf_create_user_command(
-                bufnr,
-                'Format',
-                function()
-                    lsp_formatting(bufnr)
-                end,
-                {}
-            )
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            pattern = '*',
+            group = augroup,
+            callback = function()
+                lsp_format()
+            end
+        })
 
-            wk.register({
-                ['<leader>'] = {
-                    l = {
-                        f = { "<cmd>Format<cr>", "Format buffer" }
-                    }
+        vim.api.nvim_buf_create_user_command(
+            bufnr,
+            'Format',
+            function()
+                lsp_format()
+            end,
+            {}
+        )
+
+
+        wk.register({
+            ['<leader>'] = {
+                l = {
+                    f = { "<cmd>Format<cr>", "Format buffer" }
                 }
-            })
-        end
+            }
+        })
     end
 end
 
@@ -199,6 +208,9 @@ mason_lsp.setup_handlers {
                 inlay_hints = {
                     auto = false,
                     -- highlight = "InlayHint",
+                },
+                hover_actions = {
+                    auto_focus = true,
                 }
             },
             server = {
@@ -285,6 +297,9 @@ mason_lsp.setup_handlers {
                     },
                     diagnostics = {
                         globals = { "vim" }
+                    },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true)
                     }
                 }
             }
@@ -346,7 +361,7 @@ null_ls.setup({
 })
 
 -- use pretty gutter signs
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

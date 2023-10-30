@@ -1,9 +1,5 @@
 local theme = 'auto'
 
-if vim.g.colors_name == "gruvbox" then
-  theme = 'gruvbox-material'
-end
-
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -15,9 +11,13 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
-    lualine_c = { 'filename' },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' }
+    -- lualine_c = { 'filename', { 'diagnostics', color = "StatusLine", colored = true } },
+    lualine_c = { 'filename', 'diagnostics' },
+    lualine_x = { 'encoding', 'location', { 'filetype', icons_enabled = false } },
+    lualine_y = {},
+    lualine_z = {}
+
+    -- lualine_y = { 'progress' },
+    -- lualine_z = { 'location' }
   },
 }

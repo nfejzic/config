@@ -2,14 +2,23 @@ add_newline = true
 
 [hostname]
 ssh_only = false
-format = '[$hostname](bold red) in '
+format = '[$hostname](blue)[ in ](white)'
 disabled = false
 
+[directory]
+format = '[$path](yellow)[$read_only](orange) '
+
 [time]
-disabled = false
+disabled = true
 
 [gcloud]
 disabled = true
 
 [conda]
+disabled = true
+
+[git_branch]
+disabled = false
+
+[battery]
 disabled = true

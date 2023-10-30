@@ -1,6 +1,9 @@
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "rust",
+  },
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {
@@ -55,25 +58,25 @@ require('nvim-treesitter.configs').setup {
         [']f'] = '@function.outer',
         [']]'] = '@class.outer',
         [']c'] = '@comment.outer',
-        [']a'] = '@parameter.outer',
+        [']a'] = '@parameter.inner',
       },
       goto_next_end = {
         [']F'] = '@function.outer',
         [']['] = '@class.outer',
         [']C'] = '@comment.outer',
-        [']A'] = '@parameter.outer',
+        [']A'] = '@parameter.inner',
       },
       goto_previous_start = {
         ['[f'] = '@function.outer',
         ['[['] = '@class.outer',
         ['[c'] = '@comment.outer',
-        ['[a'] = '@parameter.outer',
+        ['[a'] = '@parameter.inner',
       },
       goto_previous_end = {
         ['[F'] = '@function.outer',
         ['[]'] = '@class.outer',
         ['[C'] = '@comment.outer',
-        ['[A'] = '@parameter.outer',
+        ['[A'] = '@parameter.inner',
       },
     },
   },

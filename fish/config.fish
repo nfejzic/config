@@ -5,22 +5,22 @@ set fish_greeting
 # set -U fish_user_paths <PATH> $fish_user_paths
 
 # linuxbrew
-set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew";
-set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar";
-set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew";
-set -q PATH; or set PATH ''; set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH;
-set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH;
-set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH;
+# set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew";
+# set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar";
+# set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew";
+# set -q PATH; or set PATH ''; set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH;
+# set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH;
+# set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH;
 
 # That will permanently prepend the <PATH> to user paths universal variable
 
 abbr -a c 'nvim'
 abbr -a cc 'clang'
-abbr -a l 'exa'
-abbr -a ls 'exa'
-abbr -a la 'exa -a'
-abbr -a ll 'exa -l'
-abbr -a lla 'exa -la'
+abbr -a l 'eza'
+abbr -a ls 'eza'
+abbr -a la 'eza -a'
+abbr -a ll 'eza -l'
+abbr -a lla 'eza -la'
 abbr -a nv 'nvim'
 abbr -a wstorm 'webstorm'
 abbr -a worm 'webstorm'
@@ -35,7 +35,7 @@ abbr -a tn 'tmux new -s'
 abbr -a tl 'tmux ls'
 
 # zellij
-abbr -a ja 'zellij attach'
+abbr -a ja 'zellij attach --create'
 abbr -a jk 'zellij kill-session'
 abbr -a jka 'zellij kill-all-sessions'
 abbr -a jn 'zellij --session'
@@ -68,13 +68,17 @@ abbr -a glpv 'git log --graph --abbrev-commit --decorate --format=format:"%C(bol
 abbr -a dbox-lamp-up 'docker-compose up -d httpd php mysql bind' # launch lamp stack + bind
 abbr -a dbox-lamp-down 'docker-compose down' # stop the lamp stack
 
-abbr -a gitui 'gitui -t mocha.ron'
+abbr -a em 'emacsclient -c -n -a ""'
+
+abbr -a cn 'cargo nextest'
 
 # set cursor to block always
-set -g fish_cursor_insert 'block' 'blink'
+# set -g fish_cursor_insert 'block' 'blink'
 
 # set theme of bat (cat alternative with syntax highlighting)
+# set -gx BAT_THEME "base16"
 set -gx BAT_THEME "gruvbox-dark"
+# set -gx BAT_THEME "Catppuccin-mocha"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -111,3 +115,17 @@ end
 
 # theme_gruvbox dark hard
 # fish_config theme save "Catppuccin Mocha"
+
+# WORK RELATED
+
+# add gcloud stuff to path
+source "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
+
+# jpeg binary and library
+# For compilers to find jpeg you may need to set:
+set -gx LDFLAGS "-L/opt/homebrew/opt/jpeg/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/jpeg/include"
+# For pkg-config to find jpeg you may need to set:
+set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/jpeg/lib/pkgconfig"
+
+set -gx GPG_TTY (tty)

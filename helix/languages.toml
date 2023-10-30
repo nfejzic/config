@@ -1,0 +1,43 @@
+[language-server.eslint]
+args = ["--stdio"]
+command = "vscode-eslint-language-server"
+
+[language-server.eslint.config]
+format = true
+nodePath = ""
+onIgnoredFiles = "off"
+packageManager = "yarn"
+quiet = false
+rulesCustomizations = []
+run = "onType"
+useESLintClass = false
+validate = "on"
+codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = true } }
+codeActionOnSave = { mode = "all" }
+experimental = { }
+problems = { shortenToSingleLine = false }
+workingDirectory = { mode = "auto" }
+
+# [language-server.efm-lsp-prettier]
+# command = "efm-langserver"
+
+# [language-server.efm-lsp-prettier.config]
+# documentFormatting = true
+
+# [language-server.efm-lsp-prettier.config.languages]
+# [[language-server.efm-lsp-prettier.config.languages.javascript]]
+# formatCommand = "prettier --stdin-filepath ${INPUT}"
+# formatStdin = true
+
+# [[language-server.efm-lsp-prettier.config.languages.typescript]]
+# formatCommand = "prettier --stdin-filepath ${INPUT}"
+# formatStdin = true
+
+# [[language-server.efm-lsp-prettier.config.languages.javascriptreact]]
+# formatCommand = "prettier --stdin-filepath ${INPUT}"
+# formatStdin = true
+
+# [[language-server.efm-lsp-prettier.config.languages.json]]
+# formatCommand = "prettier --stdin-filepath ${INPUT}"
+# formatStdin = true
+
