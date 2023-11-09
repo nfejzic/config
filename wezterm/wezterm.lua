@@ -10,7 +10,7 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 local theme = "Gruvbox dark, hard (base16)"
--- theme = "Catppuccin Mocha"
+theme = "Catppuccin Mocha"
 -- theme = "Kanagawa (Gogh)"
 local colors = wezterm.color.get_builtin_schemes()[theme]
 
@@ -58,7 +58,7 @@ config.warn_about_missing_glyphs = true
 config.hide_mouse_cursor_when_typing = false
 config.enable_scroll_bar = false
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW"
 config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true

@@ -1,5 +1,6 @@
 local colors = require("catppuccin.palettes").get_palette("mocha")
 
+--- This is a doc comment
 require("catppuccin").setup({
   transparent_background = false,
   styles = {
@@ -45,15 +46,42 @@ require("catppuccin").setup({
     ts_rainbow = false,
     which_key = true,
   },
+  -- this is a comment
   custom_highlights = {
-    -- TSNamespace = { style = {} },
-    rustTSRefSpecifier = { fg = colors.sky, style = {} },
-    NormalFloat = { fg = colors.text, bg = "none" },
+    -- Comment = { fg = colors.maroon },
+    ["@comment.documentation"] = { fg = colors.teal },
+    ["@lsp.type.comment.rust"] = {},
+
+    SignColumn = { fg = colors.text, bg = colors.surface0 },
+    LineNr = { link = "SignColumn" },
+
+    GitSignsAdd = { fg = colors.green, bg = colors.surface0 },
+    GitSignsModified = { fg = colors.peach, bg = colors.surface0 },
+    GitSignsChange = { fg = colors.yellow, bg = colors.surface0 },
+    GitSignsDelete = { fg = colors.red, bg = colors.surface0 },
+
+    NeoTreeGitAdded = { fg = colors.green },
+    NeoTreeGitModified = { fg = colors.yellow },
+    NeoTreeGitDeleted = { fg = colors.red },
+    NeoTreeGitConflict = { fg = colors.peach, style = { "italic" } },
+    NeoTreeGitUntracked = { link = "NeoTreeGitConflict" },
+
+    DiagnosticSignInfo = { bg = colors.surface0 },
+    DiagnosticSignWarn = { bg = colors.surface0 },
+    DiagnosticSignError = { bg = colors.surface0 },
+    DiagnosticSignHint = { bg = colors.surface0 },
+
+    NeoTreeDiagnosticSignInfo = { bg = none },
+    NeoTreeDiagnosticSignWarn = { bg = none },
+    NeoTreeDiagnosticSignError = { bg = none },
+    NeoTreeDiagnosticSignHint = { bg = none },
+
+    NormalFloat = { bg = colors.base },
+
     LspInlayHint = { link = "Comment" },
-    TreesitterContext = { bg = colors.surface0 },
   },
-  -- make it very dark
   color_overrides = {
+    -- make it very dark
     -- mocha = {
     --   base = colors.crust,
     --   mantle = colors.base,
@@ -64,4 +92,4 @@ require("catppuccin").setup({
 })
 
 vim.g.catppuccin_flavour = "mocha"
--- vim.cmd("colo catppuccin")
+vim.cmd("colo catppuccin")

@@ -158,6 +158,7 @@ require("lazy").setup({
     { 'sainnhe/gruvbox-material' },
 
     -- some nice themes
+    { 'Shatur/neovim-ayu' },
     { 'rebelot/kanagawa.nvim' },
     { 'folke/tokyonight.nvim' },
     { 'EdenEast/nightfox.nvim' },
@@ -180,6 +181,7 @@ require("lazy").setup({
     },
     { 'shaunsingh/nord.nvim' },
     { 'savq/melange-nvim' },
+    { 'loctvl842/monokai-pro.nvim' },
 
     -- Tabline
     -- use { 'romgrk/barbar.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }

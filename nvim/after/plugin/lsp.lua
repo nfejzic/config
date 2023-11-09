@@ -354,7 +354,7 @@ null_ls.setup({
     sources = {
         null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.formatting.eslint_d,
+        -- null_ls.builtins.formatting.eslint_d,
     },
     on_attach = on_attach,
     capabilities = globalCapabilities,
@@ -365,6 +365,9 @@ local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+
+    local neotree_hl = "NeoTreeDiagnosticSign" .. type
+    vim.fn.sign_define(neotree_hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 -- indicate loading of LSP
