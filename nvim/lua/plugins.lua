@@ -24,6 +24,15 @@ require("lazy").setup({
     { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
 
+    -- nushell support
+    --
+    {
+        'LhKipp/nvim-nu',
+        config = function()
+            require('nu').setup()
+        end
+    },
+
     -- loading status for LSPs
     {
         'j-hui/fidget.nvim',
@@ -69,7 +78,18 @@ require("lazy").setup({
     },
 
     -- Rust
-    { 'simrat39/rust-tools.nvim' },
+    { 'simrat39/rust-tools.nvim',  lazy = true },
+
+    -- Go
+    {
+        'ray-x/go.nvim',
+        lazy = true,
+        config = function()
+            require("go").setup()
+        end,
+        event = { "CmdlineEnter" },
+        ft = { "go", 'gomod' },
+    },
 
     -- Debugging
     { 'mfussenegger/nvim-dap' },
@@ -95,7 +115,7 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope-ui-select.nvim',  commit = "62ea5e5" },
 
     -- Show TODO, FIX, HACK comments in telescope
     -- {
@@ -128,7 +148,14 @@ require("lazy").setup({
     { 'lewis6991/gitsigns.nvim', dependencies = { 'nvim-lua/plenary.nvim' } }, -- git signs in gutter
 
     -- git diff view and merge tool
-    { 'sindrets/diffview.nvim',  dependencies = 'nvim-lua/plenary.nvim' },
+    -- { 'sindrets/diffview.nvim',    dependencies = 'nvim-lua/plenary.nvim' },
+
+    -- git conflicts visualisation and resolving
+    {
+        'akinsho/git-conflict.nvim',
+        version = '*',
+        config = true
+    },
 
     -- show help popup for keymaps (like in emacs)
     {

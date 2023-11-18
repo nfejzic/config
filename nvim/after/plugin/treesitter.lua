@@ -7,7 +7,7 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {
-      "html", "html5"
+      "html", "html5", "lua"
     },
     -- custom_captures = {
     --       ["ref_specifier"] = "rustTSRefSpecifier",
@@ -79,5 +79,13 @@ require('nvim-treesitter.configs').setup {
         ['[A'] = '@parameter.inner',
       },
     },
+  },
+}
+
+require "nvim-treesitter.configs".setup {
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = { "BufWrite", "CursorHold" },
   },
 }

@@ -46,9 +46,16 @@ abbr -a jl 'zellij list-sessions'
 # Git
 abbr -a gs 'git status'
 abbr -a gss 'git status -s' # short version
+
 abbr -a gd 'git diff'
 abbr -a gdd 'git diff --staged'
 abbr -a gds 'git diff --stat'
+abbr -a gso 'git show'
+abbr -a sgd 'GIT_PAGER="delta --side-by-side" git diff'
+abbr -a sgdd 'GIT_PAGER="delta --side-by-side" git diff --staged'
+abbr -a sgds 'GIT_PAGER="delta --side-by-side" git diff --stat'
+abbr -a sgso 'GIT_PAGER="delta --side-by-side" git show'
+
 abbr -a ga 'git add'
 abbr -a gr 'git remove'
 abbr -a gc 'git commit'
@@ -77,8 +84,8 @@ abbr -a cn 'cargo nextest'
 
 # set theme of bat (cat alternative with syntax highlighting)
 # set -gx BAT_THEME "base16"
-set -gx BAT_THEME "gruvbox-dark"
-# set -gx BAT_THEME "Catppuccin-mocha"
+# set -gx BAT_THEME "gruvbox-dark"
+set -gx BAT_THEME "Catppuccin-mocha"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

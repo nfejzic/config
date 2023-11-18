@@ -51,6 +51,8 @@ require("catppuccin").setup({
     -- Comment = { fg = colors.maroon },
     ["@comment.documentation"] = { fg = colors.teal },
     ["@lsp.type.comment.rust"] = {},
+    ["@mut_specifier"] = { fg = colors.yellow },
+    ["@ref_specifier"] = { link = "@mut_specifier" },
 
     SignColumn = { fg = colors.text, bg = colors.surface0 },
     LineNr = { link = "SignColumn" },
@@ -79,6 +81,8 @@ require("catppuccin").setup({
     NormalFloat = { bg = colors.base },
 
     LspInlayHint = { link = "Comment" },
+
+    TreesitterContext = { link = "SignColumn" }
   },
   color_overrides = {
     -- make it very dark

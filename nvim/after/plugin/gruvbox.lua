@@ -1,13 +1,12 @@
 -- setup must be called before loading the colorscheme
 -- Default options:
 local gruvbox = require("gruvbox")
-local palette = require("gruvbox.palette")
+local palette = gruvbox.palette
 
 vim.o.background = "dark"
 -- vim.o.background = "light"
 
 local bg = vim.o.background
-local colors = palette.get_base_colors(bg, "hard")
 
 local x = {
   a = true
@@ -29,30 +28,30 @@ gruvbox.setup({
   contrast = "hard", -- can be "hard", "soft" or empty string
   palette_overrides = {},
   overrides = {
-    Function = { fg = colors.blue, bg = "none" },
-    Identifier = { fg = colors.fg2, bg = "none" },
-    ["@field"] = { fg = colors.fg2, bg = "none" },
+    Function = { fg = palette.blue, bg = "none" },
+    Identifier = { fg = palette.fg2, bg = "none" },
+    ["@field"] = { fg = palette.fg2, bg = "none" },
 
     ["@lsp.type.interface"] = { link = "@type.definition" },
-    ["@lsp.type.enumMember"] = { fg = colors.orange },
+    ["@lsp.type.enumMember"] = { fg = palette.orange },
     ["@lsp.type.lifetime"] = { link = "@storageclass.lifetime" },
-    ["@storageclass.lifetime"] = { fg = colors.aqua },
+    ["@storageclass.lifetime"] = { fg = palette.aqua },
 
-    Comment = { fg = colors.orange },
+    Comment = { fg = palette.orange },
     ["@comment"] = { link = "Comment" },
-    ["@comment.documentation"] = { fg = colors.aqua },
-    ["@punctuation.bracket"] = { fg = colors.fg1 },
-    ["@label"] = { fg = colors.yellow },
+    ["@comment.documentation"] = { fg = palette.aqua },
+    ["@punctuation.bracket"] = { fg = palette.fg1 },
+    ["@label"] = { fg = palette.yellow },
 
-    TreesitterContext = { bg = colors.bg1 },
+    TreesitterContext = { bg = palette.bg1 },
 
-    NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
-    SignColumn = { fg = colors.gray, bg = colors.bg1 },
+    NormalFloat = { fg = palette.fg4, bg = palette.bg0 },
+    SignColumn = { fg = palette.gray, bg = palette.bg1 },
     LineNr = { link = "SignColumn" },
 
-    NeoTreeGitAdded = { fg = colors.green },
-    NeoTreeGitDeleted = { fg = colors.red },
-    NeoTreeGitModified = { fg = colors.aqua },
+    NeoTreeGitAdded = { fg = palette.green },
+    NeoTreeGitDeleted = { fg = palette.red },
+    NeoTreeGitModified = { fg = palette.aqua },
   },
   dim_inactive = false,
   transparent_mode = false,

@@ -43,34 +43,34 @@ wk.register({
   }
 })
 
-wk.register({
-  ['<leader>'] = {
-    g = {
-      name = 'Git',
-      g = { '<cmd>:DiffviewOpen<CR>', 'Open Diff View' },
-      c = { '<cmd>:DiffviewClose<CR>', 'Close Diff View' },
-    }
+-- wk.register({
+--   ['<leader>'] = {
+--     g = {
+--       name = 'Git',
+--       g = { '<cmd>:DiffviewOpen<CR>', 'Open Diff View' },
+--       c = { '<cmd>:DiffviewClose<CR>', 'Close Diff View' },
+--     }
+--
+--   }
+-- })
 
-  }
-})
+-- local function setDiffviewKeybinds()
+--   vim.keymap.set('n', '<leader>gt', '<cmd>:DiffviewToggleFiles<CR>', {
+--     desc = 'Toggle Diff View Files'
+--   })
+-- end
+--
+-- vim.api.nvim_create_augroup("bufcheck", { clear = true })
+-- vim.api.nvim_create_autocmd("Filetype", {
+--   group = "bufcheck",
+--   pattern = { "DiffviewFiles" },
+--   callback = setDiffviewKeybinds
+-- })
 
-local function setDiffviewKeybinds()
-  vim.keymap.set('n', '<leader>gt', '<cmd>:DiffviewToggleFiles<CR>', {
-    desc = 'Toggle Diff View Files'
-  })
-end
-
-vim.api.nvim_create_augroup("bufcheck", { clear = true })
-vim.api.nvim_create_autocmd("Filetype", {
-  group = "bufcheck",
-  pattern = { "DiffviewFiles" },
-  callback = setDiffviewKeybinds
-})
-
-require('diffview').setup({
-  view = {
-    merge_tool = {
-      layout = "diff3_mixed"
-    }
-  }
-})
+-- require('diffview').setup({
+--   view = {
+--     merge_tool = {
+--       layout = "diff3_mixed"
+--     }
+--   }
+-- })

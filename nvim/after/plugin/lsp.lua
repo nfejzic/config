@@ -61,7 +61,7 @@ FormatExpr = function()
     -- prevent vims default formatting with `gq` etc.
     return 0
 end
-
+-- now it works real fast... I don't know what's going on...
 -- Add some commands and keybindings when server loads
 local on_attach = function(client, bufnr)
     local wk = require("wk")
@@ -222,6 +222,17 @@ mason_lsp.setup_handlers {
                     }
                 }
             },
+        }
+    end,
+    ["gopls"] = function()
+        lspconfig["gopls"].setup {
+            settings = {
+                gopls = {
+                    gofumpt = true,
+                },
+            },
+            on_attach = on_attach,
+            capabilites = globalCapabilities
         }
     end,
     ["tsserver"] = function()

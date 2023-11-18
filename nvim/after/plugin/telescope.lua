@@ -41,3 +41,18 @@ vim.api.nvim_create_autocmd(
       end
     end,
   })
+
+function openTodos()
+  expr =
+  "(TODO|FIXME|BUG|NOTE|HACK|XXX|IDEA|REVIEW|NB|BUG|REFACTOR|OPTIMIZE|WARNING|DEBUG|INFO|DONE|QUESTION|COMBAK|TEMP):"
+
+  require('telescope.builtin').live_grep({ default_text = expr, initial_mode = "normal" })
+end
+
+vim.api.nvim_create_user_command(
+  'TodoTelescope',
+  function()
+    openTodos()
+  end,
+  {}
+)
