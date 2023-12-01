@@ -1,13 +1,13 @@
 -- Setup nvim-cmp.
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-local lspkind = require 'lspkind'
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 
 local merge = function(a, b)
-  return vim.tbl_deep_extend('force', {}, a, b)
+  return vim.tbl_deep_extend("force", {}, a, b)
 end
 
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -20,13 +20,10 @@ cmp.setup {
 
   window = {
     documentation = cmp.config.window.bordered(),
-    completion = merge(
-      cmp.config.window.bordered(),
-      {
-        col_offset = -3,
-        side_padding = 0,
-      }
-    ),
+    completion = merge(cmp.config.window.bordered(), {
+      col_offset = -3,
+      side_padding = 0,
+    }),
     -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
   },
 
@@ -44,70 +41,74 @@ cmp.setup {
   },
 
   mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-    ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<C-k>'] = cmp.mapping.complete(),
-    ['<C-j>'] = cmp.mapping(
-      cmp.mapping.confirm {
+    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-k>"] = cmp.mapping.complete(),
+    ["<C-j>"] = cmp.mapping(
+      cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
-      },
-      { 'i', 'c' }
+      }),
+      { "i", "c" }
     ),
-    ['<M-j>'] = cmp.mapping(
-      cmp.mapping.confirm {
+    ["<M-j>"] = cmp.mapping(
+      cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
-      },
-      { 'i', 'c' }
+      }),
+      { "i", "c" }
     ),
-    ['<tab>'] = cmp.config.disable,
+    ["<tab>"] = cmp.config.disable,
   },
 
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
     { name = "copilot",                group_index = 2 },
-    { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'gh_issues' }
+    { name = "luasnip" },
+    { name = "path" },
+    { name = "buffer" },
+    { name = "gh_issues" },
   },
 
   experimental = {
     ghost_text = { hl_group = "Comment" },
-    native_menu = false
-  }
-}
+    native_menu = false,
+  },
+})
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
   sources = {
-    { name = 'buffer' }
-  }
+    { name = "buffer" },
+  },
 })
 
 -- Use cmdline & path source for ':' (does not work if `native_menu` is set to true).
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" },
   }, {
     {
-      name = 'cmdline',
+      name = "cmdline",
       option = {
-        ignore_cmds = { 'Man', '!' }
-      }
-    }
-  })
+        ignore_cmds = { "Man", "!" },
+      },
+    },
+  }),
 })
 
+vim.keymap.set({ "i", "s" }, "<C-L>", function()
+  luasnip.jump(1)
+end, { silent = true })
 
-vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-H>", function() luasnip.jump(-1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-H>", function()
+  luasnip.jump(-1)
+end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<C-E>", function()
   if luasnip.choice_active() then

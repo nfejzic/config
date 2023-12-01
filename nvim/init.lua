@@ -1,6 +1,6 @@
 --Remap space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.o.smarttab = true
 vim.o.shiftwidth = 4
@@ -21,24 +21,24 @@ vim.o.textwidth = 80
 
 -- set colorcolumn for git commit editing to 50 and 72 characters
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "gitcommit",
-    callback = function()
-        vim.o.colorcolumn = "50,72"
-    end
+	pattern = "gitcommit",
+	callback = function()
+		vim.o.colorcolumn = "50,72"
+	end,
 })
 
 -- set colorcolumn for rust files to 100 (as that's the default in rustfmt)
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "rust",
-    callback = function()
-        vim.o.colorcolumn = "100"
-    end
+	pattern = "rust",
+	callback = function()
+		vim.o.colorcolumn = "100"
+	end,
 })
 
 -- load plugins
 require("plugins")
 
-vim.cmd [[
+vim.cmd([[
   augroup on_open
     autocmd!
     autocmd BufWinEnter *.html5 silent! :set filetype=html " contao specific
@@ -48,13 +48,13 @@ vim.cmd [[
     autocmd BufWinEnter *.scss silent! :set syntax=scss
     autocmd BufWinEnter *.vue silent! :set shiftwidth=2
   augroup end
-]]
+]])
 
 --Make line numbers default
 vim.wo.number = true
 
 --Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 --Don't wrap line
 vim.o.wrap = false
@@ -83,7 +83,7 @@ vim.o.incsearch = true
 vim.o.updatetime = 50
 
 -- more info in signcolumn
-vim.o.signcolumn = 'yes:2'
+vim.o.signcolumn = "yes:2"
 
 vim.o.cmdheight = 1
 vim.o.showmode = false
@@ -91,24 +91,24 @@ vim.o.showmode = false
 vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect,noinsert'
+vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
 
-if vim.fn.executable('gpaste-client') == 1 then
-    vim.g.clipboard = {
-        name = 'gpaste',
-        copy = {
-            ["+"] = { 'gpaste-client', "add" },
-            ["*"] = { 'gpaste-client', "add" },
-        },
-        paste = {
-            ["+"] = { 'gpaste-client', '--use-index', 'get', '0' },
-            ["*"] = { 'gpaste-client', '--use-index', 'get', '0' },
-        },
-        cache_enabled = true,
-    }
+if vim.fn.executable("gpaste-client") == 1 then
+	vim.g.clipboard = {
+		name = "gpaste",
+		copy = {
+			["+"] = { "gpaste-client", "add" },
+			["*"] = { "gpaste-client", "add" },
+		},
+		paste = {
+			["+"] = { "gpaste-client", "--use-index", "get", "0" },
+			["*"] = { "gpaste-client", "--use-index", "get", "0" },
+		},
+		cache_enabled = true,
+	}
 end
 
 -- global statusline
@@ -124,38 +124,33 @@ vim.o.foldlevelstart = 99
 -- vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 -- Highlight on yank
-vim.cmd [[
+vim.cmd([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]]
+]])
 
 --Map blankline
-vim.g.indent_blankline_filetype = { 'vim', 'NvimTree', 'html', 'php' }
-
+vim.g.indent_blankline_filetype = { "vim", "NvimTree", "html", "php" }
 
 -- These commands will navigate through buffers in order regardless of which
 -- mode you are using e.g. if you change the order of buffers :bnext and
 -- :bprevious will not respect the custom ordering
 
-vim.g.bufferline = {
-    animation = false,
-}
-
 -- require('nvim-autopairs').setup {}
-require('project_nvim').setup {
-    manual_mode = true
-}
+require("project_nvim").setup({
+	manual_mode = true,
+})
 -- require('colorizer').setup()
-require('dressing').setup({
-    input = {
-        start_in_insert = false,
-        insert_only = false,
-        win_options = {
-            winblend = 0,
-        }
-    }
+require("dressing").setup({
+	input = {
+		start_in_insert = false,
+		insert_only = false,
+		win_options = {
+			winblend = 0,
+		},
+	},
 })
 
 -- don't continue comments on 'o' and 'O' commands
@@ -170,12 +165,5 @@ require('dressing').setup({
 -- })
 
 for _, adapter in ipairs(require("dap").adapters) do
-    print(adapter)
+	print(adapter)
 end
-
--- vim.o.background = "light"
-
--- vim.cmd("colorscheme catppuccin")
--- vim.g.gruvbox_material_foreground = "original"
--- vim.g.gruvbox_material_background = "hard"
--- vim.cmd("colorscheme rose-pine")

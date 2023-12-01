@@ -5,3 +5,5 @@
 .*env*
 Idana-Backup-Key
 .DS_Store
+compile_commands.json
+.cache/clangd/

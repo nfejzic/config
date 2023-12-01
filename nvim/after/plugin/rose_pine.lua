@@ -1,18 +1,45 @@
-require('rose-pine').setup({
-  variant = 'auto',
+require("rose-pine").setup({
+  variant = "auto",
   disable_float_background = true,
+
+  groups = {
+    keywords = "rose",
+  },
 
   -- Change specific vim highlight groups
   -- https://github.com/rose-pine/neovim/wiki/Recipes
   highlight_groups = {
-    Keyword = { fg = 'iris', bg = 'none' },
-    ["@interface"] = { fg = 'gold', bg = 'none' },
-    -- ColorColumn = { bg = 'rose' },
+    Comment = { fg = "subtle" },
+    ["@comment.documentation"] = { fg = "iris" },
+    -- ["@lsp.type.comment.rust"] = {},
+    -- ["@mut_specifier"] = { fg = colors.yellow },
+    -- ["@ref_specifier"] = { link = "@mut_specifier" },
 
-    -- Blend colours against the "base" background
-    -- CursorLine = { bg = 'foam', blend = 10 },
-    -- StatusLine = { fg = 'love', bg = 'love', blend = 10 },
-  }
+    SignColumn = { fg = "text", bg = "surface" },
+    LineNr = { link = "SignColumn" },
+
+    GitSignsAdd = { bg = "surface" },
+    GitSignsModified = { bg = "surface" },
+    GitSignsChange = { bg = "surface" },
+    GitSignsDelete = { bg = "surface" },
+
+    -- NeoTreeGitAdded = { fg = colors.green },
+    -- NeoTreeGitModified = { fg = colors.yellow },
+    -- NeoTreeGitDeleted = { fg = colors.red },
+    -- NeoTreeGitConflict = { fg = colors.peach, style = { "italic" } },
+    -- NeoTreeGitUntracked = { link = "NeoTreeGitConflict" },
+
+    DiagnosticSignInfo = { bg = "surface" },
+    DiagnosticSignWarn = { bg = "surface" },
+    DiagnosticSignError = { bg = "surface" },
+    DiagnosticSignHint = { bg = "surface" },
+
+    -- NormalFloat = {},
+
+    -- LspInlayHint = { link = "Comment" },
+
+    -- TreesitterContext = { link = "SignColumn" }
+  },
 })
 
 -- vim.cmd("colo rose-pine")
