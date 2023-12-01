@@ -79,13 +79,17 @@ abbr -a em 'emacsclient -c -n -a ""'
 
 abbr -a cn 'cargo nextest'
 
+# Wezterm
+abbr -a wtt 'wezterm cli set-tab-title'
+
 # set cursor to block always
 # set -g fish_cursor_insert 'block' 'blink'
 
 # set theme of bat (cat alternative with syntax highlighting)
 # set -gx BAT_THEME "base16"
-# set -gx BAT_THEME "gruvbox-dark"
-set -gx BAT_THEME "Catppuccin-mocha"
+set -gx BAT_THEME "gruvbox-dark"
+# set -gx BAT_THEME "Catppuccin-mocha"
+# set -gx BAT_THEME "rose-pine"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
