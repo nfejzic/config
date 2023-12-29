@@ -153,6 +153,8 @@ M.dap = function()
 	})
 end
 
+M.dap_lazy_keys = "<leader>d"
+
 M.gitsigns = function(gs)
 	wk.register({
 		["]"] = {

@@ -2,6 +2,7 @@ return {
 	-- lua impl of Github Copilot
 	{
 		"zbirenbaum/copilot.lua",
+		lazy = false,
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = false },
@@ -26,6 +27,7 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = { "zbirenbaum/copilot.lua" },
+		lazy = true,
 		config = function()
 			require("copilot_cmp").setup({
 				formatters = {

@@ -3,6 +3,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = false,
 		config = function()
 			local gs = require("gitsigns")
 			gs.setup({
@@ -23,5 +24,6 @@ return {
 		"akinsho/git-conflict.nvim",
 		version = "*",
 		config = true,
+		lazy = false,
 	},
 }

@@ -3,12 +3,17 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			{ "mxsdev/nvim-dap-vscode-js", lazy = true },
+			{ "folke/which-key.nvim" },
 			{
 				"microsoft/vscode-js-debug",
 				lazy = true,
 				build = "npm ci --legacy-peer-deps && npm run compile",
 			},
 		},
+		lazy = true,
+		keys = function()
+			return require("user.keymaps").dap_lazy_keys
+		end,
 		config = function()
 			local dap = require("dap")
 			dap.adapters.codelldb = {
@@ -114,9 +119,14 @@ return {
 			require("user.keymaps").dap()
 		end,
 	},
+
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap" },
+		lazy = true,
+		keys = function()
+			return require("user.keymaps").dap_lazy_keys
+		end,
 		config = function()
 			require("dapui").setup()
 		end,
@@ -126,6 +136,9 @@ return {
 	{
 		"microsoft/vscode-js-debug",
 		lazy = true,
+		keys = function()
+			return require("user.keymaps").dap_lazy_keys
+		end,
 		build = "npm ci --legacy-peer-deps && npm run compile",
 	},
 }

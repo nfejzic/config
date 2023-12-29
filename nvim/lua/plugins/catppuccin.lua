@@ -105,6 +105,7 @@ return {
 				color_overrides = {},
 			})
 
+			---@diagnostic disable-next-line: inject-field
 			vim.g.catppuccin_flavour = flavor
 			vim.cmd("colo catppuccin")
 		end,

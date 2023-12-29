@@ -1,10 +1,12 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
+		lazy = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			config = function()
 				local theme = "auto"
+				---@diagnostic disable-next-line: undefined-field
 				require("lualine").setup({
 					options = {
 						icons_enabled = true,
