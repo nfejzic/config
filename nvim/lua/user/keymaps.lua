@@ -15,50 +15,54 @@ wk.setup({
 
 local M = {}
 
-M.general = function()
+M.telescope_keymaps = function(telescope, t_builtin)
 	wk.register({
 		["<leader>"] = {
 			f = {
 				name = "Find/File",
 				f = {
-					"<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--follow', '--ignore-file', '.gitignore' } })<CR>",
+					function()
+						t_builtin.find_files({
+							find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" },
+						})
+					end,
 					"Find file",
 				},
 				F = {
 					function()
-						require("telescope.builtin").find_files({
+						t_builtin.find_files({
 							find_command = {
 								"rg",
 								"--files",
 								"--hidden",
 								"--follow",
-								"--ignore-file",
-								".gitignore",
+								"--no-ignore",
 							},
 						})
 					end,
-					"Find file",
+					"Find file, including hidden",
 				},
-				t = { "<cmd>Neotree toggle<CR>", "Open File Tree" },
-				r = { "<cmd>Neotree reveal<CR>", "Reveal current file in the sidebar" },
-				p = { "<cmd>Telescope projects<CR>", "Recent projects" },
+				p = {
+					telescope.extensions.projects.projects,
+					"Recent projects",
+				},
 				d = { "<cmd>TodoTelescope<CR>", "Todo / Fixme etc." },
-				g = { "<cmd>Telescope git_status<CR>", "git - modified files" },
+				g = {
+					t_builtin.git_status,
+					"git - modified files",
+				},
 			},
-			b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Telescope search buffers" },
-			B = {
-				name = "Buffer",
-				c = { "<cmd>BufferClose<CR>", "Close buffer" },
-				C = { "<cmd>BufferClose!<CR>", "Close buffer ignore changes" },
-				b = { require("telescope.builtin").buffers, "Telescope search buffers" },
+			b = {
+				t_builtin.buffers,
+				"Telescope search buffers",
 			},
 			s = {
 				name = "Search",
-				d = { require("telescope.builtin").grep_string, "Grep string" },
-				l = { require("telescope.builtin").live_grep, "Live grep string" },
+				d = { t_builtin.grep_string, "Grep string" },
+				l = { t_builtin.live_grep, "Live grep string" },
 				L = {
 					function()
-						require("telescope.builtin").live_grep({
+						t_builtin.live_grep({
 							additional_args = function()
 								return { "--case-sensitive" }
 							end,
@@ -68,7 +72,7 @@ M.general = function()
 				},
 				g = {
 					function()
-						require("telescope.builtin").live_grep({
+						t_builtin.live_grep({
 							additional_args = function()
 								return { "--hidden" }
 							end,
@@ -78,10 +82,38 @@ M.general = function()
 				},
 				s = {
 					function()
-						require("telescope.builtin").current_buffer_fuzzy_find({ find_command = "rg" })
+						t_builtin.current_buffer_fuzzy_find({ find_command = "rg" })
 					end,
 					"Fuzzy search in buffer",
 				},
+			},
+			["?"] = { t_builtin.oldfiles, "Telescope - Old Files" },
+		},
+	})
+end
+
+M.neo_tree_trigger_keys = "<leader>f"
+M.neo_tree = function()
+	wk.register({
+		["<leader>"] = {
+			f = {
+				t = { "<cmd>Neotree toggle<CR>", "Open File Tree" },
+				r = { "<cmd>Neotree reveal<CR>", "Reveal current file in the sidebar" },
+			},
+		},
+	})
+end
+
+M.general = function()
+	wk.register({
+		["<leader>"] = {
+			B = {
+				name = "Buffer",
+				c = { "<cmd>BufferClose<CR>", "Close buffer" },
+				C = { "<cmd>BufferClose!<CR>", "Close buffer ignore changes" },
+			},
+			s = {
+				name = "Search",
 			},
 			k = {
 				name = "Collapse / Fold",
@@ -92,10 +124,7 @@ M.general = function()
 			},
 			["<space>"] = { "<C-^>", "Switch to previous buffer" },
 			e = "Lsp Diagnostics popup",
-			["?"] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Telescope - Old Files" },
 		},
-		-- ['<C-l>'] = { "<cmd>BufferNext<CR>", "Go to next buffer" },
-		-- ['<C-h>'] = { "<cmd>BufferPrevious<CR>", "Go to previous buffer" },
 		["]"] = {
 			q = { "<cmd>cn<CR>", "Next quickfix entry" },
 			b = { "<cmd>bnext<CR>", "Go to next buffer" },
@@ -107,6 +136,7 @@ M.general = function()
 	})
 end
 
+M.dap_trigger_keys = "<leader>d"
 M.dap = function()
 	local function toggle_dap_sidebar(opt)
 		opt = opt or "scopes"
@@ -152,8 +182,6 @@ M.dap = function()
 		},
 	})
 end
-
-M.dap_lazy_keys = "<leader>d"
 
 M.gitsigns = function(gs)
 	wk.register({

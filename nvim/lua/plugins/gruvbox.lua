@@ -2,7 +2,7 @@ return {
 	-- original gruvbox colorscheme
 	{
 		"ellisonleao/gruvbox.nvim",
-		lazy = true,
+		lazy = false,
 		config = function()
 			-- setup must be called before loading the colorscheme
 			-- Default options:
@@ -100,7 +100,7 @@ return {
 				invert_tabline = false,
 				invert_indent_guides = false,
 				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = "hard", -- can be "hard", "soft" or empty string
+				contrast = contrast, -- can be "hard", "soft" or empty string
 				palette_overrides = {},
 				overrides = {
 					Function = { fg = colors.blue, bg = "none" },
@@ -178,6 +178,7 @@ return {
 				dim_inactive = false,
 				transparent_mode = false,
 			})
+			vim.cmd("colo gruvbox")
 		end,
 	},
 }

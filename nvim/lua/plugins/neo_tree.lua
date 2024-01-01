@@ -5,6 +5,9 @@ return {
 		branch = "v3.x",
 		lazy = true,
 		cmd = "Neotree",
+		keys = function()
+			return require("user.keymaps").neo_tree_trigger_keys
+		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
@@ -31,7 +34,8 @@ return {
 			},
 		},
 		config = function()
-			require("neo-tree").setup({
+			local neo_tree = require("neo-tree")
+			neo_tree.setup({
 				popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
 				use_default_mappings = false,
 				use_popups_for_input = true, -- If false, inputs will use vim.ui.input() instead of custom floats.
@@ -54,16 +58,10 @@ return {
 						["l"] = "focus_preview",
 						["S"] = "open_split",
 						["s"] = "open_vsplit",
-						-- ["S"] = "split_with_window_picker",
-						-- ["s"] = "vsplit_with_window_picker",
 						["t"] = "open_tabnew",
-						-- ["<cr>"] = "open_drop",
-						-- ["t"] = "open_tab_drop",
 						["w"] = "open_with_window_picker",
-						--["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
 						["C"] = "close_node",
 						["z"] = "close_all_nodes",
-						--["Z"] = "expand_all_nodes",
 						["a"] = {
 							"add",
 							-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
@@ -79,12 +77,6 @@ return {
 						["x"] = "cut_to_clipboard",
 						["p"] = "paste_from_clipboard",
 						["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-						-- ["c"] = {
-						--  "copy",
-						--  config = {
-						--    show_path = "none" -- "none", "relative", "absolute"
-						--  }
-						--}
 						["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
 						["q"] = "close_window",
 						["R"] = "refresh",
@@ -152,6 +144,8 @@ return {
 			---@diagnostic disable-next-line: inject-field
 			vim.g.loaded_netrwPlugin = 1 -- use neotree instead
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+
+			require("user.keymaps").neo_tree()
 		end,
 	},
 }

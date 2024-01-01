@@ -12,7 +12,7 @@ return {
 		},
 		lazy = true,
 		keys = function()
-			return require("user.keymaps").dap_lazy_keys
+			return require("user.keymaps").dap_trigger_keys
 		end,
 		config = function()
 			local dap = require("dap")
@@ -125,7 +125,7 @@ return {
 		dependencies = { "mfussenegger/nvim-dap" },
 		lazy = true,
 		keys = function()
-			return require("user.keymaps").dap_lazy_keys
+			return require("user.keymaps").dap_trigger_keys
 		end,
 		config = function()
 			require("dapui").setup()
@@ -137,7 +137,7 @@ return {
 		"microsoft/vscode-js-debug",
 		lazy = true,
 		keys = function()
-			return require("user.keymaps").dap_lazy_keys
+			return require("user.keymaps").dap_trigger_keys
 		end,
 		build = "npm ci --legacy-peer-deps && npm run compile",
 	},

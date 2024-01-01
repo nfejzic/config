@@ -37,9 +37,11 @@ return {
 			-- Use Telescope for LSP Code Actions
 			require("telescope").load_extension("ui-select")
 
+			-- Add extension to list projects
+			require("telescope").load_extension("projects")
+
 			-- Enable telescope fzf native
 			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("projects")
 
 			-- NOTE: Currently (on neovim nightly) there's a problem with telescope where
 			-- fin_files opens the file in insert mode. This is a workaround for that
@@ -53,16 +55,21 @@ return {
 				end,
 			})
 
+			local telescope = require("telescope")
+			local t_builtin = require("telescope.builtin")
+
 			local function openTodos()
 				local expr =
-					"(TODO|FIXME|BUG|NOTE|HACK|XXX|IDEA|REVIEW|NB|BUG|REFACTOR|OPTIMIZE|WARNING|DEBUG|INFO|DONE|QUESTION|COMBAK|TEMP):"
+					"(TODO|FIXME|BUG|NOTE|HACK|XXX|IDEA|REVIEW|NB|BUG|REFACTOR|OPTIMIZE|WARNING|DEBUG|INFO|DONE|QUESTION|COMBAK|TEMP)(\\(.*\\))?:"
 
-				require("telescope.builtin").live_grep({ default_text = expr, initial_mode = "normal" })
+				t_builtin.live_grep({ default_text = expr, initial_mode = "normal" })
 			end
 
 			vim.api.nvim_create_user_command("TodoTelescope", function()
 				openTodos()
 			end, {})
+
+			require("user.keymaps").telescope_keymaps(telescope, t_builtin)
 		end,
 	},
 }
