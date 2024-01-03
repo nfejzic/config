@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
-		lazy = true,
+		lazy = false,
 		cmd = "Neotree",
 		keys = function()
 			return require("user.keymaps").neo_tree_trigger_keys
