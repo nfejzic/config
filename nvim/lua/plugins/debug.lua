@@ -16,6 +16,9 @@ return {
 		end,
 		config = function()
 			local dap = require("dap")
+			local dapui = require("dapui")
+			local widgets = require("dap.ui.widgets")
+
 			dap.adapters.codelldb = {
 				type = "server",
 				port = "${port}",
@@ -116,7 +119,7 @@ return {
 			end
 
 			-- setup keymaps
-			require("user.keymaps").dap()
+			require("user.keymaps").dap(dap, dapui, widgets)
 		end,
 	},
 
