@@ -216,3 +216,4 @@ M.gitsigns = function(gs)
 end
 
 return M
+

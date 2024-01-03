@@ -124,7 +124,7 @@ return {
 				end
 			end, { silent = true })
 
-			-- setup Github completions
+			-- setup Github PRs and Issues completion completions
 			local plenary_job = require("plenary.job")
 			require("user.cmp").setup_github_cmp(cmp, plenary_job)
 		end,
