@@ -3,6 +3,7 @@ return {
 	{
 		"ellisonleao/gruvbox.nvim",
 		lazy = false,
+		priority = 1000,
 		config = function()
 			-- setup must be called before loading the colorscheme
 			-- Default options:
