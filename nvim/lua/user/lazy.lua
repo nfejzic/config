@@ -22,9 +22,7 @@ require("lazy").setup({
 	{ "mattn/emmet-vim" }, -- emmet for html etc
 
 	-- show help popup for keymaps (like in emacs)
-	{
-		"folke/which-key.nvim",
-	},
+	{ "folke/which-key.nvim" },
 
 	{ "nfejzic/mariana.nvim", dev = true },
 
@@ -32,4 +30,10 @@ require("lazy").setup({
 	{ "phlo/vim-btor2" },
 }, {
 	dev = { path = "/Users/nadirfejzic/Developer/nvim" },
+
+	change_detection = {
+		-- automatically check for config file changes and reload the ui
+		enabled = true,
+		notify = false, -- get a notification when changes are found
+	},
 })
