@@ -198,6 +198,9 @@ function set_theme
     __theme_fzf $cleaned
     __theme_bat $cleaned
     __theme_fish $cleaned
+
+    set -U CLI_THEME $cleaned
+
     set -e themes
 end
 
