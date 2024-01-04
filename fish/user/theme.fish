@@ -130,7 +130,8 @@ function __list_themes
 end
 
 function __help
-    __print "Usage: set_theme [theme name]"
+    __print "Usage: set_theme \"[theme name]\""
+    __print "Example: set_theme \"Catppuccin Macchiato\""
     __print ""
     __print -i 0 "Function to set theme of fish shell, fzf (fuzzy finder), bat and delta"
     __print -i 0 ""
@@ -190,11 +191,10 @@ function set_theme
     set -l supported (__is_theme_supported $cleaned)
 
     if not test $supported = 1
-        __print "Theme '$theme' is not supported"
+        __print -e "Theme '$theme' is not supported"
         return
     end
 
-    echo "Setting theme to '$theme' as '$cleaned'"
     __theme_fzf $cleaned
     __theme_bat $cleaned
     __theme_fish $cleaned
@@ -203,5 +203,3 @@ function set_theme
 
     set -e themes
 end
-
-# functions --erase __print
