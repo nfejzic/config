@@ -5,7 +5,6 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter-textobjects" },
-			-- use 'JoosepAlviste/nvim-ts-context-commentstring'
 			{ "nvim-treesitter/playground" },
 			{
 				"nvim-treesitter/nvim-treesitter-context",
