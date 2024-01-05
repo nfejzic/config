@@ -1,5 +1,54 @@
 local M = {}
 
+M.lsp = function(t_builtin, inlay_hint_supported)
+	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+	vim.keymap.set("n", "<leader>ld", t_builtin.lsp_definitions, { desc = "Go to Declaration" })
+
+	vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostics message" })
+	vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
+	vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
+	vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Refactor Rename" })
+	vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, { desc = "Show hover popup" })
+	vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Populate loclist with diagnostics" })
+
+	vim.keymap.set("n", "<leader>lr", t_builtin.lsp_references, { desc = "Go to References" })
+	vim.keymap.set("n", "<leader>li", t_builtin.lsp_implementations, { desc = "Implementations" })
+	vim.keymap.set("n", "<leader>ls", t_builtin.lsp_document_symbols, { desc = "Document symbols" })
+	vim.keymap.set("n", "<leader>lw", t_builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
+	vim.keymap.set("n", "<leader>lM", t_builtin.diagnostics, { desc = "Diagnostic messages in all buffers" })
+	vim.keymap.set("n", "<leader>lm", function()
+		t_builtin.diagnostics({ bufnr = 0 })
+	end, { desc = "Diagnostic messages in current buffer" })
+
+	vim.keymap.set("n", "<leader>a", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
+	vim.keymap.set("n", "<leader>r", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
+	vim.keymap.set("n", "<leader>l", function()
+		-- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		vim.lsp.buf.list_workspace_folders()
+	end, { desc = "List workspace folders" })
+
+	vim.keymap.set({ "n", "v" }, "<leader>.", vim.lsp.buf.code_action, { desc = "Code actions" })
+
+	vim.keymap.set("n", "gd", t_builtin.lsp_definitions, { desc = "Definitions" })
+	vim.keymap.set("n", "gr", t_builtin.lsp_references, { desc = "References" })
+	vim.keymap.set("n", "gI", t_builtin.lsp_implementations, { desc = "Implemnetations" })
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
+	vim.keymap.set("n", "gh", vim.diagnostic.open_float, { desc = "Show diagnostics message/help" })
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover" })
+
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
+
+	if inlay_hint_supported then
+		vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
+	end
+end
+
+M.conform = function()
+	vim.keymap.set("n", "<leader>lf", "<cmd>Format<cr>", { desc = "Format buffer" })
+end
+
 M.telescope_keymaps = function(telescope, t_builtin)
 	vim.keymap.set("n", "<leader>ff", function()
 		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
@@ -122,6 +171,9 @@ local function setup_wk_prefixes(wk)
 			},
 			l = {
 				name = "LSP",
+			},
+			w = {
+				name = "Lsp Workspace",
 			},
 			s = {
 				name = "Search",

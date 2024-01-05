@@ -4,6 +4,7 @@ return {
 
 		event = { "BufReadPost" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
+		lazy = false,
 
 		dependencies = {
 			-- for keymaps
@@ -18,43 +19,54 @@ return {
 			-- formatters and formatting
 			{
 				"stevearc/conform.nvim",
-				opts = {
-					formatters_by_ft = {
-						lua = { "stylua" },
-						-- Conform will run multiple formatters sequentially
-						python = { "isort", "black" },
-						-- Use a sub-list to run only the first available formatter
-						javascript = { { "prettierd", "prettier" } },
-						typescript = { { "prettierd", "prettier" } },
-						vue = { { "prettierd", "prettier" } },
-						html = { { "prettierd", "prettier" } },
-						c = {},
-					},
-					format_on_save = function()
-						local buf_name = vim.api.nvim_buf_get_name(0)
+				config = function()
+					local conform = require("conform")
 
-						local is_selfie = string.match(buf_name, "selfie")
-						local is_beator = string.match(buf_name, "selfie")
-						local is_monster = string.match(buf_name, "selfie")
+					conform.setup({
+						formatters_by_ft = {
+							lua = { "stylua" },
+							-- Conform will run multiple formatters sequentially
+							-- python = { "isort", "black" },
+							-- Use a sub-list to run only the first available formatter
+							javascript = { { "prettierd", "prettier" } },
+							typescript = { { "prettierd", "prettier" } },
+							vue = { { "prettierd", "prettier" } },
+							html = { { "prettierd", "prettier" } },
+							markdown = { { "prettierd", "prettier" } },
+							rust = { "rustfmt" },
+							c = {},
+						},
+						format_on_save = function()
+							local buf_name = vim.api.nvim_buf_get_name(0)
 
-						if is_selfie or is_beator or is_monster then
-							return { timeout_ms = 500, lsp_fallback = false }
-						else
-							return {
-								-- These options will be passed to conform.format()
-								timeout_ms = 500,
-								lsp_fallback = true,
-							}
-						end
-					end,
-				},
+							local is_selfie = string.match(buf_name, "selfie")
+							local is_beator = string.match(buf_name, "selfie")
+							local is_monster = string.match(buf_name, "selfie")
+
+							if is_selfie or is_beator or is_monster then
+								return { timeout_ms = 500, lsp_fallback = false }
+							else
+								return {
+									-- These options will be passed to conform.format()
+									timeout_ms = 500,
+									lsp_fallback = true,
+								}
+							end
+						end,
+					})
+
+					vim.api.nvim_create_user_command("Format", function()
+						conform.format({ lsp_fallback = true })
+					end, {})
+					require("user.keymaps").conform()
+				end,
 			},
 
 			-- TypeScript utilities
 			{ "jose-elias-alvarez/nvim-lsp-ts-utils" },
 
 			-- fidget spinner shows LSP loading progress
-			{ "j-hui/fidget.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {}, lazy = false },
 
 			-- auto completions
 			{ "hrsh7th/cmp-nvim-lsp" },
@@ -101,13 +113,12 @@ return {
 
 		config = function()
 			local user_lsp = require("user.lsp")
-			local wk = require("which-key")
 			local telescope_builtin = require("telescope.builtin")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-			local on_attach = user_lsp.get_on_attach(wk, telescope_builtin)
+			local on_attach = user_lsp.get_on_attach(telescope_builtin)
 			local global_capabilities = user_lsp.get_global_capabilities(cmp_nvim_lsp)
 
 			local opts = {
@@ -127,6 +138,7 @@ return {
 					lspconfig[server_name].setup(opts)
 				end,
 				-- Next, targeted overrides for specific servers.
+				["clangd"] = user_lsp.clangd(on_attach, global_capabilities, lspconfig),
 				["rust_analyzer"] = user_lsp.rust_analyzer(on_attach),
 				["gopls"] = user_lsp.go_lsp(on_attach, global_capabilities, lspconfig),
 				["tsserver"] = user_lsp.tsserver(on_attach, lspconfig),

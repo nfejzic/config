@@ -65,74 +65,14 @@ M.setup_ui = function()
 	end)
 
 	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError" })
-	vim.fn.sign_define("DapStopped", { texthl = "DiagnosticSignInfo" })
+	vim.fn.sign_define("DapStopped", { text = "->", texthl = "DiagnosticSignInfo" })
 end
 
-M.get_on_attach = function(which_key, telescope_builtin)
+M.get_on_attach = function(telescope_builtin)
 	return function(client, bufnr)
-		local wk = which_key
+		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
 
-		local show_diagnostics = function()
-			telescope_builtin.diagnostics({ bufnr = 0 })
-		end
-
-		-- Diagnostic keymaps
-		wk.register({
-			["<leader>"] = {
-				l = {
-					name = "LSP",
-					D = { vim.lsp.buf.declaration, "Go to Declaration" },
-					e = { vim.diagnostic.open_float, "Show diagnostics message" },
-					-- h = { vim.lsp.buf.signature_help, 'Show signature help' },
-					j = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" },
-					k = { vim.diagnostic.goto_prev, "Go to previous LSP diagnostics problem" },
-					n = { vim.lsp.buf.rename, "Refactor Rename" },
-					p = { vim.lsp.buf.hover, "Show hover popup" },
-					q = { vim.diagnostic.setloclist, "Populate loclist with diagnostics" },
-					r = { telescope_builtin.lsp_references, "Go to References" },
-					s = { telescope_builtin.lsp_document_symbols, "Search document symbols" },
-					w = { telescope_builtin.lsp_workspace_symbols, "Search workspace symbols" },
-					M = { telescope_builtin.diagnostics, "Show diagnostics messages in all buffers" },
-					d = { telescope_builtin.lsp_definitions, "Show definitions" },
-					i = { telescope_builtin.lsp_implementations, "Show implementations" },
-					m = { show_diagnostics, "Show diagnostics messages in current buffer" },
-				},
-				w = {
-					name = "LSP Workspace",
-					a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
-					r = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
-					l = {
-						function()
-							print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-						end,
-						"List workspace folders",
-					},
-				},
-				["."] = { vim.lsp.buf.code_action, "Show code actions" },
-			},
-			g = {
-				-- alternative keymaps
-				d = { telescope_builtin.lsp_definitions, "Show definitions" },
-				r = { telescope_builtin.lsp_references, "Go to References" },
-				I = { telescope_builtin.lsp_implementations, "Show implemnetations" },
-				D = { vim.lsp.buf.declaration, "Go to Declaration" },
-				t = { vim.lsp.buf.type_definition, "Go to Type Definition" },
-				h = { vim.diagnostic.open_float, "Show diagnostics message/help" },
-			},
-			K = { vim.lsp.buf.hover, "LSP Hover" },
-			["]"] = { d = { vim.diagnostic.goto_next, "Go to next LSP diagnostics problem" } },
-			["["] = { d = { vim.diagnostic.goto_prev, "Go to previous LSP diagnostics problem" } },
-		})
-
-		wk.register({
-			["<leader>"] = {
-				["."] = { vim.lsp.buf.code_action, "Show code actions" },
-			},
-		}, { mode = "v" })
-
-		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-		if vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint") then
+		if inlay_hint_supported then
 			-- TODO: inlay hints will be available in nightly. Right now, using
 			-- nightly build will also work, but there are some issues with other
 			-- plugins.
@@ -144,14 +84,6 @@ M.get_on_attach = function(which_key, telescope_builtin)
 				end
 			end, {})
 
-			wk.register({
-				["<leader>"] = {
-					l = {
-						h = { "<cmd>LspToggleInlayHints<cr>", "Toggle inlay hints" },
-					},
-				},
-			})
-
 			if type(vim.lsp.inlay_hint) ~= "function" then
 				vim.lsp.inlay_hint.enable(0, false) -- disable inlay hints by default
 			else
@@ -159,27 +91,32 @@ M.get_on_attach = function(which_key, telescope_builtin)
 			end
 		end
 
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-				require("conform").format()
-			end, {})
+		-- Diagnostic keymaps
+		require("user.keymaps").lsp(telescope_builtin, inlay_hint_supported)
 
-			wk.register({
-				["<leader>"] = {
-					l = {
-						f = { "<cmd>Format<cr>", "Format buffer" },
-					},
-				},
-			})
-		end
+		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	end
 end
 
 M.get_global_capabilities = function(cmp_nvim_lsp)
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+	local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+	local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
+
+	local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp_capabilities)
+
+	---@diagnostic disable-next-line: need-check-nil, undefined-field
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	return capabilities
+end
+
+M.clangd = function(on_attach_fn, capabilities, lspconfig)
+	return function()
+		lspconfig.clangd.setup({
+			cmd = { "/usr/bin/clangd" },
+			on_attach = on_attach_fn,
+			capabilities = capabilities,
+		})
+	end
 end
 
 M.rust_analyzer = function(on_attach)
@@ -289,22 +226,6 @@ M.eslint = function(on_attach, capabilities, lspconfig)
 		lspconfig["eslint"].setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
-			settings = {
-				codeAction = {
-					disableRuleComment = {
-						enable = true,
-						location = "separateLine",
-					},
-					showDocumentation = {
-						enable = true,
-					},
-				},
-				codeActionsOnSave = {
-					mode = "all",
-				},
-				format = true,
-				run = "onType",
-			},
 		})
 	end
 end
