@@ -1,4 +1,4 @@
 return {
 	-- automatically add pairs for (), {}, etc
-	-- { 'windwp/nvim-autopairs' },
+	-- { "windwp/nvim-autopairs" },
 }
