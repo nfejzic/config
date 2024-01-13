@@ -1,30 +1,29 @@
 function __theme_fzf -a scheme
     switch $scheme
         case "gruvbox_dark*"
-            set --export FZF_DEFAULT_OPTS "--height 75% --border --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+            set --gx FZF_DEFAULT_OPTS "--height 75% --border --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
               --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
 
         case "catppuccin_latte"
-        echo "Setting fzf to catppuccin latte"
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
             --color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
             --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
             --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
         
         case "catppuccin_frappe"
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
             --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
             --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
             --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
         
         case "catppuccin_macchiato"
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
             --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
             --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
             --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
         
         case "catppuccin_mocha"
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
             --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
             --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
             --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
@@ -32,19 +31,19 @@ function __theme_fzf -a scheme
         case "solarized_dark"
             # bg=bg; fg=fg; info=green; prompt=blue; pointer=red; marker=cyan; spinner=red
             # hl=magenta; hl+=magenta; fg+=bg; bg+=bg-of-dark
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
                 --color fg:#839496,bg:#002B36,hl:#D33682,hl+:#D33682,fg+:#002B36,bg+:#FDF6E3 \
                 --color info:#859900,prompt:#268BD2,spinner:#DC322F,pointer:#DC322F,marker:#2AA198"
 
         case "solarized_light"
             # bg=bg; fg=fg; info=green; prompt=blue; pointer=red; marker=cyan; spinner=red
             # hl=magenta; hl+=magenta; fg+=bg; bg+=bg-of-dark
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
                 --color fg:#657B83,bg:#FDF6E3,hl:#D33682,fg+:#FDF6E3,bg+:#002B36,hl+:#D33682 \
                 --color info:#859900,prompt:#268BD2,pointer:#DC322F,marker:#2AA198,spinner:#DC322F"
                 
         case "nord"
-            set -Ux FZF_DEFAULT_OPTS "\
+            set -gx FZF_DEFAULT_OPTS "\
                 --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C \ 
                 --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 
