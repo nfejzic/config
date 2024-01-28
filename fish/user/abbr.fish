@@ -1,16 +1,13 @@
-abbr -a c 'nvim'
 abbr -a cc 'clang'
 abbr -a l 'eza'
 abbr -a ls 'eza'
 abbr -a la 'eza -a'
 abbr -a ll 'eza -l'
 abbr -a lla 'eza -la'
-abbr -a nv 'nvim'
 abbr -a wstorm 'webstorm'
 abbr -a worm 'webstorm'
 abbr -a wm 'webstorm'
 abbr -a work 'cd ~/Developer/Tomes/idana-local-setup/'
-abbr -a grep 'rg' # use ripgrep instead of grep, but don't relearn old habits
 
 # tmux
 abbr -a ta 'tmux attach -t'
