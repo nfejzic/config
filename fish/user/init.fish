@@ -17,4 +17,8 @@ functions --erase import
 # NO IMPORTS AFTER THIS LINE
 set -gx GPG_TTY (tty)
 
-set_theme "Catppuccin Macchiato"
+if set -q CLI_THEME
+    set_theme $CLI_THEME
+else
+    set_theme "Catppuccin Macchiato"
+end
