@@ -1,15 +1,18 @@
 return {
 	-- Enable repeat for more actions
 	{
-        "tpope/vim-repeat",
-    },
+		"tpope/vim-repeat",
+	},
 
 	-- Surround
 	{
-        "tpope/vim-surround",
-    },
+		"tpope/vim-surround",
+	},
 
 	-- seems like it's not needed with treesitter...
 	-- Might be worth testing in some files without treesitter support
-	-- { "tpope/vim-sleuth" },
+	{
+		"tpope/vim-sleuth",
+		lazy = false,
+	},
 }

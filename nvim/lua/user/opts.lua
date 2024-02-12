@@ -13,7 +13,7 @@ vim.o.nu = true
 vim.g.loaded = 1
 
 -- add marker at 80 chars length and wrap text
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = "+1"
 vim.o.textwidth = 80
 
 -- set colorcolumn for git commit editing to 50 and 72 characters
@@ -28,7 +28,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "typescript", "javascript", "vue" },
 	callback = function(ev)
 		if string.match(ev.file, "idana") then
-			vim.o.colorcolumn = "100,120"
+			vim.o.colorcolumn = "100,+1"
+			vim.o.textwidth = 120
 		end
 	end,
 })
@@ -39,7 +40,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		local buf_name = vim.api.nvim_buf_get_name(0)
 
 		if string.match(buf_name, "idana") then
-			vim.o.colorcolumn = "120"
+			-- text width 120 in work projects
+			vim.o.colorcolumn = "+1"
 			vim.o.textwidth = 120
 		end
 	end,

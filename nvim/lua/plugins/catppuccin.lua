@@ -2,19 +2,54 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = true,
+		lazy = false,
+		priority = 1000,
 		config = function()
-			local flavor = "macchiato"
+			local function customHighlights(colors)
+				return {
+					-- disable @lsp highlight
+					["@lsp"] = {},
 
-			local colors = require("catppuccin.palettes").get_palette(flavor)
+					Comment = { fg = colors.maroon },
+					["@comment.documentation"] = { fg = colors.teal },
+					["@lsp.type.comment.rust"] = {},
+					["@lsp.type.enumMember.rust"] = { link = "@lsp.type.enum" },
+					["@mut_specifier"] = { fg = colors.yellow },
+					["@ref_specifier"] = { link = "@mut_specifier" },
+					["@constant.rust"] = { link = "Constant" },
 
-			if colors == nil then
-				return
+					LineNr = { link = "SignColumn" },
+					CursorLineNr = { link = "SignColumn" },
+					TreesitterContextLineNumber = { link = "SignColumn" },
+					CursorColumn = { link = "CursorLine" },
+
+					NeoTreeGitAdded = { fg = colors.green },
+					NeoTreeGitModified = { fg = colors.yellow },
+					NeoTreeGitDeleted = { fg = colors.red },
+					NeoTreeGitConflict = { fg = colors.peach, style = { "italic" } },
+					NeoTreeGitUntracked = { link = "NeoTreeGitConflict" },
+
+					DiagnosticSignCustomError = { fg = colors.red, bg = "none" },
+					DiagnosticSignCustomWarn = { fg = colors.yellow, bg = "none" },
+					DiagnosticSignCustomHint = { fg = colors.aqua, bg = "none" },
+					DiagnosticSignCustomInfo = { fg = colors.blue, bg = "none" },
+
+					NeoTreeDiagnosticSignInfo = { bg = "none" },
+					NeoTreeDiagnosticSignWarn = { bg = "none" },
+					NeoTreeDiagnosticSignError = { bg = "none" },
+					NeoTreeDiagnosticSignHint = { bg = "none" },
+
+					NormalFloat = { bg = colors.base },
+
+					LspInlayHint = { link = "Comment" },
+
+					TreesitterContext = { link = "SignColumn" },
+				}
 			end
 
 			--- This is a doc comment
 			require("catppuccin").setup({
-				transparent_background = false,
+				transparent_background = true,
 				styles = {
 					comments = { "italic" },
 					conditionals = {},
@@ -30,83 +65,49 @@ return {
 					operators = {},
 				},
 				integrations = {
-					barbar = true,
-					bufferline = true,
 					cmp = true,
 					dap = {
 						enabled = true,
 						enable_ui = true,
 					},
-					dashboard = true,
+					fidget = true,
 					gitsigns = true,
 					indent_blankline = {
 						enabled = true,
 						colored_indent_levels = false,
 					},
 					markdown = true,
+					mason = true,
 					native_lsp = {
 						enabled = true,
 					},
 					neogit = false,
 					neotree = true,
 					notify = true,
+					neotest = true,
 					octo = false,
-					symbols_outline = true,
+					symbols_outline = false,
 
 					telekasten = false,
 					telescope = true,
 					treesitter = true,
+					treesitter_context = true,
 					ts_rainbow = false,
+					window_picker = true,
 					which_key = true,
 				},
 				-- this is a comment
-				custom_highlights = {
-					-- disable @lsp highlight
-					["@lsp"] = {},
-
-					Comment = { fg = colors.maroon },
-					["@comment.documentation"] = { fg = colors.teal },
-					["@lsp.type.comment.rust"] = {},
-					["@lsp.type.enumMember.rust"] = { link = "@lsp.type.enum" },
-					["@mut_specifier"] = { fg = colors.yellow },
-					["@ref_specifier"] = { link = "@mut_specifier" },
-					["@constant.rust"] = { link = "Constant" },
-
-					SignColumn = { fg = colors.text, bg = colors.surface0 },
-					LineNr = { link = "SignColumn" },
-
-					GitSignsAdd = { fg = colors.green, bg = colors.surface0 },
-					GitSignsModified = { fg = colors.peach, bg = colors.surface0 },
-					GitSignsChange = { fg = colors.yellow, bg = colors.surface0 },
-					GitSignsDelete = { fg = colors.red, bg = colors.surface0 },
-
-					NeoTreeGitAdded = { fg = colors.green },
-					NeoTreeGitModified = { fg = colors.yellow },
-					NeoTreeGitDeleted = { fg = colors.red },
-					NeoTreeGitConflict = { fg = colors.peach, style = { "italic" } },
-					NeoTreeGitUntracked = { link = "NeoTreeGitConflict" },
-
-					DiagnosticSignInfo = { bg = colors.surface0 },
-					DiagnosticSignWarn = { bg = colors.surface0 },
-					DiagnosticSignError = { bg = colors.surface0 },
-					DiagnosticSignHint = { bg = colors.surface0 },
-
-					NeoTreeDiagnosticSignInfo = { bg = "none" },
-					NeoTreeDiagnosticSignWarn = { bg = "none" },
-					NeoTreeDiagnosticSignError = { bg = "none" },
-					NeoTreeDiagnosticSignHint = { bg = "none" },
-
-					NormalFloat = { bg = colors.base },
-
-					LspInlayHint = { link = "Comment" },
-
-					TreesitterContext = { link = "SignColumn" },
-				},
 				color_overrides = {},
+				highlight_overrides = {
+					latte = customHighlights,
+					mocha = customHighlights,
+					frappe = customHighlights,
+					macchiato = customHighlights,
+				},
 			})
 
 			---@diagnostic disable-next-line: inject-field
-			vim.g.catppuccin_flavour = flavor
+			vim.g.catppuccin_flavour = "macchiato"
 			-- vim.cmd("colo catppuccin")
 		end,
 	},

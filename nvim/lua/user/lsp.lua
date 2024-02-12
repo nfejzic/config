@@ -1,46 +1,56 @@
 local M = {}
 
-M.setup_ui = function()
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+local _border = "rounded"
 
-	vim.diagnostic.config({
+function M.get_handlers()
+	local handlers = {
+		["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = _border,
+		}),
+
+		["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = _border }),
+	}
+
+	return handlers
+end
+
+M.setup_ui = function()
+	---@type table|nil
+	local diagnostic_cfg = {
+		enable = true,
+		underline = true,
 		float = {
 			-- focusable = false,
-			-- style = 'minimal',
-			border = "rounded",
+			-- style = "minimal",
+			border = _border,
 			source = "always",
-			header = "",
-			prefix = "",
 		},
-	})
+	}
 
 	local utils = require("user.utils")
 
 	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 	utils.if_nightly_else(function()
 		-- API changed in neovim 0.10, currently nightly
-		vim.diagnostic.config({
-			enable = true,
+		diagnostic_cfg = vim.tbl_deep_extend("force", diagnostic_cfg, {
 			signs = {
 				text = {
-					["ERROR"] = signs.Error,
-					["WARN"] = signs.Warn,
-					["HINT"] = signs.Hint,
-					["INFO"] = signs.Info,
+					[vim.diagnostic.severity.ERROR] = signs.Error,
+					[vim.diagnostic.severity.WARN] = signs.Warn,
+					[vim.diagnostic.severity.HINT] = signs.Hint,
+					[vim.diagnostic.severity.INFO] = signs.Info,
 				},
 				texthl = {
-					["ERROR"] = "DiagnosticDefault",
-					["WARN"] = "DiagnosticDefault",
-					["HINT"] = "DiagnosticDefault",
-					["INFO"] = "DiagnosticDefault",
+					[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+					[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+					[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+					[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
 				},
 				numhl = {
-					["ERROR"] = "DiagnosticDefault",
-					["WARN"] = "DiagnosticDefault",
-					["HINT"] = "DiagnosticDefault",
-					["INFO"] = "DiagnosticDefault",
+					[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+					[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+					[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+					[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
 				},
 				severity_sort = true,
 			},
@@ -53,6 +63,8 @@ M.setup_ui = function()
 			vim.fn.sign_define(name, { text = icon, texthl = hl })
 		end
 	end)
+
+	vim.diagnostic.config(diagnostic_cfg)
 
 	-- use pretty gutter signs, fallback for plugins that don't support nightly
 	-- style yet
@@ -94,7 +106,7 @@ M.get_on_attach = function(telescope_builtin)
 		-- Diagnostic keymaps
 		require("user.keymaps").lsp(telescope_builtin, inlay_hint_supported)
 
-		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+		vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 	end
 end
 
@@ -109,17 +121,20 @@ M.get_global_capabilities = function(cmp_nvim_lsp)
 	return capabilities
 end
 
-M.clangd = function(on_attach_fn, capabilities, lspconfig)
+-- LSPs
+
+M.clangd = function(opts, lspconfig)
 	return function()
 		lspconfig.clangd.setup({
 			cmd = { "/usr/bin/clangd" },
-			on_attach = on_attach_fn,
-			capabilities = capabilities,
+			on_attach = opts.on_attach,
+			capabilities = opts.capabilities,
+			handlers = opts.handlers,
 		})
 	end
 end
 
-M.rust_analyzer = function(on_attach)
+M.rust_analyzer = function(opts)
 	return function()
 		---@diagnostic disable-next-line: inject-field
 		vim.g.rustaceanvim = {
@@ -127,9 +142,9 @@ M.rust_analyzer = function(on_attach)
 			tools = {},
 			-- LSP configuration
 			server = {
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-				end,
+				on_attach = opts.on_attach,
+				capabilites = opts.capabilites,
+				handlers = opts.handlers,
 				settings = {
 					-- rust-analyzer language server configuration
 					["rust-analyzer"] = {
@@ -164,21 +179,34 @@ M.rust_analyzer = function(on_attach)
 	end
 end
 
-M.go_lsp = function(on_attach, capabilities, lspconfig)
+M.go_lsp = function(opts, lspconfig)
 	return function()
 		lspconfig["gopls"].setup({
 			settings = {
 				gopls = {
 					gofumpt = true,
+					buildFlags = {
+						"-tags=integration,unit",
+					},
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
 				},
 			},
-			on_attach = on_attach,
-			capabilites = capabilities,
+			on_attach = opts.on_attach,
+			capabilites = opts.capabilities,
+			handlers = opts.handlers,
 		})
 	end
 end
 
-M.tsserver = function(on_attach, lspconfig)
+M.tsserver = function(opts, lspconfig)
 	return function()
 		lspconfig["tsserver"].setup({
 			settings = {
@@ -202,39 +230,45 @@ M.tsserver = function(on_attach, lspconfig)
 				ts_utils.setup({})
 				ts_utils.setup_client(client)
 
-				on_attach(client, bufnr)
+				opts.on_attach(client, bufnr)
 			end,
+			capabilites = opts.capabilites,
+			handlers = opts.handlers,
 		})
 	end
 end
 
-M.jsonls = function(on_attach, lspconfig)
+M.jsonls = function(opts, lspconfig)
 	return function()
 		lspconfig["jsonls"].setup({
 			on_attach = function(client, bufnr)
 				client.server_capabilities.document_formatting = false
 				client.server_capabilities.document_range_formatting = false
 
-				on_attach(client, bufnr)
+				opts.on_attach(client, bufnr)
 			end,
+			capabilites = opts.capabilites,
+			handlers = opts.handlers,
 		})
 	end
 end
 
-M.eslint = function(on_attach, capabilities, lspconfig)
+M.eslint = function(opts, lspconfig)
 	return function()
 		lspconfig["eslint"].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
+			on_attach = opts.on_attach,
+			capabilities = opts.capabilities,
+			handlers = opts.handlers,
 		})
 	end
 end
 
-M.lua_ls = function(on_attach, capabilities, lspconfig)
+M.lua_ls = function(opts, lspconfig)
 	return function()
 		lspconfig.lua_ls.setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
+			on_attach = opts.on_attach,
+			capabilities = opts.capabilities,
+			handlers = opts.handlers,
 			settings = {
 				Lua = {
 					hint = {
@@ -252,11 +286,12 @@ M.lua_ls = function(on_attach, capabilities, lspconfig)
 	end
 end
 
-M.vue_ls = function(on_attach, capabilities, lspconfig)
+M.vue_ls = function(opts, lspconfig)
 	return function()
 		lspconfig["vuels"].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
+			on_attach = opts.on_attach,
+			capabilities = opts.capabilities,
+			handlers = opts.handlers,
 			settings = {
 				vetur = {
 					completion = {

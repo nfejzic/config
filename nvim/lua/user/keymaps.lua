@@ -27,11 +27,29 @@ M.lsp = function(t_builtin, inlay_hint_supported)
 		vim.lsp.buf.list_workspace_folders()
 	end, { desc = "List workspace folders" })
 
-	vim.keymap.set({ "n", "v" }, "<leader>.", vim.lsp.buf.code_action, { desc = "Code actions" })
+	vim.keymap.set({ "n", "v" }, "<leader>.", function()
+		local code_actions_available = false
+		local code_action_chck_grp = vim.api.nvim_create_augroup("CodeActionCheck", { clear = true })
+
+		vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+			group = code_action_chck_grp,
+			callback = function()
+				code_actions_available = true
+			end,
+		})
+
+		-- check if code action succeeded
+		vim.lsp.buf.code_action()
+
+		if not code_actions_available then
+			-- then try with codelens
+			vim.lsp.codelens.run()
+		end
+	end, { desc = "Code actions" })
 
 	vim.keymap.set("n", "gd", t_builtin.lsp_definitions, { desc = "Definitions" })
 	vim.keymap.set("n", "gr", t_builtin.lsp_references, { desc = "References" })
-	vim.keymap.set("n", "gI", t_builtin.lsp_implementations, { desc = "Implemnetations" })
+	vim.keymap.set("n", "gI", t_builtin.lsp_implementations, { desc = "Implementations" })
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
 	vim.keymap.set("n", "gh", vim.diagnostic.open_float, { desc = "Show diagnostics message/help" })
@@ -47,6 +65,17 @@ end
 
 M.conform = function()
 	vim.keymap.set("n", "<leader>lf", "<cmd>Format<cr>", { desc = "Format buffer" })
+	vim.keymap.set("v", "<leader>lf", "<cmd>'<,'>Format<cr>", { desc = "Format buffer" })
+end
+
+function M.neotest(neotest)
+	vim.keymap.set("n", "]t", function()
+		neotest.jump.next()
+	end, { desc = "Go to next test (in buffer)" })
+
+	vim.keymap.set("n", "[t", function()
+		neotest.jump.prev()
+	end, { desc = "Go to next test (in buffer)" })
 end
 
 M.telescope_keymaps = function(telescope, t_builtin)

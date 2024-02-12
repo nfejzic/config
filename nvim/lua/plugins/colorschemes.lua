@@ -1,19 +1,19 @@
 return {
 	-- some nice themes
-	{ "folke/tokyonight.nvim", lazy = true },
+	{ "folke/tokyonight.nvim", lazy = false },
 
-	{ "EdenEast/nightfox.nvim", lazy = true },
+	{ "EdenEast/nightfox.nvim", lazy = false },
 
-	{ "RRethy/nvim-base16", lazy = true },
+	{ "RRethy/nvim-base16", lazy = false },
 
 	-- { "wincent/base16-nvim" },
 
-	{ "ishan9299/nvim-solarized-lua", lazy = true },
+	{ "ishan9299/nvim-solarized-lua", lazy = false },
 
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("rose-pine").setup({
 				variant = "auto",
@@ -32,13 +32,13 @@ return {
 					-- ["@mut_specifier"] = { fg = colors.yellow },
 					-- ["@ref_specifier"] = { link = "@mut_specifier" },
 
-					SignColumn = { fg = "text", bg = "surface" },
-					LineNr = { link = "SignColumn" },
+					-- SignColumn = { fg = "text", bg = "surface" },
+					-- LineNr = { link = "SignColumn" },
 
-					GitSignsAdd = { bg = "surface" },
-					GitSignsModified = { bg = "surface" },
-					GitSignsChange = { bg = "surface" },
-					GitSignsDelete = { bg = "surface" },
+					-- GitSignsAdd = { bg = "surface" },
+					-- GitSignsModified = { bg = "surface" },
+					-- GitSignsChange = { bg = "surface" },
+					-- GitSignsDelete = { bg = "surface" },
 
 					-- NeoTreeGitAdded = { fg = colors.green },
 					-- NeoTreeGitModified = { fg = colors.yellow },

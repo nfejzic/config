@@ -1,7 +1,7 @@
 return {
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = true,
+		lazy = false,
 		opts = {
 			compile = true, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
@@ -48,9 +48,9 @@ return {
 
 					TreesitterContext = { bg = colors.bg1 },
 
-					NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
-					SignColumn = { fg = colors.gray, bg = colors.bg1 },
-					LineNr = { link = "SignColumn" },
+					-- NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
+					-- SignColumn = { fg = colors.gray, bg = colors.bg1 },
+					-- LineNr = { link = "SignColumn" },
 
 					NeoTreeGitAdded = { fg = colors.green },
 					NeoTreeGitDeleted = { fg = colors.red },

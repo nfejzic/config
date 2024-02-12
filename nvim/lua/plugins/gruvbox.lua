@@ -94,7 +94,13 @@ return {
 				undercurl = true,
 				underline = true,
 				bold = true,
-				-- italic = false,
+				italic = {
+					strings = false,
+					emphasis = true,
+					comments = true,
+					operators = false,
+					folds = true,
+				},
 				strikethrough = true,
 				invert_selection = false,
 				invert_signs = false,
@@ -116,6 +122,9 @@ return {
 
 					Comment = { fg = colors.orange },
 					["@comment"] = { link = "Comment" },
+
+					["@comment.note.comment"] = { link = "GruvboxAqua" },
+
 					["@comment.documentation"] = { fg = colors.aqua },
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
@@ -133,24 +142,14 @@ return {
 
 					TreesitterContext = { bg = colors.bg1 },
 
-					NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
-					SignColumn = { fg = colors.gray, bg = colors.bg1 },
-					LineNr = { link = "SignColumn" },
+					-- NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
+					NormalFloat = { link = "Normal" },
+					SignColumn = { link = "LineNr" },
 
-					NeoTreeGitAdded = { fg = colors.green },
-					NeoTreeGitDeleted = { fg = colors.red },
-					NeoTreeGitModified = { fg = colors.aqua },
-
-					GitSignsAdd = { fg = colors.green, bg = colors.bg1 },
-					GitSignsModified = { fg = colors.orange, bg = colors.bg1 },
-					GitSignsChange = { fg = colors.yellow, bg = colors.bg1 },
-					GitSignsDelete = { fg = colors.red, bg = colors.bg1 },
-
-					-- in neo-tree etc. (currently nightly-only)
-					DiagnosticSignCustomError = { fg = colors.red, bg = "none" },
-					DiagnosticSignCustomWarn = { fg = colors.yellow, bg = "none" },
-					DiagnosticSignCustomHint = { fg = colors.aqua, bg = "none" },
-					DiagnosticSignCustomInfo = { fg = colors.blue, bg = "none" },
+					DiagnosticSignError = { fg = colors.red },
+					DiagnosticSignWarn = { fg = colors.yellow },
+					DiagnosticSignHint = { fg = colors.aqua },
+					DiagnosticSignInfo = { fg = colors.blue },
 
 					-- dap ui not optimized...
 					DapUIStopNC = { bg = "none" },
@@ -175,11 +174,33 @@ return {
 
 					["@lsp.type.builtinType.rust"] = {},
 					["@lsp"] = {},
+
+					-- neotest -> no support...
+					NeotestDir = { fg = colors.fg0 },
+					NeotestFile = { fg = colors.fg0 },
+					NeotestTest = { fg = colors.blue },
+					NeotestNamespace = { fg = colors.fg0 },
+					NeotestAdapterName = { fg = colors.aqua },
+
+					NeotestFocused = { fg = colors.yellow },
+
+					NeotestFailed = { fg = colors.red },
+					NeotestMarked = { fg = colors.orange },
+					NeotestPassed = { fg = colors.green },
+					NeotestTarget = { fg = colors.blue },
+					NeotestRunning = { fg = colors.yellow },
+					NeotestSkipped = { fg = colors.gray },
+					NeotestUnknown = { fg = colors.purple },
+					NeotestWatching = { fg = colors.yellow },
+					NeotestWinSelect = { fg = colors.yellow },
+
+					NeotestIndent = { fg = colors.gray },
+					NeotestExpandMarker = { fg = colors.gray },
 				},
 				dim_inactive = false,
-				transparent_mode = false,
+				transparent_mode = true,
 			})
-			vim.cmd("colo gruvbox")
+			-- vim.cmd("colo gruvbox")
 		end,
 	},
 }

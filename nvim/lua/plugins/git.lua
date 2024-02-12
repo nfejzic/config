@@ -26,4 +26,13 @@ return {
 		config = true,
 		lazy = false,
 	},
+
+	{
+		"/tpope/vim-fugitive",
+		lazy = false,
+		config = function()
+			---@diagnostic disable-next-line: inject-field
+			vim.g.fugitive_dynamic_colors = 1
+		end,
+	},
 }
