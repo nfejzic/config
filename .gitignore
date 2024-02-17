@@ -15,3 +15,10 @@ nvim/lazy-lock.json
 nvim/plugin/packer_compiled.lua
 
 .luarc.json
+
+# emacs
+emacs/elpa
+emacs/auto-save-list
+emacs/transient
+emacs/#init.el#
+emacs/init.el~
