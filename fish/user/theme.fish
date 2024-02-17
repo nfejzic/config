@@ -48,7 +48,21 @@ function __theme_fzf -a scheme
                 --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C \ 
                 --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 
-        case ""
+        case "*"
+            # use themes from fish theme
+            set bg "" # transparent bg
+            set fg $(echo "$fish_color_normal" | awk '{print $1}') # text 
+            set cyan $(echo "$fish_color_command" | awk '{print $1}') # text
+            set bgplus $(echo "$fish_color_selection" | awk -F '=' '{print $2}' | awk '{print $1}')
+            set red $(echo "$fish_color_error" | awk '{print $1}')
+            set orange $(echo "$fish_color_end" | awk '{print $1}')
+            set yellow $(echo "$fish_color_quote" | awk '{print $1}')
+            set selection $(echo "$fish_pager_color_progress" | awk '{print $1}')
+
+            set -Ux FZF_DEFAULT_OPTS "\
+                --color=bg+:#$bgplus,bg:$bg,spinner:#$red,hl:#$orange \
+                --color=fg:#$fg,header:#$cyan,info:#$yellow,pointer:#$red \
+                --color=marker:#$yellow,fg+:$bg,prompt:#$yellow,hl+:#$orange"
     end
 end
 
@@ -74,6 +88,12 @@ function __theme_bat -a theme
 
         case "gruvbox_dark_hard"
             set -gx BAT_THEME "gruvbox-dark"
+
+        case "kanagawa"
+            set -gx BAT_THEME "kanagawa"
+
+        case "*"
+            set -gx BAT_THEME "ansi"
     end
 end
 
@@ -99,6 +119,9 @@ function __theme_fish -a theme
 
         case "gruvbox_dark_hard"
             yes | fish_config theme save "Gruvbox Dark Hard"
+
+        case "kanagawa"
+            yes | fish_config theme save "Kanagawa"
     end
 end
 
@@ -166,7 +189,7 @@ function __is_theme_supported -a name
 end
 
 function set_theme
-    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark'
+    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa'
 
     argparse 'h/help' 'l/list' -- $argv
     or return
@@ -195,9 +218,9 @@ function set_theme
         return
     end
 
+    __theme_fish $cleaned
     __theme_fzf $cleaned
     __theme_bat $cleaned
-    __theme_fish $cleaned
 
     set -U CLI_THEME $cleaned
 
