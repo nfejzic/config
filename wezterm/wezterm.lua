@@ -82,8 +82,10 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.show_new_tab_button_in_tab_bar = false
 
+local is_transparent = config.window_background_opacity ~= 1.0
+
 config.colors = {
-	tab_bar = tab_fns.tab_bar_colors(colors),
+	tab_bar = tab_fns.tab_bar_colors(colors, is_transparent),
 }
 
 config.leader = keys.get_keybindings(wezterm).leader
