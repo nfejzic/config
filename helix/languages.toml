@@ -1,43 +1,51 @@
+# [language-server.eslint]
+# args = ["--stdio"]
+# command = "eslint_d"
+# # command = "vscode-eslint-language-server"
+
+# [language-server.eslint.config]
+# format = false
+# packageManages = "npm"
+# nodePath = ""
+# workingDirectory.mode = "auto"
+# onIgnoredFiles = "off"
+# run = "onType"
+# validate = "on"
+# useESLintClass = false
+# experimental = { }
+# codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation.enable = true }
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+injection-regex = "(ts|typescript)"
+language-servers = [{ except-features = ["format"], name = "typescript-language-server"}, "eslint"]
+roots = [".prettierrc.json", ""]
+file-types = ["ts", "mts", "cts"]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
+auto-format = true
+
 [language-server.eslint]
-args = ["--stdio"]
 command = "vscode-eslint-language-server"
+args = ["--stdio"]
 
 [language-server.eslint.config]
-format = true
-nodePath = ""
-onIgnoredFiles = "off"
-packageManager = "yarn"
-quiet = false
+validate = "on"
+experimental = {}
 rulesCustomizations = []
 run = "onType"
-useESLintClass = false
-validate = "on"
-codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = true } }
-codeActionOnSave = { mode = "all" }
-experimental = { }
 problems = { shortenToSingleLine = false }
-workingDirectory = { mode = "auto" }
+nodePath = ""
+codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation.enable = true }
 
-# [language-server.efm-lsp-prettier]
-# command = "efm-langserver"
+[[language]]
+name = "btor2"
+scope = "source.btor2"
+injection-regex = "btor2"
+file-types = [ "btor2" ]
+# comment-token = ";"
+# indent = { tab-width = 2, unit = "  " }
 
-# [language-server.efm-lsp-prettier.config]
-# documentFormatting = true
-
-# [language-server.efm-lsp-prettier.config.languages]
-# [[language-server.efm-lsp-prettier.config.languages.javascript]]
-# formatCommand = "prettier --stdin-filepath ${INPUT}"
-# formatStdin = true
-
-# [[language-server.efm-lsp-prettier.config.languages.typescript]]
-# formatCommand = "prettier --stdin-filepath ${INPUT}"
-# formatStdin = true
-
-# [[language-server.efm-lsp-prettier.config.languages.javascriptreact]]
-# formatCommand = "prettier --stdin-filepath ${INPUT}"
-# formatStdin = true
-
-# [[language-server.efm-lsp-prettier.config.languages.json]]
-# formatCommand = "prettier --stdin-filepath ${INPUT}"
-# formatStdin = true
-
+[[grammar]]
+name = "btor2"
+source.path = "/Users/nadirfejzic/Developer/tree-sitter-btor2"

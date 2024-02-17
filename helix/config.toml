@@ -1,8 +1,4 @@
-# theme = "catppuccin_mocha_hard"
-# NOTE: ~/dotfiles/helix/runtime is symlinked to ~/Developer/oss/helix/runtime for now
-# because helix is installed from source (for some new features like Multiple Language servers in same buffer)
-theme = "catppuccin_mocha"
-# theme = "gruvbox_nfejzic"
+theme = "catppuccin_macchiato"
 
 [editor]
 scrolloff = 3
@@ -10,7 +6,10 @@ color-modes = true
 line-number = "relative"
 idle-timeout = 0
 rulers = [ 80 ]
-bufferline = "multiple"
+bufferline = "never"
+auto-pairs = false
+gutters = ["diff", "spacer", "diagnostics", "spacer", "line-numbers", "spacer"]
+# gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 
 [editor.file-picker]
 hidden = false
@@ -24,7 +23,7 @@ separator = "│"
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -34,3 +33,9 @@ select = "underline"
 "}" = [ "goto_next_paragraph" ]
 "{" = [ "goto_prev_paragraph" ]
 "X" = [ "extend_line_above" ]
+
+[keys.normal.space]
+"space" = "goto_last_accessed_file"
+
+[keys.normal.space.l]
+"h" = ":toggle-option lsp.display-inlay-hints"
