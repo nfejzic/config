@@ -91,5 +91,8 @@ config.colors = {
 config.leader = keys.get_keybindings(wezterm).leader
 config.keys = keys.get_keybindings(wezterm).keys
 
+-- default is 60, so increase to prevent stuttering. Max is 255 (u8 in Rust)
+config.max_fps = 255
+
 -- and finally, return the configuration to wezterm
 return config
