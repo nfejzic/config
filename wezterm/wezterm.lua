@@ -10,11 +10,8 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 local theme = "Gruvbox dark, hard (base16)"
--- theme = "Catppuccin Mocha"
-theme = "Catppuccin Macchiato"
--- theme = "rose-pine"
--- theme = "Kanagawa (Gogh)"
--- theme = "Mariana"
+-- theme = "Catppuccin Macchiato"
+theme = "Kanagawa (Gogh)"
 local colors = wezterm.color.get_builtin_schemes()[theme]
 
 wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
