@@ -123,10 +123,13 @@ end
 
 -- LSPs
 
-M.clangd = function(opts, lspconfig)
+M.clangd = function(opts, lspconfig, neoconf)
 	return function()
+		if neoconf.get("clangd.disable") then
+			return
+		end
+
 		lspconfig.clangd.setup({
-			cmd = { "/usr/bin/clangd" },
 			on_attach = opts.on_attach,
 			capabilities = opts.capabilities,
 			handlers = opts.handlers,
@@ -134,8 +137,12 @@ M.clangd = function(opts, lspconfig)
 	end
 end
 
-M.rust_analyzer = function(opts)
+M.rust_analyzer = function(opts, neoconf)
 	return function()
+		if neoconf.get("rust_analyzer.disable") then
+			return
+		end
+
 		---@diagnostic disable-next-line: inject-field
 		vim.g.rustaceanvim = {
 			-- Plugin configuration
@@ -179,9 +186,13 @@ M.rust_analyzer = function(opts)
 	end
 end
 
-M.go_lsp = function(opts, lspconfig)
+M.go_lsp = function(opts, lspconfig, neoconf)
 	return function()
-		lspconfig["gopls"].setup({
+		if neoconf.get("go_lsp.disable") then
+			return
+		end
+
+		lspconfig.gopls.setup({
 			settings = {
 				gopls = {
 					gofumpt = true,
@@ -206,9 +217,13 @@ M.go_lsp = function(opts, lspconfig)
 	end
 end
 
-M.tsserver = function(opts, lspconfig)
+M.tsserver = function(opts, lspconfig, neoconf)
 	return function()
-		lspconfig["tsserver"].setup({
+		if neoconf.get("tsserver.disable") then
+			return
+		end
+
+		lspconfig.tsserver.setup({
 			settings = {
 				typescript = {
 					inlayHints = {
@@ -238,9 +253,13 @@ M.tsserver = function(opts, lspconfig)
 	end
 end
 
-M.jsonls = function(opts, lspconfig)
+M.jsonls = function(opts, lspconfig, neoconf)
 	return function()
-		lspconfig["jsonls"].setup({
+		if neoconf.get("jsonls.disable") then
+			return
+		end
+
+		lspconfig.jsonls.setup({
 			on_attach = function(client, bufnr)
 				client.server_capabilities.document_formatting = false
 				client.server_capabilities.document_range_formatting = false
@@ -253,9 +272,13 @@ M.jsonls = function(opts, lspconfig)
 	end
 end
 
-M.eslint = function(opts, lspconfig)
+M.eslint = function(opts, lspconfig, neoconf)
 	return function()
-		lspconfig["eslint"].setup({
+		if neoconf.get("eslint.disable") then
+			return
+		end
+
+		lspconfig.eslint.setup({
 			on_attach = opts.on_attach,
 			capabilities = opts.capabilities,
 			handlers = opts.handlers,
@@ -263,8 +286,12 @@ M.eslint = function(opts, lspconfig)
 	end
 end
 
-M.lua_ls = function(opts, lspconfig)
+M.lua_ls = function(opts, lspconfig, neoconf)
 	return function()
+		if neoconf.get("lua_ls.disable") then
+			return
+		end
+
 		lspconfig.lua_ls.setup({
 			on_attach = opts.on_attach,
 			capabilities = opts.capabilities,
@@ -278,7 +305,8 @@ M.lua_ls = function(opts, lspconfig)
 						globals = { "vim" },
 					},
 					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
+						-- let `folke/neodev` handle this
+						-- library = vim.api.nvim_get_runtime_file("", true),
 					},
 				},
 			},
@@ -286,9 +314,39 @@ M.lua_ls = function(opts, lspconfig)
 	end
 end
 
-M.vue_ls = function(opts, lspconfig)
+function M.volar(opts, lspconfig, neoconf)
 	return function()
-		lspconfig["vuels"].setup({
+		if neoconf.get("volar.disable") then
+			return
+		end
+
+		lspconfig.volar.setup({
+			filetypes = { "vue", "typescript", "javascript" },
+			on_attach = opts.on_attach,
+			capabilities = opts.capabilities,
+			handlers = opts.handlers,
+			documentFeatures = {
+				documentFormatting = {},
+			},
+			settings = {
+				typescript = {
+					preferences = {
+						-- "relative" | "non-relative" | "auto" | "shortest"(not sure)
+						importModuleSpecifier = "non-relative",
+					},
+				},
+			},
+		})
+	end
+end
+
+M.vue_ls = function(opts, lspconfig, neoconf)
+	return function()
+		if neoconf.get("vue_ls.disable") then
+			return
+		end
+
+		lspconfig.vuels.setup({
 			on_attach = opts.on_attach,
 			capabilities = opts.capabilities,
 			handlers = opts.handlers,

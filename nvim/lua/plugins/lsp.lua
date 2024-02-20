@@ -11,10 +11,15 @@ return {
 			{ "folke/which-key.nvim" },
 
 			{ "williamboman/mason.nvim", opts = {} },
+
 			{
 				"williamboman/mason-lspconfig.nvim",
 				opts = {},
 			},
+
+			{ "folke/neodev.nvim" },
+
+			{ "folke/neoconf.nvim" },
 
 			-- formatters and formatting
 			{
@@ -286,6 +291,9 @@ return {
 			local mason_lsp = require("mason-lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+			require("neoconf").setup()
+			require("neodev").setup()
+
 			local on_attach = user_lsp.get_on_attach(telescope_builtin)
 			local global_capabilities = user_lsp.get_global_capabilities(cmp_nvim_lsp)
 
@@ -301,6 +309,8 @@ return {
 				capabilities = global_capabilities,
 			})
 
+			local neoconf = require("neoconf")
+
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
@@ -309,14 +319,15 @@ return {
 					lspconfig[server_name].setup(opts)
 				end,
 				-- Next, targeted overrides for specific servers.
-				["clangd"] = user_lsp.clangd(opts, lspconfig),
-				["rust_analyzer"] = user_lsp.rust_analyzer(opts),
-				["gopls"] = user_lsp.go_lsp(opts, lspconfig),
-				["tsserver"] = user_lsp.tsserver(opts, lspconfig),
-				["jsonls"] = user_lsp.jsonls(opts, lspconfig),
-				["eslint"] = user_lsp.eslint(opts, lspconfig),
-				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig),
-				["vuels"] = user_lsp.vue_ls(opts, lspconfig),
+				["clangd"] = user_lsp.clangd(opts, lspconfig, neoconf),
+				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
+				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
+				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf),
+				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
+				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
+				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),
+				["vuels"] = user_lsp.vue_ls(opts, lspconfig, neoconf),
+				["volar"] = user_lsp.volar(opts, lspconfig, neoconf),
 			})
 
 			user_lsp.setup_ui()
