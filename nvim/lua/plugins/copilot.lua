@@ -27,7 +27,7 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = { "zbirenbaum/copilot.lua" },
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("copilot_cmp").setup({
 				formatters = {

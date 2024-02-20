@@ -2,15 +2,15 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			{ "mxsdev/nvim-dap-vscode-js", lazy = true },
+			{ "mxsdev/nvim-dap-vscode-js", lazy = false },
 			{ "folke/which-key.nvim" },
 			{
 				"microsoft/vscode-js-debug",
-				lazy = true,
+				lazy = false,
 				build = "npm ci --legacy-peer-deps && npm run compile",
 			},
 		},
-		lazy = true,
+		lazy = false,
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
 		end,
@@ -126,7 +126,7 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap" },
-		lazy = true,
+		lazy = false,
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
 		end,
@@ -138,7 +138,7 @@ return {
 	-- for javascript / typescript debugging
 	{
 		"microsoft/vscode-js-debug",
-		lazy = true,
+		lazy = false,
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
 		end,

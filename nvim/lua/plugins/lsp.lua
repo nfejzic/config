@@ -126,7 +126,7 @@ return {
 			-- JSON settings for individual language servers
 			{
 				"tamago324/nlsp-settings.nvim",
-				lazy = true,
+				lazy = false,
 				opts = {
 					config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
 					local_settings_dir = ".nlsp-settings",

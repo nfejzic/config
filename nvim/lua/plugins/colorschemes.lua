@@ -61,13 +61,13 @@ return {
 		end,
 	},
 
-	{ "shaunsingh/nord.nvim", lazy = true },
+	{ "shaunsingh/nord.nvim", lazy = false },
 
-	{ "savq/melange-nvim", lazy = true },
+	{ "savq/melange-nvim", lazy = false },
 
 	{
 		"loctvl842/monokai-pro.nvim",
-		lazy = true,
+		lazy = false,
 		opts = {
 			transparent_background = false,
 			terminal_colors = true,
@@ -119,6 +119,6 @@ return {
 	{
 		"mcchrish/zenbones.nvim",
 		dependencies = { "rktjmp/lush.nvim" },
-		lazy = true,
+		lazy = false,
 	},
 }
