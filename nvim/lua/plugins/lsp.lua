@@ -39,7 +39,7 @@ return {
 							vue = { { "prettierd", "prettier" } },
 							html = { { "prettierd", "prettier" } },
 							markdown = { { "prettierd", "prettier" } },
-							rust = { "rustfmt" },
+							rust = {},
 							c = {},
 							go = { "gofumpt" },
 							sql = { "sql_formatter", "sqlfmt" },
