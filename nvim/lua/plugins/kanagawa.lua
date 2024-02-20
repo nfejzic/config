@@ -9,71 +9,56 @@ return {
 			functionStyle = {},
 			keywordStyle = { italic = false },
 			statementStyle = { bold = true },
-			typeStyle = {},
+			typeStyle = { italic = false },
 			transparent = false, -- do not set background color
 			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
-			colors = {
-				-- add/modify theme and palette colors
-				palette = {},
-				theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-			},
-			overrides = function(colors) -- add/modify highlights
+			overrides = function(_colors) -- add/modify highlights
+				local theme = _colors.theme
 				return {
-					Function = { fg = colors.blue, bg = "none" },
-					Identifier = { fg = colors.fg2, bg = "none" },
-					["@field"] = { fg = colors.fg2, bg = "none" },
+					["@field"] = { fg = theme.syn.variable, bg = "none" },
+					["@module"] = { link = "@variable" },
+					Identifier = { fg = theme.syn.variable },
 
-					["@lsp.type.interface"] = { link = "@type.definition" },
-					["@lsp.type.enumMember"] = { fg = colors.orange },
-					["@lsp.type.lifetime"] = { fg = colors.aqua },
-					["@storageclass.lifetime"] = { fg = colors.aqua },
+					Type = { fg = theme.syn.identifier },
+					-- ["@lsp.type.interface"] = { fg = colors.surimiYellow },
+					["@lsp.type.lifetime"] = { fg = theme.syn.string },
+					["@storageclass.lifetime"] = { fg = theme.syn.string },
 
-					Comment = { fg = colors.orange },
+					Comment = { fg = theme.syn.constant },
 					["@comment"] = { link = "Comment" },
-					["@comment.documentation"] = { fg = colors.aqua },
+					["@comment.documentation"] = { fg = theme.syn.string },
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
 					["@lsp.typemod.comment.injected"] = { link = "Comment" },
-					-- ["@lsp.typemod.comment.injected.rust"] = { link = "Comment" },
-					-- ["@lsp.typemod.comment.documentation.rust"] = { link = "@comment.documentation" },
 
-					["@punctuation.delimiter"] = { fg = colors.fg2 },
-					["@punctuation.bracket"] = { fg = colors.fg2 },
+					["@punctuation.delimiter"] = { fg = theme.ui.fg },
+					["@punctuation.bracket"] = { fg = theme.ui.fg },
+					["@constructor.lua"] = { fg = theme.ui.fg },
 					["@label"] = { link = "@lsp.type.lifetime" },
 
 					["@lsp.type.keyword"] = { link = "@keyword" },
 					["@lsp.type.punctuation"] = { link = "@punctuation.bracket" },
+					Operator = { fg = theme.syn.constant },
 					["@lsp.type.operator"] = { link = "Operator" },
 
-					TreesitterContext = { bg = colors.bg1 },
+					-- transparent floating windows
+					NormalFloat = { bg = "none" },
+					FloatBorder = { bg = "none" },
+					FloatTitle = { bg = "none" },
 
-					-- NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
-					-- SignColumn = { fg = colors.gray, bg = colors.bg1 },
-					-- LineNr = { link = "SignColumn" },
+					-- Save an hlgroup with dark background and dimmed foreground
+					-- so that you can use it where your still want darker windows.
+					-- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
+					NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
 
-					NeoTreeGitAdded = { fg = colors.green },
-					NeoTreeGitDeleted = { fg = colors.red },
-					NeoTreeGitModified = { fg = colors.aqua },
-
-					GitSignsAdd = { fg = colors.green, bg = colors.bg1 },
-					GitSignsModified = { fg = colors.orange, bg = colors.bg1 },
-					GitSignsChange = { fg = colors.yellow, bg = colors.bg1 },
-					GitSignsDelete = { fg = colors.red, bg = colors.bg1 },
-
-					-- in neo-tree etc. (currently nightly-only)
-					DiagnosticSignCustomError = { fg = colors.red, bg = "none" },
-					DiagnosticSignCustomWarn = { fg = colors.yellow, bg = "none" },
-					DiagnosticSignCustomHint = { fg = colors.aqua, bg = "none" },
-					DiagnosticSignCustomInfo = { fg = colors.blue, bg = "none" },
+					-- Popular plugins that open floats will link to NormalFloat by default;
+					-- set their background accordingly if you wish to keep them dark and borderless
+					LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+					MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 				}
 			end,
 			theme = "wave", -- Load "wave" theme when 'background' option is not set
-			background = {
-				-- map the value of 'background' option to a theme
-				dark = "wave", -- try "dragon" !
-				light = "lotus",
-			},
 		},
 	},
 }
