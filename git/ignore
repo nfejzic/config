@@ -8,3 +8,4 @@ Idana-Backup-Key
 compile_commands.json
 .cache/clangd/
 .clang-format
+.neoconf.json
