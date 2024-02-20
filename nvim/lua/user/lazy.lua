@@ -18,9 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "plugins" },
 
-	-- Autocomplete
-	{ "mattn/emmet-vim" }, -- emmet for html etc
-
 	-- show help popup for keymaps (like in emacs)
 	{ "folke/which-key.nvim" },
 
