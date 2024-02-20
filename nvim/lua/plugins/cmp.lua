@@ -61,14 +61,14 @@ return {
 					["<C-k>"] = cmp.mapping.complete(),
 					["<C-j>"] = cmp.mapping(
 						cmp.mapping.confirm({
-							behavior = cmp.ConfirmBehavior.Replace,
+							behavior = cmp.ConfirmBehavior.Insert,
 							select = true,
 						}),
 						{ "i", "c" }
 					),
 					["<M-j>"] = cmp.mapping(
 						cmp.mapping.confirm({
-							behavior = cmp.ConfirmBehavior.Replace,
+							behavior = cmp.ConfirmBehavior.Insert,
 							select = false,
 						}),
 						{ "i", "c" }
