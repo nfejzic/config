@@ -31,6 +31,10 @@ return {
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
 					["@lsp.typemod.comment.injected"] = { link = "Comment" },
+					["@comment.note"] = { fg = theme.ui.fg },
+					["@comment.error"] = { fg = theme.ui.fg, bg = theme.diag.error },
+					["@comment.warning"] = { fg = theme.ui.fg, bg = theme.diff.text },
+					Todo = { fg = theme.ui.fg },
 
 					["@punctuation.delimiter"] = { fg = theme.ui.fg },
 					["@punctuation.bracket"] = { fg = theme.ui.fg },
