@@ -14,14 +14,6 @@ else
     __print -e "fish: could not setup abbr for eza, eza not found"
 end
 
-if type -q webstorm
-    abbr -a wstorm 'webstorm'
-    abbr -a worm 'webstorm'
-    abbr -a wm 'webstorm'
-else
-    __print -e "fish: could not setup abbr for webstorm, webstorm not found"
-end
-
 abbr -a work 'cd ~/Developer/Tomes/idana-local-setup/'
 
 # tmux
