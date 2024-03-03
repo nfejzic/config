@@ -125,27 +125,6 @@ function __theme_fish -a theme
     end
 end
 
-function __print
-    argparse --min-args 1 'i/indent=?!_validate_int --min 0 --max 4' 'e/error' -- $argv
-
-    set lvl 0
-    set str $argv[1]
-
-    if set -ql _flag_indent
-        set indent $argv[1]
-        set str $argv[2]
-        set lvl (math "4 * $indent")
-    end
-
-    set indent (string repeat -n $lvl " ")
-
-    if set -ql _flag_error
-        echo -e "$(echo $indent)$str" 1>&2
-    else
-        echo -e "$(echo $indent)$str"
-    end
-end
-
 function __list_themes
     for theme in $themes
         __print "$theme"

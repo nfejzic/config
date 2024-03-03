@@ -8,6 +8,7 @@ end
 
 # ADD IMPORTS HERE
 
+import "./utils.fish"
 import "./theme.fish"
 import "./abbr.fish"
 import "./setup_brew.fish"
