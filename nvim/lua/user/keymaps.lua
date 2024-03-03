@@ -210,6 +210,12 @@ local function setup_wk_prefixes(wk)
 	})
 end
 
+M.oil = function(oil)
+	-- opens oil with current file being under the cursor
+	vim.keymap.set("n", "<leader>ft", oil.open, { desc = "Open File Explorer (Oil)" })
+	vim.keymap.set("n", "<leader>fr", oil.toggle_float, { desc = "Open floating file explorer (Oil)" })
+end
+
 M.general = function()
 	local wk = require("which-key")
 
