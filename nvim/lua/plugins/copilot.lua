@@ -2,7 +2,10 @@ return {
 	-- lua impl of Github Copilot
 	{
 		"zbirenbaum/copilot.lua",
-		lazy = false,
+
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = false },
@@ -27,7 +30,10 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = { "zbirenbaum/copilot.lua" },
-		lazy = false,
+
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+
 		config = function()
 			require("copilot_cmp").setup({
 				fix_pairs = false,

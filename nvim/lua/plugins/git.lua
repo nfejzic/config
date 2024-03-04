@@ -3,7 +3,10 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		lazy = false,
+
+		lazy = true,
+		event = "BufWinEnter",
+
 		config = function()
 			local gs = require("gitsigns")
 			gs.setup({
@@ -30,6 +33,7 @@ return {
 	{
 		"/tpope/vim-fugitive",
 		lazy = false,
+
 		config = function()
 			---@diagnostic disable-next-line: inject-field
 			vim.g.fugitive_dynamic_colors = 1

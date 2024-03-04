@@ -2,9 +2,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 
+		lazy = true,
 		event = { "BufReadPost" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
-		lazy = false,
 
 		dependencies = {
 			-- for keymaps
@@ -53,8 +53,9 @@ return {
 							local is_selfie = string.match(buf_name, "selfie")
 							local is_beator = string.match(buf_name, "selfie")
 							local is_monster = string.match(buf_name, "selfie")
+							local is_json = string.match(buf_name, ".json")
 
-							if is_selfie or is_beator or is_monster then
+							if is_selfie or is_beator or is_monster or is_json then
 								return { timeout_ms = 500, lsp_fallback = false, formatters = formatters }
 							else
 								return {
@@ -122,24 +123,12 @@ return {
 						},
 					},
 				},
-				lazy = false,
+				lazy = true,
+				event = "BufWinEnter",
 			},
 
 			-- auto completions
 			{ "hrsh7th/cmp-nvim-lsp" },
-
-			-- JSON settings for individual language servers
-			{
-				"tamago324/nlsp-settings.nvim",
-				lazy = false,
-				opts = {
-					config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
-					local_settings_dir = ".nlsp-settings",
-					local_settings_root_markers = { ".git" },
-					append_default_schemas = true,
-					loader = "json",
-				},
-			},
 
 			-- Icons in auto-complete of LSP (i.e. function, variable etc)
 			{ "onsails/lspkind-nvim" },
@@ -171,7 +160,8 @@ return {
 			-- Go
 			{
 				"crispgm/nvim-go",
-				lazy = false,
+				lazy = true,
+				filetype = { "go", "gomod" },
 				config = function()
 					require("go").setup({
 						-- notify: use nvim-notify
@@ -286,15 +276,18 @@ return {
 
 		config = function()
 			local user_lsp = require("user.lsp")
-			local telescope_builtin = require("telescope.builtin")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-			require("neoconf").setup()
+			local neoconf = require("neoconf")
+
+			neoconf.setup()
 			require("neodev").setup()
 
-			local on_attach = user_lsp.get_on_attach(telescope_builtin)
+			local on_attach = user_lsp.get_on_attach(function()
+				return require("telescope.builtin")
+			end)
 			local global_capabilities = user_lsp.get_global_capabilities(cmp_nvim_lsp)
 
 			local handlers = user_lsp.get_handlers()
@@ -308,8 +301,6 @@ return {
 			lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
 				capabilities = global_capabilities,
 			})
-
-			local neoconf = require("neoconf")
 
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler

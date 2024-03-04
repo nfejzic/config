@@ -2,8 +2,10 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
+		event = "BufWinEnter",
+
 		config = function()
 			local function customHighlights(colors)
 				return {

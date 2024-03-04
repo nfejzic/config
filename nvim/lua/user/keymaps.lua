@@ -125,40 +125,42 @@ M.neo_tree = function()
 end
 
 M.dap_trigger_keys = "<leader>d"
-M.dap = function(dap, dapui, widgets)
+M.dap = function(req_dap, req_dapui, req_widgets)
 	local function toggle_dap_sidebar(opt)
 		opt = opt or "scopes"
 
 		local sidebar
 
 		if opt == "frames" then
-			sidebar = widgets.sidebar(widgets.frames)
+			sidebar = req_widgets().sidebar(req_widgets().frames)
 		else
-			sidebar = widgets.sidebar(widgets.scopes)
+			sidebar = req_widgets().sidebar(req_widgets().scopes)
 		end
 
 		return sidebar.toggle
 	end
 
 	-- Breakpoints
-	vim.keymap.set("n", "<leader>da", dap.clear_breakpoints, { desc = "Remove all breakpoints" })
-	vim.keymap.set("n", "<leader>dp", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+	vim.keymap.set("n", "<leader>da", req_dap().clear_breakpoints, { desc = "Remove all breakpoints" })
+	vim.keymap.set("n", "<leader>dp", req_dap().toggle_breakpoint, { desc = "Toggle breakpoint" })
 
 	-- Stepping
-	vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug Continue" })
-	vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug Step Into" })
-	vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Debug Step Out" })
-	vim.keymap.set("n", "<leader>dj", dap.step_over, { desc = "Debug Step Over" })
-	vim.keymap.set("n", "<leader>dk", dap.step_back, { desc = "Debug Step Back" })
+	vim.keymap.set("n", "<leader>dc", req_dap().continue, { desc = "Debug Continue" })
+	vim.keymap.set("n", "<leader>di", req_dap().step_into, { desc = "Debug Step Into" })
+	vim.keymap.set("n", "<leader>do", req_dap().step_out, { desc = "Debug Step Out" })
+	vim.keymap.set("n", "<leader>dj", req_dap().step_over, { desc = "Debug Step Over" })
+	vim.keymap.set("n", "<leader>dk", req_dap().step_back, { desc = "Debug Step Back" })
 
 	-- REPL toggle
-	vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "Debug Toggle REPL" })
+	vim.keymap.set("n", "<leader>dr", req_dap().repl.toggle, { desc = "Debug Toggle REPL" })
 
 	-- DAP Widgets (Sidebars)
-	vim.keymap.set("n", "<leader>dh", widgets.hover, { desc = "Value under cursor in floating window" })
+	vim.keymap.set("n", "<leader>dh", req_widgets().hover, { desc = "Value under cursor in floating window" })
 	vim.keymap.set("n", "<leader>ds", toggle_dap_sidebar("scopes"), { desc = "Scopes" })
 	vim.keymap.set("n", "<leader>df", toggle_dap_sidebar("frames"), { desc = "Frames" })
-	vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle DAP UI" })
+	vim.keymap.set("n", "<leader>du", function()
+		req_dapui().toggle()
+	end, { desc = "Toggle DAP UI" })
 end
 
 M.gitsigns = function(gs)

@@ -11,10 +11,11 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 		},
 
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+
 		config = function()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			local lspkind = require("lspkind")
 
 			local merge = function(a, b)
 				return vim.tbl_deep_extend("force", {}, a, b)
@@ -23,7 +24,7 @@ return {
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 
@@ -39,7 +40,7 @@ return {
 					-- format = lspkind.cmp_format({ mode = 'symbol' })
 					fields = { "kind", "abbr", "menu" },
 					format = function(entry, vim_item)
-						local kind = lspkind.cmp_format({
+						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
 							maxwidth = 50,
 							symbol_map = { Copilot = "" },
@@ -115,16 +116,16 @@ return {
 			})
 
 			vim.keymap.set({ "i", "s" }, "<C-L>", function()
-				luasnip.jump(1)
+				require("luasnip").jump(1)
 			end, { silent = true })
 
 			vim.keymap.set({ "i", "s" }, "<C-H>", function()
-				luasnip.jump(-1)
+				require("luasnip").jump(-1)
 			end, { silent = true })
 
 			vim.keymap.set({ "i", "s" }, "<C-E>", function()
-				if luasnip.choice_active() then
-					luasnip.change_choice(1)
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(1)
 				end
 			end, { silent = true })
 

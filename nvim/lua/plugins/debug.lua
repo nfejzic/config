@@ -8,16 +8,21 @@ return {
 				"microsoft/vscode-js-debug",
 				lazy = false,
 				build = "npm ci --legacy-peer-deps && npm run compile",
+				keys = function()
+					return require("user.keymaps").dap_trigger_keys
+				end,
 			},
 		},
-		lazy = false,
+
+		lazy = true,
+		event = "UIEnter",
+
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
 		end,
+
 		config = function()
 			local dap = require("dap")
-			local dapui = require("dapui")
-			local widgets = require("dap.ui.widgets")
 
 			dap.adapters.codelldb = {
 				type = "server",
@@ -119,29 +124,25 @@ return {
 			end
 
 			-- setup keymaps
-			require("user.keymaps").dap(dap, dapui, widgets)
+			require("user.keymaps").dap(function()
+				return dap
+			end, function()
+				return require("dapui")
+			end, function()
+				return require("dap.ui.widgets")
+			end)
 		end,
 	},
 
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap" },
-		lazy = false,
+		lazy = true,
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
 		end,
 		config = function()
 			require("dapui").setup()
 		end,
-	},
-
-	-- for javascript / typescript debugging
-	{
-		"microsoft/vscode-js-debug",
-		lazy = false,
-		keys = function()
-			return require("user.keymaps").dap_trigger_keys
-		end,
-		build = "npm ci --legacy-peer-deps && npm run compile",
 	},
 }

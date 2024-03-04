@@ -5,7 +5,6 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter-textobjects" },
-			{ "nvim-treesitter/playground" },
 			{
 				"nvim-treesitter/nvim-treesitter-context",
 				opts = {
@@ -14,6 +13,10 @@ return {
 				},
 			},
 		},
+
+		lazy = true,
+		event = { "BufEnter" },
+
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				modules = {},
