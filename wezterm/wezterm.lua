@@ -29,16 +29,13 @@ if wezterm.hostname() == "zenith" then
 end
 
 -- font test
-local _ = "gq 1Il O0 0123456789"
+local _ = "gq 1Il O0 0123456789 --> -> => == === != !== <= >="
 
 -- long time favorite font:
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12.5
 
 -- ->
--- config.font = wezterm.font("Monolisa")
--- config.font_size = 10
--- config.line_height = 1.18
 
 config.bold_brightens_ansi_colors = "BrightAndBold"
 

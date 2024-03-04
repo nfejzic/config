@@ -16,15 +16,17 @@ local function update_dpi(get_screens)
 		local screen_infos = require("screen_info")
 
 		if screen_infos[active_screen.name] then
-			local config_overrides = window:effective_config() or {}
+			local config_overrides = window:get_config_overrides() or {}
 			local screen_info = screen_infos[active_screen.name]
 			local w = active_screen.width
 			local h = active_screen.height
 
 			local dpi = math.sqrt(w * w + h * h) / screen_info.size
 
-			config_overrides.dpi = dpi
-			window:set_config_overrides(config_overrides)
+			if dpi ~= config_overrides.dpi then
+				config_overrides.dpi = dpi
+				window:set_config_overrides(config_overrides)
+			end
 		end
 	end
 end
