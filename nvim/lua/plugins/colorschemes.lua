@@ -4,8 +4,8 @@ return {
 
 	{ "EdenEast/nightfox.nvim", lazy = true, event = "BufWinEnter" },
 
-	{ "RRethy/nvim-base16", lazy = true, event = "BufWinEnter" },
-
+	-- { "RRethy/nvim-base16", lazy = true, event = "BufWinEnter" },
+	{ "wincent/base16-nvim" },
 	-- { "wincent/base16-nvim" },
 
 	{ "ishan9299/nvim-solarized-lua", lazy = true, event = "BufWinEnter" },
@@ -20,6 +20,12 @@ return {
 				variant = "auto",
 				disable_float_background = true,
 
+				styles = {
+					bold = true,
+					italic = true,
+					transparency = true,
+				},
+
 				groups = {
 					keywords = "rose",
 				},
@@ -27,7 +33,7 @@ return {
 				-- Change specific vim highlight groups
 				-- https://github.com/rose-pine/neovim/wiki/Recipes
 				highlight_groups = {
-					Comment = { fg = "subtle" },
+					Comment = { fg = "rose" },
 					["@comment.documentation"] = { fg = "iris" },
 					-- ["@lsp.type.comment.rust"] = {},
 					-- ["@mut_specifier"] = { fg = colors.yellow },

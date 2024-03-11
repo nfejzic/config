@@ -16,6 +16,16 @@ vim.g.loaded = 1
 vim.o.colorcolumn = "+1"
 vim.o.textwidth = 80
 
+-- more useful diffs (nvim -d)
+-- by ignoring whitespace
+vim.opt.diffopt:append("iwhite")
+-- and using a smarter algorithm
+-- https://vimways.org/2018/the-power-of-diff/
+-- https://stackoverflow.com/questions/32365271/whats-the-difference-between-git-diff-patience-and-git-diff-histogram
+-- https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+vim.opt.diffopt:append("algorithm:histogram")
+vim.opt.diffopt:append("indent-heuristic")
+
 -- set colorcolumn for git commit editing to 50 and 72 characters
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "gitcommit",
@@ -55,20 +65,20 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- keep current content top + left when splitting
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
 vim.cmd([[
   augroup on_open
     autocmd!
     autocmd BufWinEnter *.html5 silent! :set filetype=html " contao specific
     autocmd BufWinEnter *.html5 silent! :set syntax=php " contao specific
-    " autocmd BufWinEnter *.html5 silent! :IndentBlanklineEnable
     autocmd BufWinEnter *.php silent! :set syntax=php
     autocmd BufWinEnter *.scss silent! :set syntax=scss
     autocmd BufWinEnter *.vue silent! :set shiftwidth=2
   augroup end
 ]])
-
---Make line numbers default
-vim.wo.number = true
 
 --Enable mouse mode
 vim.o.mouse = "a"
@@ -82,7 +92,8 @@ vim.o.scrolloff = 4
 --Enable break indent
 vim.o.breakindent = true
 
---Save undo history
+-- Save undo history
+-- NOTE: ends up in ~/.local/state/nvim/undo/
 vim.opt.undofile = true
 
 -- disable swap files
@@ -109,6 +120,14 @@ vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menu,menuone,noselect,noinsert"
+
+--" Decent wildmenu
+-- in completion, when there is more than one match,
+-- list all matches, and only complete to longest common match
+vim.opt.wildmode = "list:longest"
+-- when opening a file with a command (like :e),
+-- don't suggest files like there:
+vim.opt.wildignore = ".hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,dist,_site"
 
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
@@ -137,9 +156,21 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevelstart = 99
 
 -- Highlight on yank
-vim.cmd([[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]])
+vim.api.nvim_create_autocmd("TextYankPost", {
+	pattern = "*",
+	command = "silent! lua vim.highlight.on_yank()",
+})
+
+-- jump to last edit position on opening file
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*",
+	callback = function()
+		if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+			-- except for in git commit messages
+			-- https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+			if not vim.fn.expand("%:p"):find(".git", 1, true) then
+				vim.cmd('exe "normal! g\'\\""')
+			end
+		end
+	end,
+})

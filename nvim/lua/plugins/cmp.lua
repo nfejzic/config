@@ -12,7 +12,8 @@ return {
 		},
 
 		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
+		-- event = { "BufReadPost", "BufNewFile" },
+		event = { "InsertEnter" },
 
 		config = function()
 			local cmp = require("cmp")

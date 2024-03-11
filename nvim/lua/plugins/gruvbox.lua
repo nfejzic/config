@@ -198,7 +198,7 @@ return {
 					NeotestExpandMarker = { fg = colors.gray },
 				},
 				dim_inactive = false,
-				transparent_mode = true,
+				transparent_mode = false,
 			})
 			-- vim.cmd("colo gruvbox")
 		end,

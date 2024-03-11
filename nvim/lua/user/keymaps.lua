@@ -252,6 +252,10 @@ M.general = function()
 	-- Quickfix
 	vim.keymap.set("n", "]q", "<cmd>cn<CR>", { desc = "Next quickfix entry" })
 	vim.keymap.set("n", "[q", "<cmd>cp<CR>", { desc = "Previous quickfix entry" })
+
+	-- Jump to start and end of line using the home row keys
+	vim.keymap.set("", "H", "^")
+	vim.keymap.set("", "L", "$")
 end
 
 return M
