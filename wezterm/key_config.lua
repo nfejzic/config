@@ -13,6 +13,12 @@ M.get_keybindings = function(wezterm)
 
 		keys = {
 			{
+				key = "x",
+				mods = "LEADER",
+				action = act.ActivateCopyMode,
+			},
+
+			{
 				key = "n",
 				mods = "LEADER",
 				action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
