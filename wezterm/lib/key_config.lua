@@ -1,10 +1,16 @@
+local sessionizer = require("lib.sessionizer")
+
+sessionizer.setup({
+	fd = "fd",
+	paths = { os.getenv("HOME") .. "/Developer" },
+})
+
 local M = {}
 -- timeout_milliseconds defaults to 1000 and can be omitted
 
 M.get_keybindings = function(wezterm)
 	local act = wezterm.action
 	return {
-
 		leader = {
 			key = " ",
 			mods = "ALT",
@@ -181,6 +187,18 @@ M.get_keybindings = function(wezterm)
 				key = "v",
 				mods = "LEADER",
 				action = act.QuickSelect,
+			},
+
+			{
+				key = "f",
+				mods = "LEADER",
+				action = wezterm.action_callback(sessionizer.toggle),
+			},
+
+			{
+				key = "F",
+				mods = "LEADER",
+				action = wezterm.action_callback(sessionizer.resetCacheAndToggle),
 			},
 		},
 	}
