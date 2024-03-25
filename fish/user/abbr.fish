@@ -114,3 +114,7 @@ for clipboard in $clipboard_providers
         break
     end
 end
+
+if type -q /opt/homebrew/opt/curl/bin/curl
+    abbr -a curl3 "/opt/homebrew/opt/curl/bin/curl"
+end
