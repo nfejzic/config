@@ -48,6 +48,14 @@ function __theme_fzf -a scheme
         --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C \ 
         --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 
+    case "rose_pine"
+        set -Ux FZF_DEFAULT_OPTS "
+        --color=fg:#908caa,bg:,hl:#ebbcba
+        --color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+        --color=border:#403d52,header:#31748f,gutter:#191724
+        --color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
+        --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
     case "*"
         # use themes from fish theme
         set bg "" # transparent bg
