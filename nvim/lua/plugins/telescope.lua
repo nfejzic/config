@@ -7,6 +7,10 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{
+				"isak102/telescope-git-file-history.nvim",
+				dependencies = { "tpope/vim-fugitive" },
+			},
 		},
 
 		config = function()
@@ -42,6 +46,9 @@ return {
 
 			-- Enable telescope fzf native
 			require("telescope").load_extension("fzf")
+
+			-- Enable extension for browsing through git history of a file
+			require("telescope").load_extension("git_file_history")
 
 			-- NOTE: Currently (on neovim nightly) there's a problem with telescope where
 			-- fin_files opens the file in insert mode. This is a workaround for that

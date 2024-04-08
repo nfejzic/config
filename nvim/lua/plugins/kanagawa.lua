@@ -3,18 +3,18 @@ return {
 		"rebelot/kanagawa.nvim",
 		lazy = false,
 		opts = {
-			compile = true, -- enable compiling the colorscheme
+			compile = false, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = true },
 			functionStyle = {},
 			keywordStyle = { italic = false },
 			statementStyle = { bold = true },
 			typeStyle = { italic = false },
-			transparent = true, -- do not set background color
+			transparent = false, -- do not set background color
 			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
-			overrides = function(_colors) -- add/modify highlights
-				local theme = _colors.theme
+			overrides = function(colors) -- add/modify highlights
+				local theme = colors.theme
 				return {
 					["@field"] = { fg = theme.syn.variable, bg = "none" },
 					["@module"] = { link = "@variable" },
@@ -34,7 +34,8 @@ return {
 					["@comment.note"] = { fg = theme.ui.fg },
 					["@comment.error"] = { fg = theme.ui.fg, bg = theme.diag.error },
 					["@comment.warning"] = { fg = theme.ui.fg, bg = theme.diff.text },
-					Todo = { fg = theme.ui.fg },
+					["@keyword.modifier"] = { fg = theme.syn.preproc }, -- these are important!
+					Todo = { fg = theme.ui.bg, bg = theme.syn.constant },
 
 					["@punctuation.delimiter"] = { fg = theme.ui.fg },
 					["@punctuation.bracket"] = { fg = theme.ui.fg },
@@ -58,8 +59,38 @@ return {
 
 					-- Popular plugins that open floats will link to NormalFloat by default;
 					-- set their background accordingly if you wish to keep them dark and borderless
-					LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-					MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+					LazyNormal = { fg = theme.ui.fg_dim },
+					MasonNormal = { fg = theme.ui.fg_dim },
+
+					TelescopeTitle = { fg = theme.ui.special, bold = true },
+					TelescopePromptNormal = { bg = "none" },
+					TelescopePromptBorder = { bg = "none" },
+					TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = "none" },
+					TelescopeResultsBorder = { bg = "none" },
+					TelescopePreviewNormal = { bg = "none" },
+					TelescopePreviewBorder = { bg = "none" },
+
+					-- neotest -> no support...
+					NeotestDir = { fg = theme.syn.fun },
+					NeotestFile = { fg = theme.syn.fun },
+					NeotestTest = { fg = theme.syn.identifier },
+					NeotestNamespace = { fg = theme.syn.fun },
+					NeotestAdapterName = { fg = theme.syn.string },
+
+					NeotestFocused = { fg = theme.syn.constant },
+
+					NeotestFailed = { fg = theme.syn.special2 },
+					NeotestMarked = { fg = theme.syn.constant },
+					NeotestPassed = { fg = theme.syn.string },
+					NeotestTarget = { fg = theme.syn.identifier },
+					NeotestRunning = { fg = theme.syn.constant },
+					NeotestSkipped = { fg = theme.syn.comment },
+					NeotestUnknown = { fg = theme.syn.keyword },
+					NeotestWatching = { fg = theme.syn.constant },
+					NeotestWinSelect = { fg = theme.syn.constant },
+
+					NeotestIndent = { fg = theme.syn.comment },
+					NeotestExpandMarker = { fg = theme.syn.comment },
 				}
 			end,
 			theme = "wave", -- Load "wave" theme when 'background' option is not set

@@ -11,6 +11,7 @@ return {
 			{ "rouge8/neotest-rust" },
 			{ "leoluz/nvim-dap-go" },
 			{ "mfussenegger/nvim-dap" },
+			{ "nvim-neotest/nvim-nio" },
 		},
 
 		config = function()

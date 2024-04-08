@@ -150,10 +150,17 @@ end
 -- global statusline
 vim.o.laststatus = 3
 
--- fold using treesitter
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevelstart = 99
+-- I actually never use fold, so disable it...
+-- NOTE: previous settings were:
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldlevelstart = 99
+--
+-- NOTE: vim.o.foldexpr = "nvim_treesitter#foldexpr()" made startup in big c
+-- files VERY slow, multiple seconds slow
+vim.opt.foldenable = false
+vim.opt.foldmethod = "manual"
+vim.opt.foldlevelstart = 99
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {

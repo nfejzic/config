@@ -28,26 +28,24 @@ return {
 				},
 				highlight = {
 					enable = true, -- false will disable the whole extension
-					disable = {
-						"html",
-						"html5",
-						-- "lua",
-					},
+					disable = function(lang, bufnr)
+						local is_big_c = lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 5000
+
+						return is_big_c
+					end,
 					-- custom_captures = {
 					--       ["ref_specifier"] = "rustTSRefSpecifier",
 					--       ["mutable_specifier"] = "rustTSMutableSpecifier",
 					-- },
 				},
 				playground = {
-					enable = true,
-					disable = { "c" },
+					enable = false,
 					updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
 					persist_queries = false, -- Whether the query persists across vim sessions
 					keybindings = {},
 				},
 				incremental_selection = {
 					enable = true,
-					disable = { "c" },
 					keymaps = {
 						init_selection = "<A-o>",
 						node_incremental = "<A-o>",
@@ -58,13 +56,9 @@ return {
 				indent = {
 					enable = true,
 				},
-				context_commentstring = {
-					enable = true,
-				},
 				textobjects = {
 					select = {
 						enable = true,
-						disable = { "c" },
 						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 						keymaps = {
 							-- You can use the capture groups defined in textobjects.scm
@@ -76,7 +70,6 @@ return {
 					},
 					move = {
 						enable = true,
-						disable = { "c" },
 						set_jumps = true, -- whether to set jumps in the jumplist
 						goto_next_start = {
 							["]f"] = "@function.outer",

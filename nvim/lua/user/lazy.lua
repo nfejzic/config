@@ -38,4 +38,9 @@ require("lazy").setup({
 		enabled = true,
 		notify = false, -- get a notification when changes are found
 	},
+
+	ui = {
+		border = "rounded",
+		backdrop = 100,
+	},
 })

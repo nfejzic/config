@@ -2,7 +2,7 @@ return {
 	-- HTML tags auto-edit pair
 	{
 		"AndrewRadev/tagalong.vim",
-		lazy = true,
+		lazy = false,
 		filetype = { "html", "html5", "vue", "markdown" },
 	},
 }

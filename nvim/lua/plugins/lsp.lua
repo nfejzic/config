@@ -10,7 +10,11 @@ return {
 			-- for keymaps
 			{ "folke/which-key.nvim" },
 
-			{ "williamboman/mason.nvim", opts = {} },
+			{ "williamboman/mason.nvim", opts = {
+				ui = {
+					border = "rounded",
+				},
+			} },
 
 			{
 				"williamboman/mason-lspconfig.nvim",
@@ -32,7 +36,7 @@ return {
 						formatters_by_ft = {
 							lua = { "stylua" },
 							-- Conform will run multiple formatters sequentially
-							-- python = { "isort", "black" },
+							python = { "isort", "black" },
 							-- Use a sub-list to run only the first available formatter
 							javascript = { { "prettierd", "prettier" } },
 							typescript = { { "prettierd", "prettier" } },
@@ -278,6 +282,7 @@ return {
 			local user_lsp = require("user.lsp")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
+			local mason_registry = require("mason-registry")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			local neoconf = require("neoconf")
@@ -311,7 +316,7 @@ return {
 				["clangd"] = user_lsp.clangd(opts, lspconfig, neoconf),
 				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
 				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
-				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf),
+				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf, mason_registry),
 				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
 				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
 				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),

@@ -91,6 +91,13 @@ M.telescope_keymaps = function(telescope, t_builtin)
 	vim.keymap.set("n", "<leader>fg", t_builtin.git_status, { desc = "git - modified files" })
 	vim.keymap.set("n", "<leader>fb", t_builtin.buffers, { desc = "Telescope search buffers" })
 
+	vim.keymap.set(
+		"n",
+		"<leader>gh",
+		telescope.extensions.git_file_history.git_file_history,
+		{ desc = "Browse through git history of current file" }
+	)
+
 	vim.keymap.set("n", "<leader>b", t_builtin.buffers, { desc = "Telescope search buffers" })
 
 	-- Search menu for which-key
