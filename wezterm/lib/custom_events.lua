@@ -49,6 +49,11 @@ local function format_workspace_name(wezterm, colors, theme)
 	end
 end
 
+--- @param wezterm table
+--- @param tab_fns table
+--- @param colors table
+--- @param theme string
+--- @param hostconf HostConfig
 function M.register_events(wezterm, tab_fns, colors, theme, hostconf)
 	wezterm.on("gui-startup", setup_gui(wezterm.mux))
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))

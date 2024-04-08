@@ -1,15 +1,17 @@
-local sessionizer = require("lib.sessionizer")
-
-sessionizer.setup({
-	fd = "fd",
-	paths = { os.getenv("HOME") .. "/Developer" },
-})
-
 local M = {}
 -- timeout_milliseconds defaults to 1000 and can be omitted
 
-M.get_keybindings = function(wezterm)
+--- @param wezterm table
+--- @param program_paths ProgramPaths
+M.get_keybindings = function(wezterm, program_paths)
 	local act = wezterm.action
+
+	local sessionizer = require("lib.sessionizer").setup({
+		program_paths = program_paths,
+		paths = { os.getenv("HOME") .. "/Developer" },
+		wezterm = wezterm,
+	})
+
 	return {
 		leader = {
 			key = " ",

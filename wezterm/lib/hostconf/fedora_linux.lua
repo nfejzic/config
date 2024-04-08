@@ -1,5 +1,12 @@
-return {
+--- @type HostConfig
+local config = {
 	dpi = nil,
-	font_size = 12.5,
+	font = {
+		family = "JetBrains Mono",
+		size = 12,
+	},
 	update_dpi = false,
+	program_paths = { fd = "/usr/bin/fd" },
 }
+
+return config

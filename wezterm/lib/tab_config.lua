@@ -32,6 +32,7 @@ local function tab_title(tab)
 	return index .. ": " .. tab.active_pane.title
 end
 
+--- @param colors table
 M.format_tab_title = function(colors)
 	return function(tab, _tabs, _panes, _config, _hover, _max_width)
 		local title = tab_title(tab)
@@ -41,6 +42,8 @@ M.format_tab_title = function(colors)
 	end
 end
 
+--- @param colors table
+--- @param is_transparent boolean
 M.tab_bar_colors = function(colors, is_transparent)
 	local term_bg = colors.background
 

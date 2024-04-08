@@ -1,5 +1,9 @@
 local M = {}
 
+--- @param wezterm table
+--- @param config table
+--- @param hostconf HostConfig
+--- @param theme string
 local function set_opts(wezterm, config, hostconf, theme)
 	config.front_end = "WebGpu"
 
@@ -8,11 +12,29 @@ local function set_opts(wezterm, config, hostconf, theme)
 	end
 
 	-- font test
-	local _ = "gq 1Il O0 0123456789 --> -> => == === != !== <= >= U u"
-	--
+	local _ = "gq 1Il l O0 0123456789 --> -> => == === != !== <= >= U u"
+
 	-- long time favorite font:
-	config.font = wezterm.font("JetBrainsMono Nerd Font")
-	config.font_size = hostconf.font_size
+	config.font = wezterm.font(hostconf.font.family)
+	config.font_size = hostconf.font.size
+
+	if hostconf.font.line_height ~= nil then
+		config.line_height = hostconf.font.line_height
+	end
+
+	if hostconf.font.cell_width ~= nil then
+		config.cell_width = hostconf.font.cell_width
+	end
+
+	if hostconf.font.freetype_load_flags ~= nil then
+		config.freetype_load_flags = hostconf.font.freetype_load_flags
+	end
+
+	if hostconf.font.harfbuzz_features ~= nil then
+		config.harfbuzz_features = hostconf.font.harfbuzz_features
+	end
+
+	config.adjust_window_size_when_changing_font_size = false
 
 	config.bold_brightens_ansi_colors = "BrightAndBold"
 
@@ -32,8 +54,9 @@ local function set_opts(wezterm, config, hostconf, theme)
 
 	config.window_decorations = "RESIZE"
 	config.window_background_opacity = 0.95
-	-- config.window_background_opacity = 1
+	config.window_background_opacity = 1
 	config.macos_window_background_blur = 30
+	-- config.window_background_opacity = 1
 	config.hide_tab_bar_if_only_one_tab = false
 	config.use_fancy_tab_bar = false
 	config.tab_bar_at_bottom = true
@@ -43,14 +66,17 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.max_fps = 255
 end
 
+--- @param wezterm table
+--- @param config table
 function M.setup(wezterm, config)
 	local color_config = require("lib.colors").init(wezterm)
 	local tab_fns = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf")[wezterm.hostname()]
+	local keybindings = keys.get_keybindings(wezterm, hostconf.program_paths)
 
-	config.leader = keys.get_keybindings(wezterm).leader
-	config.keys = keys.get_keybindings(wezterm).keys
+	config.leader = keybindings.leader
+	config.keys = keybindings.keys
 
 	local is_transparent = config.window_background_opacity ~= 1.0
 	config.colors = {

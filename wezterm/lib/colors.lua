@@ -1,5 +1,6 @@
 local M = {}
 
+--- @param wezterm table
 function M.init(wezterm)
 	local theme = "Gruvbox dark, hard (base16)"
 	-- theme = "Catppuccin Macchiato"
