@@ -9,8 +9,11 @@ decorations = "None"
 startup_mode = "Maximized"
 
 [font]
-normal      = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold        = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic      = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+opacity = 0.95
+blur = true
+normal      = { family = "MonoLisa", style = "Book" }
+# normal      = { family = "JetBrains Mono", style = "Regular" }
+# bold        = { family = "Monolisa", style = "Bold" }
+# italic      = { family = "Monolisa", style = "Italic" }
+# bold_italic = { family = "Monolisa", style = "Bold Italic" }
 size        = 17
