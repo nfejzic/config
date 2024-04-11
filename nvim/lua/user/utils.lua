@@ -99,4 +99,23 @@ function M.filter_out_formatters(conform, fmts, bufnr)
 	return formatters
 end
 
+function M.minutesToMilis(minutes)
+	assert(minutes >= 0, "Minutes should not be negative")
+	local seconds = minutes * 60
+	return seconds * 1000
+end
+
+function M.setInterval(interval, callback)
+	local timer = vim.uv.new_timer()
+	timer:start(interval, interval, function()
+		callback()
+	end)
+	return timer
+end
+
+function M.clearInterval(timer)
+	timer:stop()
+	timer:close()
+end
+
 return M
