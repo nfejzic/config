@@ -77,6 +77,7 @@ vim.cmd([[
     autocmd BufWinEnter *.php silent! :set syntax=php
     autocmd BufWinEnter *.scss silent! :set syntax=scss
     autocmd BufWinEnter *.vue silent! :set shiftwidth=2
+    autocmd BufWinEnter *.Justfile silent! :set filetype=just
   augroup end
 ]])
 
