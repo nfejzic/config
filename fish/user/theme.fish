@@ -215,7 +215,7 @@ function set_theme
     __theme_fzf $cleaned
     __theme_bat $cleaned
 
-    set -U CLI_THEME $cleaned
+    set -x -U CLI_THEME $cleaned
 
     set -e themes
 end
