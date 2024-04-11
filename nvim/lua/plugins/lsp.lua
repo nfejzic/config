@@ -3,6 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 
 		lazy = false,
+
 		event = { "BufWinEnter" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
 
@@ -128,7 +129,7 @@ return {
 					},
 				},
 				lazy = true,
-				event = "BufWinEnter",
+				event = "UIEnter",
 			},
 
 			-- auto completions
@@ -290,7 +291,9 @@ return {
 			neoconf.setup()
 			require("neodev").setup()
 
-			local on_attach = user_lsp.get_on_attach(require("telescope.builtin"))
+			local on_attach = user_lsp.get_on_attach(function()
+				return require("telescope.builtin")
+			end)
 			local global_capabilities = user_lsp.get_global_capabilities(cmp_nvim_lsp)
 
 			local handlers = user_lsp.get_handlers()

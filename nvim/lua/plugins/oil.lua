@@ -1,7 +1,10 @@
 return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	lazy = false,
+
+	lazy = true,
+	event = { "UIEnter" },
+
 	config = function()
 		local oil = require("oil")
 

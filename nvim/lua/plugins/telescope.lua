@@ -2,7 +2,8 @@ return {
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		lazy = false,
+		lazy = true,
+		event = { "UIEnter" },
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

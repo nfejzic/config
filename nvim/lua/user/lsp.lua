@@ -80,8 +80,10 @@ M.setup_ui = function()
 	vim.fn.sign_define("DapStopped", { text = "->", texthl = "DiagnosticSignInfo" })
 end
 
-M.get_on_attach = function(telescope_builtin)
+M.get_on_attach = function(t_builtin)
 	return function(client, bufnr)
+		local telescope_builtin = t_builtin()
+
 		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
 
 		if inlay_hint_supported then
