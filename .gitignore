@@ -22,3 +22,7 @@ emacs/auto-save-list
 emacs/transient
 emacs/#init.el#
 emacs/init.el~
+
+# keyboard firmware stuff
+qmk_firmware/
+vial-qmk/
