@@ -13,7 +13,7 @@ return {
 
 		lazy = true,
 		-- event = { "BufReadPost", "BufNewFile" },
-		event = { "InsertEnter" },
+		event = { "InsertEnter", "CmdlineEnter" },
 
 		config = function()
 			local cmp = require("cmp")
@@ -48,7 +48,7 @@ return {
 						})(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
 						kind.kind = " " .. (strings[1] or "") .. " "
-						kind.menu = "    (" .. (strings[2] or "") .. ")"
+						kind.menu = " (" .. (strings[2] or "") .. ")"
 
 						return kind
 					end,
@@ -63,14 +63,14 @@ return {
 					["<C-k>"] = cmp.mapping.complete(),
 					["<C-j>"] = cmp.mapping(
 						cmp.mapping.confirm({
-							behavior = cmp.ConfirmBehavior.Replace,
+							behavior = cmp.ConfirmBehavior.Insert,
 							select = true,
 						}),
 						{ "i", "c" }
 					),
 					["<M-j>"] = cmp.mapping(
 						cmp.mapping.confirm({
-							behavior = cmp.ConfirmBehavior.Replace,
+							behavior = cmp.ConfirmBehavior.Insert,
 							select = false,
 						}),
 						{ "i", "c" }

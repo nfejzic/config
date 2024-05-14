@@ -51,7 +51,7 @@ return {
 
 			--- This is a doc comment
 			require("catppuccin").setup({
-				transparent_background = true,
+				transparent_background = false,
 				styles = {
 					comments = { "italic" },
 					conditionals = {},

@@ -92,14 +92,14 @@ M.get_on_attach = function(t_builtin)
 			-- plugins.
 			vim.api.nvim_create_user_command("LspToggleInlayHints", function()
 				if type(vim.lsp.inlay_hint) ~= "function" then
-					vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0)) -- latest nightly
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(0), {}) -- latest nightly
 				else
 					vim.lsp.inlay_hint(0, nil)
 				end
 			end, {})
 
 			if type(vim.lsp.inlay_hint) ~= "function" then
-				vim.lsp.inlay_hint.enable(0, false) -- disable inlay hints by default
+				vim.lsp.inlay_hint.enable(false, {}) -- disable inlay hints by default
 			else
 				vim.lsp.inlay_hint(0, false) -- disable inlay hints by default
 			end
@@ -138,6 +138,10 @@ M.clangd = function(opts, lspconfig, neoconf)
 			on_attach = opts.on_attach,
 			capabilities = opts.capabilities,
 			handlers = opts.handlers,
+			cmd = {
+				"clangd",
+				"--offset-encoding=utf-16",
+			},
 		})
 	end
 end
@@ -148,7 +152,7 @@ M.rust_analyzer = function(opts, neoconf)
 			return
 		end
 
-		---@diagnostic disable-next-line: inject-field
+		---@type RustaceanOpts
 		vim.g.rustaceanvim = {
 			-- Plugin configuration
 			tools = {},
@@ -186,8 +190,28 @@ M.rust_analyzer = function(opts, neoconf)
 				},
 			},
 			-- DAP configuration
-			dap = {},
+			dap = {
+				autoload_configurations = true,
+			},
 		}
+	end
+end
+
+M.zig_lsp = function(opts, lspconfig, neoconf)
+	return function()
+		if neoconf.get("zig_lsp.disable") then
+			return
+		end
+
+		lspconfig.zls.setup({
+			settings = {
+				enable_build_on_save = true,
+				enable_autofix = true,
+			},
+			on_attach = opts.on_attach,
+			capabilites = opts.capabilities,
+			handlers = opts.handlers,
+		})
 	end
 end
 

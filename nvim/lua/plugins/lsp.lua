@@ -138,24 +138,6 @@ return {
 			-- Icons in auto-complete of LSP (i.e. function, variable etc)
 			{ "onsails/lspkind-nvim" },
 
-			-- linting in neovim
-			-- {
-			-- 	"mfussenegger/nvim-lint",
-			-- 	lazy = false,
-			-- 	config = function()
-			-- 		require("lint").linters_by_ft = {
-			-- 			go = { "revive" },
-			-- 		}
-			--
-			-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-			-- 			callback = function()
-			-- 				require("lint").try_lint()
-			-- 			end,
-			-- 		})
-			-- 	end,
-			-- },
-
-			-- Rust
 			{
 				"mrcjkb/rustaceanvim",
 				version = "^4", -- Recommended
@@ -175,7 +157,7 @@ return {
 						auto_format = false, -- done by conform
 						auto_lint = false,
 						-- linters: revive, errcheck, staticcheck, golangci-lint
-						linter = "revive",
+						linter = "golangci-lint",
 						-- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}
 						linter_flags = {},
 						-- lint_prompt_style: qf (quickfix), vt (virtual text)
@@ -205,78 +187,6 @@ return {
 					})
 				end,
 			},
-			-- {
-			-- 	"ray-x/go.nvim",
-			-- 	lazy = true,
-			--
-			-- 	event = { "CmdlineEnter" },
-			-- 	ft = { "go", "gomod" },
-			--
-			-- 	config = function()
-			-- 		require("go").setup({
-			--
-			-- 			disable_defaults = true, -- true|false when true set false to all boolean settings and replace all table
-			-- 			-- settings with {}
-			-- 			go = "go", -- go command, can be go[default] or go1.18beta1
-			-- 			goimport = "gopls", -- goimport command, can be gopls[default] or either goimport or golines if need to split long lines
-			-- 			fillstruct = "gopls", -- default, can also use fillstruct
-			-- 			gofmt = "gofumpt", --gofmt cmd,
-			-- 			max_line_len = 100, -- max line length in golines format, Target maximum line length for golines
-			-- 			icons = false,
-			-- 			verbose = false, -- output loginf in messages
-			-- 			lsp_cfg = false, -- true: use non-default gopls setup specified in go/lsp.lua
-			-- 			-- false: do nothing
-			-- 			-- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
-			-- 			--   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-			-- 			lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-			-- 			lsp_on_attach = nil, -- nil: use on_attach function defined in go/lsp.lua,
-			-- 			lsp_inlay_hints = {},
-			-- 			gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
-			-- 			gocoverage_sign = "█",
-			-- 			sign_priority = 5, -- change to a higher number to override other signs
-			-- 			dap_debug = true, -- set to false to disable dap
-			-- 			dap_debug_keymap = false, -- true: use keymap for debugger defined in go/dap.lua
-			-- 			-- false: do not use keymap in go/dap.lua.  you must define your own.
-			-- 			-- Windows: Use Visual Studio keymap
-			-- 			-- dap_debug_gui = {}, -- bool|table put your dap-ui setup here set to false to disable
-			-- 			-- dap_debug_vt = { enabled_commands = true, all_frames = true }, -- bool|table put your dap-virtual-text setup here set to false to disable
-			--
-			-- 			-- dap_port = 38697, -- can be set to a number, if set to -1 go.nvim will pick up a random port
-			-- 			-- dap_timeout = 15, --  see dap option initialize_timeout_sec = 15,
-			-- 			-- dap_retries = 20, -- see dap option max_retries
-			-- 			build_tags = "integration,unit", -- set default build tags
-			-- 			-- textobjects = true, -- enable default text objects through treesittter-text-objects
-			-- 			test_runner = "go", -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gotestsum`}
-			-- 			-- float term recommend if you use richgo/ginkgo with terminal color
-			--
-			-- 			-- floaterm = { -- position
-			-- 			-- 	posititon = "auto", -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
-			-- 			-- 	width = 0.45, -- width of float window if not auto
-			-- 			-- 	height = 0.98, -- height of float window if not auto
-			-- 			-- 	title_colors = "nord", -- default to nord, one of {'nord', 'tokyo', 'dracula', 'rainbow', 'solarized ', 'monokai'}
-			-- 			-- 	-- can also set to a list of colors to define colors to choose from
-			-- 			-- 	-- e.g {'#D8DEE9', '#5E81AC', '#88C0D0', '#EBCB8B', '#A3BE8C', '#B48EAD'}
-			-- 			-- },
-			-- 			-- trouble = false, -- true: use trouble to open quickfix
-			-- 			-- test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
-			-- 			luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
-			-- 			--  Do not enable this if you already added the path, that will duplicate the entries
-			-- 			-- on_jobstart = function(cmd)
-			-- 			-- 	_ = cmd
-			-- 			-- end, -- callback for stdout
-			-- 			-- on_stdout = function(err, data)
-			-- 			-- 	_, _ = err, data
-			-- 			-- end, -- callback when job started
-			-- 			-- on_stderr = function(err, data)
-			-- 			-- 	_, _ = err, data
-			-- 			-- end, -- callback for stderr
-			-- 			-- on_exit = function(code, signal, output)
-			-- 			-- 	_, _, _ = code, signal, output
-			-- 			-- end, -- callback for jobexit, output : string
-			-- 			iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
-			-- 		})
-			-- 	end,
-			-- },
 		},
 
 		config = function()
@@ -308,6 +218,12 @@ return {
 				capabilities = global_capabilities,
 			})
 
+			-- if we decide to use rust_analyzer provided by `rustup`:
+			if not mason_registry.is_installed("rust-analyzer") then
+				local setup_fn = user_lsp.rust_analyzer(opts, neoconf)
+				setup_fn()
+			end
+
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
@@ -318,8 +234,9 @@ return {
 				-- Next, targeted overrides for specific servers.
 				["clangd"] = user_lsp.clangd(opts, lspconfig, neoconf),
 				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
+				["zls"] = user_lsp.zig_lsp(opts, lspconfig, neoconf),
 				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
-				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf, mason_registry),
+				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf),
 				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
 				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
 				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),

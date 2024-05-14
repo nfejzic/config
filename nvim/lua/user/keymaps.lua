@@ -256,13 +256,34 @@ M.general = function()
 	vim.keymap.set("n", "<leader>ko", "<cmd>foldopen<CR>", { desc = "Unfold (open fold)" })
 	vim.keymap.set("n", "<leader>kO", "zR", { desc = "Unfold all (open fold)" })
 
+	local go_quickfix = function(next, list)
+		return function()
+			local command = "c"
+			if list then
+				command = "l"
+			end
+
+			if next then
+				return "<cmd>" .. vim.v.count .. command .. "n<CR>"
+			else
+				return "<cmd>" .. vim.v.count .. command .. "p<CR>"
+			end
+		end
+	end
+
 	-- Quickfix
-	vim.keymap.set("n", "]q", "<cmd>cn<CR>", { desc = "Next quickfix entry" })
-	vim.keymap.set("n", "[q", "<cmd>cp<CR>", { desc = "Previous quickfix entry" })
+	vim.keymap.set("n", "]q", go_quickfix(true, false), { desc = "Next quickfix entry", expr = true })
+	vim.keymap.set("n", "[q", go_quickfix(false, false), { desc = "Previous quickfix entry", expr = true })
+	vim.keymap.set("n", "<C-j>", go_quickfix(true, false), { desc = "Next quickfix entry", expr = true })
+	vim.keymap.set("n", "<C-k>", go_quickfix(false, false), { desc = "Previous quickfix entry", expr = true })
 
 	-- Jump to start and end of line using the home row keys
 	vim.keymap.set("", "H", "^")
 	vim.keymap.set("", "L", "$")
+
+	-- Move lines using Ctrl = J|K (down|up) in visual mode
+	vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
+	vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
 end
 
 return M

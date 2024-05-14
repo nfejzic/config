@@ -22,15 +22,17 @@ return {
 
 					Type = { fg = theme.syn.identifier },
 					-- ["@lsp.type.interface"] = { fg = colors.surimiYellow },
-					["@lsp.type.lifetime"] = { fg = theme.syn.string },
+					-- ["@lsp.type.lifetime"] = { fg = theme.syn.type },
 					["@storageclass.lifetime"] = { fg = theme.syn.string },
 
 					Comment = { fg = theme.syn.constant },
 					["@comment"] = { link = "Comment" },
 					["@comment.documentation"] = { fg = theme.syn.string },
+
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
 					["@lsp.typemod.comment.injected"] = { link = "Comment" },
+
 					["@comment.note"] = { fg = theme.ui.fg },
 					["@comment.error"] = { fg = theme.ui.fg, bg = theme.diag.error },
 					["@comment.warning"] = { fg = theme.ui.fg, bg = theme.diff.text },
