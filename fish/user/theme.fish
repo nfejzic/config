@@ -77,34 +77,34 @@ end
 function __theme_bat -a theme
     switch $theme
     case "catppuccin_latte"
-        set -gx BAT_THEME "Catppuccin-latte"
+        set -Ux BAT_THEME "Catppuccin-latte"
 
     case "catppuccin_frappe"
-        set -gx BAT_THEME "Catppuccin-frappe"
+        set -Ux BAT_THEME "Catppuccin-frappe"
 
     case "catppuccin_macchiato"
-        set -gx BAT_THEME "Catppuccin-macchiato"
+        set -Ux BAT_THEME "Catppuccin-macchiato"
 
     case "catppuccin_mocha"
-        set -gx BAT_THEME "Catppuccin-mocha"
+        set -Ux BAT_THEME "Catppuccin-mocha"
 
     case "solarized_dark"
-        set -gx BAT_THEME "Solarized (dark)"
+        set -Ux BAT_THEME "Solarized (dark)"
 
     case "solarized_light"
-        set -gx BAT_THEME "Solarized (light)"
+        set -Ux BAT_THEME "Solarized (light)"
 
     case "gruvbox_dark_hard"
-        set -gx BAT_THEME "gruvbox-dark"
+        set -Ux BAT_THEME "gruvbox-dark"
 
     case "kanagawa"
-        set -gx BAT_THEME "kanagawa"
+        set -Ux BAT_THEME "kanagawa"
 
     case "rose_pine"
-        set -gx BAT_THEME "rose-pine"
+        set -Ux BAT_THEME "rose-pine"
 
     case "*"
-        set -gx BAT_THEME "ansi"
+        set -Ux BAT_THEME "ansi"
     end
 end
 
