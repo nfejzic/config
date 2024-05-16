@@ -91,18 +91,10 @@ M.get_on_attach = function(t_builtin)
 			-- nightly build will also work, but there are some issues with other
 			-- plugins.
 			vim.api.nvim_create_user_command("LspToggleInlayHints", function()
-				if type(vim.lsp.inlay_hint) ~= "function" then
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(0), {}) -- latest nightly
-				else
-					vim.lsp.inlay_hint(0, nil)
-				end
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), {}) -- latest nightly
 			end, {})
 
-			if type(vim.lsp.inlay_hint) ~= "function" then
-				vim.lsp.inlay_hint.enable(false, {}) -- disable inlay hints by default
-			else
-				vim.lsp.inlay_hint(0, false) -- disable inlay hints by default
-			end
+			vim.lsp.inlay_hint.enable(false, {}) -- disable inlay hints by default
 		end
 
 		-- Diagnostic keymaps
