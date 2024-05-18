@@ -13,7 +13,6 @@ return {
 				pattern = "markdown",
 				once = true,
 				callback = function()
-					print("Hello there my friend")
 					vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
 					vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 				end,
