@@ -40,6 +40,7 @@ return {
 				formatting = {
 					-- format = lspkind.cmp_format({ mode = 'symbol' })
 					fields = { "kind", "abbr", "menu" },
+					expandable_indicator = true,
 					format = function(entry, vim_item)
 						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
