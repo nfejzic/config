@@ -12,7 +12,7 @@ return {
 					-- disable @lsp highlight
 					["@lsp"] = {},
 
-					Comment = { fg = colors.maroon },
+					Comment = { fg = colors.peach },
 					["@comment.documentation"] = { fg = colors.teal },
 					["@lsp.type.comment.rust"] = {},
 					["@lsp.type.enumMember.rust"] = { link = "@lsp.type.enum" },
@@ -43,7 +43,7 @@ return {
 
 					NormalFloat = { bg = colors.base },
 
-					LspInlayHint = { link = "Comment" },
+					LspInlayHint = { bg = "none" },
 
 					TreesitterContext = { link = "SignColumn" },
 				}
