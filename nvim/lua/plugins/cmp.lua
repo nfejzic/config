@@ -90,7 +90,7 @@ return {
 				},
 
 				experimental = {
-					ghost_text = { hl_group = "Comment" },
+					ghost_text = { hl_group = "LspInlayHint" },
 					native_menu = false,
 				},
 			})
