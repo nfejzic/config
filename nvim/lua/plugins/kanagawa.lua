@@ -93,6 +93,8 @@ return {
 
 					NeotestIndent = { fg = theme.syn.comment },
 					NeotestExpandMarker = { fg = theme.syn.comment },
+
+					NvimDapVirtualText = { link = "LspInlayHint" },
 				}
 			end,
 			theme = "wave", -- Load "wave" theme when 'background' option is not set
