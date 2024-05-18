@@ -75,6 +75,27 @@ function M.neotest(neotest)
 	vim.keymap.set("n", "[t", function()
 		neotest.jump.prev()
 	end, { desc = "Go to next test (in buffer)" })
+
+	local function go_cmds()
+		vim.api.nvim_create_user_command("GoTestDebug", function()
+			require("dap-go").debug_test()
+		end, {})
+
+		vim.keymap.set("n", "<leader>dt", "GoTestDebug", { desc = "Debug test under cursor" })
+	end
+
+	if vim.bo.filetype == "go" then
+		vim.api.nvim_create_user_command("GoTestDebug", function()
+			require("dap-go").debug_test()
+		end, {})
+
+		vim.keymap.set("n", "<leader>dt", "GoTestDebug", { desc = "Debug test under cursor" })
+	end
+
+	vim.api.nvim_create_autocmd("BufRead", {
+		pattern = "*.go",
+		callback = go_cmds,
+	})
 end
 
 M.telescope_keymaps = function(telescope, t_builtin)
@@ -111,63 +132,95 @@ M.telescope_keymaps = function(telescope, t_builtin)
 			end,
 		})
 	end, { desc = "Live grep string, case sensitive" })
+
 	vim.keymap.set("n", "<leader>sg", function()
 		t_builtin.live_grep({
 			additional_args = function()
 				return { "--hidden" }
 			end,
 		})
-	end, { desc = "Live grep string, includeing hidden" })
+	end, { desc = "Live grep string, including hidden" })
 	vim.keymap.set("n", "<leader>ss", function()
 		t_builtin.current_buffer_fuzzy_find({ find_command = "rg" })
 	end, { desc = "Fuzzy search in buffer" })
-
-	vim.keymap.set("n", "<leader>?", t_builtin.oldfiles, { desc = "Telescope - Old Files" })
 end
 
-M.neo_tree_trigger_keys = "<leader>f"
-M.neo_tree = function()
-	vim.keymap.set("n", "<leader>ft", "<cmd>Neotree toggle<CR>", { desc = "Open File Tree" })
-	vim.keymap.set("n", "<leader>fr", "<cmd>Neotree reveal<CR>", { desc = "Reveal current file in the sidebar" })
-end
+-- M.neo_tree_trigger_keys = "<leader>f"
+-- M.neo_tree = function()
+-- 	vim.keymap.set("n", "<leader>ft", "<cmd>Neotree toggle<CR>", { desc = "Open File Tree" })
+-- 	vim.keymap.set("n", "<leader>fr", "<cmd>Neotree reveal<CR>", { desc = "Reveal current file in the sidebar" })
+-- end
 
 M.dap_trigger_keys = "<leader>d"
-M.dap = function(req_dap, req_dapui, req_widgets)
-	local function toggle_dap_sidebar(opt)
-		opt = opt or "scopes"
-
-		local sidebar
-
-		if opt == "frames" then
-			sidebar = req_widgets().sidebar(req_widgets().frames)
-		else
-			sidebar = req_widgets().sidebar(req_widgets().scopes)
-		end
-
-		return sidebar.toggle
-	end
-
+M.dap = function(dap, dapui)
 	-- Breakpoints
-	vim.keymap.set("n", "<leader>da", req_dap().clear_breakpoints, { desc = "Remove all breakpoints" })
-	vim.keymap.set("n", "<leader>dp", req_dap().toggle_breakpoint, { desc = "Toggle breakpoint" })
+	vim.keymap.set("n", "<leader>dp", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
 
 	-- Stepping
-	vim.keymap.set("n", "<leader>dc", req_dap().continue, { desc = "Debug Continue" })
-	vim.keymap.set("n", "<leader>di", req_dap().step_into, { desc = "Debug Step Into" })
-	vim.keymap.set("n", "<leader>do", req_dap().step_out, { desc = "Debug Step Out" })
-	vim.keymap.set("n", "<leader>dj", req_dap().step_over, { desc = "Debug Step Over" })
-	vim.keymap.set("n", "<leader>dk", req_dap().step_back, { desc = "Debug Step Back" })
+	vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug Continue" })
+	vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug Step Into" })
+	vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Debug Step Out" })
+	vim.keymap.set("n", "<leader>dj", dap.step_over, { desc = "Debug Step Over" })
+	vim.keymap.set("n", "<leader>dk", dap.step_back, { desc = "Debug Step Back" })
+	vim.keymap.set("n", "<leader>dr", dap.restart, { desc = "Debug Restart" })
 
 	-- REPL toggle
-	vim.keymap.set("n", "<leader>dr", req_dap().repl.toggle, { desc = "Debug Toggle REPL" })
+	-- vim.keymap.set("n", "<leader>dr", req_dap.repl.toggle, { desc = "Debug Toggle REPL" })
 
-	-- DAP Widgets (Sidebars)
-	vim.keymap.set("n", "<leader>dh", req_widgets().hover, { desc = "Value under cursor in floating window" })
-	vim.keymap.set("n", "<leader>ds", toggle_dap_sidebar("scopes"), { desc = "Scopes" })
-	vim.keymap.set("n", "<leader>df", toggle_dap_sidebar("frames"), { desc = "Frames" })
+	-- DAP Widgets and UI (Sidebars)
+	vim.keymap.set("n", "<space>?", function()
+		dapui.eval(nil, { enter = true })
+	end, { desc = "Evaluate value under the cursor in floating window." })
+
 	vim.keymap.set("n", "<leader>du", function()
-		req_dapui().toggle()
+		dapui.toggle()
 	end, { desc = "Toggle DAP UI" })
+
+	-- Rust specific
+	local function rust_mapping()
+		local function with_args(cmd)
+			return function()
+				vim.ui.input({ prompt = "Args for executable: " }, function(args_for_executable)
+					if type(args_for_executable) == "string" and string.len(args_for_executable) > 0 then
+						-- vim.cmd("RustLsp debuggables " .. args_for_executable)
+						vim.cmd(cmd .. " " .. args_for_executable)
+					end
+				end)
+			end
+		end
+
+		vim.keymap.set("n", "<leader>dd", "<cmd>RustLsp debug<CR>", { desc = "Debug RustLsp debuggable under cursor" })
+		vim.keymap.set(
+			"n",
+			"<leader>dD",
+			with_args("RustLsp debug"),
+			{ desc = "Debug RustLsp debuggable under cursor with arguments" }
+		)
+
+		vim.keymap.set("n", "<leader>da", "<CMD>RustLsp debuggables<CR>", { desc = "All RustLsp debuggables" })
+		vim.keymap.set(
+			"n",
+			"<leader>dA",
+			with_args("RustLsp debuggables"),
+			{ desc = "All RustLsp debuggables with arguments" }
+		)
+
+		vim.keymap.set(
+			"n",
+			"<leader>ds",
+			"<cmd>RustLsp! debuggables<CR>",
+			{ desc = "Run same RustLsp debuggable as last time" }
+		)
+	end
+
+	if vim.bo.filetype == "rust" then
+		rust_mapping()
+	end
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.rs",
+		callback = rust_mapping,
+	})
 end
 
 M.gitsigns = function(gs)

@@ -2,6 +2,12 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
+			"leoluz/nvim-dap-go",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+			"williamboman/mason.nvim",
+
 			{ "mxsdev/nvim-dap-vscode-js", lazy = false },
 			{ "folke/which-key.nvim" },
 			{
@@ -23,7 +29,30 @@ return {
 
 		config = function()
 			local dap = require("dap")
+			local ui = require("dapui")
 
+			ui.setup()
+			require("dap-go").setup()
+
+			require("nvim-dap-virtual-text").setup({
+				-- Don't show virtual text for sensitive variables. Probably
+				-- won't catch all of them.
+				display_callback = function(variable)
+					local name = string.lower(variable.name)
+					local value = string.lower(variable.value)
+					if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
+						return "*****"
+					end
+
+					if #variable.value > 15 then
+						return " = " .. string.sub(variable.value, 1, 15) .. "... "
+					end
+
+					return " = " .. variable.value
+				end,
+			})
+
+			-- C, C++, Rust debugger
 			dap.adapters.codelldb = {
 				type = "server",
 				port = "${port}",
@@ -124,25 +153,20 @@ return {
 			end
 
 			-- setup keymaps
-			require("user.keymaps").dap(function()
-				return dap
-			end, function()
-				return require("dapui")
-			end, function()
-				return require("dap.ui.widgets")
-			end)
-		end,
-	},
+			require("user.keymaps").dap(dap, ui)
 
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap" },
-		lazy = true,
-		keys = function()
-			return require("user.keymaps").dap_trigger_keys
-		end,
-		config = function()
-			require("dapui").setup()
+			dap.listeners.before.attach.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				ui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				ui.close()
+			end
 		end,
 	},
 }
