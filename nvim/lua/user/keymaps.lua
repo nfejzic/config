@@ -103,11 +103,10 @@ M.telescope_keymaps = function(telescope, t_builtin)
 		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
 	end, { desc = "Find file" })
 
-	vim.keymap.set("n", "<leader>fF", function()
+	vim.keymap.set("n", "<leader>fa", function()
 		t_builtin.find_files({ find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore" } })
-	end, { desc = "Find file, including hidden" })
+	end, { desc = "Find all files, including hidden" })
 
-	vim.keymap.set("n", "<leader>fp", telescope.extensions.projects.projects, { desc = "Recent projects" })
 	vim.keymap.set("n", "<leader>fd", "<cmd>TodoTelescope<CR>", { desc = "Todo / Fixme etc" })
 	vim.keymap.set("n", "<leader>fg", t_builtin.git_status, { desc = "git - modified files" })
 	vim.keymap.set("n", "<leader>fb", t_builtin.buffers, { desc = "Telescope search buffers" })
@@ -123,7 +122,7 @@ M.telescope_keymaps = function(telescope, t_builtin)
 
 	-- Search menu for which-key
 	vim.keymap.set("n", "<leader>s", "", { desc = "Search" })
-	vim.keymap.set("n", "<leader>sd", t_builtin.grep_string, { desc = "Grep string" })
+	vim.keymap.set({ "n", "v" }, "<leader>sd", t_builtin.grep_string, { desc = "Grep string" })
 	vim.keymap.set("n", "<leader>sl", t_builtin.live_grep, { desc = "Live grep string" })
 	vim.keymap.set("n", "<leader>sL", function()
 		t_builtin.live_grep({
@@ -275,6 +274,7 @@ end
 M.oil = function(oil)
 	-- opens oil with current file being under the cursor
 	vim.keymap.set("n", "<leader>ft", oil.open, { desc = "Open File Explorer (Oil)" })
+	vim.keymap.set("n", "-", oil.open, { desc = "Open File Explorer (Oil)" })
 	vim.keymap.set("n", "<leader>fr", oil.toggle_float, { desc = "Open floating file explorer (Oil)" })
 end
 
