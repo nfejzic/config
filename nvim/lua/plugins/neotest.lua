@@ -37,11 +37,6 @@ return {
 					build_flags = "-tags=unit,integration",
 				},
 			})
-
-			vim.api.nvim_create_user_command("GoTestDebug", function()
-				require("dap-go").debug_test()
-			end, {})
-
 			require("user.keymaps").neotest(neotest)
 		end,
 	},
