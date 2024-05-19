@@ -68,10 +68,7 @@ return {
 				},
 				integrations = {
 					cmp = true,
-					dap = {
-						enabled = true,
-						enable_ui = true,
-					},
+					dap = true,
 					fidget = true,
 					gitsigns = true,
 					indent_blankline = {
@@ -108,9 +105,7 @@ return {
 				},
 			})
 
-			---@diagnostic disable-next-line: inject-field
 			vim.g.catppuccin_flavour = "macchiato"
-			-- vim.cmd("colo catppuccin")
 		end,
 	},
 }
