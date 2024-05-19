@@ -51,52 +51,24 @@ return {
 
 			--- This is a doc comment
 			require("catppuccin").setup({
-				transparent_background = false,
 				styles = {
 					comments = { "italic" },
 					conditionals = {},
-					loops = {},
-					functions = {},
-					keywords = {},
-					strings = {},
-					variables = {},
-					numbers = {},
-					booleans = {},
-					properties = {},
-					types = {},
-					operators = {},
 				},
 				integrations = {
-					cmp = true,
-					dap = true,
 					fidget = true,
-					gitsigns = true,
-					indent_blankline = {
-						enabled = true,
-						colored_indent_levels = false,
-					},
-					markdown = true,
 					mason = true,
 					native_lsp = {
 						enabled = true,
 					},
 					neogit = false,
-					neotree = true,
-					notify = true,
 					neotest = true,
-					octo = false,
-					symbols_outline = false,
 
-					telekasten = false,
-					telescope = true,
-					treesitter = true,
-					treesitter_context = true,
-					ts_rainbow = false,
-					window_picker = true,
+					telescope = {
+						enabled = true,
+					},
 					which_key = true,
 				},
-				-- this is a comment
-				color_overrides = {},
 				highlight_overrides = {
 					latte = customHighlights,
 					mocha = customHighlights,
