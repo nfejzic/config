@@ -28,7 +28,7 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 11.5,
+	size = 13.5,
 	cell_width = 0.95,
 	harfbuzz_features = {
 		-- strike-through '$'
@@ -42,7 +42,7 @@ local monolisa = {
 --- @type HostConfig
 local config = {
 	dpi = nil,
-	font = jetbrains_mono_comfy,
+	font = monolisa,
 	-- font = monolisa,
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
