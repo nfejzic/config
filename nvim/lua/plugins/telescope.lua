@@ -42,9 +42,6 @@ return {
 			-- Use Telescope for LSP Code Actions
 			require("telescope").load_extension("ui-select")
 
-			-- Add extension to list projects
-			require("telescope").load_extension("projects")
-
 			-- Enable telescope fzf native
 			require("telescope").load_extension("fzf")
 
