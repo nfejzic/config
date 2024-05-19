@@ -15,6 +15,8 @@ function M.get_handlers()
 end
 
 M.setup_ui = function()
+	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+
 	---@type table|nil
 	local diagnostic_cfg = {
 		enable = true,
@@ -25,14 +27,6 @@ M.setup_ui = function()
 			border = _border,
 			source = "always",
 		},
-	}
-
-	local utils = require("user.utils")
-
-	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-	utils.if_nightly_else(function()
-		-- API changed in neovim 0.10, currently nightly
-		diagnostic_cfg = vim.tbl_deep_extend("force", diagnostic_cfg, {
 			signs = {
 				text = {
 					[vim.diagnostic.severity.ERROR] = signs.Error,
@@ -54,27 +48,9 @@ M.setup_ui = function()
 				},
 				severity_sort = true,
 			},
-		})
-	end, function()
-		-- define signs and their highlights
-		for type, icon in pairs(signs) do
-			local name = "DiagnosticSign" .. type
-			local hl = name
-			vim.fn.sign_define(name, { text = icon, texthl = hl })
-		end
-	end)
+	}
 
 	vim.diagnostic.config(diagnostic_cfg)
-
-	-- use pretty gutter signs, fallback for plugins that don't support nightly
-	-- style yet
-	utils.if_nightly(function()
-		for type, icon in pairs(signs) do
-			local name = "DiagnosticSign" .. type
-			local hl = "DiagnosticSignCustom" .. type
-			vim.fn.sign_define(name, { text = icon, texthl = hl })
-		end
-	end)
 
 	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError" })
 	vim.fn.sign_define("DapStopped", { text = "->", texthl = "DiagnosticSignInfo" })
@@ -87,11 +63,8 @@ M.get_on_attach = function(t_builtin)
 		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
 
 		if inlay_hint_supported then
-			-- TODO: inlay hints will be available in nightly. Right now, using
-			-- nightly build will also work, but there are some issues with other
-			-- plugins.
 			vim.api.nvim_create_user_command("LspToggleInlayHints", function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), {}) -- latest nightly
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), {})
 			end, {})
 
 			vim.lsp.inlay_hint.enable(false, {}) -- disable inlay hints by default
