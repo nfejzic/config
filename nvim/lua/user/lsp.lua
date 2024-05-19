@@ -27,27 +27,27 @@ M.setup_ui = function()
 			border = _border,
 			source = "always",
 		},
-			signs = {
-				text = {
-					[vim.diagnostic.severity.ERROR] = signs.Error,
-					[vim.diagnostic.severity.WARN] = signs.Warn,
-					[vim.diagnostic.severity.HINT] = signs.Hint,
-					[vim.diagnostic.severity.INFO] = signs.Info,
-				},
-				texthl = {
-					[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
-					[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
-					[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
-					[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
-				},
-				numhl = {
-					[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
-					[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
-					[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
-					[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
-				},
-				severity_sort = true,
+		signs = {
+			text = {
+				[vim.diagnostic.severity.ERROR] = signs.Error,
+				[vim.diagnostic.severity.WARN] = signs.Warn,
+				[vim.diagnostic.severity.HINT] = signs.Hint,
+				[vim.diagnostic.severity.INFO] = signs.Info,
 			},
+			texthl = {
+				[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+				[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+				[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+				[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
+			},
+			numhl = {
+				[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
+				[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
+				[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
+				[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
+			},
+			severity_sort = true,
+		},
 	}
 
 	vim.diagnostic.config(diagnostic_cfg)
