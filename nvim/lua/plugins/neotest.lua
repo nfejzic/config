@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
 	{
 		"nvim-neotest/neotest",
@@ -18,7 +19,7 @@ return {
 			local neotest = require("neotest")
 
 			neotest.setup({
-				-- ...,
+				-- diagnostic complains about missing fields, but should be fine
 				adapters = {
 					require("neotest-go")({
 						experimental = {
