@@ -132,17 +132,13 @@ return {
 				event = "UIEnter",
 			},
 
-			-- auto completions
-			{ "hrsh7th/cmp-nvim-lsp" },
-
-			-- Icons in auto-complete of LSP (i.e. function, variable etc)
-			{ "onsails/lspkind-nvim" },
-
 			{
 				"mrcjkb/rustaceanvim",
-				version = "^4", -- Recommended
+				version = "^4",
 				ft = { "rust" },
 			},
+
+			{ "hrsh7th/cmp-nvim-lsp" }, -- for auto-completion
 
 			-- Go
 			{
