@@ -3,6 +3,6 @@ return {
 	{
 		"AndrewRadev/tagalong.vim",
 		lazy = false,
-		filetype = { "html", "html5", "vue", "markdown" },
+		filetype = { "html", "html5", "vue", "markdown", "jsx", "tsx" },
 	},
 }
