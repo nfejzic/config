@@ -114,7 +114,7 @@ vim.o.incsearch = true
 vim.o.updatetime = 50
 
 -- more info in signcolumn
-vim.o.signcolumn = "yes:2"
+vim.o.signcolumn = "yes"
 
 vim.o.cmdheight = 1
 vim.o.showmode = false
