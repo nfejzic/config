@@ -16,7 +16,7 @@ return {
 		},
 
 		lazy = true,
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 
 		config = function()
 			require("user.completion")
