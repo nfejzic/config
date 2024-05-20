@@ -1,9 +1,9 @@
 return {
 	"stevearc/oil.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true, event = "VeryLazy" },
 
-	lazy = true,
-	event = { "UIEnter" },
+	-- do not lazy load in order to replace netrw
+	lazy = false,
 
 	config = function()
 		local oil = require("oil")
