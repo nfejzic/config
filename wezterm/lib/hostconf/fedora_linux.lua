@@ -2,7 +2,7 @@
 ---@diagnostic disable-next-line: unused-local
 local jetbrains_mono = {
 	family = "JetBrains Mono",
-	size = 12,
+	size = 15,
 	cell_width = 1,
 }
 
@@ -28,8 +28,9 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 13.5,
-	cell_width = 0.95,
+	size = 14,
+	cell_width = 1,
+	freetype_load_flags = "NO_HINTING",
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
