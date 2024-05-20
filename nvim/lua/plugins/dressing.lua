@@ -10,6 +10,7 @@ return {
 				},
 			},
 		},
-		lazy = false,
+		lazy = true,
+		event = "VeryLazy",
 	},
 }

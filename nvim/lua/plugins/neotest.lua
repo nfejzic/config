@@ -4,7 +4,7 @@ return {
 		"nvim-neotest/neotest",
 
 		lazy = true,
-		event = "UIEnter",
+		event = "VeryLazy",
 
 		dependencies = {
 			{ "nvim-neotest/neotest-go" },

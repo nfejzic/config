@@ -21,7 +21,7 @@ return {
 		},
 
 		lazy = true,
-		event = "UIEnter",
+		event = "VeryLazy",
 
 		keys = function()
 			return require("user.keymaps").dap_trigger_keys
