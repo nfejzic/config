@@ -184,17 +184,3 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		end
 	end,
 })
-
--- local utils = require("user.utils")
---
--- local interval = utils.setInterval(10000, function()
--- 	print("Polling env variables")
--- 	local theme = os.getenv("CLI_THEME")
--- 	print("CLI_THEME=" .. theme)
--- end)
---
--- vim.api.nvim_create_autocmd("VimLeavePre", {
--- 	callback = function()
--- 		utils.clearInterval(interval)
--- 	end,
--- })
