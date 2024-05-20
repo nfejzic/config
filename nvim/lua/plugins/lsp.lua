@@ -1,7 +1,8 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = false,
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		dependencies = {
 			{ "folke/which-key.nvim" },
 			{
