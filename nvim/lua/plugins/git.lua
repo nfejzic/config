@@ -5,7 +5,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 
 		lazy = true,
-		event = "BufWinEnter",
+		event = "VeryLazy",
 
 		config = function()
 			local gs = require("gitsigns")
@@ -27,12 +27,14 @@ return {
 		"akinsho/git-conflict.nvim",
 		version = "*",
 		config = true,
-		lazy = false,
+		lazy = true,
+		event = "VeryLazy",
 	},
 
 	{
 		"/tpope/vim-fugitive",
-		lazy = false,
+		lazy = true,
+		cmd = "Git",
 
 		config = function()
 			---@diagnostic disable-next-line: inject-field
