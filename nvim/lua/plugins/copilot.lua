@@ -4,7 +4,7 @@ return {
 		"zbirenbaum/copilot.lua",
 
 		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
+		event = "InsertEnter",
 
 		config = function()
 			require("copilot").setup({
@@ -32,7 +32,8 @@ return {
 		dependencies = { "zbirenbaum/copilot.lua" },
 
 		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
+
+		event = "InsertEnter",
 
 		config = function()
 			require("copilot_cmp").setup({
