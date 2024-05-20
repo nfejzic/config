@@ -103,6 +103,11 @@ M.telescope_keymaps = function(telescope, t_builtin)
 		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
 	end, { desc = "Find file" })
 
+	-- Ctrl-P make it be the same
+	vim.keymap.set("n", "<C-p>", function()
+		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
+	end, { desc = "Find file (in git repository)" })
+
 	vim.keymap.set("n", "<leader>fa", function()
 		t_builtin.find_files({ find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore" } })
 	end, { desc = "Find all files, including hidden" })
