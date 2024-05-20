@@ -1,3 +1,5 @@
+vim.opt.guicursor = ""
+
 --Remap space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
