@@ -16,7 +16,6 @@ vim.g.loaded = 1
 
 -- add marker at 80 chars length and wrap text
 vim.o.colorcolumn = "+1"
-vim.o.textwidth = 80
 
 -- more useful diffs (nvim -d)
 -- by ignoring whitespace
@@ -33,6 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "gitcommit",
 	callback = function()
 		vim.o.colorcolumn = "50,72"
+		vim.o.textwidth = 80
 	end,
 })
 
@@ -49,8 +49,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "markdown" },
 	callback = function()
-		local buf_name = vim.api.nvim_buf_get_name(0)
+		vim.o.textwidth = 80
 
+		local buf_name = vim.api.nvim_buf_get_name(0)
 		if string.match(buf_name, "idana") then
 			-- text width 120 in work projects
 			vim.o.colorcolumn = "+1"
