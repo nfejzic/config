@@ -4,6 +4,19 @@ vim.opt.guicursor = ""
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.listchars = {
+	eol = "↲",
+	tab = "» ",
+	space = "·",
+	trail = "·",
+	extends = "…",
+	precedes = "…",
+	conceal = "┊",
+	nbsp = "☠",
+}
+
+vim.opt.list = false
+
 vim.o.smarttab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
@@ -14,7 +27,7 @@ vim.o.nu = true
 
 vim.g.loaded = 1
 
--- add marker at 80 chars length and wrap text
+-- add ruler line where text limit should be
 vim.o.colorcolumn = "+1"
 
 -- more useful diffs (nvim -d)
@@ -92,6 +105,7 @@ vim.o.wrap = false
 
 --Set padding when scrolling
 vim.o.scrolloff = 4
+vim.o.sidescrolloff = 10
 
 --Enable break indent
 vim.o.breakindent = true
@@ -100,12 +114,18 @@ vim.o.breakindent = true
 -- NOTE: ends up in ~/.local/state/nvim/undo/
 vim.opt.undofile = true
 
+-- save shared data
+vim.opt.shada = { "'10", "<0", "s10", "h" }
+
 -- disable swap files
 vim.opt.swapfile = false
 
---Case insensitive searching UNLESS /C or capital in search
+--Case insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- Do not add comment on "o" for new line
+vim.opt.formatoptions:remove("o")
 
 --Set highlight on search
 vim.o.hlsearch = false
