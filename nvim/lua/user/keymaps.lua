@@ -335,10 +335,6 @@ M.general = function()
 	vim.keymap.set("n", "<C-j>", go_quickfix(true, false), { desc = "Next quickfix entry", expr = true })
 	vim.keymap.set("n", "<C-k>", go_quickfix(false, false), { desc = "Previous quickfix entry", expr = true })
 
-	-- Jump to start and end of line using the home row keys
-	vim.keymap.set("", "H", "^")
-	vim.keymap.set("", "L", "$")
-
 	-- Move lines using Ctrl = J|K (down|up) in visual mode
 	vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
 	vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
