@@ -101,12 +101,6 @@ return {
 				capabilities = global_capabilities,
 			})
 
-			-- if we decide to use rust_analyzer provided by `rustup`:
-			if not mason_registry.is_installed("rust-analyzer") then
-				local setup_fn = user_lsp.rust_analyzer(opts, neoconf)
-				setup_fn()
-			end
-
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have

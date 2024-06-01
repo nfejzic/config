@@ -122,6 +122,8 @@ M.rust_analyzer = function(opts, neoconf)
 			-- Plugin configuration
 			tools = {},
 			-- LSP configuration
+			-- NOTE: If 'rust-analyzer' is installed through rustup, it has priority and will be used
+			--       If that's not the case, then the binary installed through 'Mason' will be used
 			server = {
 				on_attach = opts.on_attach,
 				capabilites = opts.capabilites,
