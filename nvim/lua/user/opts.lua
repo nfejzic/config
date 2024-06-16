@@ -40,15 +40,6 @@ vim.opt.diffopt:append("iwhite")
 vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.diffopt:append("indent-heuristic")
 
--- set colorcolumn for git commit editing to 50 and 72 characters
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "gitcommit",
-	callback = function()
-		vim.o.colorcolumn = "50,72"
-		vim.o.textwidth = 80
-	end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "typescript", "javascript", "vue" },
 	callback = function(ev)
@@ -189,7 +180,9 @@ vim.opt.foldlevelstart = 99
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
-	command = "silent! lua vim.highlight.on_yank()",
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- jump to last edit position on opening file
