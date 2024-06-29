@@ -3,6 +3,7 @@
 # fish files
 fish/completions/*
 fish/conf.d/nvm.fish
+fish/conf.d/rustup.fish
 fish/functions/*
 fish/functions/fisher.fish
 fish/fish_variables

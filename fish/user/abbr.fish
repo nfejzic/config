@@ -1,3 +1,7 @@
+if type -q nvim
+    abbr -a e 'nvim'
+end
+
 if type -q clang
     abbr -a cc 'clang'
 else

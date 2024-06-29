@@ -13,6 +13,7 @@ import "./theme.fish"
 import "./abbr.fish"
 import "./setup_brew.fish"
 import "./editor.fish"
+import "./env.fish"
 import "./rectangle.fish"
 
 functions --erase import
