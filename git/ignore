@@ -9,7 +9,10 @@ compile_commands.json
 .cache/clangd/
 .clang-format
 .neoconf.json
+.editorconfig
 
 # ignore hidden files specific to `just` command runner
 .Justfile*
 .justfile*
+
+__pycache__
