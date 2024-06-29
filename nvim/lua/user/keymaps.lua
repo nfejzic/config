@@ -98,6 +98,15 @@ function M.neotest(neotest)
 	})
 end
 
+M.neogen = function(neogen)
+	vim.keymap.set(
+		"n",
+		"<leader>lc",
+		neogen.generate,
+		{ noremap = true, silent = true, desc = "Generate annotation for the current item." }
+	)
+end
+
 M.telescope_keymaps = function(telescope, t_builtin)
 	vim.keymap.set("n", "<leader>ff", function()
 		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
@@ -114,7 +123,7 @@ M.telescope_keymaps = function(telescope, t_builtin)
 
 	vim.keymap.set("n", "<leader>fd", "<cmd>TodoTelescope<CR>", { desc = "Todo / Fixme etc" })
 	vim.keymap.set("n", "<leader>fg", t_builtin.git_status, { desc = "git - modified files" })
-	vim.keymap.set("n", "<leader>fb", t_builtin.buffers, { desc = "Telescope search buffers" })
+	vim.keymap.set("n", "<leader>;", t_builtin.buffers, { desc = "Telescope search buffers" })
 
 	vim.keymap.set(
 		"n",
