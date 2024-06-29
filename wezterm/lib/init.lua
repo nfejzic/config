@@ -3,7 +3,7 @@ local M = {}
 --- @param wezterm table
 --- @param config table
 --- @param hostconf HostConfig
---- @param theme string
+--- @param theme string | table
 local function set_opts(wezterm, config, hostconf, theme)
 	config.front_end = "WebGpu"
 
@@ -38,8 +38,11 @@ local function set_opts(wezterm, config, hostconf, theme)
 
 	config.bold_brightens_ansi_colors = "BrightAndBold"
 
-	wezterm.log_info("Setting the theme to: " .. theme)
-	config.color_scheme = theme
+	if type(theme) == "string" then
+		config.color_scheme = theme
+	else
+		config.colors = theme
+	end
 
 	config.window_padding = {
 		left = "0cell",
