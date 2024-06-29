@@ -31,13 +31,14 @@ conform.setup({
 		local is_json = string.match(buf_name, ".*idana.*.json")
 
 		if is_selfie or is_beator or is_monster or is_json then
-			return { timeout_ms = 500, lsp_fallback = false, formatters = formatters }
+			return { timeout_ms = 500, lsp_fallback = false, formatters = formatters, quiet = true }
 		else
 			return {
 				-- These options will be passed to conform.format()
 				timeout_ms = 500,
 				lsp_fallback = true,
 				formatters = formatters,
+				quiet = true,
 			}
 		end
 	end,
