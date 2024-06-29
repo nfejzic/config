@@ -13,6 +13,7 @@ return {
 			{ "leoluz/nvim-dap-go" },
 			{ "mfussenegger/nvim-dap" },
 			{ "nvim-neotest/nvim-nio" },
+			{ "marilari88/neotest-vitest" },
 		},
 
 		config = function()
@@ -30,6 +31,7 @@ return {
 					require("neotest-rust")({
 						dap_adapter = "codelldb",
 					}),
+					require("neotest-vitest"),
 				},
 			})
 
