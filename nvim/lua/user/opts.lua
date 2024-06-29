@@ -27,8 +27,8 @@ vim.o.nu = true
 
 vim.g.loaded = 1
 
--- add ruler line where text limit should be
-vim.o.colorcolumn = "+1"
+-- add ruler line where text limit should be (and at 80 chars if textwidth is not defined)
+vim.o.colorcolumn = "+1,80"
 
 -- more useful diffs (nvim -d)
 -- by ignoring whitespace
