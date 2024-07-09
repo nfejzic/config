@@ -55,7 +55,12 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.hide_mouse_cursor_when_typing = false
 	config.enable_scroll_bar = false
 
-	config.window_decorations = "RESIZE"
+	if os.getenv("DESKTOP_SESSION") == "hyprland" then
+		config.window_decorations = "TITLE | RESIZE"
+	else
+		config.window_decorations = "RESIZE"
+	end
+
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
 	config.macos_window_background_blur = 30
