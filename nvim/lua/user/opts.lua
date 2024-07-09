@@ -147,7 +147,7 @@ vim.opt.wildignore = ".hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,di
 -- use system clipboard
 vim.o.clipboard = "unnamedplus"
 
-if vim.fn.executable("gpaste-client") == 1 then
+if vim.fn.executable("gpaste-client") == 1 and not os.getenv("DESKTOP_SESSION") == "hyprland" then
 	vim.g.clipboard = {
 		name = "gpaste",
 		copy = {

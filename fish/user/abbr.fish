@@ -114,6 +114,11 @@ end
 set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
 for clipboard in $clipboard_providers 
     if type -q $clipboard
+        if test "$clipboard" = "gpaste-client" && test "$DESKTOP_SESSION" = "hyprland"
+            # hyprland uses wl-copy and wl-paste
+            continue
+        end
+
         abbr -a copy $clipboard
         break
     end
