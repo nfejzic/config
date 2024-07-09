@@ -1,16 +1,16 @@
 import = [
-    "~/.config/alacritty/colors/gruvbox_dark_hard.toml"
+    "~/.config/alacritty/colors/kanagawa.toml"
     # "~/.config/alacritty/colors/catppuccin-macchiato.toml"
 ]
-shell = "/opt/homebrew/bin/fish"
+shell = "fish"
 
 [window]
 decorations = "None"
 startup_mode = "Maximized"
-
-[font]
 opacity = 0.95
 blur = true
+
+[font]
 normal      = { family = "MonoLisa", style = "Book" }
 # normal      = { family = "JetBrains Mono", style = "Regular" }
 # bold        = { family = "Monolisa", style = "Bold" }
