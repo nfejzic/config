@@ -6,7 +6,7 @@
 
 /* Kanagawa colorscheme */
 @define-color bg rgba(31, 31, 40, 1);
-@define-color bgGreen rgba(0, 0, 255, 0.2);
+@define-color bgGreen rgb(118, 148, 106);
 @define-color fg rgba(220, 215, 186, 1);
 @define-color yellow rgb(192, 163, 110);
 
