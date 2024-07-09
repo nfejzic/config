@@ -4,6 +4,14 @@ local jetbrains_mono = {
 	family = "JetBrains Mono",
 	size = 13,
 	cell_width = 1,
+	harfbuzz_features = {
+		"cv03", -- looped 'g'
+		"cv07", -- looped 'g'
+		"cv10", -- serif on 'r'
+		"cv11", -- rounded 'y'
+		"cv12", -- regular 'u'
+		"ss20", -- raised bar 'f'
+	},
 }
 
 --- @type FontConfig
@@ -11,8 +19,16 @@ local jetbrains_mono = {
 local jetbrains_mono_comfy = {
 	family = "JetBrains Mono",
 	size = 15,
-	cell_width = 1,
-	line_height = 1,
+	-- cell_width = 1,
+	-- line_height = 1.0,
+	harfbuzz_features = {
+		"cv03", -- looped 'g'
+		"cv07", -- looped 'g'
+		"cv10", -- serif on 'r'
+		"cv11", -- rounded 'y'
+		"cv12", -- regular 'u'
+		"ss20", -- raised bar 'f'
+	},
 }
 
 --- @type FontConfig
@@ -45,8 +61,8 @@ local monolisa_comfy = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
 	size = 15,
-	line_height = 0.95,
-	cell_width = 1,
+	-- line_height = 0.95,
+	-- cell_width = 1,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
@@ -62,7 +78,7 @@ local monolisa_huge = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
 	size = 18,
-	line_height = 0.95,
+	line_height = 1,
 	cell_width = 1,
 	harfbuzz_features = {
 		-- strike-through '$'
@@ -71,14 +87,6 @@ local monolisa_huge = {
 		-- centered hexadecimal 0xF
 		"ss11",
 	},
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local geist_mono = {
-	family = "Geist Mono",
-	size = 13.5,
-	cell_width = 1,
 }
 
 --- @type FontConfig
@@ -92,19 +100,25 @@ local fira_code = {
 
 --- @type FontConfig
 ---@diagnostic disable-next-line: unused-local
-local maple_mono = {
-	family = "Maple Mono",
-	size = 13.0,
+local fira_code_comfy = {
+	family = "Fira Code",
+	size = 15,
 	cell_width = 1,
+	line_height = 1.07,
+	harfbuzz_features = {},
 }
 
 --- @type FontConfig
 ---@diagnostic disable-next-line: unused-local
-local noto_sans_mono = {
-	family = "Noto Sans Mono",
-	size = 13.0,
+local fira_code_huge = {
+	family = "Fira Code",
+	size = 18,
 	cell_width = 1,
-	line_height = 0.95,
+	line_height = 1.12,
+	harfbuzz_features = {
+		"zero", -- dotted zero
+		"cv14", -- sharp 3
+	},
 }
 
 --- @type HostConfig
@@ -117,21 +131,11 @@ local config = {
 	},
 }
 
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local commit_mono = {
-	family = "CommitMono",
-	size = 13.5,
-	cell_width = 1,
-	line_height = 1.15,
-}
-
--- I can always go back to this one...
-
 config.font = jetbrains_mono
 config.font = monolisa
 config.font = jetbrains_mono_comfy
-config.font.size = 18
-config.font = monolisa_huge
+-- config.font.size = 19
+config.font = monolisa_comfy
+-- config.font = monolisa_huge
 
 return config
