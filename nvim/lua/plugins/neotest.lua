@@ -31,7 +31,7 @@ return {
 					require("neotest-rust")({
 						dap_adapter = "codelldb",
 					}),
-					require("neotest-vitest"),
+					-- require("neotest-vitest"),
 				},
 			})
 
