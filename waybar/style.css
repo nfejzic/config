@@ -1,16 +1,22 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: FontAwesome, Jetbrains Mono, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-family: MonoLisa, FontAwesome, Jetbrains Mono, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
 }
+
+/* Kanagawa colorscheme */
+@define-color bg rgba(31, 31, 40, 1);
+@define-color bgGreen rgba(0, 0, 255, 0.2);
+@define-color fg rgba(220, 215, 186, 1);
+@define-color yellow rgb(192, 163, 110);
 
 window#waybar {
   /* background-color: rgba(43, 48, 59, 0); */
-  background-color: transparent;
+  background-color: @bg;
   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: #ffffff;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  color: @fg;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -24,7 +30,7 @@ window#waybar.empty {
     background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+    background-color: @fg;
 }
 */
 
@@ -52,25 +58,29 @@ button:hover {
 }
 
 #workspaces button {
-  margin: 5px 0px;
-  padding: 0px 10px;
-  border-radius: 10px;
+  border-radius: 0px;
   background-color: transparent;
-  color: #ffffff;
+  color: @fg;
   box-shadow: none;
+  border-bottom: 2px solid @bg;
+  min-width: 10px;
 }
 
 #workspaces button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: @bg;
+  min-width: 10px;
 }
 
-#workspaces button.focused {
-  background: rgba(255, 255, 255, 0.3);
+#workspaces button.active {
+  /* background: rgba(0, 255, 255, 0.3); */
+  color: @yellow;
   box-shadow: none;
+  border-bottom: 2px solid @yellow;
 }
 
 #workspaces button.urgent {
   background-color: #eb4d4b;
+  min-width: 10px;
 }
 
 #mode {
@@ -96,7 +106,7 @@ button:hover {
 #mpd {
   margin: 5px 0px;
   padding: 0 10px;
-  color: #ffffff;
+  color: @fg;
   border-radius: 10px;
 }
 
@@ -106,47 +116,49 @@ button:hover {
 }
 
 #window {
-  background-color: rgba(104, 157, 106, 0.3);
+  color: @yellow;
+  background-color: transparent;
   margin: 5px 0px;
-  padding: 0px 20px;
+  padding: 0px 0px;
   border-radius: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
+.modules-left>widget:first-child>#workspaces {
   margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
+.modules-right>widget:last-child>#workspaces {
   margin-right: 0;
 }
 
+
 #clock {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #battery {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #ffffff;
-  background-color: rgba(152, 151, 18, 0.5);
+  color: @fg;
+  background-color: @bgGreen;
 }
 
 @keyframes blink {
   to {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background-color: @bg;
+    color: @fg;
   }
 }
 
 #battery.critical:not(.charging) {
   background-color: rgba(204, 36, 29, 0.5);
-  color: #ffffff;
+  color: @fg;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -155,117 +167,117 @@ button:hover {
 }
 
 label:focus {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #cpu {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: @bg;
+  color: @fg;
 }
 
 #memory {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #disk {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #backlight {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #network {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #network.disconnected {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #pulseaudio {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: @bg;
+  color: @fg;
 }
 
 #pulseaudio.muted {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
   color: #2a5c45;
 }
 
 #wireplumber {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: @bg;
+  color: @fg;
 }
 
 #wireplumber.muted {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #custom-media {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
   color: #2a5c45;
   min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #custom-media.custom-vlc {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #temperature {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #temperature.critical {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #tray {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #idle_inhibitor {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #idle_inhibitor.activated {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
   color: #2d3436;
 }
 
 #mpd {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
   color: #2a5c45;
 }
 
 #mpd.disconnected {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #mpd.stopped {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #mpd.paused {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: @bg;
 }
 
 #language {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: @bg;
+  color: @fg;
   padding: 0 5px;
   margin: 0 5px;
   min-width: 16px;
@@ -274,8 +286,8 @@ label:focus {
 }
 
 #keyboard-state {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: @bg;
+  color: @fg;
   padding: 0 0px;
   margin: 0 5px;
   min-width: 16px;
@@ -283,13 +295,13 @@ label:focus {
   margin: 5px 0px;
 }
 
-#keyboard-state > label {
+#keyboard-state>label {
   padding: 0 5px;
   border-radius: 10px;
   margin: 5px 0px;
 }
 
-#keyboard-state > label.locked {
+#keyboard-state>label.locked {
   background: rgba(0, 0, 0, 0.2);
 }
 
