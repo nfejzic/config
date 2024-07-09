@@ -28,7 +28,7 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 14,
+	size = 15,
 	cell_width = 1,
 	freetype_load_flags = "NO_HINTING",
 	harfbuzz_features = {
