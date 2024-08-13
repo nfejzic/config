@@ -5,17 +5,17 @@ conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		-- Conform will run multiple formatters sequentially
-		python = { "isort", "black" },
+		python = { "isort", "black", stop_after_first = false },
 		-- Use a sub-list to run only the first available formatter
-		javascript = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
-		vue = { { "prettierd", "prettier" } },
-		html = { { "prettierd", "prettier" } },
-		markdown = { { "prettierd", "prettier" } },
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		vue = { "prettierd", "prettier", stop_after_first = true },
+		html = { "prettierd", "prettier", stop_after_first = true },
+		markdown = { "prettierd", "prettier", stop_after_first = true },
 		rust = {},
 		c = {},
 		go = { "gofumpt" },
-		sql = { "sql_formatter", "sqlfmt" },
+		sql = { "sql_formatter", "sqlfmt", stop_after_first = false },
 		["*"] = { "injected" },
 	},
 	format_on_save = function(bufnr)
