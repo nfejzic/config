@@ -72,6 +72,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = "*.component.html",
+	callback = function(e)
+		vim.o.filetype = "htmlangular"
+	end,
+})
+
 -- keep current content top + left when splitting
 vim.opt.splitright = true
 vim.opt.splitbelow = true
