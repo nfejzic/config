@@ -19,10 +19,15 @@ nvim/plugin/packer_compiled.lua
 
 # emacs
 emacs/elpa
+emacs/elpaca
+emacs/backups
 emacs/auto-save-list
 emacs/transient
 emacs/#init.el#
 emacs/init.el~
+/**/*.el~
+/**/*.elc
+
 
 # keyboard firmware stuff
 qmk_firmware/
