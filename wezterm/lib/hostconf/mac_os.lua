@@ -7,10 +7,10 @@ local jetbrains_mono = {
 	harfbuzz_features = {
 		"cv03", -- looped 'g'
 		"cv07", -- looped 'g'
-		"cv10", -- serif on 'r'
+		-- "cv10", -- serif on 'r'
 		"cv11", -- rounded 'y'
 		"cv12", -- regular 'u'
-		"ss20", -- raised bar 'f'
+		-- "ss20", -- raised bar 'f'
 	},
 }
 
@@ -20,10 +20,10 @@ local jetbrains_mono_comfy = {
 	family = "JetBrains Mono",
 	size = 15,
 	-- cell_width = 1,
-	-- line_height = 1.0,
+	line_height = 1.05,
 	harfbuzz_features = {
 		"cv03", -- looped 'g'
-		"cv07", -- looped 'g'
+		"cv07", -- lowered 'w'
 		"cv10", -- serif on 'r'
 		"cv11", -- rounded 'y'
 		"cv12", -- regular 'u'
@@ -121,6 +121,19 @@ local fira_code_huge = {
 	},
 }
 
+--- @type FontConfig
+---@diagnostic disable-next-line: unused-local
+local sf_mono_comfy = {
+	family = "SF Mono",
+	size = 15,
+	cell_width = 1,
+	line_height = 1.16,
+	-- harfbuzz_features = {
+	-- 	"zero", -- dotted zero
+	-- 	"cv14", -- sharp 3
+	-- },
+}
+
 --- @type HostConfig
 local config = {
 	dpi = 108,
@@ -133,7 +146,7 @@ local config = {
 
 config.font = jetbrains_mono
 config.font = monolisa
-config.font = jetbrains_mono_comfy
+-- config.font = jetbrains_mono_comfy
 -- config.font.size = 19
 config.font = monolisa_comfy
 -- config.font = monolisa_huge
