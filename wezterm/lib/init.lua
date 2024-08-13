@@ -64,7 +64,6 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
 	config.macos_window_background_blur = 30
-	-- config.window_background_opacity = 1
 	config.hide_tab_bar_if_only_one_tab = false
 	config.use_fancy_tab_bar = false
 	config.tab_bar_at_bottom = true
