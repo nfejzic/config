@@ -103,7 +103,7 @@ vim.o.wrap = false
 
 --Set padding when scrolling
 vim.o.scrolloff = 4
-vim.o.sidescrolloff = 10
+vim.o.sidescrolloff = 4
 
 --Enable break indent
 vim.o.breakindent = true
