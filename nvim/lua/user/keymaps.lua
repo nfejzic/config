@@ -2,14 +2,15 @@ local M = {}
 
 M.lsp = function(t_builtin, inlay_hint_supported)
 	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
-	vim.keymap.set("n", "<leader>ld", t_builtin.lsp_definitions, { desc = "Go to Declaration" })
+	vim.keymap.set("n", "<leader>ld", t_builtin.lsp_definitions, { desc = "Go to definition" })
 
 	vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostics message" })
 	vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
 	vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
 	vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Refactor Rename" })
 	vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, { desc = "Show hover popup" })
-	vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Populate loclist with diagnostics" })
+	vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "Populate location list with diagnostics" })
+	vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Populate quickfix list with diagnostics" })
 
 	vim.keymap.set("n", "<leader>lr", t_builtin.lsp_references, { desc = "Go to References" })
 	vim.keymap.set("n", "<leader>li", t_builtin.lsp_implementations, { desc = "Implementations" })
@@ -20,13 +21,12 @@ M.lsp = function(t_builtin, inlay_hint_supported)
 		t_builtin.diagnostics({ bufnr = 0 })
 	end, { desc = "Diagnostic messages in current buffer" })
 
-	vim.keymap.set("n", "<leader>a", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
-	vim.keymap.set("n", "<leader>r", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
-	vim.keymap.set("n", "<leader>l", function()
-		vim.lsp.buf.list_workspace_folders()
-	end, { desc = "List workspace folders" })
+	vim.keymap.set("n", "<leader>la", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
+	vim.keymap.set("n", "<leader>lr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
+	-- TODO: this does not work right now (and I never use it). Try it out later
+	-- vim.keymap.set("n", "<leader>ll", vim.lsp.buf.list_workspace_folders, { desc = "List workspace folders" })
 
-	vim.keymap.set({ "n", "v" }, "<leader>.", function()
+	local code_action_fn = function()
 		local code_actions_available = false
 		local code_action_chck_grp = vim.api.nvim_create_augroup("CodeActionCheck", { clear = true })
 
@@ -37,14 +37,17 @@ M.lsp = function(t_builtin, inlay_hint_supported)
 			end,
 		})
 
-		-- check if code action succeeded
+		-- check whether code action succeeded
 		vim.lsp.buf.code_action()
 
 		if not code_actions_available then
 			-- then try with codelens
 			vim.lsp.codelens.run()
 		end
-	end, { desc = "Code actions" })
+	end
+
+	vim.keymap.set({ "n", "v" }, "<leader>.", code_action_fn, { desc = "Code actions" })
+	vim.keymap.set({ "n", "v" }, "<leader>a", code_action_fn, { desc = "Code actions" })
 
 	vim.keymap.set("n", "gd", t_builtin.lsp_definitions, { desc = "Definitions" })
 	vim.keymap.set("n", "gr", t_builtin.lsp_references, { desc = "References" })
@@ -255,33 +258,15 @@ M.gitsigns = function(gs)
 end
 
 local function setup_wk_prefixes(wk)
-	wk.register({
-		["<leader>"] = {
-			B = {
-				name = "Buffer",
-			},
-			d = {
-				name = "Debug / DAP",
-			},
-			f = {
-				name = "Find/File",
-			},
-			g = {
-				name = "Git",
-			},
-			k = {
-				name = "Collapse / Fold",
-			},
-			l = {
-				name = "LSP",
-			},
-			w = {
-				name = "Lsp Workspace",
-			},
-			s = {
-				name = "Search",
-			},
-		},
+	wk.add({
+		{ "<leader>B", group = "Buffer" },
+		{ "<leader>d", group = "Debug / DAP" },
+		{ "<leader>f", group = "Find/File" },
+		{ "<leader>g", group = "Git" },
+		-- { "<leader>k", group = "Collapse / Fold" },
+		{ "<leader>l", group = "LSP" },
+		{ "<leader>s", group = "Search" },
+		{ "<leader>w", group = "Lsp Workspace" },
 	})
 end
 
@@ -296,13 +281,14 @@ M.general = function()
 	local wk = require("which-key")
 
 	wk.setup({
+		preset = "modern",
 		disable = {
-			filetypes = {
+			ft = {
 				"TelescopePrompt",
 				"neo-tree",
 				"NeoTree",
 			},
-			buftypes = {
+			bt = {
 				"nofile",
 			},
 		},
@@ -318,10 +304,10 @@ M.general = function()
 	vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", { desc = "Go to previous buffer" })
 
 	-- Collapse / Fold
-	vim.keymap.set("n", "<leader>kk", "<cmd>foldclose<CR>", { desc = "Fold" })
-	vim.keymap.set("n", "<leader>kk", "<cmd>foldclose!<CR>", { desc = "Fold all" })
-	vim.keymap.set("n", "<leader>ko", "<cmd>foldopen<CR>", { desc = "Unfold (open fold)" })
-	vim.keymap.set("n", "<leader>kO", "zR", { desc = "Unfold all (open fold)" })
+	-- vim.keymap.set("n", "<leader>kk", "<cmd>foldclose<CR>", { desc = "Fold" })
+	-- vim.keymap.set("n", "<leader>kk", "<cmd>foldclose!<CR>", { desc = "Fold all" })
+	-- vim.keymap.set("n", "<leader>ko", "<cmd>foldopen<CR>", { desc = "Unfold (open fold)" })
+	-- vim.keymap.set("n", "<leader>kO", "zR", { desc = "Unfold all (open fold)" })
 
 	local go_quickfix = function(next, list)
 		return function()
