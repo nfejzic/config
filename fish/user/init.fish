@@ -8,17 +8,13 @@ end
 
 # ADD IMPORTS HERE
 
-import "./env.fish"
 import "./utils.fish"
 import "./theme.fish"
 import "./abbr.fish"
 import "./setup_brew.fish"
 import "./editor.fish"
+import "./env.fish"
 import "./rectangle.fish"
-
-if test (uname -s) = "Linux"
-    import "./gnome.fish"
-end
 
 functions --erase import
 # NO IMPORTS AFTER THIS LINE
