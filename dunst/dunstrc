@@ -1,0 +1,7 @@
+[global]
+follow=mouse
+font="MonoLisa 12"
+#min_icon_size=96
+max_icon_size=96
+corner_radius=10
+width = (0, 500)
