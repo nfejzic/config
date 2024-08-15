@@ -1,0 +1,10 @@
+#!/opt/homebrew/bin/fish
+
+set tmuxsessions (tmux list-sessions)
+
+function tmux_switch_to_session -a session
+    tmux switch-client -t "$session"
+end
+
+set choice ( tmux list-sessions | fzf | awk -F ':' '{print $1}' )
+tmux_switch_to_session "$choice"
