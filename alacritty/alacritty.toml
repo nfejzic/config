@@ -7,9 +7,9 @@ shell = "fish"
 [window]
 decorations = "None"
 startup_mode = "Maximized"
-opacity = 0.95
+opacity = 1
 blur = true
 
 [font]
 normal      = { family = "MonoLisa", style = "Book" }
-size    = 20
+size    = 16
