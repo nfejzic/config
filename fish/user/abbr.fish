@@ -79,7 +79,9 @@ end
 if type -q docker-compose
     abbr -a dbox-lamp-up 'docker-compose up -d httpd php mysql bind' # launch lamp stack + bind
     abbr -a dbox-lamp-down 'docker-compose down' # stop the lamp stack
-    abbr -a em 'emacsclient -c -n -a ""'
+else if type -q podman-compose
+    abbr -a dbox-lamp-up 'podman-compose up -d httpd php mysql bind' # launch lamp stack + bind
+    abbr -a dbox-lamp-down 'podman-compose down' # stop the lamp stack
 else
     __print -e "fish: could not setup abbr for docker-compose, docker-compose not found"
 end
@@ -88,13 +90,6 @@ if type -q cargo
     abbr -a cn 'cargo nextest'
 else
     __print -e "fish: could not setup abbr for cargo, cargo not found"
-end
-
-# Wezterm
-if type -q wezterm
-    abbr -a wtt 'wezterm cli set-tab-title'
-else
-    __print -e "fish: could not setup abbr for wezterm, wezterm not found"
 end
 
 if type -q zoxide
