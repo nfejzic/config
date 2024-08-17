@@ -4,9 +4,11 @@
 fish/completions/*
 fish/conf.d/nvm.fish
 fish/conf.d/rustup.fish
+fish/conf.d/fzf.fish
 fish/functions/*
 fish/functions/fisher.fish
 fish/fish_variables
+fish/themes/Catppuccin*
 
 # helix files
 helix/runtime
