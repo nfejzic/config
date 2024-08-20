@@ -163,7 +163,7 @@ font-thicken = false
 # 
 #   * Powerline glyphs will be adjusted along with the cell height so
 #     that things like status lines continue to look aligned.
-adjust-cell-width = -1
+adjust-cell-width = 0
 
 adjust-cell-height = 1
 adjust-font-baseline = 
