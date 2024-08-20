@@ -74,8 +74,11 @@ font-style-bold-italic = default
 # 
 # To generally disable most ligatures, use `-calt`, `-liga`, and `-dlig` (as
 # separate repetitive entries in your config).
-font-feature = ss11 # MonoLisa centered hexadecimal '0xF'
-font-feature = ss13 # MonoLisa strikethrough '$'
+
+# Centered 'x' in '0xF'
+font-feature = ss11
+# No strikethrough $:
+font-feature = ss13
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
