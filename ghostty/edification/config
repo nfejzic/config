@@ -674,6 +674,14 @@ keybind = super+k=clear_screen
 keybind = ctrl+l=clear_screen
 keybind = super+v=paste_from_clipboard
 
+# bind Ctrl-[ to 'ESC'
+keybind = ctrl+left_bracket=text:\x1B
+keybind = ctrl+right_bracket=unbind
+# bind Ctrl-p to up arrow, easier run last command
+keybind = ctrl+p=csi:A
+# bind Ctrl-p to down arrow, easier run last command
+keybind = ctrl+n=csi:B
+
 # Horizontal window padding. This applies padding between the terminal cells
 # and the left and right window borders. The value is in points, meaning that
 # it will be scaled appropriately for screen DPI.
