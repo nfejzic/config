@@ -212,10 +212,13 @@ grapheme-width-method = unicode
 # 
 # A future update will allow custom themes to be installed in certain
 # directories.
+theme = dayfox
 theme = kanagawabones
 
+# theme = GruvboxDarkHard
+# background = #1d2021
+
 # Background color for the window.
-# background = #282c34
 
 # Foreground color for the window.
 # foreground = #ffffff
@@ -276,7 +279,7 @@ cursor-opacity = 1
 #   * `bar`
 #   * `underline`
 # 
-cursor-style = block
+cursor-style = bar
 
 # Sets the default blinking state of the cursor. This is just the default
 # state; running programs may override the cursor style using `DECSCUSR` (`CSI
@@ -675,12 +678,9 @@ keybind = ctrl+l=clear_screen
 keybind = super+v=paste_from_clipboard
 
 # bind Ctrl-[ to 'ESC'
+# See https://tintin.mudhalla.net/info/xterm/
 keybind = ctrl+left_bracket=text:\x1B
 keybind = ctrl+right_bracket=unbind
-# bind Ctrl-p to up arrow, easier run last command
-keybind = ctrl+p=csi:A
-# bind Ctrl-p to down arrow, easier run last command
-keybind = ctrl+n=csi:B
 
 # Horizontal window padding. This applies padding between the terminal cells
 # and the left and right window borders. The value is in points, meaning that
@@ -814,7 +814,7 @@ window-title-font-family = MonoLisa
 # non-terminal windows within Ghostty.
 # 
 # This is currently only supported on macOS and Linux.
-window-theme = auto
+window-theme = system
 
 # The colorspace to use for the terminal window. The default is `srgb` but
 # this can also be set to `display-p3` to use the Display P3 colorspace.
@@ -1119,7 +1119,7 @@ initial-window = true
 #   * `bash`, `elvish`, `fish`, `zsh` - Use this specific shell injection scheme.
 # 
 # The default value is `detect`.
-shell-integration = detect
+shell-integration = fish
 
 # Shell integration features to enable if shell integration itself is enabled.
 # The format of this is a list of features to enable separated by commas. If
@@ -1136,7 +1136,7 @@ shell-integration = detect
 #   * `title` - Set the window title via shell integration.
 # 
 # Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
-shell-integration-features = no-cursor,no-sudo,title
+shell-integration-features = cursor,sudo,title
 
 # Sets the reporting format for OSC sequences that request color information.
 # Ghostty currently supports OSC 10 (foreground), OSC 11 (background), and
