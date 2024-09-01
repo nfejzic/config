@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd -H -I -td "^.git$" "$HOME/Developer/Tomes" "$HOME/Developer" --exec dirname | fzf)
+    selected=$(fd -H -I -td "^.git$" "$HOME/Developer" --exec dirname | fzf)
 fi
 
 if [[ -z $selected ]]; then

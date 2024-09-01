@@ -3,7 +3,12 @@
 set tmuxsessions (tmux list-sessions)
 
 function tmux_switch_to_session -a session
-    tmux switch-client -t "$session"
+    if set -q "TMUX"
+        tmux switch-client -t "$session"
+    else
+        tmux attach -t "$session"
+    end
+    
 end
 
 set choice ( tmux list-sessions | fzf | awk -F ':' '{print $1}' )

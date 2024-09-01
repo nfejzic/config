@@ -5,7 +5,7 @@ local M = {}
 --- @param hostconf HostConfig
 --- @param theme string | table
 local function set_opts(wezterm, config, hostconf, theme)
-	config.front_end = "WebGpu"
+	-- config.front_end = "WebGpu"
 
 	if hostconf.dpi ~= nil then
 		config.dpi = 108
@@ -55,11 +55,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.hide_mouse_cursor_when_typing = false
 	config.enable_scroll_bar = false
 
-	if os.getenv("DESKTOP_SESSION") == "hyprland" then
-		config.window_decorations = "TITLE | RESIZE"
-	else
-		config.window_decorations = "RESIZE"
-	end
+	config.window_decorations = "TITLE | RESIZE"
 
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
