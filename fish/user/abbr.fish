@@ -26,6 +26,7 @@ if type -q tmux
     abbr -a tk 'tmux kill-session -t'
     abbr -a tn 'tmux new -s'
     abbr -a tl 'tmux ls'
+    abbr -a ts '~/.config/tmux/bin/tmux-fuzzy-choose-session'
 else
     __print -e "fish: could not setup abbr for tmux, tmux not found"
 end
@@ -122,3 +123,6 @@ end
 if type -q /opt/homebrew/opt/curl/bin/curl
     abbr -a curl3 "/opt/homebrew/opt/curl/bin/curl"
 end
+
+bind -M insert \cf 'zi'
+bind -M normal \cf 'zi'
