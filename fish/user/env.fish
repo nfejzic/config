@@ -1,2 +1,16 @@
 set -gx EMAIL 'nadir@notfloor.com'
-set -gx XDG_CONFIG_HOME "$HOME/.config"
+
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+set -gx fish_cursor_default "block"
+set -gx fish_cursor_insert "line" "blink"
+set -gx fish_cursor_external "line" "blink"
+set -gx fish_cursor_replace_one "underscore"
+set -gx fish_cursor_visual "block"
+
+if status is-interactive
+    if string match -q -- '*ghostty*' $TERM
+        set -g fish_vi_force_cursor 1
+    end
+end
