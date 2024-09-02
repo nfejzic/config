@@ -7,6 +7,11 @@ return {
 		event = "InsertEnter",
 
 		config = function()
+			if string.match(vim.fn.hostname(), "percolation") then
+				-- AI tools not allowed at work
+				return
+			end
+
 			require("copilot").setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
@@ -36,6 +41,10 @@ return {
 		event = "InsertEnter",
 
 		config = function()
+			if string.match(vim.fn.hostname(), "percolation") then
+				return
+			end
+
 			require("copilot_cmp").setup({
 				fix_pairs = false,
 			})
