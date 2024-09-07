@@ -11,5 +11,7 @@ opacity = 1
 blur = true
 
 [font]
-normal      = { family = "MonoLisa", style = "Book" }
-size    = 20
+normal      = { family = "MonoLisa", style = "Light" }
+italic      = { family = "MonoLisa", style = "Light Italic" }
+bold        = { family = "MonoLisa", style = "Regular" }
+size        = 20
