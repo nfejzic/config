@@ -7,7 +7,7 @@ end
 
 local cmp_fmt = lspkind.cmp_format({
 	mode = "symbol_text",
-	symbol_map = { Copilot = "" },
+	symbol_map = { Codeium = "" },
 })
 
 cmp.setup({
@@ -66,10 +66,10 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
-		{ name = "copilot", group_index = 2 },
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "buffer" },
+		{ name = "codeium", group_index = 2 },
 		{ name = "gh_issues" },
 	},
 
