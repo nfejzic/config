@@ -7,9 +7,9 @@ return {
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = true },
 			functionStyle = {},
-			keywordStyle = { italic = false },
-			statementStyle = { bold = true },
-			typeStyle = { italic = false },
+			keywordStyle = { italic = false, bold = false },
+			statementStyle = { bold = false },
+			typeStyle = { italic = false, bold = false },
 			transparent = false, -- do not set background color
 			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
@@ -19,6 +19,7 @@ return {
 					["@field"] = { fg = theme.syn.variable, bg = "none" },
 					["@module"] = { link = "@variable" },
 					Identifier = { fg = theme.syn.variable },
+					Boolean = { bold = false },
 
 					Type = { fg = theme.syn.identifier },
 					-- ["@lsp.type.interface"] = { fg = colors.surimiYellow },
