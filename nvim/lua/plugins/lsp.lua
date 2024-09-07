@@ -113,7 +113,7 @@ return {
 				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
 				["zls"] = user_lsp.zig_lsp(opts, lspconfig, neoconf),
 				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
-				["tsserver"] = user_lsp.tsserver(opts, lspconfig, neoconf),
+				["vtsls"] = user_lsp.vtsls(opts, lspconfig, neoconf),
 				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
 				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
 				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),

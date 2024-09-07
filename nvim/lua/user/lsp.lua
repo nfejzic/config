@@ -213,13 +213,21 @@ M.go_lsp = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.tsserver = function(opts, lspconfig, neoconf)
+M.vtsls = function(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("tsserver.disable") then
 			return
 		end
 
-		lspconfig.tsserver.setup({
+		if neoconf.get("ts_ls.disable") then
+			return
+		end
+
+		if neoconf.get("vtsls.disable") then
+			return
+		end
+
+		lspconfig.vtsls.setup({
 			settings = {
 				typescript = {
 					inlayHints = {
