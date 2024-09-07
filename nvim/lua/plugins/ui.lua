@@ -7,12 +7,11 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			local theme = "auto"
 			---@diagnostic disable-next-line: undefined-field
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
-					theme = theme,
+					theme = "auto",
 					component_separators = { left = "", right = "" },
 					section_separators = { left = "", right = "" },
 					globalstatus = true,
