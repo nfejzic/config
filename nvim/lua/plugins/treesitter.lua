@@ -3,6 +3,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+
+		-- TODO: remove once the rust parser is fixed:
+		commit = "a1573a9135c608e68cb383f752623527be84bdce",
+
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter-textobjects" },
 			{
