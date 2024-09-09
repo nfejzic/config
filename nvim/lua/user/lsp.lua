@@ -143,7 +143,10 @@ M.rust_analyzer = function(opts, neoconf)
 						rustc = { source = "discover" },
 						updates = { channel = "nightly" },
 
-						cargo = { allFeatures = true },
+						cargo = {
+							allFeatures = true,
+							buildScripts = true,
+						},
 						checkOnSave = true,
 						check = {
 							enable = true,
