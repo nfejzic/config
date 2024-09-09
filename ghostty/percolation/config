@@ -91,7 +91,7 @@ font-feature = ss13
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 15
+font-size = 18
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -612,15 +612,15 @@ keybind = shift+alt+k=resize_split:up,30
 # keybind = shift+alt+h=unbind
 # keybind = shift+alt+k=unbind
 
-keybind = super+d=new_split:right
-keybind = super+shift+d=new_split:down
-keybind = alt+shift+equal=equalize_splits
+keybind = alt+d=new_split:right
+keybind = alt+shift+d=new_split:down
+keybind = super+alt+equal=equalize_splits
 # keybind = super+shift+enter=toggle_split_zoom
 
 # TABS:
-keybind = opt+n=next_tab
-keybind = opt+p=previous_tab
-keybind = super+t=new_tab
+keybind = alt+n=next_tab
+keybind = alt+p=previous_tab
+keybind = alt+t=new_tab
 
 keybind = super+physical:one=goto_tab:1
 keybind = super+physical:two=goto_tab:2
@@ -644,7 +644,7 @@ keybind = super+shift+down=jump_to_prompt:1
 keybind = super+shift+w=close_window
 keybind = shift+up=adjust_selection:up
 keybind = super+enter=toggle_fullscreen
-keybind = super+c=copy_to_clipboard
+keybind = alt+c=copy_to_clipboard
 keybind = shift+left=adjust_selection:left
 keybind = super+equal=increase_font_size:1
 keybind = shift+page_up=adjust_selection:page_up
@@ -675,7 +675,7 @@ keybind = super+zero=reset_font_size
 keybind = shift+home=adjust_selection:home
 keybind = super+k=clear_screen
 keybind = ctrl+l=clear_screen
-keybind = super+v=paste_from_clipboard
+keybind = alt+v=paste_from_clipboard
 
 # bind Ctrl-[ to 'ESC'
 # See https://tintin.mudhalla.net/info/xterm/
