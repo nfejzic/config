@@ -1,5 +1,4 @@
 if test (uname -s) = "Linux"
-    and type -q brew
     # linuxbrew
     set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew";
     set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar";
@@ -10,7 +9,6 @@ if test (uname -s) = "Linux"
 end
 
 if test (uname -s) = "Darwin"
-    and type -q brew
     # add gcloud stuff to path
     source "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
 end
