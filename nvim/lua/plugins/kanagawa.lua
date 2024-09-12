@@ -22,9 +22,12 @@ return {
 					Boolean = { bold = false },
 
 					Type = { fg = theme.syn.identifier },
-					-- ["@lsp.type.interface"] = { fg = colors.surimiYellow },
-					-- ["@lsp.type.lifetime"] = { fg = theme.syn.type },
 					["@storageclass.lifetime"] = { fg = theme.syn.string },
+					["@lsp.type.lifetime"] = { fg = theme.syn.string },
+
+					-- highlight identifiers in format strings (in Rust)
+					["@lsp.type.variable"] = { link = "@variable" },
+					["@lsp.type.formatSpecifier"] = { link = "Operator" },
 
 					Comment = { fg = theme.syn.constant },
 					["@comment"] = { link = "Comment" },
