@@ -60,6 +60,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- text width 120 in work projects
 			vim.o.colorcolumn = "+1"
 			vim.o.textwidth = 120
+		else
+			vim.o.textwidth = 80
 		end
 	end,
 })
@@ -68,7 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rust",
 	callback = function()
-		vim.o.colorcolumn = "100"
+		vim.o.colorcolumn = "+1"
 	end,
 })
 
