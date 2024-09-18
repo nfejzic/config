@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/fish
+#!/usr/bin/fish
 
 set tmuxsessions (tmux list-sessions)
 
