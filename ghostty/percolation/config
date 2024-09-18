@@ -36,6 +36,7 @@
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
 font-family = "MonoLisa"
+# font-family = "Liberation Mono"
 
 font-family-bold = 
 font-family-italic = 
@@ -598,39 +599,39 @@ working-directory = inherit
 
 # keybind=clear
 # SPLITS:
-keybind = alt+l=goto_split:right
-keybind = alt+j=goto_split:bottom
-keybind = alt+h=goto_split:left
-keybind = alt+k=goto_split:top
-keybind = shift+alt+l=resize_split:right,30
-keybind = shift+alt+j=resize_split:down,30
-keybind = shift+alt+h=resize_split:left,30
-keybind = shift+alt+k=resize_split:up,30
+# keybind = alt+l=goto_split:right
+# keybind = alt+j=goto_split:bottom
+# keybind = alt+h=goto_split:left
+# keybind = alt+k=goto_split:top
+# keybind = shift+alt+l=resize_split:right,30
+# keybind = shift+alt+j=resize_split:down,30
+# keybind = shift+alt+h=resize_split:left,30
+# keybind = shift+alt+k=resize_split:up,30
 # Deactive for now, use in tmux
 # keybind = shift+alt+l=unbind
 # keybind = shift+alt+j=unbind
 # keybind = shift+alt+h=unbind
 # keybind = shift+alt+k=unbind
 
-keybind = alt+d=new_split:right
-keybind = alt+shift+d=new_split:down
+# keybind = alt+d=new_split:right
+# keybind = alt+shift+d=new_split:down
 keybind = super+alt+equal=equalize_splits
 # keybind = super+shift+enter=toggle_split_zoom
 
 # TABS:
-keybind = alt+n=next_tab
-keybind = alt+p=previous_tab
-keybind = alt+t=new_tab
+# keybind = alt+n=next_tab
+# keybind = alt+p=previous_tab
+# keybind = alt+t=new_tab
 
-keybind = super+physical:one=goto_tab:1
-keybind = super+physical:two=goto_tab:2
-keybind = super+physical:three=goto_tab:3
-keybind = super+physical:four=goto_tab:4
-keybind = super+physical:five=goto_tab:5
-keybind = super+physical:six=goto_tab:6
-keybind = super+physical:seven=goto_tab:7
-keybind = super+physical:eight=goto_tab:8
-keybind = super+physical:nine=goto_tab:9
+# keybind = super+physical:one=goto_tab:1
+# keybind = super+physical:two=goto_tab:2
+# keybind = super+physical:three=goto_tab:3
+# keybind = super+physical:four=goto_tab:4
+# keybind = super+physical:five=goto_tab:5
+# keybind = super+physical:six=goto_tab:6
+# keybind = super+physical:seven=goto_tab:7
+# keybind = super+physical:eight=goto_tab:8
+# keybind = super+physical:nine=goto_tab:9
 
 # SCROLL:
 keybind = super+home=scroll_to_top
@@ -638,7 +639,8 @@ keybind = super+page_up=scroll_page_up
 keybind = super+alt+shift+j=write_scrollback_file:open
 
 keybind = super+alt+i=inspector:toggle
-keybind = super+w=close_surface
+# keybind = super+w=close_surface
+# keybind = alt+w=close_surface
 
 keybind = super+shift+down=jump_to_prompt:1
 keybind = super+shift+w=close_window
