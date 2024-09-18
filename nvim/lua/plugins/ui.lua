@@ -32,5 +32,10 @@ return {
 		end,
 	},
 
-	{ "luukvbaal/stabilize.nvim" }, -- Stabilize nvim windows
+	{
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup()
+		end
+	},                                -- Stabilize nvim windows
 }
