@@ -27,6 +27,7 @@ if type -q tmux
     abbr -a tn 'tmux new -s'
     abbr -a tl 'tmux ls'
     abbr -a ts '~/.config/tmux/bin/tmux-fuzzy-choose-session'
+    abbr -a tf '~/.config/tmux/bin/tmux-sessionizer'
 else
     __print -e "fish: could not setup abbr for tmux, tmux not found"
 end
