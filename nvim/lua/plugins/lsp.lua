@@ -45,7 +45,7 @@ return {
 
 			{
 				"mrcjkb/rustaceanvim",
-				version = "^4",
+				version = "^5",
 				ft = { "rust" },
 			},
 
@@ -76,7 +76,6 @@ return {
 			local user_lsp = require("user.lsp")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
-			local mason_registry = require("mason-registry")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			local neoconf = require("neoconf")
@@ -100,6 +99,16 @@ return {
 			lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
 				capabilities = global_capabilities,
 			})
+
+			-- NOTE: rustaceanvim recommends that we don't use mason, but rather
+			-- install the rust-analyzer through rustup. In case rust-analyzer
+			-- is not installed through, the `setup_handlers` won't be called.
+			-- So let's call the setup here:
+			if not require('mason-registry').is_installed('rust-analyzer') then
+				vim.notify("Setting rustaceanvim rust_analyzer directly.")
+				local setup_rust_analyzer = user_lsp.rust_analyzer(opts, neoconf)
+				setup_rust_analyzer()
+			end
 
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler
