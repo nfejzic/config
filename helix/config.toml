@@ -1,11 +1,11 @@
-theme = "catppuccin_macchiato"
+theme = "kanagawa"
 
 [editor]
 scrolloff = 3
 color-modes = true
 line-number = "relative"
 idle-timeout = 0
-rulers = [ 80 ]
+rulers = [ 81 ]
 bufferline = "never"
 auto-pairs = false
 gutters = ["diff", "spacer", "diagnostics", "spacer", "line-numbers", "spacer"]

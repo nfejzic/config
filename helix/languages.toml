@@ -1,43 +1,3 @@
-# [language-server.eslint]
-# args = ["--stdio"]
-# command = "eslint_d"
-# # command = "vscode-eslint-language-server"
-
-# [language-server.eslint.config]
-# format = false
-# packageManages = "npm"
-# nodePath = ""
-# workingDirectory.mode = "auto"
-# onIgnoredFiles = "off"
-# run = "onType"
-# validate = "on"
-# useESLintClass = false
-# experimental = { }
-# codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation.enable = true }
-
-[[language]]
-name = "typescript"
-scope = "source.ts"
-injection-regex = "(ts|typescript)"
-language-servers = [{ except-features = ["format"], name = "typescript-language-server"}, "eslint"]
-roots = [".prettierrc.json", ""]
-file-types = ["ts", "mts", "cts"]
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
-auto-format = true
-
-[language-server.eslint]
-command = "vscode-eslint-language-server"
-args = ["--stdio"]
-
-[language-server.eslint.config]
-validate = "on"
-experimental = {}
-rulesCustomizations = []
-run = "onType"
-problems = { shortenToSingleLine = false }
-nodePath = ""
-codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation.enable = true }
-
 [[language]]
 name = "btor2"
 scope = "source.btor2"
@@ -49,3 +9,9 @@ file-types = [ "btor2" ]
 [[grammar]]
 name = "btor2"
 source.path = "/Users/nadirfejzic/Developer/tree-sitter-btor2"
+
+[[language]]
+name = "rust"
+scope = "source.rs"
+rulers = [ 101 ]
+file-types = [ "rs" ]
