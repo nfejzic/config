@@ -9,6 +9,9 @@ return {
 		config = function()
 			local function customHighlights(colors)
 				return {
+					-- don't bold visual selection
+					Visual = { style = {} },
+
 					-- disable @lsp highlight
 					["@lsp"] = {},
 
