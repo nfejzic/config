@@ -1,0 +1,84 @@
+{
+  "bar.customModules.updates.pollingInterval": 1440000,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "theme.bar.floating": true,
+  "theme.bar.outer_spacing": "0.2em",
+  "theme.bar.buttons.y_margins": "0.4em",
+  "theme.bar.buttons.padding_y": "0.0rem",
+  "bar.launcher.icon": "",
+  "menus.clock.weather.location": "Salzburg",
+  "menus.clock.time.military": true,
+  "menus.clock.weather.unit": "metric",
+  "bar.notifications.show_total": true,
+  "bar.clock.format": "%a %b %d - %H:%M:%S",
+  "menus.dashboard.powermenu.avatar.image": "/home/nadirfejzic/Downloads/nadir.jpg",
+  "menus.dashboard.shortcuts.left.shortcut1.command": "brave-browser",
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Brave Browser",
+  "menus.dashboard.shortcuts.left.shortcut1.icon": "",
+  "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
+  "menus.dashboard.shortcuts.left.shortcut4.command": "wofi --show drun",
+  "menus.dashboard.directories.left.directory1.command": "bash -c \"nautilus $HOME/Downloads/\"",
+  "menus.dashboard.directories.left.directory2.command": "bash -c \"nautilus $HOME/Videos/\"",
+  "menus.dashboard.directories.left.directory3.command": "bash -c \"nautilus $HOME/Projects/\"",
+  "menus.dashboard.directories.right.directory1.command": "bash -c \"nautilus $HOME/Documents/\"",
+  "menus.dashboard.directories.right.directory2.command": "bash -c \"nautilus $HOME/Pictures/\"",
+  "menus.dashboard.directories.right.directory3.command": "bash -c \"nautilus $HOME/\""
+}
