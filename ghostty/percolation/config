@@ -92,7 +92,7 @@ font-feature = ss11
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 19
+font-size = 16
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -623,15 +623,15 @@ keybind = super+alt+equal=equalize_splits
 # keybind = alt+p=previous_tab
 # keybind = alt+t=new_tab
 
-# keybind = super+physical:one=goto_tab:1
-# keybind = super+physical:two=goto_tab:2
-# keybind = super+physical:three=goto_tab:3
-# keybind = super+physical:four=goto_tab:4
-# keybind = super+physical:five=goto_tab:5
-# keybind = super+physical:six=goto_tab:6
-# keybind = super+physical:seven=goto_tab:7
-# keybind = super+physical:eight=goto_tab:8
-# keybind = super+physical:nine=goto_tab:9
+keybind = alt+one=unbind
+keybind = alt+two=unbind
+keybind = alt+three=unbind
+keybind = alt+four=unbind
+keybind = alt+five=unbind
+keybind = alt+six=unbind
+keybind = alt+seven=unbind
+keybind = alt+eight=unbind
+keybind = alt+nine=unbind
 
 # SCROLL:
 keybind = super+home=scroll_to_top
