@@ -14,3 +14,8 @@ if status is-interactive
         set -g fish_vi_force_cursor 1
     end
 end
+
+if string match -q -- "percolation" $hostname
+    set --export BUN_INSTALL "$HOME/.bun"
+    set --export PATH $BUN_INSTALL/bin $PATH
+end
