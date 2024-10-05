@@ -1,6 +1,6 @@
 local M = {}
 
-M.lsp = function(t_builtin, inlay_hint_supported)
+function M.lsp(t_builtin, inlay_hint_supported)
 	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 	vim.keymap.set("n", "<leader>ld", t_builtin.lsp_definitions, { desc = "Go to definition" })
 
@@ -21,12 +21,7 @@ M.lsp = function(t_builtin, inlay_hint_supported)
 		t_builtin.diagnostics({ bufnr = 0 })
 	end, { desc = "Diagnostic messages in current buffer" })
 
-	vim.keymap.set("n", "<leader>la", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
-	vim.keymap.set("n", "<leader>lr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
-	-- TODO: this does not work right now (and I never use it). Try it out later
-	-- vim.keymap.set("n", "<leader>ll", vim.lsp.buf.list_workspace_folders, { desc = "List workspace folders" })
-
-	local code_action_fn = function()
+	local function code_action_fn()
 		local code_actions_available = false
 		local code_action_chck_grp = vim.api.nvim_create_augroup("CodeActionCheck", { clear = true })
 
@@ -48,6 +43,7 @@ M.lsp = function(t_builtin, inlay_hint_supported)
 
 	vim.keymap.set({ "n", "v" }, "<leader>.", code_action_fn, { desc = "Code actions" })
 	vim.keymap.set({ "n", "v" }, "<leader>a", code_action_fn, { desc = "Code actions" })
+	vim.keymap.set({ "n", "v" }, "<leader>ll", vim.lsp.codelens.run, { desc = "Code actions" })
 
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Definitions" })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "References" })
