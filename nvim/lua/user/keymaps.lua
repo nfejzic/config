@@ -52,6 +52,8 @@ function M.lsp(t_builtin, inlay_hint_supported)
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
 	vim.keymap.set("n", "gh", vim.diagnostic.open_float, { desc = "Show diagnostics message/help" })
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover" })
+	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 
 	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
