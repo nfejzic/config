@@ -76,7 +76,14 @@ function M.setup(wezterm, config)
 	local tab_fns = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf")[wezterm.hostname()]
-	local keybindings = keys.get_keybindings(wezterm, hostconf.program_paths)
+
+	local keybindings
+
+	if hostconf.get_keybindings ~= nil then
+		keybindings = hostconf.get_keybindings(wezterm, hostconf.program_paths)
+	else
+		keybindings = keys.get_keybindings(wezterm, hostconf.program_paths)
+	end
 
 	config.leader = keybindings.leader
 	config.keys = keybindings.keys

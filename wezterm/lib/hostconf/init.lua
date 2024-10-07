@@ -14,11 +14,13 @@
 ---@field font FontConfig
 ---@field update_dpi boolean
 ---@field program_paths ProgramPaths
+---@field get_keybindings function|nil
 
 --- @type table<string, HostConfig>
 local configs = {
 	["zenith"] = require("lib.hostconf.mac_os"),
 	["edification"] = require("lib.hostconf.fedora_linux"),
+	["percolation"] = require("lib.hostconf.percolation"),
 }
 
 return configs
