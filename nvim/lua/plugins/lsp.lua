@@ -105,7 +105,6 @@ return {
 			-- is not installed through, the `setup_handlers` won't be called.
 			-- So let's call the setup here:
 			if not require('mason-registry').is_installed('rust-analyzer') then
-				vim.notify("Setting rustaceanvim rust_analyzer directly.")
 				local setup_rust_analyzer = user_lsp.rust_analyzer(opts, neoconf)
 				setup_rust_analyzer()
 			end
