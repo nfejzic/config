@@ -1,8 +1,12 @@
 local M = {}
 
-local function setup_gui(mux)
+local function setup_gui(wezterm)
 	return function(cmd)
-		local _, _, window = mux.spawn_window(cmd or {})
+		if wezterm.hostname() == "percolation" then
+			return
+		end
+
+		local _, _, window = wezterm.mux.spawn_window(cmd or {})
 		local gui = window:gui_window()
 
 		gui:maximize()
@@ -55,7 +59,7 @@ end
 --- @param theme string
 --- @param hostconf HostConfig
 function M.register_events(wezterm, tab_fns, colors, theme, hostconf)
-	wezterm.on("gui-startup", setup_gui(wezterm.mux))
+	wezterm.on("gui-startup", setup_gui(wezterm))
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
 	wezterm.on("update-status", format_workspace_name(wezterm, colors, theme))
 
