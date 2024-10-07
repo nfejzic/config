@@ -107,6 +107,12 @@ else
     __print -e "fish: could not setup abbr for zoxide, zoxide not found"
 end
 
+if type -q fzf && type -q zoxide
+    abbr ff "z (fd -H -I -td . '$HOME/Developer' | fzf)"
+else
+    __print -e "fish: could not setup abbr for fzf + zoxide, zoxide or fzf not found"
+end
+
 # add copy abbreviation for first available clipboard provider
 set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
 for clipboard in $clipboard_providers 
