@@ -5,12 +5,12 @@ local jetbrains_mono = {
 	size = 13,
 	cell_width = 1,
 	harfbuzz_features = {
+		"cv01", -- regular looking 'l'
 		"cv03", -- looped 'g'
-		"cv07", -- looped 'g'
-		-- "cv10", -- serif on 'r'
+		"cv07", -- nicer 'w'
+		"cv10", -- serif on 'r'
 		"cv11", -- rounded 'y'
 		"cv12", -- regular 'u'
-		-- "ss20", -- raised bar 'f'
 	},
 }
 
@@ -134,6 +134,21 @@ local sf_mono_comfy = {
 	-- },
 }
 
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local berkeley_mono = {
+	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
+	family = "Berkeley Mono",
+	size = 12,
+	harfbuzz_features = {
+		-- strike-through '$'
+		"ss13",
+
+		-- centered hexadecimal 0xF
+		"ss11",
+	},
+}
+
 --- @type HostConfig
 local config = {
 	dpi = 108,
@@ -145,10 +160,11 @@ local config = {
 }
 
 config.font = jetbrains_mono
-config.font = monolisa
+-- config.font = monolisa
+-- config.font = berkeley_mono
 -- config.font = jetbrains_mono_comfy
 -- config.font.size = 19
-config.font = monolisa_comfy
+-- config.font = monolisa_comfy
 -- config.font = monolisa_huge
 
 return config

@@ -52,17 +52,70 @@
 # # r with serif
 # font-feature = cv10
 
-# MonoLisa
-font-family = "MonoLisa"
-font-style = "Regular"
-font-style-bold = "Bold"
-font-style-italic = "Regular Italic"
-font-style-bold-italic = "Bold Italic"
+##############
+## MonoLisa ##
+##############
 
-# MonoLisa centered hexadecimal '0xF'
-font-feature = ss11
+# font-family = "MonoLisa"
+# font-style = "Regular"
+# font-style-bold = "Bold"
+# font-style-italic = "Regular Italic"
+# font-style-bold-italic = "Bold Italic"
+# # font-size = 18
+# font-size = 23
+# adjust-cell-width = 0%
+# adjust-cell-height = 
+# # MonoLisa centered hexadecimal '0xF'
+# font-feature = ss11
 
-font-size = 21
+###################
+## Berkeley Mono ##
+###################
+
+font-family = "Berkeley Mono"
+font-size = 22
+# dotted '0'
+font-feature = ss02
+
+####################
+## JetBrains Mono ##
+####################
+
+# font-family = "JetBrains Mono"
+# font-size = 19.5
+# # 'g' with two loops
+# font-feature = cv03
+# # nicer looking 'w'
+# font-feature = cv07
+# # 'r' with serifs
+# font-feature = cv10
+# # regular looking 'u'
+# font-feature = cv12
+# # regular looking 'l'
+# font-feature = cv01
+# # rounded 'y'
+# font-feature = cv11
+
+#############
+## Codelia ##
+#############
+
+# font-family = "Codelia Ligatures"
+# font-style = "Regular"
+# font-size = 19
+
+###############
+## Fira Code ##
+###############
+
+# font-family = "Fira Code"
+# font-size = 19
+# # dotted '0'
+# font-feature = zero
+# # normal 'l'
+# font-feature = cv10
+# # sharp '3'
+# font-feature = cv14
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -134,9 +187,6 @@ font-thicken = false
 # 
 #   * Powerline glyphs will be adjusted along with the cell height so
 #     that things like status lines continue to look aligned.
-adjust-cell-width = -1
-
-adjust-cell-height = 1
 adjust-font-baseline = 
 adjust-underline-position = 
 adjust-underline-thickness = 
@@ -718,7 +768,7 @@ fullscreen = false
 # The title Ghostty will use for the window. This will force the title of the
 # window to be this title at all times and Ghostty will ignore any set title
 # escape sequences programs (such as Neovim) may send.
-title = 
+title = Ghostty 👻
 
 # The setting that will change the application class value.
 # 
@@ -1022,7 +1072,7 @@ window-decoration = true
 # The font that will be used for the application's window and tab titles.
 # 
 # This is currently only supported on macOS.
-window-title-font-family = MonoLisa
+# window-title-font-family = MonoLisa
 
 # The theme to use for the windows. Valid values:
 # 
@@ -1360,7 +1410,7 @@ shell-integration = detect
 #   * `title` - Set the window title via shell integration.
 # 
 # Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
-shell-integration-features = no-cursor,no-sudo,title
+shell-integration-features = no-cursor,no-sudo,no-title
 
 # Sets the reporting format for OSC sequences that request color information.
 # Ghostty currently supports OSC 10 (foreground), OSC 11 (background), and
@@ -1474,7 +1524,7 @@ macos-non-native-fullscreen = false
 # most cases.
 # 
 # Changing this option at runtime only applies to new windows.
-macos-titlebar-style = "tabs"
+macos-titlebar-style = transparent
 
 # If `true`, the *Option* key will be treated as *Alt*. This makes terminal
 # sequences expecting *Alt* to work properly, but will break Unicode input
