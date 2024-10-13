@@ -1,15 +1,11 @@
-#!/usr/bin/fish
+#!/usr/bin/env bash
 
-set tmuxsessions (tmux list-sessions)
+tmuxsessions=$(tmux list-sessions)
 
-function tmux_switch_to_session -a session
-    if set -q "TMUX"
-        tmux switch-client -t "$session"
-    else
-        tmux attach -t "$session"
-    end
-    
-end
+choice=$(tmux list-sessions | fzf | awk -F ':' '{print $1}')
 
-set choice ( tmux list-sessions | fzf | awk -F ':' '{print $1}' )
-tmux_switch_to_session "$choice"
+if [[ -z $TMUX ]]; then
+    tmux attach -t "$choice"
+else
+    tmux switch-client -t "$choice"
+fi
