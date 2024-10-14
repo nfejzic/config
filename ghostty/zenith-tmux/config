@@ -56,45 +56,45 @@
 ## MonoLisa ##
 ##############
 
-# font-family = "MonoLisa"
-# font-style = "Regular"
-# font-style-bold = "Bold"
-# font-style-italic = "Regular Italic"
-# font-style-bold-italic = "Bold Italic"
-# # font-size = 18
-# font-size = 23
-# adjust-cell-width = 0%
-# adjust-cell-height = 
-# # MonoLisa centered hexadecimal '0xF'
-# font-feature = ss11
+font-family = "MonoLisa"
+font-style = "Regular"
+font-style-bold = "Bold"
+font-style-italic = "Regular Italic"
+font-style-bold-italic = "Bold Italic"
+# font-size = 20
+font-size = 23
+# adjust-cell-width = -1
+adjust-cell-height = 
+# MonoLisa centered hexadecimal '0xF'
+font-feature = ss11
 
 ###################
 ## Berkeley Mono ##
 ###################
 
-font-family = "Berkeley Mono"
-font-size = 22
-# dotted '0'
-font-feature = ss02
+# font-family = "Berkeley Mono"
+# font-size = 22
+# # dotted '0'
+# font-feature = ss02
 
 ####################
 ## JetBrains Mono ##
 ####################
 
 # font-family = "JetBrains Mono"
-# font-size = 19.5
-# # 'g' with two loops
-# font-feature = cv03
-# # nicer looking 'w'
-# font-feature = cv07
-# # 'r' with serifs
-# font-feature = cv10
-# # regular looking 'u'
-# font-feature = cv12
-# # regular looking 'l'
-# font-feature = cv01
-# # rounded 'y'
-# font-feature = cv11
+# font-size = 20
+# # # 'g' with two loops
+# # font-feature = cv03
+# # # nicer looking 'w'
+# # font-feature = cv07
+# # # 'r' with serifs
+# # font-feature = cv10
+# # # regular looking 'u'
+# # font-feature = cv12
+# # # regular looking 'l'
+# # font-feature = cv01
+# # # rounded 'y'
+# # font-feature = cv11
 
 #############
 ## Codelia ##
