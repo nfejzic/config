@@ -76,7 +76,7 @@ return {
 			local user_lsp = require("user.lsp")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			local neoconf = require("neoconf")
 

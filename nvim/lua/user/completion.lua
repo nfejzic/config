@@ -69,7 +69,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "buffer" },
-		{ name = "codeium", group_index = 2 },
+		{ name = "codeium",                group_index = 2 },
 		{ name = "gh_issues" },
 	},
 

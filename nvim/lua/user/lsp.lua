@@ -80,14 +80,20 @@ M.get_on_attach = function(t_builtin)
 	end
 end
 
-M.get_global_capabilities = function(cmp_nvim_lsp)
-	local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-	local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
-
-	local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp_capabilities)
+---@param cmp_nvim_lsp table|nil
+function M.get_global_capabilities(cmp_nvim_lsp)
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	---@diagnostic disable-next-line: need-check-nil, undefined-field
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+	if cmp_nvim_lsp ~= nil then
+		local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
+		local glob_capabilities = vim.tbl_deep_extend("force", capabilities, cmp_capabilities)
+
+		return glob_capabilities
+	end
+
 	return capabilities
 end
 
@@ -117,10 +123,11 @@ M.rust_analyzer = function(opts, neoconf)
 			return
 		end
 
-		---@type RustaceanOpts
+		---@type rustaceanvim.Opts
 		vim.g.rustaceanvim = {
 			-- Plugin configuration
 			tools = {},
+
 			-- LSP configuration
 			-- NOTE: If 'rust-analyzer' is installed through rustup, it has priority and will be used
 			--       If that's not the case, then the binary installed through 'Mason' will be used
@@ -131,27 +138,33 @@ M.rust_analyzer = function(opts, neoconf)
 				settings = {
 					-- rust-analyzer language server configuration
 					["rust-analyzer"] = {
+						cachePriming = {
+							-- disable warming up of caches on startup, hopefully this should spread out caching during
+							-- usage and prevent bringin editor to a crawl at startup
+							enable = false,
+						},
+
 						hover = {
 							links = {
-								enable = false,
+								enable = true,
 							},
 						},
 
 						lens = { enable = true },
 						inlayHints = { enable = true },
 						completion = { autoimport = { enable = true } },
-						rustc = { source = "discover" },
-						updates = { channel = "nightly" },
+						-- rustc = { source = "discover" },
+						-- updates = { channel = "nightly" },
 
 						cargo = {
-							allFeatures = true,
+							-- allFeatures = true,
 							buildScripts = true,
 						},
 						checkOnSave = true,
 						check = {
 							enable = true,
 							command = "clippy",
-							features = "all",
+							-- features = "all",
 						},
 						procMacro = {
 							enable = true,
