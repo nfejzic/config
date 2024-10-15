@@ -35,12 +35,47 @@
 # 
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
-font-family = "MonoLisa"
 # font-family = "Liberation Mono"
+
+# # FONT: MONOLISA ##
+# font-family = "MonoLisa"
+# font-size = 16
+# # Centered 'x' in '0xF'
+# font-feature = ss11
+
+# # FONT: CODELIA ##
+# font-family = "Codelia Ligatures"
+# font-size = 17
+# font-feature = cv10
+
+# # FONT: COMIC CODE ##
+# font-family = "Comic Code Ligatures"
+# font-size = 17
+
+# # FONT: COMMIT MONO ##
+# font-family = "CommitMono"
+# font-size = 17
+
+# FONT: BERKELEY MONO ##
+font-family = "Berkeley Mono"
+font-size = 17
+
+# ## FONT: JETBRAINS MONO ##
+# font-family = "JetBrains Mono"
+# font-size = 17
+# # g with loop
+# font-feature = cv03
+# # somewhat nicer 'w'
+# font-feature = cv07
+# # r with serifs
+# font-feature = cv10
+# # regular u
+# font-feature = cv12
 
 font-family-bold = 
 font-family-italic = 
 font-family-bold-italic = 
+
 # The named font style to use for each of the requested terminal font styles.
 # This looks up the style based on the font style string advertised by the
 # font itself. For example, "Iosevka Heavy" has a style of "Heavy".
@@ -76,11 +111,6 @@ font-family-bold-italic =
 # To generally disable most ligatures, use `-calt`, `-liga`, and `-dlig` (as
 # separate repetitive entries in your config).
 
-# Centered 'x' in '0xF'
-font-feature = ss11
-# No strikethrough $:
-# font-feature = ss13
-
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
 # then you can get an odd numbered pixel size by specifying a half point.
@@ -92,7 +122,6 @@ font-feature = ss11
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 16
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -164,9 +193,9 @@ font-thicken = false
 # 
 #   * Powerline glyphs will be adjusted along with the cell height so
 #     that things like status lines continue to look aligned.
-adjust-cell-width = 0
+adjust-cell-width =
 
-adjust-cell-height = 1
+adjust-cell-height =
 adjust-font-baseline = 
 adjust-underline-position = 
 adjust-underline-thickness = 
@@ -215,8 +244,8 @@ grapheme-width-method = unicode
 # directories.
 theme = dayfox
 theme = kanagawabones
-
 # theme = GruvboxDarkHard
+
 # background = #1d2021
 
 # Background color for the window.
