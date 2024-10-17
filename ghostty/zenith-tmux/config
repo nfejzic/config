@@ -52,30 +52,51 @@
 # # r with serif
 # font-feature = cv10
 
+####################
+## Recursive Mono ##
+####################
+
+# font-family = "Recursive Mono Casual Static"
+# font-size = 23
+# # code ligatures
+# font-feature = dlig
+# # simplified 'f'
+# font-feature = ss03
+# # simplified 'i'
+# font-feature = ss04
+# # dotted '0'
+# font-feature = ss10
+
 ##############
 ## MonoLisa ##
 ##############
 
-font-family = "MonoLisa"
-font-style = "Regular"
-font-style-bold = "Bold"
-font-style-italic = "Regular Italic"
-font-style-bold-italic = "Bold Italic"
-# font-size = 20
-font-size = 23
-# adjust-cell-width = -1
-adjust-cell-height = 
-# MonoLisa centered hexadecimal '0xF'
-font-feature = ss11
+# font-family = "MonoLisa"
+# font-style = "Regular"
+# font-style-bold = "Bold"
+# font-style-italic = "Regular Italic"
+# font-style-bold-italic = "Bold Italic"
+# # font-size = 20
+# font-size = 23
+# # adjust-cell-width = -1
+# adjust-cell-height = 
+# # MonoLisa centered hexadecimal '0xF'
+# font-feature = ss11
+
+################
+## Comic Code ##
+################
+
+font-family = "Comic Code"
+font-size = 24
+font-feature = zero
 
 ###################
 ## Berkeley Mono ##
 ###################
 
 # font-family = "Berkeley Mono"
-# font-size = 22
-# # dotted '0'
-# font-feature = ss02
+# font-size = 25
 
 ####################
 ## JetBrains Mono ##
@@ -102,7 +123,7 @@ font-feature = ss11
 
 # font-family = "Codelia Ligatures"
 # font-style = "Regular"
-# font-size = 19
+# font-size = 23
 
 ###############
 ## Fira Code ##
