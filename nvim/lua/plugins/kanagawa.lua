@@ -28,6 +28,7 @@ return {
 					-- highlight identifiers in format strings (in Rust)
 					["@lsp.type.variable"] = { link = "@variable" },
 					["@lsp.type.formatSpecifier"] = { link = "Operator" },
+					["@variable.builtin"] = { italic = false },
 
 					Comment = { fg = theme.syn.constant },
 					["@comment"] = { link = "Comment" },
