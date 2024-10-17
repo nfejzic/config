@@ -255,6 +255,7 @@ grapheme-width-method = unicode
 # A future update will allow custom themes to be installed in certain
 # directories.
 theme = kanagawabones
+config-file = ../themes/kanagawa_dragon
 
 # Background color for the window.
 # background = #282c34
@@ -1312,7 +1313,7 @@ click-repeat-interval = 0
 # 
 # Cycles are not allowed. If a cycle is detected, an error will be logged and
 # the configuration file will be ignored.
-config-file = 
+# config-file = ../roseprime_theme
 
 # When this is true, the default configuration file paths will be loaded.
 # The default configuration file paths are currently only the XDG

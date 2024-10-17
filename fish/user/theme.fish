@@ -85,6 +85,9 @@ function __theme_fzf -a scheme
 end
 
 function __theme_bat -a theme
+    set -gx BAT_THEME "ansi"
+    return
+
     switch $theme
     case "catppuccin_latte"
         set -gx BAT_THEME "Catppuccin-latte"
