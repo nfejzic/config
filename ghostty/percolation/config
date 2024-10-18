@@ -245,6 +245,7 @@ grapheme-width-method = unicode
 # directories.
 theme = dayfox
 theme = kanagawabones
+theme = zenbones_dark
 # theme = GruvboxDarkHard
 
 # background = #1d2021

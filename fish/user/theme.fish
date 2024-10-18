@@ -56,6 +56,16 @@ function __theme_fzf -a scheme
         --color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
         --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
+    case "zenbones"
+        # 0 = black, 1 = red, 2 = green, 3 = orange, 4 = blue
+        # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
+        # 10 = brgreen, 11 = brorange, 12 = brblue, 13 = pink, 14 = aqua,
+        # 15 = lightgray, 16 = black
+        set -gx FZF_DEFAULT_OPTS "--ansi
+        --color=bg+:8,bg:0,spinner:9,hl:10 \
+        --color=fg:15,header:12,info:10,pointer:9 \
+        --color=marker:10,fg+:7,prompt:10,hl+:9"
+
     case "*"
         # use themes from fish theme
         set bg "" # transparent bg
@@ -103,6 +113,9 @@ function __theme_bat -a theme
     case "rose_pine"
         set -gx BAT_THEME "rose-pine"
 
+    case "zenbones"
+        set -gx BAT_THEME "ansi"
+
     case "*"
         set -gx BAT_THEME "ansi"
     end
@@ -136,6 +149,9 @@ function __theme_fish -a theme
 
     case "kanagawa"
         yes | fish_config theme save "Kanagawa"
+
+    case "zenbones"
+        yes | fish_config theme save "transparent"
     end
 end
 
@@ -182,7 +198,7 @@ function __is_theme_supported -a name
 end
 
 function set_theme
-    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa' 'Rose Pine'
+    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa' 'Rose Pine' 'Zenbones'
 
     argparse 'h/help' 'l/list' -- $argv
     or return

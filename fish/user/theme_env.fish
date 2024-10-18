@@ -1,1 +1,1 @@
-set -gx CLI_THEME kanagawa
+set -gx CLI_THEME zenbones
