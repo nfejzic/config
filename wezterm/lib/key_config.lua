@@ -1,3 +1,4 @@
+-- This is the default keybindings configuration. See hostconf for keybindings specific to the given hosts
 local M = {}
 -- timeout_milliseconds defaults to 1000 and can be omitted
 
