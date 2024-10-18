@@ -48,17 +48,18 @@
 # font-size = 17
 # font-feature = cv10
 
-# # FONT: COMIC CODE ##
-# font-family = "Comic Code Ligatures"
-# font-size = 17
+# FONT: COMIC CODE ## -> 0 == 
+font-family = "Comic Code"
+font-size = 16
+font-feature = zero
 
 # # FONT: COMMIT MONO ##
 # font-family = "CommitMono"
 # font-size = 17
 
-# FONT: BERKELEY MONO ##
-font-family = "Berkeley Mono"
-font-size = 17
+# # FONT: BERKELEY MONO ##
+# font-family = "Berkeley Mono"
+# font-size = 17
 
 # ## FONT: JETBRAINS MONO ##
 # font-family = "JetBrains Mono"
@@ -196,7 +197,7 @@ font-thicken = false
 adjust-cell-width =
 
 adjust-cell-height =
-adjust-font-baseline = 
+adjust-font-baseline =
 adjust-underline-position = 
 adjust-underline-thickness = 
 adjust-strikethrough-position = 

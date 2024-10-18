@@ -59,14 +59,14 @@ M.tab_bar_colors = function(colors, is_transparent)
 
 		active_tab = {
 			-- The color of the background area for the tab
-			bg_color = colors.ansi[8],
+			bg_color = term_bg,
 			-- The color of the text for the tab
-			fg_color = colors.ansi[1],
+			fg_color = colors.ansi[4],
 
 			-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
 			-- label shown for this tab.
 			-- The default is "Normal"
-			intensity = "Bold",
+			intensity = "Normal",
 
 			-- Specify whether you want "None", "Single" or "Double" underline for
 			-- label shown for this tab.

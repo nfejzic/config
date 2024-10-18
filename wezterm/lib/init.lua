@@ -52,7 +52,8 @@ local function set_opts(wezterm, config, hostconf, theme)
 	}
 
 	config.warn_about_missing_glyphs = true
-	config.hide_mouse_cursor_when_typing = false
+	config.hide_mouse_cursor_when_typing = true
+	config.cursor_blink_rate = 0
 	config.enable_scroll_bar = false
 
 	config.window_decorations = "TITLE | RESIZE"

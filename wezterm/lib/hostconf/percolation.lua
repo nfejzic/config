@@ -212,6 +212,18 @@ end
 
 --- @type FontConfig
 ---@diagnostic disable-next-line: unused-local
+local comic_code = {
+	family = "Comic Code",
+	size = 16,
+	cell_width = 1,
+	harfbuzz_features = {
+		-- dotted zero
+		"zero"
+	}
+}
+
+--- @type FontConfig
+---@diagnostic disable-next-line: unused-local
 local jetbrains_mono = {
 	family = "JetBrains Mono",
 	size = 15,
@@ -223,15 +235,6 @@ local jetbrains_mono = {
 local jetbrains_mono_comfy = {
 	family = "JetBrains Mono",
 	size = 16,
-	cell_width = 1,
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local comic_code = {
-	family = "Comic Code Ligatures",
-	size = 12,
-	line_height = 1.1,
 	cell_width = 1,
 }
 
@@ -253,7 +256,7 @@ local monolisa = {
 --- @type HostConfig
 local config = {
 	dpi = nil,
-	font = monolisa,
+	font = comic_code,
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
 	get_keybindings = get_keybindings
