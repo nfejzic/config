@@ -243,9 +243,13 @@ grapheme-width-method = unicode
 # 
 # A future update will allow custom themes to be installed in certain
 # directories.
-theme = dayfox
-theme = kanagawabones
-theme = zenbones_dark
+theme = GruvboxDarkHard
+# use the correct bacgkround shade
+palette =  0=#1d2021
+background =1d2021
+# config-file = ./kanagawa_dragon
+
+# theme = zenbones_dark
 # theme = GruvboxDarkHard
 
 # background = #1d2021
@@ -1050,7 +1054,7 @@ click-repeat-interval = 0
 # 
 # Cycles are not allowed. If a cycle is detected, an error will be logged and
 # the configuration file will be ignored.
-config-file = 
+# config-file = ./kanagawa_dragon
 
 # When this is true, the default configuration file paths will be loaded.
 # The default configuration file paths are currently only the XDG
@@ -1414,7 +1418,7 @@ gtk-adwaita = true
 desktop-notifications = true
 
 # If `true`, the bold text will use the bright color palette.
-bold-is-bright = false
+bold-is-bright = true
 
 # This will be used to set the `TERM` environment variable.
 # HACK: We set this with an `xterm` prefix because vim uses that to enable key
