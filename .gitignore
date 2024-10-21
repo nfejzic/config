@@ -32,6 +32,8 @@ emacs/init.el~
 /**/*.elc
 
 
+tmux/plugins
+
 # keyboard firmware stuff
 qmk_firmware/
 vial-qmk/
