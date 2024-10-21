@@ -1,205 +1,118 @@
 return {
-	-- original gruvbox colorscheme
 	{
-		"ellisonleao/gruvbox.nvim",
-		lazy = true,
-		config = function()
-			-- setup must be called before loading the colorscheme
-			-- Default options:
-			local gruvbox = require("gruvbox")
+		'nfejzic/gruvbox.nvim',
+		lazy = false,
+		dev = true,
+		opts =
+		{
+			compile = false, -- enable compiling the colorscheme
+			undercurl = true, -- enable undercurls
+			commentStyle = { italic = false },
+			functionStyle = {},
+			keywordStyle = { italic = false, bold = false },
+			statementStyle = { bold = false },
+			typeStyle = { italic = false, bold = false },
+			transparent = false, -- do not set background color
+			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+			terminalColors = true, -- define vim.g.terminal_color_{0,17}
+			overrides = function(colors) -- add/modify highlights
+				local theme = colors.theme
+				local palette = colors.palette
+				return {
+					-- ["@field"] = { fg = theme.syn.variable, bg = "none" },
+					-- ["@module"] = { link = "@variable" },
+					-- Identifier = { fg = theme.syn.variable },
+					Boolean = { bold = false },
 
-			vim.o.background = "dark"
-			local contrast = "hard"
+					-- Type = { fg = theme.syn.identifier },
+					-- ["@storageclass.lifetime"] = { fg = theme.syn.string },
+					-- ["@lsp.type.lifetime"] = { fg = theme.syn.string },
+					--
+					-- -- highlight identifiers in format strings (in Rust)
+					-- ["@lsp.type.variable"] = { link = "@variable" },
+					-- ["@lsp.type.formatSpecifier"] = { link = "Operator" },
+					-- ["@variable.builtin"] = { italic = false },
 
-			local function get_colors()
-				local p = gruvbox.palette
-
-				local bg = vim.o.background
-
-				local color_groups = {
-					dark = {
-						bg0 = p.dark0,
-						bg1 = p.dark1,
-						bg2 = p.dark2,
-						bg3 = p.dark3,
-						bg4 = p.dark4,
-						fg0 = p.light0,
-						fg1 = p.light1,
-						fg2 = p.light2,
-						fg3 = p.light3,
-						fg4 = p.light4,
-						red = p.bright_red,
-						green = p.bright_green,
-						yellow = p.bright_yellow,
-						blue = p.bright_blue,
-						purple = p.bright_purple,
-						aqua = p.bright_aqua,
-						orange = p.bright_orange,
-						neutral_red = p.neutral_red,
-						neutral_green = p.neutral_green,
-						neutral_yellow = p.neutral_yellow,
-						neutral_blue = p.neutral_blue,
-						neutral_purple = p.neutral_purple,
-						neutral_aqua = p.neutral_aqua,
-						dark_red = p.dark_red,
-						dark_green = p.dark_green,
-						dark_aqua = p.dark_aqua,
-						gray = p.gray,
-					},
-					light = {
-						bg0 = p.light0,
-						bg1 = p.light1,
-						bg2 = p.light2,
-						bg3 = p.light3,
-						bg4 = p.light4,
-						fg0 = p.dark0,
-						fg1 = p.dark1,
-						fg2 = p.dark2,
-						fg3 = p.dark3,
-						fg4 = p.dark4,
-						red = p.faded_red,
-						green = p.faded_green,
-						yellow = p.faded_yellow,
-						blue = p.faded_blue,
-						purple = p.faded_purple,
-						aqua = p.faded_aqua,
-						orange = p.faded_orange,
-						neutral_red = p.neutral_red,
-						neutral_green = p.neutral_green,
-						neutral_yellow = p.neutral_yellow,
-						neutral_blue = p.neutral_blue,
-						neutral_purple = p.neutral_purple,
-						neutral_aqua = p.neutral_aqua,
-						dark_red = p.light_red,
-						dark_green = p.light_green,
-						dark_aqua = p.light_aqua,
-						gray = p.gray,
-					},
-				}
-
-				if contrast ~= nil and contrast ~= "" then
-					color_groups[bg].bg0 = p[bg .. "0_" .. contrast]
-					color_groups[bg].dark_red = p[bg .. "_red_" .. contrast]
-					color_groups[bg].dark_green = p[bg .. "_green_" .. contrast]
-					color_groups[bg].dark_aqua = p[bg .. "_aqua_" .. contrast]
-				end
-
-				return color_groups[bg]
-			end
-
-			local colors = get_colors()
-
-			gruvbox.setup({
-				undercurl = true,
-				underline = true,
-				bold = true,
-				italic = {
-					strings = false,
-					emphasis = true,
-					comments = true,
-					operators = false,
-					folds = true,
-				},
-				strikethrough = true,
-				invert_selection = false,
-				invert_signs = false,
-				invert_tabline = false,
-				invert_indent_guides = false,
-				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = contrast, -- can be "hard", "soft" or empty string
-				palette_overrides = {},
-				overrides = {
-					Function = { fg = colors.blue, bg = "none" },
-					Identifier = { fg = colors.fg2, bg = "none" },
-					["@field"] = { fg = colors.fg2, bg = "none" },
-
-					["@lsp.type.interface"] = { link = "@type.definition" },
-					["@lsp.type.enumMember"] = { link = "@lsp.type.enum" },
-					["@lsp.type.lifetime"] = { fg = colors.aqua },
-					["@storageclass.lifetime"] = { fg = colors.aqua },
-					["@lsp.mod.constant.rust"] = { link = "Constant" },
-
-					Comment = { fg = colors.orange },
+					Comment = { fg = theme.syn.constant },
 					["@comment"] = { link = "Comment" },
+					["@comment.documentation"] = { fg = palette.brightAqua },
+					["@markup.heading.gitcommit"] = { fg = theme.syn.variable },
+					["@constant.comment"] = { fg = palette.brightRed },
 
-					["@comment.note.comment"] = { link = "GruvboxAqua" },
-
-					["@comment.documentation"] = { fg = colors.aqua },
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
 					["@lsp.typemod.comment.injected"] = { link = "Comment" },
-					-- ["@lsp.typemod.comment.injected.rust"] = { link = "Comment" },
-					-- ["@lsp.typemod.comment.documentation.rust"] = { link = "@comment.documentation" },
+					["@lsp.typemod.comment.documentation"] = { link = "@comment.documentation" },
+					["@lsp.type.selfKeyword"] = { fg = palette.brightOrange },
+					["@keyword.modifier"] = { fg = palette.brightRed },
+					["@attribute"] = { fg = palette.brightAqua },
+					["@attribute.builtin"] = { link = "@attribute" },
+					["@lsp.type.lifetime"] = { link = "@attribute" },
 
-					["@punctuation.delimiter"] = { fg = colors.fg2 },
-					["@punctuation.bracket"] = { fg = colors.fg2 },
-					["@label"] = { link = "@lsp.type.lifetime" },
+					-- ["@comment.note"] = { fg = theme.ui.fg },
+					-- ["@comment.error"] = { fg = theme.ui.fg, bg = theme.diag.error },
+					-- ["@comment.warning"] = { fg = theme.ui.fg, bg = theme.diff.text },
+					-- ["@keyword.modifier"] = { fg = theme.syn.preproc }, -- these are important!
+					-- Todo = { fg = theme.ui.bg, bg = theme.syn.constant },
+					--
+					-- ["@punctuation.delimiter"] = { fg = theme.ui.fg },
+					-- ["@punctuation.bracket"] = { fg = theme.ui.fg },
+					-- ["@constructor.lua"] = { fg = theme.ui.fg },
+					-- ["@label"] = { link = "@lsp.type.lifetime" },
+					--
+					["@lsp.type.keyword"] = { link = "none" },
+					["@module"] = { link = "@variable" },
+					["@lsp.type.namespace"] = { link = "none" },
 
-					["@lsp.type.keyword"] = { link = "@keyword" },
-					["@lsp.type.punctuation"] = { link = "@punctuation.bracket" },
-					["@lsp.type.operator"] = { link = "Operator" },
+					-- -- transparent floating windows
+					NormalFloat = { bg = "none" },
+					FloatBorder = { bg = "none" },
+					FloatTitle = { bg = "none" },
 
-					TreesitterContext = { bg = colors.bg1 },
-
-					-- NormalFloat = { fg = colors.fg4, bg = colors.bg0 },
-					NormalFloat = { link = "Normal" },
-					SignColumn = { link = "LineNr" },
-
-					DiagnosticSignError = { fg = colors.red },
-					DiagnosticSignWarn = { fg = colors.yellow },
-					DiagnosticSignHint = { fg = colors.aqua },
-					DiagnosticSignInfo = { fg = colors.blue },
-
-					-- dap ui not optimized...
-					DapUIStopNC = { bg = "none" },
-					DapUIRestartNC = { bg = "none" },
-					DapUIStepOutNC = { bg = "none" },
-					DapUIStepBackNC = { bg = "none" },
-					DapUIStepIntoNC = { bg = "none" },
-					DapUIStepOverNC = { bg = "none" },
-					DapUIPlayPauseNC = { bg = "none" },
-					DapUIUnavailableNC = { bg = "none" },
-					DapUINormalNC = { bg = "none" },
-
-					DapUIStop = { bg = "none" },
-					DapUIRestart = { bg = "none" },
-					DapUIStepOut = { bg = "none" },
-					DapUIStepBack = { bg = "none" },
-					DapUIStepInto = { bg = "none" },
-					DapUIStepOver = { bg = "none" },
-					DapUIPlayPause = { bg = "none" },
-					DapUIUnavailable = { bg = "none" },
-					DapUINormal = { bg = "none" },
-
-					["@lsp.type.builtinType.rust"] = {},
-					["@lsp"] = {},
-
-					-- neotest -> no support...
-					NeotestDir = { fg = colors.fg0 },
-					NeotestFile = { fg = colors.fg0 },
-					NeotestTest = { fg = colors.blue },
-					NeotestNamespace = { fg = colors.fg0 },
-					NeotestAdapterName = { fg = colors.aqua },
-
-					NeotestFocused = { fg = colors.yellow },
-
-					NeotestFailed = { fg = colors.red },
-					NeotestMarked = { fg = colors.orange },
-					NeotestPassed = { fg = colors.green },
-					NeotestTarget = { fg = colors.blue },
-					NeotestRunning = { fg = colors.yellow },
-					NeotestSkipped = { fg = colors.gray },
-					NeotestUnknown = { fg = colors.purple },
-					NeotestWatching = { fg = colors.yellow },
-					NeotestWinSelect = { fg = colors.yellow },
-
-					NeotestIndent = { fg = colors.gray },
-					NeotestExpandMarker = { fg = colors.gray },
-				},
-				dim_inactive = false,
-				transparent_mode = false,
-			})
-			-- vim.cmd("colo gruvbox")
-		end,
-	},
+					-- -- Save an hlgroup with dark background and dimmed foreground
+					-- -- so that you can use it where your still want darker windows.
+					-- -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
+					-- NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+					--
+					-- -- Popular plugins that open floats will link to NormalFloat by default;
+					-- -- set their background accordingly if you wish to keep them dark and borderless
+					-- LazyNormal = { fg = theme.ui.fg_dim },
+					-- MasonNormal = { fg = theme.ui.fg_dim },
+					--
+					TelescopeTitle = { fg = theme.syn.identifier, bold = false },
+					-- TelescopePromptNormal = { bg = "none" },
+					-- TelescopePromptBorder = { bg = "none" },
+					-- TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = "none" },
+					-- TelescopeResultsBorder = { bg = "none" },
+					-- TelescopePreviewNormal = { bg = "none" },
+					-- TelescopePreviewBorder = { bg = "none" },
+					--
+					-- -- neotest -> no support...
+					-- NeotestDir = { fg = theme.syn.fun },
+					-- NeotestFile = { fg = theme.syn.fun },
+					-- NeotestTest = { fg = theme.syn.identifier },
+					-- NeotestNamespace = { fg = theme.syn.fun },
+					-- NeotestAdapterName = { fg = theme.syn.string },
+					--
+					-- NeotestFocused = { fg = theme.syn.constant },
+					--
+					-- NeotestFailed = { fg = theme.syn.special2 },
+					-- NeotestMarked = { fg = theme.syn.constant },
+					-- NeotestPassed = { fg = theme.syn.string },
+					-- NeotestTarget = { fg = theme.syn.identifier },
+					-- NeotestRunning = { fg = theme.syn.constant },
+					-- NeotestSkipped = { fg = theme.syn.comment },
+					-- NeotestUnknown = { fg = theme.syn.keyword },
+					-- NeotestWatching = { fg = theme.syn.constant },
+					-- NeotestWinSelect = { fg = theme.syn.constant },
+					--
+					-- NeotestIndent = { fg = theme.syn.comment },
+					-- NeotestExpandMarker = { fg = theme.syn.comment },
+					--
+					-- NvimDapVirtualText = { link = "LspInlayHint" },
+				}
+			end,
+			theme = "dh", -- Load "wave" theme when 'background' option is not set
+		}
+	}
 }

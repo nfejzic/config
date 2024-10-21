@@ -36,7 +36,7 @@ require("lazy").setup({
 	-- 	ft = { "rust" },
 	-- },
 }, {
-	dev = { path = "/Users/nadirfejzic/Developer/nvim" },
+	dev = { path = vim.uv.os_homedir() .. "/Developer/nvim" },
 
 	change_detection = {
 		-- automatically check for config file changes and reload the ui
