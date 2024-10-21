@@ -1,7 +1,7 @@
 return {
 	-- some nice themes
-	{ "folke/tokyonight.nvim", lazy = true, event = "BufWinEnter" },
-	{ "EdenEast/nightfox.nvim", lazy = true, event = "BufWinEnter" },
+	{ "folke/tokyonight.nvim",        lazy = true, event = "BufWinEnter" },
+	{ "EdenEast/nightfox.nvim",       lazy = true, event = "BufWinEnter" },
 	{ "wincent/base16-nvim" },
 	{ "ishan9299/nvim-solarized-lua", lazy = true, event = "BufWinEnter" },
 	{
@@ -36,7 +36,7 @@ return {
 	},
 
 	{ "shaunsingh/nord.nvim", lazy = true, event = "BufWinEnter" },
-	{ "savq/melange-nvim", lazy = true, event = "BufWinEnter" },
+	{ "savq/melange-nvim",    lazy = true, event = "BufWinEnter" },
 	{
 		"loctvl842/monokai-pro.nvim",
 		lazy = true,
@@ -52,7 +52,7 @@ return {
 				annotation = { italic = false },
 				tag_attribute = { italic = false },
 			},
-			filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+			filter = "pro",   -- classic | octagon | pro | machine | ristretto | spectrum
 			-- Enable this will disable filter option
 			inc_search = "background", -- underline | background
 			background_clear = {
@@ -67,7 +67,13 @@ return {
 	{
 		"mcchrish/zenbones.nvim",
 		dependencies = { "rktjmp/lush.nvim" },
-		lazy = true,
-		event = "BufWinEnter",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.zenbones = {
+				solid_line_nr = true,
+				transparent_background = false,
+			}
+		end
 	},
 }

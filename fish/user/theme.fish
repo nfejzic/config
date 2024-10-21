@@ -56,31 +56,31 @@ function __theme_fzf -a scheme
         --color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
         --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-    case "zenbones"
-        # 0 = black, 1 = red, 2 = green, 3 = orange, 4 = blue
+    case "*"
+        # 0 = black, 1 = red, 2 = green, 3 = yellow, 4 = blue
         # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
         # 10 = brgreen, 11 = brorange, 12 = brblue, 13 = pink, 14 = aqua,
         # 15 = lightgray, 16 = black
         set -gx FZF_DEFAULT_OPTS "--ansi
-        --color=bg+:8,bg:0,spinner:9,hl:10 \
-        --color=fg:15,header:12,info:10,pointer:9 \
-        --color=marker:10,fg+:7,prompt:10,hl+:9"
+        --color=bg+:7,bg:0,spinner:9,hl:12 \
+        --color=fg:8,header:12,info:10,pointer:1 \
+        --color=marker:1,fg+:0,prompt:10,hl+:9"
 
-    case "*"
-        # use themes from fish theme
-        set bg "" # transparent bg
-        set fg $(echo "$fish_color_normal" | awk '{print $1}') # text 
-        set cyan $(echo "$fish_color_command" | awk '{print $1}') # text
-        set bgplus $(echo "$fish_color_selection" | awk -F '=' '{print $2}' | awk '{print $1}')
-        set red $(echo "$fish_color_error" | awk '{print $1}')
-        set orange $(echo "$fish_color_end" | awk '{print $1}')
-        set yellow $(echo "$fish_color_quote" | awk '{print $1}')
-        set selection $(echo "$fish_pager_color_progress" | awk '{print $1}')
-
-        set -gx FZF_DEFAULT_OPTS "\
-        --color=bg+:#$bgplus,bg:$bg,spinner:#$red,hl:#$orange \
-        --color=fg:#$fg,header:#$cyan,info:#$yellow,pointer:#$red \
-        --color=marker:#$yellow,fg+:$bg,prompt:#$yellow,hl+:#$orange"
+    # case "*"
+    #     # use themes from fish theme
+    #     set bg "" # transparent bg
+    #     set fg $(echo "$fish_color_normal" | awk '{print $1}') # text 
+    #     set cyan $(echo "$fish_color_command" | awk '{print $1}') # text
+    #     set bgplus $(echo "$fish_color_selection" | awk -F '=' '{print $2}' | awk '{print $1}')
+    #     set red $(echo "$fish_color_error" | awk '{print $1}')
+    #     set orange $(echo "$fish_color_end" | awk '{print $1}')
+    #     set yellow $(echo "$fish_color_quote" | awk '{print $1}')
+    #     set selection $(echo "$fish_pager_color_progress" | awk '{print $1}')
+    #
+    #     set -gx FZF_DEFAULT_OPTS "\
+    #     --color=bg+:#$bgplus,bg:$bg,spinner:#$red,hl:#$orange \
+    #     --color=fg:#$fg,header:#$cyan,info:#$yellow,pointer:#$red \
+    #     --color=marker:#$yellow,fg+:$bg,prompt:#$yellow,hl+:#$orange"
     end
 end
 
@@ -152,6 +152,9 @@ function __theme_fish -a theme
 
     case "zenbones"
         yes | fish_config theme save "transparent"
+
+    case "*"
+        yes | fish_config theme save "transparent"
     end
 end
 
@@ -198,7 +201,7 @@ function __is_theme_supported -a name
 end
 
 function set_theme
-    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa' 'Rose Pine' 'Zenbones'
+    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa' 'Rose Pine' 'Zenbones' 'Transparent'
 
     argparse 'h/help' 'l/list' -- $argv
     or return
