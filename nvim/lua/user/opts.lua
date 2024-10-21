@@ -40,6 +40,13 @@ vim.opt.diffopt:append("iwhite")
 vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.diffopt:append("indent-heuristic")
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		require("user.custom_hl").customize()
+	end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "typescript", "javascript", "vue" },
 	callback = function(ev)

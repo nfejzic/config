@@ -8,6 +8,7 @@ local function mod_hl(hl_name, hl_opts)
 			hl_def[k] = v
 		end
 
+		---@diagnostic disable-next-line: param-type-mismatch
 		vim.api.nvim_set_hl(0, hl_name, hl_def)
 	end
 end
@@ -29,11 +30,22 @@ local function copy_hl(from_hl, to_hl)
 end
 
 mod_hl("LspInlayHint", { bg = "none" })
-mod_hl("ColorColumn", { link = "TabLine" })
-mod_hl("NormalFloat", { link = "Normal" })
-mod_hl("Constant", { italic = false })
 
-copy_hl("@label.vimdoc", "@comment.documentation")
-mod_hl("@comment.documentation", { italic = true, bold = false })
-mod_hl("@lsp.mod.documentation", { link = "@comment.documentation" })
-mod_hl("@lsp.typemod.comment.documentation", { link = "@comment.documentation" })
+local customization_map = {
+	["zenbones"] = require("user.colorscheme.zenbones").customize,
+	["rose-pine"] = require("user.colorscheme.rose-pine").customize,
+	["solarized-high"] = require("user.colorscheme.solarized").customize("high"),
+}
+
+local M = {}
+
+function M.customize()
+	local current_scheme = vim.api.nvim_exec2("colorscheme", { output = true }).output
+	local customize_scheme = customization_map[current_scheme]
+
+	if customize_scheme ~= nil then
+		customize_scheme(mod_hl)
+	end
+end
+
+return M
