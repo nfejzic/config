@@ -1,18 +1,5 @@
 local M = {}
 
-local function setup_gui(wezterm)
-	return function(cmd)
-		if wezterm.hostname() == "percolation" then
-			return
-		end
-
-		local _, _, window = wezterm.mux.spawn_window(cmd or {})
-		local gui = window:gui_window()
-
-		gui:maximize()
-	end
-end
-
 local function update_dpi(get_screens)
 	return function(window)
 		-- calculate correct DPI
@@ -59,7 +46,6 @@ end
 --- @param theme string
 --- @param hostconf HostConfig
 function M.register_events(wezterm, tab_fns, colors, theme, hostconf)
-	wezterm.on("gui-startup", setup_gui(wezterm))
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
 	wezterm.on("update-status", format_workspace_name(wezterm, colors, theme))
 
