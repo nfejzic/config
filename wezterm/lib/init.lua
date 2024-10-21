@@ -56,7 +56,8 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.cursor_blink_rate = 0
 	config.enable_scroll_bar = false
 
-	config.window_decorations = "TITLE | RESIZE"
+	config.window_decorations = "RESIZE"
+	config.integrated_title_button_style = "MacOsNative"
 
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
