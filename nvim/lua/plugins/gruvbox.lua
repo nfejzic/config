@@ -17,35 +17,22 @@ return {
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
 			overrides = function(colors) -- add/modify highlights
 				local theme = colors.theme
-				local palette = colors.palette
 				return {
-					-- ["@field"] = { fg = theme.syn.variable, bg = "none" },
-					-- ["@module"] = { link = "@variable" },
-					-- Identifier = { fg = theme.syn.variable },
 					Boolean = { bold = false },
 
-					-- Type = { fg = theme.syn.identifier },
-					-- ["@storageclass.lifetime"] = { fg = theme.syn.string },
-					-- ["@lsp.type.lifetime"] = { fg = theme.syn.string },
-					--
-					-- -- highlight identifiers in format strings (in Rust)
-					-- ["@lsp.type.variable"] = { link = "@variable" },
-					-- ["@lsp.type.formatSpecifier"] = { link = "Operator" },
-					-- ["@variable.builtin"] = { italic = false },
-
-					Comment = { fg = theme.syn.constant },
+					Comment = { fg = theme.syn.comment },
 					["@comment"] = { link = "Comment" },
-					["@comment.documentation"] = { fg = palette.brightAqua },
+					["@comment.documentation"] = { fg = theme.syn.docComment },
 					["@markup.heading.gitcommit"] = { fg = theme.syn.variable },
-					["@constant.comment"] = { fg = palette.brightRed },
+					["@constant.comment"] = { fg = theme.syn.preproc },
 
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
 					["@lsp.typemod.comment.injected"] = { link = "Comment" },
 					["@lsp.typemod.comment.documentation"] = { link = "@comment.documentation" },
-					["@lsp.type.selfKeyword"] = { fg = palette.brightOrange },
-					["@keyword.modifier"] = { fg = palette.brightRed },
-					["@attribute"] = { fg = palette.brightAqua },
+					["@lsp.type.selfKeyword"] = { fg = theme.syn.constant },
+					["@keyword.modifier"] = { fg = theme.syn.preproc },
+					["@attribute"] = { fg = theme.syn.docComment },
 					["@attribute.builtin"] = { link = "@attribute" },
 					["@lsp.type.lifetime"] = { link = "@attribute" },
 
