@@ -16,7 +16,7 @@ disabled = false
 style = "bright-blue"
 
 [directory]
-style = "blue"
+style = "bright-blue"
 
 [character]
 success_symbol = "[❯](purple)"
