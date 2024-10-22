@@ -1,14 +1,15 @@
 return {
 	-- some nice themes
-	{ "folke/tokyonight.nvim",        lazy = true, event = "BufWinEnter" },
-	{ "EdenEast/nightfox.nvim",       lazy = true, event = "BufWinEnter" },
-	{ "wincent/base16-nvim" },
-	{ "ishan9299/nvim-solarized-lua", lazy = true, event = "BufWinEnter" },
+	{ "folke/tokyonight.nvim",        lazy = true,    event = "BufWinEnter", enabled = false },
+	{ "EdenEast/nightfox.nvim",       lazy = true,    event = "BufWinEnter", enabled = false },
+	{ "wincent/base16-nvim",          enabled = false },
+	{ "ishan9299/nvim-solarized-lua", lazy = true,    event = "BufWinEnter", enabled = false },
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
 		lazy = true,
 		event = "BufWinEnter",
+		enabled = false,
 		config = function()
 			require("rose-pine").setup({
 				variant = "auto",
@@ -35,12 +36,13 @@ return {
 		end,
 	},
 
-	{ "shaunsingh/nord.nvim", lazy = true, event = "BufWinEnter" },
-	{ "savq/melange-nvim",    lazy = true, event = "BufWinEnter" },
+	{ "shaunsingh/nord.nvim", lazy = true, event = "BufWinEnter", enabled = false },
+	{ "savq/melange-nvim",    lazy = true, event = "BufWinEnter", enabled = false },
 	{
 		"loctvl842/monokai-pro.nvim",
 		lazy = true,
 		event = "BufWinEnter",
+		enabled = false,
 		opts = {
 			styles = {
 				comment = { italic = true },
@@ -68,6 +70,7 @@ return {
 		"mcchrish/zenbones.nvim",
 		dependencies = { "rktjmp/lush.nvim" },
 		lazy = false,
+		enabled = false,
 		priority = 1000,
 		config = function()
 			vim.g.zenbones = {

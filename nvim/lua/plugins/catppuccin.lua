@@ -3,6 +3,7 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		lazy = true,
+		enabled = false,
 		priority = 1000,
 		event = "BufWinEnter",
 
