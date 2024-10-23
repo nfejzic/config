@@ -6,7 +6,7 @@
 
 # FONT: COMIC CODE ## -> 0 == 
 font-family = "Comic Code"
-font-size = 16
+font-size = 15
 font-feature = zero
 
 # # FONT: BERKELEY MONO ##
