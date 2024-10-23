@@ -5,7 +5,7 @@ return {
 		dev = true,
 		opts =
 		{
-			compile = true, -- enable compiling the colorscheme
+			compile = false, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = false },
 			functionStyle = {},
