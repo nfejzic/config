@@ -1,10 +1,11 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		lazy = true,
-		event = "VeryLazy",
+		lazy = false,
+		-- event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
+			"nfejzic/colorize.nvim",
 		},
 		config = function()
 			---@diagnostic disable-next-line: undefined-field

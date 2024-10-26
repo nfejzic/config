@@ -2,4 +2,4 @@ require("user.opts")
 require("user.lazy")
 require("user.keymaps").general()
 
-vim.cmd("colo gruvbox")
+vim.cmd("colo solarized-dark-hard")

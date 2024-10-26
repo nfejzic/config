@@ -1,11 +1,12 @@
 return {
 	{
-		'nfejzic/gruvbox.nvim',
+		'nfejzic/colorize.nvim',
 		lazy = false,
 		dev = true,
+		priority = 1000,
 		opts =
 		{
-			compile = false, -- enable compiling the colorscheme
+			compile = true, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = false },
 			functionStyle = {},
@@ -24,7 +25,7 @@ return {
 					["@comment"] = { link = "Comment" },
 					["@comment.documentation"] = { fg = theme.syn.docComment },
 					["@markup.heading.gitcommit"] = { fg = theme.syn.variable },
-					["@constant.comment"] = { fg = theme.syn.preproc },
+					["@constant.comment"] = { link = "Constant" },
 
 					["@lsp.mod.documentation"] = {},
 					["@lsp.type.comment"] = {},
