@@ -36,6 +36,13 @@ function __theme_fzf -a scheme
         --color fg:#839496,bg:#002B36,hl:#D33682,hl+:#D33682,fg+:#002B36,bg+:#FDF6E3 \
         --color info:#859900,prompt:#268BD2,spinner:#DC322F,pointer:#DC322F,marker:#2AA198"
 
+    case "solarized_dark_hard"
+        # bg=bg; fg=fg; info=green; prompt=blue; pointer=red; marker=cyan; spinner=red
+        # hl=magenta; hl+=magenta; fg+=bg; bg+=bg-of-dark
+        set -gx FZF_DEFAULT_OPTS "\
+        --color fg:#839496,bg:#00141D,hl:#D33682,hl+:#D33682,fg+:#00141D,bg+:#FDF6E3 \
+        --color info:#859900,prompt:#268BD2,spinner:#DC322F,pointer:#DC322F,marker:#2AA198"
+
     case "solarized_light"
         # bg=bg; fg=fg; info=green; prompt=blue; pointer=red; marker=cyan; spinner=red
         # hl=magenta; hl+=magenta; fg+=bg; bg+=bg-of-dark
@@ -138,9 +145,9 @@ function __theme_fish -a theme
     case "catppuccin_mocha"
         yes | fish_config theme save "Catppuccin Mocha"
 
-    case "solarized_dark"
-        yes | fish_config theme save "Solarized Dark"
-
+    case "solarized_dark" or "solarized_dark_hard"
+        yes | fish_config theme save "transparent" # works better than solarized theme
+        
     case "solarized_light"
         yes | fish_config theme save "Solarized Light"
 
@@ -204,7 +211,7 @@ function __is_theme_supported -a name
 end
 
 function set_theme
-    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Kanagawa' 'Rose Pine' 'Zenbones' 'Transparent'
+    set -g themes 'Catppuccin Frappe' 'Catppuccin Latte' 'Catppuccin Macchiato' 'Catppuccin Mocha' 'Gruvbox Dark Hard' 'Solarized Light' 'Solarized Dark' 'Solarized Dark Hard' 'Kanagawa' 'Rose Pine' 'Zenbones' 'Transparent'
 
     argparse 'h/help' 'l/list' -- $argv
     or return
