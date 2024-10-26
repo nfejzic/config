@@ -35,11 +35,10 @@ font-feature = zero
 # 
 # A future update will allow custom themes to be installed in certain
 # directories.
-theme = GruvboxDarkHard
+# theme = GruvboxDarkHard
+config-file = ../themes/solarized_dark_hard_patched
 
 # correct gruvbox dark hard theme
-background = 1d2021
-palette = 0=#1d2021
 
 # If you select across cells with differing foregrounds and backgrounds, the
 # selection color will vary across the selection.
