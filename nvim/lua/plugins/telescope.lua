@@ -13,6 +13,18 @@ return {
 				dependencies = { "tpope/vim-fugitive" },
 			},
 			{ "folke/neoconf.nvim" },
+
+			{
+				"danielfalk/smart-open.nvim",
+				branch = "0.2.x",
+				dependencies = {
+					"kkharji/sqlite.lua",
+					-- Only required if using match_algorithm fzf
+					{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+					-- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+					{ "nvim-telescope/telescope-fzy-native.nvim" },
+				},
+			}
 		},
 
 		config = function()
@@ -61,12 +73,16 @@ return {
 			-- Enable extension for browsing through git history of a file
 			require("telescope").load_extension("git_file_history")
 
+			-- Enable smart search extension
+			require("telescope").load_extension("smart_open")
+
 			local telescope = require("telescope")
 			local t_builtin = require("telescope.builtin")
+			local t_extensions = require("telescope").extensions
 
 			local function openTodos()
 				local expr =
-					"(TODO|FIXME|BUG|NOTE|HACK|XXX|IDEA|REVIEW|NB|BUG|REFACTOR|OPTIMIZE|WARNING|DEBUG|INFO|DONE|QUESTION|COMBAK|TEMP)(\\(.*\\))?:"
+				"(TODO|FIXME|BUG|NOTE|HACK|XXX|IDEA|REVIEW|NB|BUG|REFACTOR|OPTIMIZE|WARNING|DEBUG|INFO|DONE|QUESTION|COMBAK|TEMP)(\\(.*\\))?:"
 
 				t_builtin.live_grep({ default_text = expr, initial_mode = "normal" })
 			end
@@ -75,7 +91,7 @@ return {
 				openTodos()
 			end, {})
 
-			require("user.keymaps").telescope_keymaps(telescope, t_builtin)
+			require("user.keymaps").telescope_keymaps(telescope, t_builtin, t_extensions)
 		end,
 	},
 }

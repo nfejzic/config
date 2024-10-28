@@ -108,9 +108,12 @@ M.neogen = function(neogen)
 	)
 end
 
-M.telescope_keymaps = function(telescope, t_builtin)
+function M.telescope_keymaps(telescope, t_builtin, t_extensions)
 	vim.keymap.set("n", "<leader>ff", function()
-		t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
+		-- t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
+		t_extensions.smart_open.smart_open({
+			filename_first = false
+		})
 	end, { desc = "Find file" })
 
 	-- Ctrl-P make it be the same
