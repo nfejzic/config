@@ -141,7 +141,8 @@ M.rust_analyzer = function(opts, neoconf)
 						cachePriming = {
 							-- disable warming up of caches on startup, hopefully this should spread out caching during
 							-- usage and prevent bringin editor to a crawl at startup
-							enable = false,
+							-- NOTE: does not really work...
+							enable = true,
 						},
 
 						hover = {
@@ -164,7 +165,7 @@ M.rust_analyzer = function(opts, neoconf)
 						check = {
 							enable = true,
 							command = "clippy",
-							-- features = "all",
+							features = "all",
 						},
 						procMacro = {
 							enable = true,
