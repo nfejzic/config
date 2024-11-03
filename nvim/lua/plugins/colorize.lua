@@ -100,7 +100,7 @@ return {
 					-- NvimDapVirtualText = { link = "LspInlayHint" },
 				}
 			end,
-			theme = "dh", -- Load "wave" theme when 'background' option is not set
+			theme = "gruvbox-dark-hard", -- Load "wave" theme when 'background' option is not set
 		}
 	}
 }
