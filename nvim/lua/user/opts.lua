@@ -1,4 +1,4 @@
--- vim.opt.guicursor = "a:block"
+vim.opt.guicursor = "a:block"
 
 --Remap space as leader key
 vim.g.mapleader = " "
