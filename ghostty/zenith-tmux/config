@@ -19,8 +19,12 @@
 ################
 
 font-family = "Comic Code"
-font-size = 21
+font-size = 27
 font-feature = zero
+
+# font-family = "JetBrains Mono"
+# font-size = 29
+# font-feature = cv01
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
@@ -36,7 +40,8 @@ font-feature = zero
 # A future update will allow custom themes to be installed in certain
 # directories.
 # theme = GruvboxDarkHard
-config-file = ../themes/solarized_dark_hard_patched
+config-file = ../themes/gruvbox_dark_hard
+# config-file = ../themes/rose_pine_black
 
 # correct gruvbox dark hard theme
 
@@ -350,7 +355,7 @@ window-inherit-font-size = true
 # 
 # Changing this configuration in your configuration and reloading will
 # only affect new windows. Existing windows will not be affected.
-window-decoration = true
+window-decoration = false
 
 # Whether to allow programs running in the terminal to read/write to the
 # system clipboard (OSC 52, for googling). The default is to allow clipboard
