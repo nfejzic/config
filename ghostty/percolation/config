@@ -1,25 +1,19 @@
 # # FONT: MONOLISA ##
 # font-family = "MonoLisa"
-# font-size = 16
-# # Centered 'x' in '0xF'
-# font-feature = ss11
+font-family = "MonoLisa"
+font-size = 19
 
 # FONT: COMIC CODE ## -> 0 == 
-font-family = "Comic Code"
-font-size = 15
-font-feature = zero
+# font-family = "Comic Code"
+# font-size = 15
+# font-size = 22
+# font-feature = zero
 
 # # FONT: BERKELEY MONO ##
 # font-family = "Berkeley Mono"
 # font-size = 17
 
-# A named theme to use. The available themes are currently hardcoded to the
-# themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
-# Contents/Resources/ghostty/themes` directory. On Linux, this list is in the
-# `share/ghostty/themes` directory (wherever you installed the Ghostty "share"
-# directory.
-# 
-# To see a list of available themes, run `ghostty +list-themes`.
+# A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
 # Any additional colors specified via background, foreground, palette, etc.
 # will override the colors specified in the theme.
@@ -27,6 +21,9 @@ font-feature = zero
 # A future update will allow custom themes to be installed in certain
 # directories.
 # theme = GruvboxDarkHard
+
+# for now, we use custom themes, which is just a file that configures palette.
+# Custom config files can be loaded with `config-file = <path>`
 config-file = ../themes/gruvbox_dark_hard
 
 # Swap the foreground and background colors of cells for selection. This
@@ -42,33 +39,19 @@ selection-invert-fg-bg = false
 cursor-invert-fg-bg = false
 
 # The style of the cursor. This sets the default style. A running program can
-# still request an explicit cursor style using escape sequences (such as `CSI
-# q`). Shell configurations will often request specific cursor styles.
-# 
-# Note that shell integration will automatically set the cursor to a bar at
-# a prompt, regardless of this configuration. You can disable that behavior
-# by specifying `shell-integration-features = no-cursor` or disabling shell
-# integration entirely.
-# 
+# still request an explicit cursor style.
+#
 # Valid values are:
 # 
 #   * `block`
 #   * `bar`
 #   * `underline`
-# 
 cursor-style = bar
 
 # Sets the default blinking state of the cursor. This is just the default
-# state; running programs may override the cursor style using `DECSCUSR` (`CSI
-# q`).
+# state; running programs may override the cursor style.
 # 
-# If this is not set, the cursor blinks by default. Note that this is not the
-# same as a "true" value, as noted below.
-# 
-# If this is not set at all (`null`), then Ghostty will respect DEC Mode 12
-# (AT&T cursor blink) as an alternate approach to turning blinking on/off. If
-# this is set to any value other than null, DEC mode 12 will be ignored but
-# `DECSCUSR` will still be respected.
+# The cursor blinks by default.
 # 
 # Valid values are:
 # 
@@ -78,30 +61,13 @@ cursor-style = bar
 # 
 cursor-style-blink = false
 
-# Hide the mouse immediately when typing. The mouse becomes visible again when
-# the mouse is used. The mouse is only hidden if the mouse cursor is over the
-# active terminal surface.
+# Hide the mouse immediately when typing.
 mouse-hide-while-typing = true
 
 # The size of the scrollback buffer in bytes. This also includes the active
-# screen. No matter what this is set to, enough memory will always be
-# allocated for the visible screen and anything leftover is the limit for
-# the scrollback.
-# 
-# When this limit is reached, the oldest lines are removed from the
+# screen. When this limit is reached, the oldest lines are removed from the
 # scrollback.
-# 
-# Scrollback currently exists completely in memory. This means that the
-# larger this value, the larger potential memory usage. Scrollback is
-# allocated lazily up to this limit, so if you set this to a very large
-# value, it will not immediately consume a lot of memory.
-# 
-# This size is per terminal surface, not for the entire application.
-# 
-# It is not currently possible to set an unlimited scrollback buffer.
-# This is a future planned feature.
-# 
-# This can be changed at runtime but will only affect new terminal surfaces.
+# NOTE: this is mostly irrelevant if Ghostty is used with Tmux.
 scrollback-limit = 10000000
 
 # The title Ghostty will use for the window. This will force the title of the
@@ -171,14 +137,7 @@ keybind = ctrl+right_bracket=unbind
 # size. In this case, some extra padding on the end of a column and the bottom
 # of the final row may exist. If this is `true`, then this extra padding
 # is automatically balanced between all four edges to minimize imbalance on
-# one side. If this is `false`, the top left grid cell will always hug the
-# edge with zero padding other than what may be specified with the other
-# `window-padding` options.
-# 
-# If other `window-padding` fields are set and this is `true`, this will still
-# apply. The other padding is applied first and may affect how many grid cells
-# actually exist, and this is applied last in order to balance the padding
-# given a certain viewport size and grid cell size.
+# one side.
 window-padding-balance = true
 
 # The color of the padding area of the window. Valid values are:
@@ -204,33 +163,25 @@ window-padding-balance = true
 window-padding-color = extend
 
 # If true, new windows and tabs will inherit the working directory of the
-# previously focused window. If no window was previously focused, the default
-# working directory will be used (the `working-directory` option).
+# previously focused window.
+# NOTE: mostly irrelevant if Ghostty is used with Tmux
 window-inherit-working-directory = true
 
 # If true, new windows and tabs will inherit the font size of the previously
-# focused window. If no window was previously focused, the default font size
-# will be used. If this is false, the default font size specified in the
-# configuration `font-size` will be used.
+# focused window.
 window-inherit-font-size = true
 
 # Valid values:
 # 
 #   * `true`
 #   * `false` - windows won't have native decorations, i.e. titlebar and
-#      borders. On MacOS this also disables tabs and tab overview.
+#      borders.
 # 
 # The "toggle_window_decoration" keybind action can be used to create
 # a keybinding to toggle this setting at runtime.
 # 
-# Changing this configuration in your configuration and reloading will
-# only affect new windows. Existing windows will not be affected.
+# Only affects new windows. Existing windows will not be affected.
 window-decoration = false
-
-# The font that will be used for the application's window and tab titles.
-# 
-# This is currently only supported on macOS.
-window-title-font-family = Comic Code
 
 # The theme to use for the windows. Valid values:
 # 
@@ -239,19 +190,10 @@ window-title-font-family = Comic Code
 #   * `system` - Use the system theme.
 #   * `light` - Use the light theme regardless of system theme.
 #   * `dark` - Use the dark theme regardless of system theme.
-# 
-# On macOS, if `macos-titlebar-style` is "tabs", the window theme will be
-# automatically set based on the luminosity of the terminal background color.
-# This only applies to terminal windows. This setting will still apply to
-# non-terminal windows within Ghostty.
-# 
-# This is currently only supported on macOS and Linux.
 window-theme = system
 
-focus-follows-mouse = false
 # Whether to allow programs running in the terminal to read/write to the
-# system clipboard (OSC 52, for googling). The default is to allow clipboard
-# reading after prompting the user and allow writing unconditionally.
+# system clipboard (OSC 52, for googling)
 # 
 # Valid values are:
 # 
@@ -260,21 +202,16 @@ focus-follows-mouse = false
 #   * `deny`
 # 
 clipboard-read = ask
-
 clipboard-write = allow
+
 # Trims trailing whitespace on data that is copied to the clipboard. This does
 # not affect data sent to the clipboard via `clipboard-write`.
 clipboard-trim-trailing-spaces = true
 
-# Require confirmation before pasting text that appears unsafe. This helps
-# prevent a "copy/paste attack" where a user may accidentally execute unsafe
-# commands by pasting text with newlines.
+# Require confirmation before pasting text that appears unsafe.
 clipboard-paste-protection = true
 
-# If true, bracketed pastes will be considered safe. By default, bracketed
-# pastes are considered safe. "Bracketed" pastes are pastes while the running
-# program has bracketed paste mode enabled (a setting set by the running
-# program, not the terminal emulator).
+# If true, bracketed pastes will be considered safe.
 clipboard-paste-bracketed-safe = true
 
 # Whether to enable shell integration auto-injection or not. Shell integration
@@ -282,74 +219,37 @@ clipboard-paste-bracketed-safe = true
 # 
 #   * Working directory reporting so new tabs, splits inherit the
 #     previous terminal's working directory.
-# 
 #   * Prompt marking that enables the "jump_to_prompt" keybinding.
-# 
 #   * If you're sitting at a prompt, closing a terminal will not ask
 #     for confirmation.
-# 
 #   * Resizing the window with a complex prompt usually paints much
 #     better.
-# 
-# Allowable values are:
-# 
-#   * `none` - Do not do any automatic injection. You can still manually
-#     configure your shell to enable the integration.
-# 
-#   * `detect` - Detect the shell based on the filename.
-# 
-#   * `bash`, `elvish`, `fish`, `zsh` - Use this specific shell injection scheme.
-# 
-# The default value is `detect`.
 shell-integration = fish
 
 # Shell integration features to enable if shell integration itself is enabled.
-# The format of this is a list of features to enable separated by commas. If
-# you prefix a feature with `no-` then it is disabled. If you omit a feature,
-# its default value is used, so you must explicitly disable features you don't
-# want. You can also use `true` or `false` to turn all features on or off.
+# If you prefix a feature with `no-` then it is disabled.
 # 
 # Available features:
 # 
 #   * `cursor` - Set the cursor to a blinking bar at the prompt.
-# 
 #   * `sudo` - Set sudo wrapper to preserve terminfo.
-# 
 #   * `title` - Set the window title via shell integration.
-# 
-# Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
 shell-integration-features = cursor,sudo,title
 
 # When enabled, the full GTK titlebar is displayed instead of your window
-# manager's simple titlebar. The behavior of this option will vary with your
-# window manager.
+# manager's simple titlebar.
 # 
-# This option does nothing when `window-decoration` is false or when running
-# under macOS.
-# 
-# Changing this value at runtime and reloading the configuration will only
-# affect new windows.
+# Only affects new windows.
 gtk-titlebar = true
 
 # Determines the side of the screen that the GTK tab bar will stick to.
 # Top, bottom, left, and right are supported. The default is top.
 gtk-tabs-location = top
 
-# If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
-# are the new typical Gnome style where tabs fill their available space.
-# If you set this to `false` then tabs will only take up space they need,
-# which is the old style.
+# If `true` (default), then the Ghostty GTK tabs will be "wide."
 gtk-wide-tabs = true
 
-# If `true` (default), Ghostty will enable libadwaita theme support. This
-# will make `window-theme` work properly and will also allow Ghostty to
-# properly respond to system theme changes, light/dark mode changing, etc.
-# This requires a GTK4 desktop with a GTK4 theme.
-# 
-# If you are running GTK3 or have a GTK3 theme, you may have to set this
-# to false to get your theme picked up properly. Having this set to true
-# with GTK3 should not cause any problems, but it may not work exactly as
-# expected.
+# If `true` (default), Ghostty will enable libadwaita theme support.
 # 
 # This configuration only has an effect if Ghostty was built with
 # libadwaita support.
