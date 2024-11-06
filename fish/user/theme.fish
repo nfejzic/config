@@ -152,7 +152,8 @@ function __theme_fish -a theme
         yes | fish_config theme save "Solarized Light"
 
     case "gruvbox_dark_hard"
-        yes | fish_config theme save "Gruvbox Dark Hard"
+        yes | fish_config theme save "transparent"
+        # yes | fish_config theme save "Gruvbox Dark Hard"
 
     case "rose_pine"
         yes | fish_config theme save "Rosé Pine"
