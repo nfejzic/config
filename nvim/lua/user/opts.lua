@@ -83,8 +83,23 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = "*.component.html",
-	callback = function(e)
+	callback = function()
 		vim.o.filetype = "htmlangular"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = "config",
+	callback = function(ev)
+		print(vim.inspect(ev))
+
+		if string.match(ev.file, "ghostty/.*/config") then
+			-- Ghostty config file, e.g. ~/Developer/config/ghostty/zenith-tmux/config
+			--			   matches with:                    ghostty/     .*    /config
+			vim.o.filetype = "ghostty"
+			vim.o.colorcolumn = "+1"
+			vim.o.textwidth = 80
+		end
 	end,
 })
 
