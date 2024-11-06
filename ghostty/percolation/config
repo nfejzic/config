@@ -46,7 +46,7 @@ cursor-invert-fg-bg = false
 #   * `block`
 #   * `bar`
 #   * `underline`
-cursor-style = bar
+cursor-style = block
 
 # Sets the default blinking state of the cursor. This is just the default
 # state; running programs may override the cursor style.
@@ -234,7 +234,7 @@ shell-integration = fish
 #   * `cursor` - Set the cursor to a blinking bar at the prompt.
 #   * `sudo` - Set sudo wrapper to preserve terminfo.
 #   * `title` - Set the window title via shell integration.
-shell-integration-features = cursor,sudo,title
+shell-integration-features = no-cursor,sudo,title
 
 # When enabled, the full GTK titlebar is displayed instead of your window
 # manager's simple titlebar.
