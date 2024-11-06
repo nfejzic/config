@@ -9,7 +9,7 @@ function M.lsp(t_builtin, inlay_hint_supported)
 	vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
 	vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Refactor Rename" })
 	vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, { desc = "Show hover popup" })
-	vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "Populate location list with diagnostics" })
+	-- vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "Populate location list with diagnostics" })
 	vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Populate quickfix list with diagnostics" })
 
 	vim.keymap.set("n", "<leader>lr", t_builtin.lsp_references, { desc = "Go to References" })
@@ -43,7 +43,7 @@ function M.lsp(t_builtin, inlay_hint_supported)
 
 	vim.keymap.set({ "n", "v" }, "<leader>.", code_action_fn, { desc = "Code actions" })
 	vim.keymap.set({ "n", "v" }, "<leader>a", code_action_fn, { desc = "Code actions" })
-	vim.keymap.set({ "n", "v" }, "<leader>ll", vim.lsp.codelens.run, { desc = "Code actions" })
+	vim.keymap.set({ "n", "v" }, "<leader>ll", vim.lsp.codelens.run, { desc = "Run Code Lens" })
 
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Definitions" })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "References" })
@@ -60,6 +60,11 @@ function M.lsp(t_builtin, inlay_hint_supported)
 
 	if inlay_hint_supported then
 		vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
+	end
+
+	-- rust specific
+	if vim.fn.exists(':RustLsp') then
+		vim.keymap.set("n", "<leader>lx", "<cmd>RustLsp expandMacro<cr>", { desc = "RustLsp expand macro" })
 	end
 end
 
