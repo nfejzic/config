@@ -16,7 +16,15 @@ conform.setup({
 		c = {},
 		go = { "gofumpt" },
 		sql = { "sql_formatter", "sqlfmt", stop_after_first = false },
+		fish = { "fish_indent" },
 		["*"] = { "injected" },
+	},
+	formatters = {
+		fish_indent = {
+			command = "fish_indent",
+			args = { "-w", "$FILENAME" },
+			stdin = false,
+		}
 	},
 	format_on_save = function(bufnr)
 		local buf_name = vim.api.nvim_buf_get_name(bufnr)
