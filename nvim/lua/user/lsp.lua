@@ -117,7 +117,7 @@ M.clangd = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.rust_analyzer = function(opts, neoconf)
+function M.rust_analyzer(opts, neoconf)
 	return function()
 		if neoconf.get("rust_analyzer.disable") then
 			return
@@ -135,40 +135,15 @@ M.rust_analyzer = function(opts, neoconf)
 				on_attach = opts.on_attach,
 				capabilites = opts.capabilites,
 				handlers = opts.handlers,
-				settings = {
+				standalone = false,
+				default_settings = {
 					-- rust-analyzer language server configuration
 					["rust-analyzer"] = {
-						cachePriming = {
-							-- disable warming up of caches on startup, hopefully this should spread out caching during
-							-- usage and prevent bringin editor to a crawl at startup
-							-- NOTE: does not really work...
-							enable = true,
-						},
-
-						hover = {
-							links = {
-								enable = true,
-							},
-						},
-
-						lens = { enable = true },
-						inlayHints = { enable = true },
-						completion = { autoimport = { enable = true } },
-						-- rustc = { source = "discover" },
-						-- updates = { channel = "nightly" },
-
-						cargo = {
-							-- allFeatures = true,
-							buildScripts = true,
-						},
 						checkOnSave = true,
 						check = {
 							enable = true,
 							command = "clippy",
 							features = "all",
-						},
-						procMacro = {
-							enable = true,
 						},
 					},
 				},
