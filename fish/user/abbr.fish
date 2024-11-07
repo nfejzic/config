@@ -133,3 +133,7 @@ end
 
 bind -M insert \cf 'zi'
 bind -M normal \cf 'zi'
+
+if string match -q -- "percolation" $hostname
+    abbr -a me "nvim_for_device"
+end
