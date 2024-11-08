@@ -1,5 +1,7 @@
 import = [
-    "~/.config/alacritty/colors/kanagawa.toml"
+    "~/.config/alacritty/colors/gruvbox_dark_hard.toml"
+
+    # "~/.config/alacritty/colors/kanagawa.toml"
     # "~/.config/alacritty/colors/catppuccin-macchiato.toml"
 ]
 shell = "fish"
