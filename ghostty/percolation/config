@@ -3,15 +3,30 @@
 font-family = "MonoLisa"
 font-size = 19
 
+# FONT: JetBrains Mono ##
+# font-family = "JetBrainsMono Nerd Font"
+# font-size = 20
+# # slab 'l'
+# font-feature = cv01
+# # serif 'r'
+# font-feature = cv10
+# # double-loop 'g'
+# font-feature = cv03
+# # nicer 'w'
+# font-feature = cv07
+# # rounded 'y'
+# font-feature = cv11
+# # normal 'u'
+# font-feature = cv12
+
 # FONT: COMIC CODE ## -> 0 == 
 # font-family = "Comic Code"
-# font-size = 15
-# font-size = 22
+# font-size = 21
 # font-feature = zero
 
 # # FONT: BERKELEY MONO ##
 # font-family = "Berkeley Mono"
-# font-size = 17
+# font-size = 22
 
 # A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
@@ -130,8 +145,11 @@ keybind = alt+v=paste_from_clipboard
 
 # bind Ctrl-[ to 'ESC'
 # See https://tintin.mudhalla.net/info/xterm/
+# See https://gist.github.com/nfejzic/6f3788b3841cb0d7ac11584c6b33b5b9
 keybind = ctrl+left_bracket=text:\x1B
 keybind = ctrl+right_bracket=unbind
+# send Ctrl-W on Ctrl+backspace
+keybind = ctrl+backspace=text:\x17
 
 # The viewport dimensions are usually not perfectly divisible by the cell
 # size. In this case, some extra padding on the end of a column and the bottom
