@@ -44,12 +44,12 @@ end
 
 --- @param colors table
 --- @param is_transparent boolean
-M.tab_bar_colors = function(colors, is_transparent)
-	local term_bg = colors.background
+function M.tab_bar_colors(colors, is_transparent)
+	local term_bg = colors.tab_bg
 
-	if is_transparent then
-		term_bg = "rgba(0% 0% 0% 0%)"
-	end
+	-- if is_transparent then
+	-- 	term_bg = "rgba(0% 0% 0% 0%)"
+	-- end
 
 	return {
 		-- The color of the inactive tab bar edge/divider

@@ -24,6 +24,21 @@ local function get_keybindings(wezterm, program_paths)
 			},
 
 			{
+				key = "v",
+				mods = "ALT",
+				action = act.PasteFrom('Clipboard'),
+			},
+
+			{
+				key = "Backspace",
+				mods = "CTRL",
+				action = act.SendKey({
+					key = 'w',
+					mods = 'CTRL',
+				})
+			},
+
+			{
 				key = "d",
 				mods = "ALT",
 				action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
@@ -243,7 +258,7 @@ local jetbrains_mono_comfy = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 16,
+	size = 19,
 	cell_width = 1,
 	line_height = 1.05,
 	freetype_load_flags = "NO_HINTING",
@@ -256,7 +271,7 @@ local monolisa = {
 --- @type HostConfig
 local config = {
 	dpi = nil,
-	font = comic_code,
+	font = monolisa,
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
 	get_keybindings = get_keybindings

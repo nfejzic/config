@@ -26,14 +26,14 @@ local function format_workspace_name(wezterm, colors, theme)
 	return function(window, _)
 		local workspace = window:active_workspace()
 
-		local foreground_color = colors.ansi[1]
+		local foreground_color = colors.ansi[8]
 		if theme == "rose-pine" then
 			foreground_color = colors.brights[8]
 		end
 
 		window:set_left_status(wezterm.format({
 			{ Attribute = { Intensity = "Normal" } },
-			{ Background = { Color = colors.brights[5] } },
+			{ Background = { Color = colors.tab_bg } },
 			{ Foreground = { Color = foreground_color } },
 			{ Text = " [" .. workspace .. "] " },
 		}))

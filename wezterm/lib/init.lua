@@ -5,7 +5,8 @@ local M = {}
 --- @param hostconf HostConfig
 --- @param theme string | table
 local function set_opts(wezterm, config, hostconf, theme)
-	-- config.front_end = "WebGpu"
+	config.enable_wayland = false
+	config.front_end = "OpenGL"
 
 	if hostconf.dpi ~= nil then
 		config.dpi = 108
@@ -56,7 +57,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.cursor_blink_rate = 0
 	config.enable_scroll_bar = false
 
-	config.window_decorations = "RESIZE"
+	config.window_decorations = "NONE"
 
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
