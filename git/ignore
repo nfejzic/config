@@ -10,6 +10,7 @@ compile_commands.json
 .clang-format
 .neoconf.json
 .editorconfig
+.vscode/
 
 # ignore hidden files specific to `just` command runner
 .Justfile*
