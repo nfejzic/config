@@ -1,7 +1,14 @@
 # # FONT: MONOLISA ##
 # font-family = "MonoLisa"
 font-family = "MonoLisa"
+font-style = Regular
+font-style-italic = Regular Italic
+font-style-bold = Bold
+font-style-bold-italic = Bold Italic
 font-size = 19
+adjust-cell-width = 0
+adjust-cell-height = 0
+
 
 # FONT: JetBrains Mono ##
 # font-family = "JetBrainsMono Nerd Font"
