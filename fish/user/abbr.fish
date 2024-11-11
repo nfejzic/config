@@ -64,6 +64,7 @@ if type -q git
     abbr -a gc 'git commit'
     abbr -a gk 'git checkout'
     abbr -a gp 'git pull'
+    abbr -a gpr 'git pull --prune'
     abbr -a gpp 'git push'
     abbr -a gbd 'git branch -vv | rg gone | awk \'{print $1}\' | xargs -p -I _ git branch -D _'
     abbr -a gw 'git worktree'
