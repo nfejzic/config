@@ -21,6 +21,6 @@ function reset_rectangle
     open /Applications/Rectangle.app
 end
 
-if not test (uname -s) = "Darwin"
+if not test (uname -s) = Darwin
     functions -e set_yabai_for_streaming
 end

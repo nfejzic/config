@@ -1,6 +1,6 @@
 # Function used to printing messages with indentation and optionally to stderr.
 function __print
-    argparse --name=__print 'h/help' 'i/indent=?!_validate_int --min 0 --max 4' 'e/error' -- $argv
+    argparse --name=__print h/help 'i/indent=?!_validate_int --min 0 --max 4' e/error -- $argv
     or return
 
     set lvl 0
@@ -54,24 +54,24 @@ function log
         set -l arg_lvl (echo $_flag_level | tr '[:upper:]' '[:lower:]')
 
         switch "$arg_lvl"
-        case "info"
-            set color cyan
-            set lvl INFO
-        case "warn"
-            set color yellow
-            set lvl WARN
-        case "error"
-            set color red
-            set lvl ERROR
-        case "debug"
-            set color blue
-            set lvl DEBUG
-        case "*"
-            log --level=error -- "Log level can be one of 'info|debug|warn|error'."
+            case info
+                set color cyan
+                set lvl INFO
+            case warn
+                set color yellow
+                set lvl WARN
+            case error
+                set color red
+                set lvl ERROR
+            case debug
+                set color blue
+                set lvl DEBUG
+            case "*"
+                log --level=error -- "Log level can be one of 'info|debug|warn|error'."
         end
     end
 
-    if test "$lvl" = "error"
+    if test "$lvl" = error
         set_color $color
         echo -n $lvl >&2
         set_color normal

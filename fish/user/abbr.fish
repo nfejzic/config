@@ -1,16 +1,16 @@
 if type -q nvim
-    abbr -a e 'nvim'
+    abbr -a e nvim
 end
 
 if type -q clang
-    abbr -a cc 'clang'
+    abbr -a cc clang
 else
     __print -e "fish: could not setup abbr for clang, clang not found"
 end
 
 if type -q eza
-    abbr -a l 'eza'
-    abbr -a ls 'eza'
+    abbr -a l eza
+    abbr -a ls eza
     abbr -a la 'eza -a'
     abbr -a ll 'eza -l'
     abbr -a lla 'eza -la'
@@ -98,12 +98,12 @@ end
 if type -q zoxide
     # init zoxide
     zoxide init fish | source
-    abbr -a cd "z"
-    abbr -a cdi "zi"
+    abbr -a cd z
+    abbr -a cdi zi
 
     # makes sure zoxide is used instead of cd in scripts and commands from history
     # found by fzf, so it can cache the paths
-    alias cd "z" 
+    alias cd z
 else
     __print -e "fish: could not setup abbr for zoxide, zoxide not found"
 end
@@ -115,10 +115,10 @@ else
 end
 
 # add copy abbreviation for first available clipboard provider
-set clipboard_providers 'gpaste-client' 'wl-copy' 'xclip' 'pbcopy'
-for clipboard in $clipboard_providers 
+set clipboard_providers gpaste-client wl-copy xclip pbcopy
+for clipboard in $clipboard_providers
     if type -q $clipboard
-        if test "$clipboard" = "gpaste-client" && test "$DESKTOP_SESSION" = "hyprland"
+        if test "$clipboard" = gpaste-client && test "$DESKTOP_SESSION" = hyprland
             # hyprland uses wl-copy and wl-paste
             continue
         end
@@ -129,12 +129,12 @@ for clipboard in $clipboard_providers
 end
 
 if type -q /opt/homebrew/opt/curl/bin/curl
-    abbr -a curl3 "/opt/homebrew/opt/curl/bin/curl"
+    abbr -a curl3 /opt/homebrew/opt/curl/bin/curl
 end
 
-bind -M insert \cf 'zi'
-bind -M normal \cf 'zi'
+bind -M insert \cf zi
+bind -M normal \cf zi
 
-if string match -q -- "percolation" $hostname
-    abbr -a me "nvim_for_device"
+if string match -q -- percolation $hostname
+    abbr -a me nvim_for_device
 end

@@ -9,11 +9,11 @@ set -gx PATH "$VOLTA_HOME/bin" $PATH
 # set -gx fish_cursor_replace_one "underscore"
 # set -gx fish_cursor_visual "block"
 
-set -gx fish_cursor_default "block"
-set -gx fish_cursor_insert "block" "blink"
-set -gx fish_cursor_external "block" "blink"
-set -gx fish_cursor_replace_one "underscore"
-set -gx fish_cursor_visual "block"
+set -gx fish_cursor_default block
+set -gx fish_cursor_insert block blink
+set -gx fish_cursor_external block blink
+set -gx fish_cursor_replace_one underscore
+set -gx fish_cursor_visual block
 
 if status is-interactive
     if string match -q -r -- '.*ghostty.*|xterm-256color' $TERM
@@ -21,7 +21,7 @@ if status is-interactive
     end
 end
 
-if string match -q -- "percolation" $hostname
+if string match -q -- percolation $hostname
     set --export BUN_INSTALL "$HOME/.bun"
     set --export PATH $BUN_INSTALL/bin $PATH
 end
