@@ -7,6 +7,22 @@ local function get_keybindings(wezterm, program_paths)
 		wezterm = wezterm,
 	})
 
+	local spawn_tab_next_to_active = function(win, pane)
+		local function active_tab_idx(mux_win)
+			for _, item in ipairs(mux_win:tabs_with_info()) do
+				-- wezterm.log_info('idx: ', idx, 'tab:', item)
+				if item.is_active then
+					return item.index
+				end
+			end
+		end
+
+		local mux_win = win:mux_window()
+		local idx = active_tab_idx(mux_win)
+		local _ = mux_win:spawn_tab({})
+		win:perform_action(wezterm.action.MoveTab(idx + 1), pane)
+	end
+
 	return {
 		leader = {
 			key = " ",
@@ -92,10 +108,16 @@ local function get_keybindings(wezterm, program_paths)
 				action = act.AdjustPaneSize({ "Right", 5 }),
 			},
 
-			-- create new tab
+			-- create tab next to the active tab
 			{
 				key = "t",
-				mods = "LEADER",
+				mods = "SUPER",
+				action = wezterm.action_callback(spawn_tab_next_to_active),
+			},
+
+			{
+				key = "t",
+				mods = "SUPER|SHIFT",
 				action = act.SpawnTab("CurrentPaneDomain"),
 			},
 
@@ -117,7 +139,7 @@ local function get_keybindings(wezterm, program_paths)
 			{
 				key = "n",
 				mods = "LEADER",
-				action = wezterm.action_callback(function(_win, _p, _l)
+				action = wezterm.action_callback(function(_win, _p, _)
 					local active_workspaces = wezterm.mux.get_workspace_names()
 
 					local t = ""
@@ -238,7 +260,7 @@ local jetbrains_mono_comfy = {
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 15,
+	size = 26,
 	line_height = 1.1,
 	cell_width = 1,
 	harfbuzz_features = { "zero" },
@@ -249,7 +271,7 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 12.5,
+	size = 17.5,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
@@ -257,6 +279,7 @@ local monolisa = {
 		-- centered hexadecimal 0xF
 		"ss11",
 	},
+	freetype_load_flags = "NO_AUTOHINT",
 }
 
 --- @type FontConfig
@@ -365,7 +388,7 @@ local config = {
 }
 
 config.font = comic_code
--- config.font = monolisa
+config.font = monolisa
 -- config.font = berkeley_mono
 -- config.font = jetbrains_mono_comfy
 -- config.font.size = 19
