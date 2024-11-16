@@ -32,6 +32,15 @@ local function get_keybindings(wezterm, program_paths)
 
 		keys = {
 			{
+				key = 'Backspace',
+				mods = 'CTRL',
+				action = act.SendKey {
+					key = 'w',
+					mods = 'CTRL',
+				},
+			},
+
+			{
 				key = "x",
 				mods = "LEADER",
 				action = act.ActivateCopyMode,
