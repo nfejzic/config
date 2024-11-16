@@ -2,25 +2,16 @@
 ## MonoLisa ##
 ##############
 
-# font-family = "MonoLisa"
-# font-style = "Regular"
-# font-style-bold = "Bold"
-# font-style-italic = "Regular Italic"
-# font-style-bold-italic = "Bold Italic"
-# # font-size = 20
-# font-size = 23
-# adjust-cell-width = 0
-# adjust-cell-height = 
-# # MonoLisa centered hexadecimal '0xF'
-# font-feature = ss11
+font-family = "MonoLisa"
+font-size = 23
 
 ################
 ## Comic Code ##
 ################
 
-font-family = "Comic Code"
-font-size = 27
-font-feature = zero
+# font-family = "Comic Code"
+# font-size = 23
+# font-feature = zero
 
 # font-family = "JetBrains Mono"
 # font-size = 29
@@ -355,7 +346,7 @@ window-inherit-font-size = true
 # 
 # Changing this configuration in your configuration and reloading will
 # only affect new windows. Existing windows will not be affected.
-window-decoration = false
+window-decoration = true
 
 # Whether to allow programs running in the terminal to read/write to the
 # system clipboard (OSC 52, for googling). The default is to allow clipboard
