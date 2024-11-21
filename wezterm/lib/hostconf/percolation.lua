@@ -258,9 +258,9 @@ local jetbrains_mono_comfy = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 19,
+	size = 23,
 	cell_width = 1,
-	line_height = 1.05,
+	line_height = 1.00,
 	freetype_load_flags = "NO_HINTING",
 	harfbuzz_features = {
 		-- centered hexadecimal 0xF
