@@ -17,6 +17,7 @@ return {
 			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
 			theme = "gruvbox-dark-hard", -- Load "gruvbox-dark-hard" theme when 'background' option is not set
+			semantic_highlighting = "minimal",
 		}
 	}
 }
