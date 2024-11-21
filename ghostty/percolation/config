@@ -1,24 +1,25 @@
 # # FONT: MONOLISA ##
 font-family = MonoLisa
-font-size = 23
+font-size = 21
 font-style = Regular
 font-style-italic = Regular Italic
 font-style-bold = Bold
 font-style-bold-italic = Bold Italic
 font-synthetic-style = false
 freetype-load-flags = no-hinting,no-autohint
-adjust-cell-height = 1
+adjust-cell-height =  
 
 # FONT: COMIC CODE ## -> 0 == 
 # font-family = "Comic Code"
-# font-size = 19
+# font-size = 22
 # font-feature = zero
 # freetype-load-flags = no-hinting,no-autohint
-# adjust-cell-height = 6
+# adjust-cell-height = 
 
 # font-family = JetBrains Mono
-# font-size = 16
+# font-size = 22
 # freetype-load-flags = no-hinting,no-autohint
+# adjust-cell-height = 1
 
 # # FONT: BERKELEY MONO ##
 # font-family = "Berkeley Mono"
