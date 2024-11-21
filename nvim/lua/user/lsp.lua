@@ -125,8 +125,12 @@ function M.rust_analyzer(opts, neoconf)
 
 		---@type rustaceanvim.Opts
 		vim.g.rustaceanvim = {
-			-- Plugin configuration
-			tools = {},
+			tools = {
+				float_win_config = {
+					border = "rounded",
+					focusable = true,
+				},
+			},
 
 			-- LSP configuration
 			-- NOTE: If 'rust-analyzer' is installed through rustup, it has priority and will be used
