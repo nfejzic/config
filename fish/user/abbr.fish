@@ -62,6 +62,7 @@ if type -q git
     abbr -a ga 'git add'
     abbr -a gr 'git remove'
     abbr -a gc 'git commit'
+    abbr -a gam 'git commit --amend'
     abbr -a gk 'git checkout'
     abbr -a gp 'git pull'
     abbr -a gpr 'git pull --prune'
