@@ -22,6 +22,9 @@ local function update_dpi(get_screens)
 	end
 end
 
+--- @param wezterm table
+--- @param colors ColorTheme
+--- @param theme string|ColorTheme
 local function format_workspace_name(wezterm, colors, theme)
 	return function(window, _)
 		local workspace = window:active_workspace()
@@ -33,7 +36,7 @@ local function format_workspace_name(wezterm, colors, theme)
 
 		window:set_left_status(wezterm.format({
 			{ Attribute = { Intensity = "Normal" } },
-			{ Background = { Color = colors.tab_bg } },
+			{ Background = { Color = colors.background_secondary } },
 			{ Foreground = { Color = foreground_color } },
 			{ Text = " [" .. workspace .. "] " },
 		}))
@@ -42,8 +45,8 @@ end
 
 --- @param wezterm table
 --- @param tab_fns table
---- @param colors table
---- @param theme string
+--- @param colors ColorTheme
+--- @param theme string|ColorTheme
 --- @param hostconf HostConfig
 function M.register_events(wezterm, tab_fns, colors, theme, hostconf)
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))

@@ -252,16 +252,16 @@ local jetbrains_mono = {
 ---@diagnostic disable-next-line: unused-local
 local jetbrains_mono_comfy = {
 	family = "JetBrains Mono",
-	size = 15,
+	size = 20,
 	-- cell_width = 1,
-	line_height = 1.05,
+	-- line_height = 1.05,
 	harfbuzz_features = {
-		"cv03", -- looped 'g'
-		"cv07", -- lowered 'w'
-		"cv10", -- serif on 'r'
-		"cv11", -- rounded 'y'
-		"cv12", -- regular 'u'
-		"ss20", -- raised bar 'f'
+		-- 	"cv03", -- looped 'g'
+		-- "cv07", -- lowered 'w'
+		-- "cv10", -- serif on 'r'
+		-- "cv11", -- rounded 'y'
+		-- 	"cv12", -- regular 'u'
+		-- 	-- "ss20", -- raised bar 'f'
 	},
 }
 
@@ -270,9 +270,9 @@ local jetbrains_mono_comfy = {
 local comic_code = {
 	family = "Comic Code",
 	size = 19,
-	line_height = 1.0,
+	line_height = 1.15,
 	cell_width = 1,
-	harfbuzz_features = { "zero" },
+	harfbuzz_features = { "zero", "dlig" },
 }
 
 --- @type FontConfig
@@ -280,7 +280,7 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 17.5,
+	size = 19,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
@@ -376,6 +376,7 @@ local berkeley_mono = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "Berkeley Mono",
 	size = 20,
+	line_height = 1.1,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
@@ -397,11 +398,8 @@ local config = {
 }
 
 config.font = comic_code
--- config.font = monolisa
+config.font = monolisa
 -- config.font = berkeley_mono
 -- config.font = jetbrains_mono_comfy
--- config.font.size = 19
--- config.font = monolisa_comfy
--- config.font = monolisa_huge
 
 return config

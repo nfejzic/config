@@ -32,8 +32,10 @@ local function tab_title(tab)
 	return index .. ": " .. tab.active_pane.title
 end
 
---- @param colors table
+--- @param colors ColorTheme
+---@diagnostic disable-next-line: unused-local
 M.format_tab_title = function(colors)
+	---@diagnostic disable-next-line: unused-local
 	return function(tab, _tabs, _panes, _config, _hover, _max_width)
 		local title = tab_title(tab)
 		return {
@@ -42,59 +44,16 @@ M.format_tab_title = function(colors)
 	end
 end
 
---- @param colors table
+--- @param colors ColorTheme
 --- @param is_transparent boolean
 function M.tab_bar_colors(colors, is_transparent)
-	local term_bg = colors.tab_bg
+	local term_bg = colors.background_secondary
 
-	-- if is_transparent then
-	-- 	term_bg = "rgba(0% 0% 0% 0%)"
-	-- end
+	if is_transparent then
+		term_bg = "rgba(0% 0% 0% 0%)"
+	end
 
-	return {
-		-- The color of the inactive tab bar edge/divider
-		inactive_tab_edge = colors.brights[1],
-		-- background = colors.background,
-		background = term_bg,
-
-		active_tab = {
-			-- The color of the background area for the tab
-			bg_color = term_bg,
-			-- The color of the text for the tab
-			fg_color = colors.ansi[4],
-
-			-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
-			-- label shown for this tab.
-			-- The default is "Normal"
-			intensity = "Normal",
-
-			-- Specify whether you want "None", "Single" or "Double" underline for
-			-- label shown for this tab.
-			-- The default is "None"
-			underline = "None",
-
-			-- Specify whether you want the text to be italic (true) or not (false)
-			-- for this tab.  The default is false.
-			italic = false,
-
-			-- Specify whether you want the text to be rendered with strikethrough (true)
-			-- or not for this tab.  The default is false.
-			strikethrough = false,
-		},
-		inactive_tab = {
-			bg_color = term_bg,
-			fg_color = colors.foreground,
-			intensity = "Half",
-		},
-		new_tab = {
-			bg_color = colors.background,
-			fg_color = colors.foreground,
-		},
-		new_tab_hover = {
-			bg_color = colors.brights[1],
-			fg_color = colors.foreground,
-		},
-	}
+	return colors.tab_bar(term_bg, colors)
 end
 
 return M

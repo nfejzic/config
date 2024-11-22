@@ -3,7 +3,7 @@ local M = {}
 --- @param wezterm table
 --- @param config table
 --- @param hostconf HostConfig
---- @param theme string | table
+--- @param theme string | ColorTheme
 local function set_opts(wezterm, config, hostconf, theme)
 	config.enable_wayland = true
 	config.front_end = "OpenGL"
@@ -41,8 +41,13 @@ local function set_opts(wezterm, config, hostconf, theme)
 
 	if type(theme) == "string" then
 		config.color_scheme = theme
-	else
-		config.colors = theme
+	elseif type(theme) == "table" then
+		config.colors = {}
+		for key, value in pairs(theme) do
+			if not theme.is_not_standard(key) then
+				config.colors[key] = value
+			end
+		end
 	end
 
 	config.window_padding = {
@@ -90,12 +95,15 @@ function M.setup(wezterm, config)
 	config.leader = keybindings.leader
 	config.keys = keybindings.keys
 
-	local is_transparent = config.window_background_opacity ~= 1.0
-	config.colors = {
-		tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent),
-	}
+	local is_transparent = config.window_background_opacity ~= nil and config.window_background_opacity < 1.0
 
 	set_opts(wezterm, config, hostconf, color_config.theme)
+
+	if config.colors == nil then
+		config.colors = {}
+	end
+
+	config.colors.tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent)
 
 	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, color_config.theme, hostconf)
 end
