@@ -255,6 +255,7 @@ keybind = ctrl+l=clear_screen
 # and neovim
 keybind = ctrl+backspace=text:\x17
 keybind = opt+backspace=text:\x17
+keybind = super+shift+t=text:\x1bT
 
 # Horizontal window padding. This applies padding between the terminal cells
 # and the left and right window borders. The value is in points, meaning that
