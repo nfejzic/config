@@ -20,6 +20,7 @@ M.setup_ui = function()
 	---@type table|nil
 	local diagnostic_cfg = {
 		enable = true,
+		virtual_text = false,
 		underline = true,
 		float = {
 			-- focusable = false,
