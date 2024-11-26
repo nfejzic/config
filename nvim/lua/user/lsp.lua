@@ -144,6 +144,11 @@ function M.rust_analyzer(opts, neoconf)
 				default_settings = {
 					-- rust-analyzer language server configuration
 					["rust-analyzer"] = {
+						hover = {
+							links = {
+								enable = false,
+							},
+						},
 						checkOnSave = true,
 						check = {
 							enable = true,
