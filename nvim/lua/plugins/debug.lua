@@ -13,6 +13,7 @@ return {
 			{
 				"microsoft/vscode-js-debug",
 				lazy = false,
+				enabled = false,
 				build = "npm ci --legacy-peer-deps && npm run compile",
 				keys = function()
 					return require("user.keymaps").dap_trigger_keys
