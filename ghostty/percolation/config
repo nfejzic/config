@@ -4,6 +4,10 @@ font-size = 21
 font-synthetic-style = false
 freetype-load-flags = no-hinting,no-autohint
 adjust-cell-height =  
+# let's try without ligatures for some time.
+font-feature = -calt
+font-feature = -dlig
+font-feature = -liga
 
 # A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
