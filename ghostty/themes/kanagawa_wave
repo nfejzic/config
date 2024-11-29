@@ -1,0 +1,41 @@
+# black
+palette = 0=#090618
+# red
+palette = 1=#c34043
+# green
+palette = 2=#76946a
+# yellow
+palette = 3=#c0a36e
+# blue
+palette = 4=#7e9cd8
+# magenta
+palette = 5=#957fb8
+# cyan
+palette = 6=#6a9589
+# foreground
+palette = 7=#c8c093
+
+## BRIGHTS
+
+# brblack
+palette = 8=#727169
+# brred - same as red
+palette = 9=#e82424
+# brgreen same as green
+palette = 10=#98bb6c
+# bryellow same as yellow
+palette = 11=#e6c384
+# brblue same as blue
+palette = 12=#7fb4ca
+# brmagenta same as magenta
+palette = 13=#938aa9
+# brcyan same as cyan
+palette = 14=#7aa89f
+# brwhite
+palette = 15=#dcd7ba
+
+background = 1f1f28
+foreground = dcd7ba
+cursor-color = e0def4
+selection-background = 2d4f67
+selection-foreground = c8c093
