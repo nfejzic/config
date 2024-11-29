@@ -63,6 +63,16 @@ function __theme_fzf -a scheme
             --color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
             --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
+        case kanagawa
+            # 0 = black, 1 = red, 2 = green, 3 = yellow, 4 = blue
+            # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
+            # 10 = brgreen, 11 = brorange, 12 = brblue, 13 = pink, 14 = aqua,
+            # 15 = lightgray, 16 = black
+            set -gx FZF_DEFAULT_OPTS "--ansi
+            --color=bg+:8,bg:-1,spinner:9,hl:12 \
+            --color=fg:-1,header:12,info:10,pointer:1 \
+            --color=marker:1,fg+:-1,prompt:10,hl+:9"
+
         case "*"
             # 0 = black, 1 = red, 2 = green, 3 = yellow, 4 = blue
             # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
@@ -159,7 +169,7 @@ function __theme_fish -a theme
             yes | fish_config theme save "Rosé Pine"
 
         case kanagawa
-            yes | fish_config theme save Kanagawa
+            yes | fish_config theme save transparent
 
         case zenbones
             yes | fish_config theme save transparent
