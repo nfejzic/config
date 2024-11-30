@@ -9,7 +9,6 @@ if wezterm.config_builder then
 end
 
 local library = require("lib.init")
-
 library.setup(wezterm, config)
 
 return config

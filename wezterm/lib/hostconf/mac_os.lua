@@ -1,3 +1,4 @@
+---@param program_paths ProgramPaths
 local function get_keybindings(wezterm, program_paths)
 	local act = wezterm.action
 
@@ -278,13 +279,9 @@ local comic_code = {
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
 local monolisa = {
-	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
 	size = 18,
 	harfbuzz_features = {
-		-- strike-through '$'
-		"ss13",
-
 		-- centered hexadecimal 0xF
 		"ss11",
 	},
@@ -294,7 +291,6 @@ local monolisa = {
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
 local monolisa_comfy = {
-	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
 	size = 15,
 	-- line_height = 0.95,
@@ -311,7 +307,6 @@ local monolisa_comfy = {
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
 local monolisa_huge = {
-	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
 	size = 18,
 	line_height = 1,
@@ -373,7 +368,6 @@ local sf_mono_comfy = {
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
 local berkeley_mono = {
-	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "Berkeley Mono",
 	size = 20,
 	line_height = 1.1,

@@ -19,6 +19,8 @@ local function createToggleFn(fd, paths, wezterm)
 					"-H",
 					"-I",
 					"-td",
+					"--prune",
+					"--max-depth=3",
 					"^.git$",
 					path,
 				})
@@ -36,6 +38,7 @@ local function createToggleFn(fd, paths, wezterm)
 				end
 			end
 		end
+
 		window:perform_action(
 			act.InputSelector({
 				action = wezterm.action_callback(function(win, _, id, label)
