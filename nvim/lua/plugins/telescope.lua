@@ -87,9 +87,7 @@ return {
 				t_builtin.live_grep({ default_text = expr, initial_mode = "normal" })
 			end
 
-			vim.api.nvim_create_user_command("TodoTelescope", function()
-				openTodos()
-			end, {})
+			vim.api.nvim_create_user_command("TodoTelescope", openTodos, {})
 
 			require("user.keymaps").telescope_keymaps(telescope, t_builtin, t_extensions)
 		end,
