@@ -9,6 +9,12 @@
 ---@class ProgramPaths
 ---@field fd string
 
+---@class WindowPadding
+---@field top string
+---@field right string
+---@field bottom string
+---@field left string
+
 ---@class HostConfig
 ---@field dpi integer|nil
 ---@field font FontConfig
@@ -16,6 +22,7 @@
 ---@field program_paths ProgramPaths
 ---@field get_keybindings function|nil
 ---@field window_decorations string|nil
+---@field window_padding WindowPadding|nil
 
 --- @type table<string, HostConfig>
 local configs = {

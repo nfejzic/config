@@ -50,12 +50,16 @@ local function set_opts(wezterm, config, hostconf, theme)
 		end
 	end
 
-	config.window_padding = {
-		left = "0cell",
-		right = "0cell",
-		top = "1cell",
-		bottom = "0.0cell",
-	}
+	if hostconf.window_padding ~= nil then
+		config.window_padding = hostconf.window_padding
+	else
+		config.window_padding = {
+			left = "0cell",
+			right = "0cell",
+			top = "0cell",
+			bottom = "0cell",
+		}
+	end
 
 	config.warn_about_missing_glyphs = true
 	config.hide_mouse_cursor_when_typing = true
