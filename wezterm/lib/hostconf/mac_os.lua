@@ -280,7 +280,7 @@ local comic_code = {
 local monolisa = {
 	-- Font custom-hosted here: https://github.com/nfejzic/monolisa
 	family = "MonoLisa",
-	size = 19,
+	size = 18,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
