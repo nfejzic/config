@@ -50,10 +50,17 @@
 local M = {}
 
 ---@param _wezterm table
+---@param theme string|nil
 ---@return { colors: ColorTheme, theme: string|ColorTheme }
 ---@diagnostic disable-next-line: unused-local
-function M.init(_wezterm)
+function M.init(_wezterm, theme)
 	local colors = require('lib.colors.gruvbox').colors()
+
+	if theme == "catppuccin" then
+		colors = require('lib.colors.catppuccin').colors()
+	elseif theme == "kanagawa-wave" then
+		colors = require('lib.colors.kanagawa').wave()
+	end
 
 	return { colors = colors, theme = colors }
 end
