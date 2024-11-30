@@ -53,7 +53,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.window_padding = {
 		left = "0cell",
 		right = "0cell",
-		top = "0cell",
+		top = "1cell",
 		bottom = "0.0cell",
 	}
 
@@ -62,7 +62,11 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.cursor_blink_rate = 0
 	config.enable_scroll_bar = false
 
-	config.window_decorations = "RESIZE"
+	if hostconf.window_decorations ~= nil then
+		config.window_decorations = hostconf.window_decorations
+	else
+		config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+	end
 
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1

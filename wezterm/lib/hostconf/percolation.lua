@@ -274,7 +274,8 @@ local config = {
 	font = monolisa,
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
-	get_keybindings = get_keybindings
+	get_keybindings = get_keybindings,
+	window_decorations = "RESIZE",
 }
 
 return config

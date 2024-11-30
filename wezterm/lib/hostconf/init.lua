@@ -15,6 +15,7 @@
 ---@field update_dpi boolean
 ---@field program_paths ProgramPaths
 ---@field get_keybindings function|nil
+---@field window_decorations string|nil
 
 --- @type table<string, HostConfig>
 local configs = {
