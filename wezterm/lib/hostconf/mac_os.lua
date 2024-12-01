@@ -389,7 +389,7 @@ local config = {
 		fd = "/opt/homebrew/bin/fd",
 	},
 	get_keybindings = get_keybindings,
-	window_padding = { top = "0.9cell", right = "0cell", bottom = "0cell", left = "0cell" },
+	window_padding = { top = "22pt", right = "0cell", bottom = "0cell", left = "0cell" },
 }
 
 config.font = comic_code
