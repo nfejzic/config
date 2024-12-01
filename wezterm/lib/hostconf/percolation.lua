@@ -275,7 +275,7 @@ local config = {
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
 	get_keybindings = get_keybindings,
-	window_decorations = "RESIZE",
+	window_decorations = "NONE",
 }
 
 return config
