@@ -24,15 +24,11 @@ end
 
 --- @param wezterm table
 --- @param colors ColorTheme
---- @param theme string|ColorTheme
-local function format_workspace_name(wezterm, colors, theme)
+local function format_workspace_name(wezterm, colors)
 	return function(window, _)
 		local workspace = window:active_workspace()
 
-		local foreground_color = colors.ansi[8]
-		if theme == "rose-pine" then
-			foreground_color = colors.brights[8]
-		end
+		local foreground_color = colors.foreground
 
 		window:set_left_status(wezterm.format({
 			{ Attribute = { Intensity = "Normal" } },
@@ -46,11 +42,10 @@ end
 --- @param wezterm table
 --- @param tab_fns table
 --- @param colors ColorTheme
---- @param theme string|ColorTheme
 --- @param hostconf HostConfig
-function M.register_events(wezterm, tab_fns, colors, theme, hostconf)
+function M.register_events(wezterm, tab_fns, colors, hostconf)
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
-	wezterm.on("update-status", format_workspace_name(wezterm, colors, theme))
+	wezterm.on("update-status", format_workspace_name(wezterm, colors))
 
 	if hostconf.update_dpi then
 		wezterm.on("window-resized", update_dpi(wezterm.gui.screens))

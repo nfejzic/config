@@ -113,7 +113,7 @@ function M.setup(wezterm, config)
 
 	config.colors.tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent)
 
-	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, color_config.theme, hostconf)
+	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
 end
 
 return M
