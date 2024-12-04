@@ -111,7 +111,7 @@ function M.wave()
 				inactive_tab = {
 					bg_color = term_bg,
 					fg_color = colors.foreground,
-					intensity = "Half",
+					intensity = "Normal",
 				},
 				inactive_tab_hover = {
 					bg_color = term_bg,
