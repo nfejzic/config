@@ -270,7 +270,7 @@ local jetbrains_mono_comfy = {
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 19,
+	size = 18,
 	line_height = 1.15,
 	cell_width = 1,
 	harfbuzz_features = { "zero", "dlig" },
@@ -393,7 +393,7 @@ local config = {
 }
 
 config.font = comic_code
-config.font = monolisa
+-- config.font = monolisa
 -- config.font = berkeley_mono
 -- config.font = jetbrains_mono_comfy
 
