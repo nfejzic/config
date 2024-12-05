@@ -11,7 +11,7 @@ function M.wave()
 
 		-- Overrides the cell background color when the current cell is occupied by the
 		-- cursor and the cursor style is set to Block
-		cursor_bg = '#e0def4',
+		cursor_bg = '#dcd7ba',
 
 		-- Overrides the text color when the current cell is occupied by the cursor
 		cursor_fg = '#1f1f28',
