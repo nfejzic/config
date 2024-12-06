@@ -1,13 +1,13 @@
-# # FONT: MONOLISA ##
-font-family = MonoLisa
-font-size = 21
-font-synthetic-style = false
-freetype-load-flags = no-hinting,no-autohint
-adjust-cell-height =  
-# let's try without ligatures for some time.
-font-feature = -calt
-font-feature = -dlig
-font-feature = -liga
+# font-family = MonoLisa
+# font-size = 21
+# font-synthetic-style = false
+# freetype-load-flags = no-hinting,no-autohint
+# adjust-cell-height = 1
+
+font-family = Comic Code
+font-size = 22
+adjust-cell-height = 4
+font-feature = zero
 
 # A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
@@ -20,7 +20,7 @@ font-feature = -liga
 
 # for now, we use custom themes, which is just a file that configures palette.
 # Custom config files can be loaded with `config-file = <path>`
-config-file = ../themes/gruvbox_dark_hard
+config-file = ../themes/kanagawa_wave
 
 # Swap the foreground and background colors of cells for selection. This
 # option overrides the `selection-foreground` and `selection-background`
@@ -69,7 +69,7 @@ scrollback-limit = 10000000
 # The title Ghostty will use for the window. This will force the title of the
 # window to be this title at all times and Ghostty will ignore any set title
 # escape sequences programs (such as Neovim) may send.
-title = 
+title = Ghostty 👻
 
 keybind = super+alt+equal=equalize_splits
 
