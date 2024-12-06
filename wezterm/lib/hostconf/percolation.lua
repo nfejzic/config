@@ -229,8 +229,9 @@ end
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 16,
-	cell_width = 1,
+	size = 17,
+	cell_width = 1.00,
+	line_height = 1.12,
 	harfbuzz_features = {
 		-- dotted zero
 		"zero"
@@ -271,7 +272,7 @@ local monolisa = {
 --- @type HostConfig
 local config = {
 	dpi = nil,
-	font = monolisa,
+	font = comic_code,
 	update_dpi = false,
 	program_paths = { fd = "/usr/bin/fd" },
 	get_keybindings = get_keybindings,
