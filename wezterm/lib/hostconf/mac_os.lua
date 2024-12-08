@@ -237,8 +237,9 @@ end
 ---@diagnostic disable-next-line: unused-local
 local jetbrains_mono = {
 	family = "JetBrains Mono",
-	size = 13,
+	size = 15,
 	cell_width = 1,
+	line_height = 1.05,
 	harfbuzz_features = {
 		"cv01", -- regular looking 'l'
 		"cv03", -- looped 'g'
@@ -270,7 +271,7 @@ local jetbrains_mono_comfy = {
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 18,
+	size = 15,
 	line_height = 1.15,
 	cell_width = 1,
 	harfbuzz_features = { "zero", "dlig" },
@@ -280,7 +281,7 @@ local comic_code = {
 --- @diagnostic disable-next-line: unused-local
 local monolisa = {
 	family = "MonoLisa",
-	size = 18,
+	size = 15,
 	harfbuzz_features = {
 		-- centered hexadecimal 0xF
 		"ss11",
@@ -369,8 +370,8 @@ local sf_mono_comfy = {
 --- @diagnostic disable-next-line: unused-local
 local berkeley_mono = {
 	family = "Berkeley Mono",
-	size = 20,
-	line_height = 1.1,
+	size = 15,
+	line_height = 1.15,
 	harfbuzz_features = {
 		-- strike-through '$'
 		"ss13",
@@ -395,6 +396,6 @@ local config = {
 config.font = comic_code
 -- config.font = monolisa
 -- config.font = berkeley_mono
--- config.font = jetbrains_mono_comfy
+-- config.font = jetbrains_mono
 
 return config
