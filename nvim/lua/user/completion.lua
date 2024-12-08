@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
 local merge = function(a, b)
 	return vim.tbl_deep_extend("force", {}, a, b)
@@ -13,7 +14,7 @@ local cmp_fmt = lspkind.cmp_format({
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 
@@ -102,16 +103,16 @@ cmp.setup.cmdline(":", {
 })
 
 vim.keymap.set({ "i", "s" }, "<C-L>", function()
-	require("luasnip").jump(1)
+	luasnip.jump(1)
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<C-H>", function()
-	require("luasnip").jump(-1)
+	luasnip.jump(-1)
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<C-E>", function()
-	if require("luasnip").choice_active() then
-		require("luasnip").change_choice(1)
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
 	end
 end, { silent = true })
 
