@@ -2,12 +2,17 @@
 # font-size = 21
 # font-synthetic-style = false
 # freetype-load-flags = no-hinting,no-autohint
-# adjust-cell-height = 1
+# adjust-cell-height = -2
 
 font-family = Comic Code
-font-size = 22
+font-size = 17
 adjust-cell-height = 4
 font-feature = zero
+
+# font-family = Berkeley Mono
+# font-size = 22
+# # adjust-cell-height = 2
+# # font-feature = zero
 
 # A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
