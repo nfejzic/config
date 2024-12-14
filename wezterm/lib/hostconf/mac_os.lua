@@ -241,12 +241,12 @@ local jetbrains_mono = {
 	cell_width = 1,
 	line_height = 1.05,
 	harfbuzz_features = {
-		"cv01", -- regular looking 'l'
-		"cv03", -- looped 'g'
-		"cv07", -- nicer 'w'
-		"cv10", -- serif on 'r'
-		"cv11", -- rounded 'y'
-		"cv12", -- regular 'u'
+		-- "cv01", -- regular looking 'l'
+		-- "cv03", -- looped 'g'
+		-- "cv07", -- nicer 'w'
+		-- "cv10", -- serif on 'r'
+		-- "cv11", -- rounded 'y'
+		-- "cv12", -- regular 'u'
 	},
 }
 
@@ -381,6 +381,19 @@ local berkeley_mono = {
 	},
 }
 
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local cascadia_code = {
+	family = "Cascadia Code",
+	size = 16,
+	line_height = 1.12,
+	harfbuzz_features = {
+		-- centered hexadecimal 0xF
+		"ss11",
+	},
+	freetype_load_flags = "NO_AUTOHINT",
+}
+
 --- @type HostConfig
 local config = {
 	dpi = 108,
@@ -394,7 +407,7 @@ local config = {
 }
 
 config.font = comic_code
--- config.font = monolisa
+config.font = monolisa
 -- config.font = berkeley_mono
 -- config.font = jetbrains_mono
 
