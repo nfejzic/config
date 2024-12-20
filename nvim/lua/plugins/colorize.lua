@@ -7,7 +7,7 @@ return {
 		opts = {
 			compile = false, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
-			commentStyle = { italic = false },
+			commentStyle = { italic = true },
 			functionStyle = {},
 			keywordStyle = { italic = false, bold = false },
 			statementStyle = { bold = false },

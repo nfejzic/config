@@ -81,15 +81,15 @@ M.get_on_attach = function(t_builtin)
 	end
 end
 
----@param cmp_nvim_lsp table|nil
-function M.get_global_capabilities(cmp_nvim_lsp)
+---@param get_autocomplete_capabilities nil|fun() -> table
+function M.get_global_capabilities(get_autocomplete_capabilities)
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	---@diagnostic disable-next-line: need-check-nil, undefined-field
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-	if cmp_nvim_lsp ~= nil then
-		local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
+	if get_autocomplete_capabilities ~= nil then
+		local cmp_capabilities = get_autocomplete_capabilities()
 		local glob_capabilities = vim.tbl_deep_extend("force", capabilities, cmp_capabilities)
 
 		return glob_capabilities

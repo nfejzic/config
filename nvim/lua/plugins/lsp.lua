@@ -49,7 +49,8 @@ return {
 				ft = { "rust" },
 			},
 
-			{ "hrsh7th/cmp-nvim-lsp" }, -- for auto-completion
+			"hrsh7th/cmp-nvim-lsp", -- for auto-completion
+			-- 'saghen/blink.cmp', -- for autocompletion
 
 			-- Go
 			{
@@ -76,7 +77,8 @@ return {
 			local user_lsp = require("user.lsp")
 			local lspconfig = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			local blink_ok, blink = pcall(require, "blink.cmp")
+			local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
 			local neoconf = require("neoconf")
 
@@ -87,7 +89,15 @@ return {
 				return require("telescope.builtin")
 			end)
 
-			local global_capabilities = user_lsp.get_global_capabilities(cmp_nvim_lsp)
+			local get_cmp_capabilities = nil
+
+			if blink_ok then
+				get_cmp_capabilities = blink.get_lsp_capabilities
+			elseif cmp_ok then
+				get_cmp_capabilities = cmp_nvim_lsp.default_capabilities
+			end
+
+			local global_capabilities = user_lsp.get_global_capabilities(get_cmp_capabilities)
 			local handlers = user_lsp.get_handlers()
 
 			local opts = {
