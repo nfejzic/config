@@ -282,10 +282,12 @@ local comic_code = {
 local monolisa = {
 	family = "MonoLisa",
 	size = 18,
-	-- cell_width = 0.92,
+	cell_width = 0.95,
 	harfbuzz_features = {
 		-- centered hexadecimal 0xF
-		"ss11",
+		"ss11", -- centered 'x' in 0xF
+		-- "ss02", -- cursive italic
+		"ss07", -- more agressive '{' and '}'
 	},
 }
 
@@ -385,8 +387,8 @@ local berkeley_mono = {
 --- @diagnostic disable-next-line: unused-local
 local cascadia_code = {
 	family = "Cascadia Code",
-	size = 16,
-	line_height = 1.12,
+	size = 18,
+	line_height = 1.2,
 	harfbuzz_features = {
 		-- centered hexadecimal 0xF
 		"ss11",
@@ -407,9 +409,10 @@ local config = {
 }
 
 config.font = comic_code
--- config.font = monolisa
+config.font = monolisa
 -- config.font = berkeley_mono
 -- config.font = jetbrains_mono
+-- config.font = cascadia_code
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
 return config
