@@ -64,14 +64,10 @@ function __theme_fzf -a scheme
             --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
         case kanagawa
-            # 0 = black, 1 = red, 2 = green, 3 = yellow, 4 = blue
-            # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
-            # 10 = brgreen, 11 = brorange, 12 = brblue, 13 = pink, 14 = aqua,
-            # 15 = lightgray, 16 = black
-            set -gx FZF_DEFAULT_OPTS "--ansi
-            --color=bg+:8,bg:-1,spinner:9,hl:12 \
-            --color=fg:-1,header:12,info:10,pointer:1 \
-            --color=marker:1,fg+:-1,prompt:10,hl+:9"
+            set -gx FZF_DEFAULT_OPTS "\
+            --color=bg+:#223249,bg:#1F1F28,spinner:#957FB8,hl:#FF5D62 \
+            --color=fg:#DCD7BA,header:#FF5D62,info:#7E9CD8,pointer:#957FB8 \
+            --color=marker:#957FB8,fg+:#DCD7BA,prompt:#7E9CD8,hl+:#FF5D62"
 
         case "*"
             # 0 = black, 1 = red, 2 = green, 3 = yellow, 4 = blue
