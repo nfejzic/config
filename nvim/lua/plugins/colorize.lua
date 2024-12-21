@@ -15,10 +15,6 @@ return {
 			transparent = false, -- do not set background color
 			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}
-			background = {
-				dark = "kanagawa",
-				light = "gruvbox-light-soft",
-			},
 			theme = "kanagawa", -- Load "kanagawa" theme when 'background' option is not set
 			semantic_highlighting = "minimal",
 		}
