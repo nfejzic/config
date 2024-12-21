@@ -60,6 +60,8 @@ function M.init(_wezterm, theme)
 		colors = require('lib.colors.catppuccin').colors()
 	elseif theme == "kanagawa-wave" then
 		colors = require('lib.colors.kanagawa').wave()
+	elseif theme == "rose-pine-main" then
+		colors = require('lib.colors.rose_pine').main()
 	end
 
 	return { colors = colors, theme = colors }
