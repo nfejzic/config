@@ -2,20 +2,33 @@
 ## MonoLisa ##
 ##############
 
-font-family = "MonoLisa"
-font-size = 22
+# font-family = "MonoLisa"
+# font-size = 22
+# adjust-cell-width = -2
+# # centered 'x' in 0xF
+# font-feature = ss11
+# # more pronounced '{' and '}'
+# font-feature = ss07
+# font-synthetic-style = false
+# font-style-bold = Bold
+# font-style-italic = Regular Italic
+# font-style-bold-italic = Bold Italic
 
 ################
 ## Comic Code ##
 ################
 
-# font-family = "Comic Code"
-# font-size = 22
-# font-feature = zero
+font-family = "Comic Code"
+font-size = 21
+adjust-cell-width = -2
+adjust-cell-height = 5
+font-feature = zero
 
 # font-family = "JetBrains Mono"
-# font-size = 29
+# font-size = 23
 # font-feature = cv01
+# font-feature = cv10
+# font-feature = cv03
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
@@ -30,8 +43,8 @@ font-size = 22
 # 
 # A future update will allow custom themes to be installed in certain
 # directories.
-# theme = GruvboxDarkHard
-config-file = ../themes/kanagawa_wave
+theme = Kanagawa Wave
+# config-file = ../themes/kanagawa_wave
 # config-file = ../themes/gruvbox_dark_hard
 # config-file = ../themes/rose_pine_black
 
@@ -489,6 +502,27 @@ osc-color-report-format = 16-bit
 # 
 # Changing this option at runtime only applies to new windows.
 macos-titlebar-style = transparent
+
+# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
+# is the icon that represents the folder of the current working directory.
+# You can see this very clearly in the macOS built-in Terminal.app
+# titlebar.
+#
+# The proxy icon is only visible with the native macOS titlebar style.
+#
+# Valid values are:
+#
+#   * `visible` - Show the proxy icon.
+#   * `hidden` - Hide the proxy icon.
+#
+# The default value is `visible`.
+#
+# This setting can be changed at runtime and will affect all currently
+# open windows but only after their working directory changes again.
+# Therefore, to make this work after changing the setting, you must
+# usually `cd` to a different directory, open a different file in an
+# editor, etc.
+macos-titlebar-proxy-icon = hidden
 
 # If `true`, the *Option* key will be treated as *Alt*. This makes terminal
 # sequences expecting *Alt* to work properly, but will break Unicode input
