@@ -76,6 +76,9 @@ if type -q git
     abbr -a gl 'git log --oneline' # show git commits with less info (only commit message headline)
     abbr -a glp 'git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all' # show git commits with graph and commit message headline
     abbr -a glpv 'git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n"\'          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)\' --all' # show git commits with graph and commit message headline with date
+
+    abbr -a gsh 'git stash' # G-it S-tash H-ide
+    abbr -a gsp 'git stash pop' # G-it S-tash P-op
 else
     __print -e "fish: could not setup abbr for git, git not found"
 end
