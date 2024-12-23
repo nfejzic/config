@@ -12,6 +12,13 @@ if test (uname -s) = Linux
 end
 
 if test (uname -s) = Darwin
+    # multi account homebrew setup
+    if test -d ~/.homebrew
+        eval "$(~/.homebrew/bin/brew shellenv)"
+    end
+
     # add gcloud stuff to path
-    source "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
+    if test -f "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
+        source "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
+    end
 end
