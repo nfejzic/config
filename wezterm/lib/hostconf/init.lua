@@ -24,9 +24,18 @@
 ---@field window_decorations string|nil
 ---@field window_padding WindowPadding|nil
 
+---@type HostConfig
+local mac_hostconf = require("lib.hostconf.mac_os")
+
+---@type HostConfig
+local mirza_mac_conf = require("lib.utils.init").table.copy(mac_hostconf)
+mirza_mac_conf.program_paths.fd = "/Users/nadirfejzic/.homebrew/bin/fd"
+mirza_mac_conf.dpi = nil
+
 --- @type table<string, HostConfig>
 local configs = {
-	["zenith"] = require("lib.hostconf.mac_os"),
+	["zenith"] = mac_hostconf,
+	["Mirzas-mac.local"] = mirza_mac_conf,
 	["edification"] = require("lib.hostconf.fedora_linux"),
 	["percolation"] = require("lib.hostconf.percolation"),
 }
