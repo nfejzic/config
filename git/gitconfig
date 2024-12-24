@@ -10,21 +10,21 @@
 	signingkey = 0D70B2CFAE6C70DE
 
 [core]
-    pager = delta
+	pager = delta
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+	diffFilter = delta --color-only
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
-    color-only = true
+	navigate = true
+	side-by-size = true
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
     # light = true
 
 [merge]
-    conflictstyle = diff3
+	conflictStyle = zdiff3
 
 [diff]
     colorMoved = default
