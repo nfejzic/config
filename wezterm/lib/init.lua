@@ -9,7 +9,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.front_end = "OpenGL"
 
 	if hostconf.dpi ~= nil then
-		config.dpi = 108
+		config.dpi = hostconf.dpi
 	end
 
 	-- font test
