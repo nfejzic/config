@@ -6,14 +6,14 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.listchars = {
-	eol = "↲",
-	tab = "» ",
-	space = "·",
-	trail = "·",
-	extends = "…",
-	precedes = "…",
-	conceal = "┊",
-	nbsp = "☠",
+    eol = "↲",
+    tab = "» ",
+    space = "·",
+    trail = "·",
+    extends = "…",
+    precedes = "…",
+    conceal = "┊",
+    nbsp = "☠",
 }
 
 vim.opt.list = false
@@ -42,66 +42,64 @@ vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.diffopt:append("indent-heuristic")
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-	pattern = "*",
-	callback = function()
-		require("user.custom_hl").customize()
-	end,
+    pattern = "*",
+    callback = function()
+        require("user.custom_hl").customize()
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "typescript", "javascript", "vue" },
-	callback = function(ev)
-		if string.match(ev.file, "idana") then
-			vim.o.colorcolumn = "100,+1"
-			vim.o.textwidth = 120
-		end
-	end,
+    pattern = { "typescript", "javascript", "vue" },
+    callback = function(ev)
+        if string.match(ev.file, "idana") then
+            vim.o.colorcolumn = "100,+1"
+            vim.o.textwidth = 120
+        end
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown" },
-	callback = function()
-		vim.o.textwidth = 80
+    pattern = { "markdown" },
+    callback = function()
+        vim.o.textwidth = 80
 
-		local buf_name = vim.api.nvim_buf_get_name(0)
-		if string.match(buf_name, "idana") then
-			-- text width 120 in work projects
-			vim.o.colorcolumn = "+1"
-			vim.o.textwidth = 120
-		else
-			vim.o.textwidth = 80
-		end
-	end,
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        if string.match(buf_name, "idana") then
+            -- text width 120 in work projects
+            vim.o.colorcolumn = "+1"
+            vim.o.textwidth = 120
+        else
+            vim.o.textwidth = 80
+        end
+    end,
 })
 
 -- set colorcolumn for rust files to 100 (as that's the default in rustfmt)
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "rust",
-	callback = function()
-		vim.o.colorcolumn = "+1"
-	end,
+    pattern = "rust",
+    callback = function()
+        vim.o.colorcolumn = "+1"
+    end,
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = "*.component.html",
-	callback = function()
-		vim.o.filetype = "htmlangular"
-	end,
+    pattern = "*.component.html",
+    callback = function()
+        vim.o.filetype = "htmlangular"
+    end,
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = "config",
-	callback = function(ev)
-		print(vim.inspect(ev))
-
-		if string.match(ev.file, "ghostty/.*/config") then
-			-- Ghostty config file, e.g. ~/Developer/config/ghostty/zenith-tmux/config
-			--			   matches with:                    ghostty/     .*    /config
-			vim.o.filetype = "ghostty"
-			vim.o.colorcolumn = "+1"
-			vim.o.textwidth = 80
-		end
-	end,
+    pattern = "config",
+    callback = function(ev)
+        if string.match(ev.file, "ghostty/.*/config") then
+            -- Ghostty config file, e.g. ~/Developer/config/ghostty/zenith-tmux/config
+            --			   matches with:                    ghostty/     .*    /config
+            vim.o.filetype = "ghostty"
+            vim.o.colorcolumn = "+1"
+            vim.o.textwidth = 80
+        end
+    end,
 })
 
 -- keep current content top + left when splitting
@@ -180,18 +178,18 @@ vim.opt.wildignore = ".hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,di
 vim.o.clipboard = "unnamedplus"
 
 if vim.fn.executable("gpaste-client") == 1 and not os.getenv("DESKTOP_SESSION") == "hyprland" then
-	vim.g.clipboard = {
-		name = "gpaste",
-		copy = {
-			["+"] = { "gpaste-client", "add" },
-			["*"] = { "gpaste-client", "add" },
-		},
-		paste = {
-			["+"] = { "gpaste-client", "--use-index", "get", "0" },
-			["*"] = { "gpaste-client", "--use-index", "get", "0" },
-		},
-		cache_enabled = true,
-	}
+    vim.g.clipboard = {
+        name = "gpaste",
+        copy = {
+            ["+"] = { "gpaste-client", "add" },
+            ["*"] = { "gpaste-client", "add" },
+        },
+        paste = {
+            ["+"] = { "gpaste-client", "--use-index", "get", "0" },
+            ["*"] = { "gpaste-client", "--use-index", "get", "0" },
+        },
+        cache_enabled = true,
+    }
 end
 
 -- global statusline
@@ -211,22 +209,22 @@ vim.opt.foldlevelstart = 99
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- jump to last edit position on opening file
 vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "*",
-	callback = function()
-		if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-			-- except for in git commit messages
-			-- https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
-			if not vim.fn.expand("%:p"):find(".git", 1, true) then
-				vim.cmd('exe "normal! g\'\\""')
-			end
-		end
-	end,
+    pattern = "*",
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            -- except for in git commit messages
+            -- https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+            if not vim.fn.expand("%:p"):find(".git", 1, true) then
+                vim.cmd('exe "normal! g\'\\""')
+            end
+        end
+    end,
 })

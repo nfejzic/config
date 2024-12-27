@@ -1,6 +1,6 @@
 return {
 	-- some nice themes
-	{ "folke/tokyonight.nvim",        lazy = true,   event = "BufWinEnter", enabled = false },
+	{ "folke/tokyonight.nvim",        lazy = true,   event = "BufWinEnter", enabled = true },
 	{ "EdenEast/nightfox.nvim",       lazy = true,   event = "BufWinEnter", enabled = false },
 	{ "wincent/base16-nvim",          enabled = true },
 	{ "ishan9299/nvim-solarized-lua", lazy = true,   event = "BufWinEnter", enabled = false },

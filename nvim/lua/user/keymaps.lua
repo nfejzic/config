@@ -287,6 +287,7 @@ end
 M.general = function()
 	local wk = require("which-key")
 
+	---@diagnostic disable-next-line: missing-fields
 	wk.setup({
 		preset = "modern",
 		disable = {
