@@ -2,27 +2,28 @@
 ## MonoLisa ##
 ##############
 
-font-family = "MonoLisa"
-font-size = 20
-adjust-cell-width = -1
-# centered 'x' in 0xF
-font-feature = ss11
-# more pronounced '{' and '}'
-font-feature = ss07
-font-synthetic-style = false
-font-style-bold = Bold
-font-style-italic = Regular Italic
-font-style-bold-italic = Bold Italic
+# font-family = "MonoLisa"
+# font-size = 20
+# adjust-cell-width = -1
+# # centered 'x' in 0xF
+# font-feature = ss11
+# # more pronounced '{' and '}'
+# font-feature = ss07
+# font-synthetic-style = false
+# font-style-bold = Bold
+# font-style-italic = Regular Italic
+# font-style-bold-italic = Bold Italic
 
 ################
 ## Comic Code ##
 ################
 
-# font-family = "Comic Code"
-# font-size = 21
-# adjust-cell-width = -2
-# adjust-cell-height = 5
-# font-feature = zero
+font-family = "Comic Code"
+font-size = 23
+adjust-cell-width = 0
+adjust-cell-height = 5
+adjust-cursor-height = 5
+font-feature = zero
 
 # font-family = "JetBrains Mono"
 # font-size = 23
@@ -44,11 +45,6 @@ font-style-bold-italic = Bold Italic
 # A future update will allow custom themes to be installed in certain
 # directories.
 theme = Kanagawa Wave
-# config-file = ../themes/kanagawa_wave
-# config-file = ../themes/gruvbox_dark_hard
-# config-file = ../themes/rose_pine_black
-
-# correct gruvbox dark hard theme
 
 # If you select across cells with differing foregrounds and backgrounds, the
 # selection color will vary across the selection.
@@ -106,19 +102,6 @@ cursor-style-blink = false
 # the mouse is used. The mouse is only hidden if the mouse cursor is over the
 # active terminal surface.
 mouse-hide-while-typing = false
-
-# The opacity level (opposite of transparency) of the background. A value of
-# 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
-# or greater than 1 will be clamped to the nearest valid value.
-background-opacity = 1
-
-# A positive value enables blurring of the background when background-opacity
-# is less than 1. The value is the blur radius to apply. A value of 20
-# is reasonable for a good looking blur. Higher values will cause strange
-# rendering issues as well as performance issues.
-# 
-# This is only supported on macOS.
-background-blur-radius = 0
 
 # The size of the scrollback buffer in bytes. This also includes the active
 # screen. No matter what this is set to, enough memory will always be
@@ -269,6 +252,7 @@ keybind = ctrl+l=clear_screen
 keybind = ctrl+backspace=text:\x17
 keybind = opt+backspace=text:\x17
 keybind = super+shift+t=text:\x1bT
+keybind = super+control+t=toggle_quick_terminal
 
 # Horizontal window padding. This applies padding between the terminal cells
 # and the left and right window borders. The value is in points, meaning that
@@ -368,44 +352,6 @@ window-inherit-font-size = true
 # only affect new windows. Existing windows will not be affected.
 window-decoration = true
 
-# Whether to allow programs running in the terminal to read/write to the
-# system clipboard (OSC 52, for googling). The default is to allow clipboard
-# reading after prompting the user and allow writing unconditionally.
-# 
-# Valid values are:
-# 
-#   * `ask`
-#   * `allow`
-#   * `deny`
-# 
-clipboard-read = ask
-
-clipboard-write = allow
-
-# Trims trailing whitespace on data that is copied to the clipboard. This does
-# not affect data sent to the clipboard via `clipboard-write`.
-clipboard-trim-trailing-spaces = true
-
-# Require confirmation before pasting text that appears unsafe. This helps
-# prevent a "copy/paste attack" where a user may accidentally execute unsafe
-# commands by pasting text with newlines.
-clipboard-paste-protection = true
-
-# If true, bracketed pastes will be considered safe. By default, bracketed
-# pastes are considered safe. "Bracketed" pastes are pastes while the running
-# program has bracketed paste mode enabled (a setting set by the running
-# program, not the terminal emulator).
-clipboard-paste-bracketed-safe = true
-
-# The total amount of bytes that can be used for image data (i.e. the Kitty
-# image protocol) per terminal scren. The maximum value is 4,294,967,295
-# (4GiB). The default is 320MB. If this is set to zero, then all image
-# protocols will be disabled.
-# 
-# This value is separate for primary and alternate screens so the effective
-# limit per surface is double.
-image-storage-limit = 320000000
-
 # Whether to automatically copy selected text to the clipboard. `true` will
 # only copy on systems that support a selection clipboard.
 # 
@@ -458,25 +404,6 @@ shell-integration = detect
 # 
 # Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
 shell-integration-features = no-cursor,no-sudo,no-title
-
-# Sets the reporting format for OSC sequences that request color information.
-# Ghostty currently supports OSC 10 (foreground), OSC 11 (background), and
-# OSC 4 (256 color palette) queries, and by default the reported values
-# are scaled-up RGB values, where each component are 16 bits. This is how
-# most terminals report these values. However, some legacy applications may
-# require 8-bit, unscaled, components. We also support turning off reporting
-# altogether. The components are lowercase hex values.
-# 
-# Allowable values are:
-# 
-#   * `none` - OSC 4/10/11 queries receive no reply
-# 
-#   * `8-bit` - Color components are return unscaled, i.e. `rr/gg/bb`
-# 
-#   * `16-bit` - Color components are returned scaled, e.g. `rrrr/gggg/bbbb`
-# 
-# The default value is `16-bit`.
-osc-color-report-format = 16-bit
 
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", and "tabs".
@@ -541,56 +468,6 @@ macos-option-as-alt = true
 # find false more visually appealing.
 macos-window-shadow = true
 
-# If `true`, the Ghostty GTK application will run in single-instance mode:
-# each new `ghostty` process launched will result in a new window if there is
-# already a running process.
-# 
-# If `false`, each new ghostty process will launch a separate application.
-# 
-# The default value is `detect` which will default to `true` if Ghostty
-# detects that it was launched from the `.desktop` file such as an app
-# launcher (like Gnome Shell)  or by D-Bus activation. If Ghostty is launched
-# from the command line, it will default to `false`.
-# 
-# Note that debug builds of Ghostty have a separate single-instance ID
-# so you can test single instance without conflicting with release builds.
-gtk-single-instance = desktop
-
-# When enabled, the full GTK titlebar is displayed instead of your window
-# manager's simple titlebar. The behavior of this option will vary with your
-# window manager.
-# 
-# This option does nothing when `window-decoration` is false or when running
-# under macOS.
-# 
-# Changing this value at runtime and reloading the configuration will only
-# affect new windows.
-gtk-titlebar = true
-
-# Determines the side of the screen that the GTK tab bar will stick to.
-# Top, bottom, left, and right are supported. The default is top.
-gtk-tabs-location = top
-
-# If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
-# are the new typical Gnome style where tabs fill their available space.
-# If you set this to `false` then tabs will only take up space they need,
-# which is the old style.
-gtk-wide-tabs = true
-
-# If `true` (default), Ghostty will enable libadwaita theme support. This
-# will make `window-theme` work properly and will also allow Ghostty to
-# properly respond to system theme changes, light/dark mode changing, etc.
-# This requires a GTK4 desktop with a GTK4 theme.
-# 
-# If you are running GTK3 or have a GTK3 theme, you may have to set this
-# to false to get your theme picked up properly. Having this set to true
-# with GTK3 should not cause any problems, but it may not work exactly as
-# expected.
-# 
-# This configuration only has an effect if Ghostty was built with
-# libadwaita support.
-gtk-adwaita = true
-
 # If `true` (default), applications running in the terminal can show desktop
 # notifications using certain escape sequences such as OSC 9 or OSC 777.
 desktop-notifications = true
@@ -606,7 +483,13 @@ bold-is-bright = true
 # from working properly. https://github.com/vim/vim/pull/13211 fixes this.
 term = xterm-ghostty
 
-# String to send when we receive `ENQ` (`0x05`) from the command that we are
-# running. Defaults to an empty string if not set.
-enquiry-response = 
-
+# The colorspace to use for the terminal window. The default is `srgb` but
+# this can also be set to `display-p3` to use the Display P3 colorspace.
+#
+# Changing this value at runtime will only affect new windows.
+#
+# This setting is only supported on macOS.
+#
+# NOTE: display-p3 has more accurate color rendering.
+#       Maybe relevant issue: https://github.com/ghostty-org/ghostty/issues/2125
+window-colorspace = display-p3
