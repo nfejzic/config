@@ -15,7 +15,6 @@ local function set_opts(wezterm, config, hostconf, theme)
 	-- font test
 	local _ = "gq 1Il l O0 0123456789 --> -> => == === != !== <= >= U u"
 
-	-- long time favorite font:
 	config.font = wezterm.font(hostconf.font.family)
 	config.font_size = hostconf.font.size
 

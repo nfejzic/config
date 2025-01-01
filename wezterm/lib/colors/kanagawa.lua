@@ -1,5 +1,49 @@
 local M = {}
 
+local palette = {
+	fujiWhite = '#DCD7BA',
+	oldWhite = '#C8C093',
+
+	sumiInk0 = '#16161D',
+	sumiInk1 = '#1F1F28',
+	sumiInk2 = '#2A2A37',
+	sumiInk3 = '#363646',
+	sumiInk4 = '#54546D',
+
+	waveBlue1 = '#223249',
+	waveBlue2 = '#2D4F67',
+
+	waveAqua1 = '#6A9589',
+	waveAqua2 = '#7AA89F',
+
+	samuraiRed = '#E82424',
+	autumnRed = '#C34043',
+	autumnYellow = '#DCA561',
+	roninYellow = '#FF9E3B',
+	peachRed = '#FF5D62',
+	crystalBlue = '#7E9CD8',
+	dragonBlue = '#658594',
+	springGreen = '#98BB6C',
+	springBlue = '#7FB4CA',
+	autumnGreen = '#76946A',
+	winterGreen = '#2B3328',
+	winterYellow = '#49443C',
+	winterRed = '#43242B',
+	winterBlue = '#252535',
+	oniViolet = '#957FB8',
+	sakuraPink = '#D27E99',
+	lightBlue = '#A3D4D5',
+
+	oldWhite3 = '#002B36',
+	oldWhite3_hard = '#00141D',
+	surimiOrange = '#FFA066',
+	boatYellow2 = '#C0A36E',
+	carpYellow = '#E6C384',
+
+	katanaGrey = '#717C7C',
+
+}
+
 ---@return ColorTheme
 function M.wave()
 	return {
@@ -73,10 +117,12 @@ function M.wave()
 		copy_mode_inactive_highlight_fg = { AnsiColor = 'Black' },
 
 		quick_select_label_bg = { AnsiColor = 'Maroon' },
-		quick_select_label_fg = { Color = 'White' },
+		quick_select_label_fg = { AnsiColor = 'White' },
 		quick_select_match_bg = { AnsiColor = 'Green' },
-		quick_select_match_fg = { Color = 'White' },
+		quick_select_match_fg = { AnsiColor = 'White' },
 
+		---@param term_bg string
+		---@param colors ColorTheme
 		tab_bar = function(term_bg, colors)
 			return {
 				-- The color of the inactive tab bar edge/divider
@@ -88,7 +134,7 @@ function M.wave()
 					-- The color of the background area for the tab
 					bg_color = term_bg,
 					-- The color of the text for the tab
-					fg_color = colors.brights[4],
+					fg_color = palette.autumnYellow,
 
 					-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
 					-- label shown for this tab.
