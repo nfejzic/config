@@ -237,33 +237,12 @@ end
 ---@diagnostic disable-next-line: unused-local
 local jetbrains_mono = {
 	family = "JetBrains Mono",
-	size = 18,
+	size = 22,
 	cell_width = 1,
 	line_height = 1.05,
 	harfbuzz_features = {
-		-- "cv01", -- regular looking 'l'
-		-- "cv03", -- looped 'g'
-		-- "cv07", -- nicer 'w'
-		-- "cv10", -- serif on 'r'
-		-- "cv11", -- rounded 'y'
-		-- "cv12", -- regular 'u'
-	},
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local jetbrains_mono_comfy = {
-	family = "JetBrains Mono",
-	size = 20,
-	-- cell_width = 1,
-	-- line_height = 1.05,
-	harfbuzz_features = {
-		-- 	"cv03", -- looped 'g'
-		-- "cv07", -- lowered 'w'
-		-- "cv10", -- serif on 'r'
-		-- "cv11", -- rounded 'y'
-		-- 	"cv12", -- regular 'u'
-		-- 	-- "ss20", -- raised bar 'f'
+		"cv01", --    slab 'l'
+		"cv12", -- regular 'u'
 	},
 }
 
@@ -271,7 +250,7 @@ local jetbrains_mono_comfy = {
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 18,
+	size = 22,
 	line_height = 1.15,
 	cell_width = 1,
 	harfbuzz_features = { "zero", "dlig" },
@@ -281,119 +260,14 @@ local comic_code = {
 --- @diagnostic disable-next-line: unused-local
 local monolisa = {
 	family = "MonoLisa",
-	size = 18,
+	size = 22,
+	line_height = 1,
 	cell_width = 0.95,
 	harfbuzz_features = {
-		-- centered hexadecimal 0xF
 		"ss11", -- centered 'x' in 0xF
 		-- "ss02", -- cursive italic
 		"ss07", -- more agressive '{' and '}'
 	},
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local monolisa_comfy = {
-	family = "MonoLisa",
-	size = 15,
-	-- line_height = 0.95,
-	-- cell_width = 1,
-	harfbuzz_features = {
-		-- strike-through '$'
-		"ss13",
-
-		-- centered hexadecimal 0xF
-		"ss11",
-	},
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local monolisa_huge = {
-	family = "MonoLisa",
-	size = 18,
-	line_height = 1,
-	cell_width = 1,
-	harfbuzz_features = {
-		-- strike-through '$'
-		"ss13",
-
-		-- centered hexadecimal 0xF
-		"ss11",
-	},
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local fira_code = {
-	family = "Fira Code",
-	size = 12.75,
-	cell_width = 1,
-	line_height = 1.07,
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local fira_code_comfy = {
-	family = "Fira Code",
-	size = 15,
-	cell_width = 1,
-	line_height = 1.07,
-	harfbuzz_features = {},
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local fira_code_huge = {
-	family = "Fira Code",
-	size = 18,
-	cell_width = 1,
-	line_height = 1.12,
-	harfbuzz_features = {
-		"zero", -- dotted zero
-		"cv14", -- sharp 3
-	},
-}
-
---- @type FontConfig
----@diagnostic disable-next-line: unused-local
-local sf_mono_comfy = {
-	family = "SF Mono",
-	size = 15,
-	cell_width = 1,
-	line_height = 1.16,
-	-- harfbuzz_features = {
-	-- 	"zero", -- dotted zero
-	-- 	"cv14", -- sharp 3
-	-- },
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local berkeley_mono = {
-	family = "Berkeley Mono",
-	size = 18,
-	line_height = 1.15,
-	harfbuzz_features = {
-		-- strike-through '$'
-		"ss13",
-
-		-- centered hexadecimal 0xF
-		"ss11",
-	},
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local cascadia_code = {
-	family = "Cascadia Code",
-	size = 18,
-	line_height = 1.2,
-	harfbuzz_features = {
-		-- centered hexadecimal 0xF
-		"ss11",
-	},
-	freetype_load_flags = "NO_AUTOHINT",
 }
 
 --- @type HostConfig
@@ -409,10 +283,7 @@ local config = {
 }
 
 config.font = comic_code
-config.font = monolisa
--- config.font = berkeley_mono
--- config.font = jetbrains_mono
--- config.font = cascadia_code
+-- config.font = monolisa
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
 return config

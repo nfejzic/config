@@ -31,6 +31,7 @@ local mac_hostconf = require("lib.hostconf.mac_os")
 local mirza_mac_conf = require("lib.utils.init").table.copy(mac_hostconf)
 mirza_mac_conf.program_paths.fd = "/Users/nadirfejzic/.homebrew/bin/fd"
 mirza_mac_conf.dpi = nil
+mirza_mac_conf.window_padding.top = "28pt"
 
 --- @type table<string, HostConfig>
 local configs = {
