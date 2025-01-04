@@ -18,18 +18,16 @@
 ## Comic Code ##
 ################
 
-font-family = "Comic Code"
-font-size = 23
-adjust-cell-width = 0
-adjust-cell-height = 5
-adjust-cursor-height = 5
-font-feature = zero
-
-# font-family = "JetBrains Mono"
+# font-family = "Comic Code"
 # font-size = 23
-# font-feature = cv01
-# font-feature = cv10
-# font-feature = cv03
+# adjust-cell-width = 0
+# adjust-cell-height = 5
+# adjust-cursor-height = 5
+# font-feature = zero
+
+font-family = "JetBrains Mono"
+font-size = 23
+font-feature = cv01
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/

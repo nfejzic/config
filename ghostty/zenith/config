@@ -38,19 +38,8 @@
 
 # # JetBrains Mono
 # font-family = "JetBrains Mono"
-# font-style = "Regular"
-# font-style-bold = "Bold"
-# font-style-italic = "Italic"
-# font-style-bold-italic = "Bold Italic"
-#
-# font-size = 26
-#
-# # f with serif
-# # font-feature = cv09
-# # g with loop
-# font-feature = cv03
-# # r with serif
-# font-feature = cv10
+# font-size = 23
+# font-feature = cv01
 
 # # MonoLisa
 # font-family = "MonoLisa"
@@ -64,9 +53,9 @@
 
 font-family = Comic Code
 font-feature = zero
-font-size = 26
-adjust-cell-height = 8
-adjust-cursor-height = 8
+font-size = 22
+adjust-cell-height = 7
+adjust-cursor-height = 7
 
 # Draw fonts with a thicker stroke, if supported. This is only supported
 # currently on MacOS.
@@ -245,6 +234,11 @@ keybind = shift+home=adjust_selection:home
 keybind = super+k=clear_screen
 keybind = ctrl+l=clear_screen
 keybind = super+v=paste_from_clipboard
+
+# bind opt+backspace and ctrl+backspace to ctrl-w for easy deletion in shell
+# and neovim
+keybind = ctrl+backspace=text:\x17
+keybind = opt+backspace=text:\x17
 
 # Horizontal window padding.
 window-padding-x = 0
