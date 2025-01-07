@@ -6,7 +6,8 @@
 
 font-family = Comic Code
 font-size = 17
-adjust-cell-height = 4
+adjust-cell-height = 3
+adjust-cursor-height = 3
 font-feature = zero
 
 # font-family = Berkeley Mono
@@ -21,11 +22,7 @@ font-feature = zero
 # 
 # A future update will allow custom themes to be installed in certain
 # directories.
-# theme = GruvboxDarkHard
-
-# for now, we use custom themes, which is just a file that configures palette.
-# Custom config files can be loaded with `config-file = <path>`
-config-file = ../themes/kanagawa_wave
+theme = Kanagawa Wave
 
 # Swap the foreground and background colors of cells for selection. This
 # option overrides the `selection-foreground` and `selection-background`
