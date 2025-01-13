@@ -21,8 +21,6 @@ require("lazy").setup({
 	-- show help popup for keymaps (like in emacs)
 	{ "folke/which-key.nvim" },
 
-	{ "nfejzic/mariana.nvim", dev = true },
-
 	-- btor2 syntax highlighting
 	{ "phlo/vim-btor2" },
 
