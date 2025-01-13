@@ -23,16 +23,6 @@ require("lazy").setup({
 
 	-- btor2 syntax highlighting
 	{ "phlo/vim-btor2" },
-
-	-- {
-	-- 	"NoahTheDuke/vim-just",
-	-- 	ft = { "just" },
-	-- },
-
-	-- {
-	-- 	"rust-lang/rust.vim",
-	-- 	ft = { "rust" },
-	-- },
 }, {
 	dev = { path = vim.uv.os_homedir() .. "/Developer/nvim" },
 
