@@ -110,6 +110,8 @@ function M.setup(wezterm, config)
 		config.colors = {}
 	end
 
+	require("lib.hyperlinks").configure_hyperlinks(config, wezterm)
+
 	config.colors.tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent)
 
 	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
