@@ -2,32 +2,51 @@
 ## MonoLisa ##
 ##############
 
-# font-family = "MonoLisa"
-# font-size = 20
-# adjust-cell-width = -1
-# # centered 'x' in 0xF
-# font-feature = ss11
-# # more pronounced '{' and '}'
-# font-feature = ss07
-# font-synthetic-style = false
-# font-style-bold = Bold
-# font-style-italic = Regular Italic
-# font-style-bold-italic = Bold Italic
+font-family = MonoLisa
+font-size = 22
+adjust-cell-width = 0
+adjust-cell-height = 0
+adjust-cursor-height = 0
+# centered 'x' in 0xF
+font-feature = ss11
+# more pronounced '{' and '}'
+font-feature = ss07
+font-synthetic-style = false
 
 ################
 ## Comic Code ##
 ################
 
 # font-family = "Comic Code"
-# font-size = 23
-# adjust-cell-width = 0
-# adjust-cell-height = 5
-# adjust-cursor-height = 5
+# font-size = 22
+# adjust-cell-height = 8
+# adjust-cell-width = -1
+# adjust-cursor-height = 8
 # font-feature = zero
 
-font-family = "JetBrains Mono"
-font-size = 23
-font-feature = cv01
+#############
+## Codelia ##
+#############
+
+# font-family = "Codelia Ligatures"
+# font-size = 22
+# adjust-cell-height = 4
+# adjust-cursor-height = 4
+# adjust-cell-width = 0
+# font-feature = zero
+# font-feature = ss02
+
+####################
+## JetBrains Mono ##
+####################
+
+# font-family = "JetBrains Mono"
+# adjust-cell-height = 2
+# adjust-cursor-height = 2
+# font-size = 22
+# font-feature = cv10
+# font-feature = cv01
+# font-feature = cv12
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
@@ -233,7 +252,7 @@ keybind = super+shift+n=new_window
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
 
-keybind = super+enter=toggle_fullscreen
+keybind = super+enter=toggle_window_decorations
 
 keybind = super+equal=increase_font_size:1
 keybind = super+plus=increase_font_size:1
@@ -243,7 +262,7 @@ keybind = super+zero=reset_font_size
 keybind = super+comma=open_config
 keybind = super+shift+comma=reload_config
 
-keybind = ctrl+l=clear_screen
+# keybind = ctrl+l=clear_screen
 
 # bind opt+backspace and ctrl+backspace to ctrl-w for easy deletion in shell
 # and neovim
@@ -490,4 +509,4 @@ term = xterm-ghostty
 #
 # NOTE: display-p3 has more accurate color rendering.
 #       Maybe relevant issue: https://github.com/ghostty-org/ghostty/issues/2125
-window-colorspace = display-p3
+window-colorspace = srgb
