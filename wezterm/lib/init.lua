@@ -5,9 +5,6 @@ local M = {}
 --- @param hostconf HostConfig
 --- @param theme string | ColorTheme
 local function set_opts(wezterm, config, hostconf, theme)
-	config.enable_wayland = true
-	config.front_end = "OpenGL"
-
 	if hostconf.dpi ~= nil then
 		config.dpi = hostconf.dpi
 	end
