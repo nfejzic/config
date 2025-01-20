@@ -166,12 +166,6 @@ function M.telescope_keymaps(telescope, t_builtin)
 	end, { desc = "Fuzzy search in buffer" })
 end
 
--- M.neo_tree_trigger_keys = "<leader>f"
--- M.neo_tree = function()
--- 	vim.keymap.set("n", "<leader>ft", "<cmd>Neotree toggle<CR>", { desc = "Open File Tree" })
--- 	vim.keymap.set("n", "<leader>fr", "<cmd>Neotree reveal<CR>", { desc = "Reveal current file in the sidebar" })
--- end
-
 M.dap_trigger_keys = "<leader>d"
 M.dap = function(dap, dapui)
 	-- Breakpoints
