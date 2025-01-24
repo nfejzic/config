@@ -1,19 +1,17 @@
-# font-family = MonoLisa
-# font-size = 20
-# font-synthetic-style = false
-# freetype-load-flags = no-hinting,no-autohint
-# adjust-cell-height = -2
-
-font-family = Comic Code
-font-size = 20
-adjust-cell-height = 3
-adjust-cursor-height = 3
-font-feature = zero
-
-# font-family = JetBrains Mono
-# font-size = 21
-# adjust-cell-height = 2
-# adjust-cursor-height = 2
+font-family = MonoLisa
+font-style = Regular
+font-style-italic = Regular Italic
+font-style-bold = Bold
+font-style-bold-italic = Bold Italic
+font-size = 19
+font-synthetic-style = false
+freetype-load-flags = no-hinting,no-autohint
+# single loop 'g'
+font-feature = ss04
+# more aggressive braces '{}'
+font-feature = ss07
+# cursive italic
+font-feature = ss02
 
 # A named theme to use. To see a list of available themes, run `ghostty +list-themes`.
 # 
