@@ -3,6 +3,7 @@ font-size = 20
 adjust-cell-width = 0
 adjust-cell-height = 0
 adjust-cursor-height = 0
+adjust-cursor-thickness = 100%
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
