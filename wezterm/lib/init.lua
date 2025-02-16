@@ -86,14 +86,18 @@ function M.setup(wezterm, config)
 	local color_config = require("lib.colors").init(wezterm, 'kanagawa-wave')
 	local tab_fns = require("lib.tab_config")
 	local keys = require("lib.key_config")
-	local hostconf = require("lib.hostconf")[wezterm.hostname()]
+	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
 
 	local keybindings
 
+	local program_paths = {
+		fd = require("lib.utils").execute("which fd")
+	}
+
 	if hostconf.get_keybindings ~= nil then
-		keybindings = hostconf.get_keybindings(wezterm, hostconf.program_paths)
+		keybindings = hostconf.get_keybindings(wezterm, program_paths)
 	else
-		keybindings = keys.get_keybindings(wezterm, hostconf.program_paths)
+		keybindings = keys.get_keybindings(wezterm, program_paths)
 	end
 
 	config.leader = keybindings.leader

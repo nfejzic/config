@@ -1,8 +1,7 @@
----@param program_paths ProgramPaths
 local function get_keybindings(wezterm, program_paths)
 	local act = wezterm.action
 
-	local sessionizer = require("lib.sessionizer").setup({
+	local sessionizer = require("lib.sessionizer").setup(wezterm, {
 		program_paths = program_paths,
 		paths = { os.getenv("HOME") .. "/Developer" },
 		wezterm = wezterm,
@@ -276,7 +275,7 @@ local config = {
 	font = monolisa,
 	update_dpi = true,
 	program_paths = {
-		fd = "/opt/homebrew/bin/fd",
+		fd = require("lib.utils").execute("which fd")
 	},
 	get_keybindings = get_keybindings,
 	window_padding = { top = "27pt", right = "0cell", bottom = "0cell", left = "0cell" },
