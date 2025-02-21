@@ -155,6 +155,9 @@ function M.rust_analyzer(opts, neoconf)
 							command = "clippy",
 							features = "all",
 						},
+						files = {
+							excludeDirs = { '.direnv' },
+						},
 					},
 				},
 			},
