@@ -2,6 +2,9 @@ local M = {}
 
 local cached = {}
 
+---@class ProgramPaths
+---@field fd string
+
 --- @param fd string
 --- @param paths table<string, string>,
 --- @param wezterm table
@@ -85,11 +88,9 @@ local SessionizerConfig = setmetatable({}, {
 
 --- @param sessionizer SessionizerConfig
 --- @return Sessionizer
-M.setup = function(sessionizer)
+function M.setup(wezterm, sessionizer)
 	local fd = sessionizer.program_paths.fd
 	local paths = sessionizer.paths
-
-	local wezterm = require("wezterm")
 
 	local toggleFn = createToggleFn(fd, paths, wezterm)
 	local resetCacheAndToggleFn = createResetCacheAndToggleFn(wezterm, toggleFn)

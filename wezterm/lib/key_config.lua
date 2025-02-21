@@ -7,7 +7,7 @@ local M = {}
 M.get_keybindings = function(wezterm, program_paths)
 	local act = wezterm.action
 
-	local sessionizer = require("lib.sessionizer").setup({
+	local sessionizer = require("lib.sessionizer").setup(wezterm, {
 		program_paths = program_paths,
 		paths = { os.getenv("HOME") .. "/Developer" },
 		wezterm = wezterm,

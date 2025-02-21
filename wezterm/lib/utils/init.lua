@@ -16,4 +16,17 @@ function M.table.copy(table)
 	return t2;
 end
 
+---@param command string Command to execute in the user's default shell
+function M.execute(command)
+	local shell = os.getenv("SHELL")
+	local pipe = io.popen(shell .. " --command '" .. command .. "'")
+
+	if pipe then
+		local command_output = pipe:read("*a")
+		return string.gsub(command_output, "%s+", "")
+	else
+		return ""
+	end
+end
+
 return M
