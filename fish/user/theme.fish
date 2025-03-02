@@ -137,7 +137,7 @@ function __theme_bat -a theme
     end
 end
 
-function __theme_fish -a theme
+function __theme_fish -a theme -a transparent
     switch $theme
         case catppuccin_latte
             yes | fish_config theme save "Catppuccin Latte"
@@ -152,26 +152,26 @@ function __theme_fish -a theme
             yes | fish_config theme save "Catppuccin Mocha"
 
         case solarized_dark or solarized_dark_hard
-            yes | fish_config theme save transparent # works better than solarized theme
+            yes | fish_config theme save "$transparent" # works better than solarized theme
 
         case solarized_light
             yes | fish_config theme save "Solarized Light"
 
         case gruvbox_dark_hard
-            yes | fish_config theme save transparent
+            yes | fish_config theme save "$fish_transparent"
             # yes | fish_config theme save "Gruvbox Dark Hard"
 
         case rose_pine
             yes | fish_config theme save "Rosé Pine"
 
         case kanagawa
-            yes | fish_config theme save transparent
+            yes | fish_config theme save "$transparent"
 
         case zenbones
-            yes | fish_config theme save transparent
+            yes | fish_config theme save "$transparent"
 
         case "*"
-            yes | fish_config theme save transparent
+            yes | fish_config theme save "$transparent"
     end
 end
 
@@ -247,7 +247,13 @@ function set_theme
         return
     end
 
-    __theme_fish $cleaned
+    set -l fish_transparent "fish default"
+
+    if test (fish_config theme list | rg transparent)
+        set -l fish_transparent transparent
+    end
+
+    __theme_fish $cleaned $fish_transparent
     __theme_fzf $cleaned
     __theme_bat $cleaned
 
