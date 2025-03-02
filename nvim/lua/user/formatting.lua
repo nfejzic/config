@@ -13,6 +13,7 @@ conform.setup({
 		html = { "prettierd", "prettier", stop_after_first = true },
 		markdown = { "prettierd", "prettier", stop_after_first = true },
 		yaml = { "yamlfmt" },
+		nix = { "nixfmt" },
 		rust = {},
 		c = {},
 		go = { "gofumpt" },
@@ -25,6 +26,11 @@ conform.setup({
 			command = "fish_indent",
 			args = { "-w", "$FILENAME" },
 			stdin = false,
+		},
+		nixfmt = {
+			command = "nixfmt",
+			args = { "$FILENAME" },
+			stdin = false,
 		}
 	},
 	format_on_save = function(bufnr)
@@ -35,19 +41,26 @@ conform.setup({
 		local is_selfie = string.match(buf_name, "selfie")
 		local is_beator = string.match(buf_name, "selfie")
 		local is_monster = string.match(buf_name, "selfie")
+		local is_nix_file = string.match(buf_name, ".nix")
 
 		-- disable json formatting in idana projects
 		local is_json = string.match(buf_name, ".*idana.*.json")
 
+		local timeout_ms = 500
+		if is_nix_file then
+			-- nix fmt takes a long time to format file, but it's ok...
+			timeout_ms = 10000
+		end
+
 		if is_selfie or is_beator or is_monster or is_json then
-			return { timeout_ms = 500, lsp_fallback = false, formatters = formatters, quiet = true }
+			return { timeout_ms = timeout_ms, lsp_fallback = false, formatters = formatters, quiet = false }
 		else
 			return {
 				-- These options will be passed to conform.format()
-				timeout_ms = 500,
+				timeout_ms = timeout_ms,
 				lsp_fallback = true,
 				formatters = formatters,
-				quiet = true,
+				quiet = false,
 			}
 		end
 	end,
