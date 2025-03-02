@@ -116,6 +116,12 @@ function M.setup(wezterm, config)
 	config.colors.tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent)
 
 	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
+
+	config.dpi_by_screen = {
+		["LG HDR QHD"] = 108,
+		["LG HDR 4K"] = 108,
+		["Built-in Retina Display"] = 109,
+	}
 end
 
 return M
