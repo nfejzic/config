@@ -65,7 +65,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	if hostconf.window_decorations ~= nil then
 		config.window_decorations = hostconf.window_decorations
 	else
-		config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+		config.window_decorations = "TITLE|RESIZE"
 	end
 
 	config.window_background_opacity = 0.95
