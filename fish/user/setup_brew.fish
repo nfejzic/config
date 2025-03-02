@@ -12,6 +12,8 @@ if test (uname -s) = Linux
 end
 
 if test (uname -s) = Darwin
+    eval (/opt/homebrew/bin/brew shellenv)
+
     # multi account homebrew setup
     if test -d ~/.homebrew
         eval "$(~/.homebrew/bin/brew shellenv)"
