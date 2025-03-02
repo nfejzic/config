@@ -1,3 +1,4 @@
+local utils = require "lib.utils"
 --- @param wezterm table
 local function get_keybindings(wezterm, program_paths)
 	local act = wezterm.action
@@ -160,6 +161,7 @@ local function get_keybindings(wezterm, program_paths)
 								-- An empty string if they just hit enter
 								-- Or the actual line of text they wrote
 								if line then
+									utils.workspace_switch_event(wezterm)
 									window:perform_action(
 										act.SwitchToWorkspace({
 											name = line,

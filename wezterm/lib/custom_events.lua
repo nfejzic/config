@@ -1,3 +1,4 @@
+local utils = require "lib.utils"
 local M = {}
 
 local function update_dpi(get_screens)
@@ -39,6 +40,28 @@ local function format_workspace_name(wezterm, colors)
 	end
 end
 
+local last_workspace = nil
+local function workspace_switching(wezterm)
+	wezterm.on(utils.events.WORKSPACE_SWITCHED, function(_, _)
+		last_workspace = wezterm.mux.get_active_workspace()
+		wezterm.log_info("Update last_workspace = '" .. last_workspace .. "'")
+	end)
+
+	wezterm.on(utils.events.SWITCH_TO_LAST_WORKSPACE, function(window, pane)
+		if last_workspace == nil then
+			wezterm.log_warn("No last workspace, nothing to switch to")
+			return
+		end
+
+		local current_workspace = wezterm.mux.get_active_workspace()
+
+		wezterm.log_info("Switching from '" .. current_workspace .. "' to '" .. last_workspace .. "'")
+		window:perform_action(wezterm.action.SwitchToWorkspace({ name = last_workspace }), pane)
+
+		last_workspace = current_workspace
+	end)
+end
+
 --- @param wezterm table
 --- @param tab_fns table
 --- @param colors ColorTheme
@@ -46,6 +69,8 @@ end
 function M.register_events(wezterm, tab_fns, colors, hostconf)
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
 	wezterm.on("update-status", format_workspace_name(wezterm, colors))
+
+	workspace_switching(wezterm)
 
 	if hostconf.update_dpi then
 		wezterm.on("window-resized", update_dpi(wezterm.gui.screens))

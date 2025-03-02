@@ -1,3 +1,4 @@
+local utils = require "lib.utils"
 -- This is the default keybindings configuration. See hostconf for keybindings specific to the given hosts
 local M = {}
 -- timeout_milliseconds defaults to 1000 and can be omitted
@@ -150,6 +151,7 @@ M.get_keybindings = function(wezterm, program_paths)
 								-- An empty string if they just hit enter
 								-- Or the actual line of text they wrote
 								if line then
+									utils.workspace_switch_event(wezterm)
 									window:perform_action(
 										act.SwitchToWorkspace({
 											name = line,

@@ -1,3 +1,4 @@
+local utils = require "lib.utils"
 local M = {}
 
 local cached = {}
@@ -49,6 +50,7 @@ local function createToggleFn(fd, paths, wezterm)
 						wezterm.log_info("Cancelled")
 					else
 						wezterm.log_info("Selected " .. label)
+						utils.workspace_switch_event(wezterm)
 						win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }), pane)
 					end
 				end),

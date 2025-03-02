@@ -1,3 +1,4 @@
+local utils = require "lib.utils"
 local function get_keybindings(wezterm, program_paths)
 	local act = wezterm.action
 
@@ -31,6 +32,16 @@ local function get_keybindings(wezterm, program_paths)
 		},
 
 		keys = {
+			-- send Ctrl-w on Ctrl-Backspace | Opt-Backspace
+			{
+				key = 'Backspace',
+				mods = 'OPT',
+				action = act.SendKey {
+					key = 'w',
+					mods = 'CTRL',
+				},
+			},
+
 			{
 				key = 'Backspace',
 				mods = 'CTRL',
@@ -175,6 +186,7 @@ local function get_keybindings(wezterm, program_paths)
 								-- An empty string if they just hit enter
 								-- Or the actual line of text they wrote
 								if line then
+									utils.workspace_switch_event(wezterm)
 									window:perform_action(
 										act.SwitchToWorkspace({
 											name = line,
@@ -190,9 +202,43 @@ local function get_keybindings(wezterm, program_paths)
 			},
 
 			{
+				key = " ",
+				mods = "LEADER|ALT",
+				action = act.EmitEvent(utils.events.SWITCH_TO_LAST_WORKSPACE),
+			},
+
+			{
 				key = "s",
 				mods = "LEADER",
-				action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+
+				action = wezterm.action_callback(function(window, pane)
+					local workspaces = wezterm.mux.get_workspace_names()
+
+					local workspaces_list = {}
+
+					for _, workspace in pairs(workspaces) do
+						table.insert(workspaces_list, { label = workspace, id = workspace })
+					end
+
+					wezterm.log_info(workspaces_list)
+
+					window:perform_action(
+						act.InputSelector({
+							action = wezterm.action_callback(function(win, _, id, label)
+								if not id and not label then
+									wezterm.log_info("Switch workspace cancelled")
+								else
+									wezterm.log_info("Selected workspace " .. label)
+									utils.workspace_switch_event(wezterm)
+									win:perform_action(act.SwitchToWorkspace({ name = id }), pane)
+								end
+							end),
+							choices = workspaces_list,
+							fuzzy = true,
+						}),
+						pane
+					)
+				end)
 			},
 
 			{

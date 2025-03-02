@@ -29,4 +29,13 @@ function M.execute(command)
 	end
 end
 
+M.events = {
+	WORKSPACE_SWITCHED = 'workspace_switch',
+	SWITCH_TO_LAST_WORKSPACE = 'switch-to-last-workspace',
+}
+
+function M.workspace_switch_event(wezterm)
+	wezterm.emit(M.events.WORKSPACE_SWITCHED)
+end
+
 return M
