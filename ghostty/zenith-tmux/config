@@ -3,7 +3,6 @@ font-size = 20
 adjust-cell-width = 0
 adjust-cell-height = 0
 adjust-cursor-height = 0
-adjust-cursor-thickness = 100%
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
@@ -13,11 +12,19 @@ font-synthetic-style = false
 # cursive
 font-feature = ss02
 # single-loop 'g'
-font-feature = ss04
+# font-feature = ss04
 # more pronounced '{' and '}'
 font-feature = ss07
 # centered 'x' in 0xF
 font-feature = ss11
+
+# font-family = Comic Code
+# font-size = 21
+# adjust-cell-height = 8
+# adjust-cursor-height = 8
+# font-feature = zero
+
+adjust-cursor-thickness = 200%
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
@@ -480,4 +487,4 @@ term = xterm-ghostty
 #
 # NOTE: display-p3 has more accurate color rendering.
 #       Maybe relevant issue: https://github.com/ghostty-org/ghostty/issues/2125
-window-colorspace = srgb
+window-colorspace = display-p3
