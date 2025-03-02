@@ -305,13 +305,14 @@ local comic_code = {
 --- @diagnostic disable-next-line: unused-local
 local monolisa = {
 	family = "MonoLisa",
-	size = 22,
+	size = 26,
 	line_height = 1,
-	cell_width = 0.95,
+	cell_width = 1,
 	harfbuzz_features = {
+		"ss02", -- cursive letters
+		-- "ss04", -- single-loop 'g'
+		-- "ss07", -- more agressive '{' and '}'
 		"ss11", -- centered 'x' in 0xF
-		-- "ss02", -- cursive italic
-		"ss07", -- more agressive '{' and '}'
 	},
 }
 
