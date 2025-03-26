@@ -69,7 +69,7 @@ cmp.setup({
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 		{ name = "path" },
-		{ name = "buffer" },
+		{ name = "buffer",                 enabled = false },
 		{ name = "codeium",                group_index = 2 },
 		{ name = "gh_issues" },
 	},
