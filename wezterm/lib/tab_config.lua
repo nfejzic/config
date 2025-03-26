@@ -1,5 +1,3 @@
-local window = require("wezterm").window
-
 local M = {}
 
 -- Equivalent to POSIX basename(3)
@@ -13,9 +11,15 @@ end
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
 -- title of the active pane in that tab.
-local function tab_title(tab)
+---@param max_width number
+local function tab_title(tab, max_width)
+	-- we add space at the end, so we count it right away
+	max_width = max_width - 1
+
 	local pane = tab.active_pane
 	local index = tab.tab_index + 1
+
+	local result = " " .. index .. ": "
 
 	local title = tab.tab_title
 
@@ -23,23 +27,45 @@ local function tab_title(tab)
 		title = basename(pane.foreground_process_name)
 	end
 
-	-- if the tab title is explicitly set, take that
-	if title and #title > 0 then
-		return index .. ": " .. title
+	if title == "nvim" then
+		local path = pane.current_working_dir
+
+		if path ~= nil then
+			local dir_name = string.gsub(path.file_path, "(.*/)(.*)", "%2")
+
+			require("wezterm").log_info("#result + #title + #dir_name + 2 = " .. #result + #title + #dir_name + 2)
+			require("wezterm").log_info("             max_width = " .. max_width)
+
+			if #result + #title + #dir_name + 2 > max_width then
+				-- -1 for the appended dot
+				local dir_len = max_width - #result - #title - 2 - 1
+				dir_name = string.sub(dir_name, 1, dir_len) .. "."
+			end
+
+			title = title .. "(" .. dir_name .. ")"
+		end
 	end
-	-- Otherwise, use the title from the active pane
-	-- in that tab
-	return index .. ": " .. tab.active_pane.title
+
+	if title and #title > 0 then
+		-- if the tab title is explicitly set, take that
+		result = result .. title
+	else
+		-- Otherwise, use the title from the active pane
+		-- in that tab
+		result = result .. tab.active_pane.title
+	end
+
+	return result .. " "
 end
 
 --- @param colors ColorTheme
 ---@diagnostic disable-next-line: unused-local
 M.format_tab_title = function(colors)
 	---@diagnostic disable-next-line: unused-local
-	return function(tab, _tabs, _panes, _config, _hover, _max_width)
-		local title = tab_title(tab)
+	return function(tab, _tabs, _panes, _config, _hover, max_width)
+		local title = tab_title(tab, max_width)
 		return {
-			{ Text = " " .. title .. " " },
+			{ Text = title },
 		}
 	end
 end
