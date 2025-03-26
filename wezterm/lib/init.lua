@@ -118,9 +118,10 @@ function M.setup(wezterm, config)
 	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
 
 	config.dpi_by_screen = {
-		["LG HDR QHD"] = 108,
-		["LG HDR 4K"] = 108,
+		["LG HDR QHD"] = 120,
+		["LG HDR 4K"] = 120,
 		["Built-in Retina Display"] = 109,
+		["LEN T27p-10"] = 120,
 	}
 end
 
