@@ -89,8 +89,8 @@ function M.get_global_capabilities(get_autocomplete_capabilities)
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 	if get_autocomplete_capabilities ~= nil then
-		local cmp_capabilities = get_autocomplete_capabilities()
-		local glob_capabilities = vim.tbl_deep_extend("force", capabilities, cmp_capabilities)
+		local completion_capabilities = get_autocomplete_capabilities()
+		local glob_capabilities = vim.tbl_deep_extend("force", capabilities, completion_capabilities)
 
 		return glob_capabilities
 	end
