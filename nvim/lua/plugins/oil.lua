@@ -15,6 +15,9 @@ return {
 				"size",
 				-- "mtime",
 			},
+			view_options = {
+				show_hidden = true,
+			},
 			-- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
 			delete_to_trash = true,
 		})
