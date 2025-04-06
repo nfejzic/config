@@ -46,7 +46,7 @@ conform.setup({
 		-- disable json formatting in idana projects
 		local is_json = string.match(buf_name, ".*idana.*.json")
 
-		local timeout_ms = 500
+		local timeout_ms = 1500
 		if is_nix_file then
 			-- nix fmt takes a long time to format file, but it's ok...
 			timeout_ms = 10000
