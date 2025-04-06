@@ -20,41 +20,32 @@ local function tab_title(tab, max_width)
 	local index = tab.tab_index + 1
 
 	local result = " " .. index .. ": "
+	local curr_tab_title = tab.tab_title
 
-	local title = tab.tab_title
-
-	if not title or #title == 0 then
-		title = basename(pane.foreground_process_name)
-	end
-
-	if title == "nvim" then
-		local path = pane.current_working_dir
-
-		if path ~= nil then
-			local dir_name = string.gsub(path.file_path, "(.*/)(.*)", "%2")
-
-			require("wezterm").log_info("#result + #title + #dir_name + 2 = " .. #result + #title + #dir_name + 2)
-			require("wezterm").log_info("             max_width = " .. max_width)
-
-			if #result + #title + #dir_name + 2 > max_width then
-				-- -1 for the appended dot
-				local dir_len = max_width - #result - #title - 2 - 1
-				dir_name = string.sub(dir_name, 1, dir_len) .. "."
-			end
-
-			title = title .. "(" .. dir_name .. ")"
-		end
-	end
-
-	if title and #title > 0 then
+	if curr_tab_title and #curr_tab_title > 0 then
 		-- if the tab title is explicitly set, take that
-		result = result .. title
-	else
-		-- Otherwise, use the title from the active pane
-		-- in that tab
-		result = result .. tab.active_pane.title
+		return result .. curr_tab_title
 	end
 
+	local title = basename(pane.foreground_process_name)
+	local path = pane.current_working_dir
+
+	if path ~= nil then
+		local dir_name = basename(path.file_path)
+
+		require("wezterm").log_info("#result + #title + #dir_name + 2 = " .. #result + #title + #dir_name + 2)
+		require("wezterm").log_info("             max_width = " .. max_width)
+
+		if #result + #title + #dir_name + 2 > max_width then
+			-- -1 for the appended dot
+			local dir_len = max_width - #result - #title - 2 - 1
+			dir_name = string.sub(dir_name, 1, dir_len) .. "."
+		end
+
+		title = title .. "(" .. dir_name .. ")"
+	end
+
+	result = result .. title
 	return result .. " "
 end
 
