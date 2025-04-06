@@ -122,6 +122,7 @@ function M.setup(wezterm, config)
 		["LG HDR 4K"] = 120,
 		["Built-in Retina Display"] = 109,
 		["LEN T27p-10"] = 120,
+		["DELL P3223QE"] = 118,
 	}
 end
 
