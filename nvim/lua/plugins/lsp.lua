@@ -98,7 +98,7 @@ return {
 			end
 
 			local global_capabilities = user_lsp.get_global_capabilities(get_cmp_capabilities)
-			local handlers = user_lsp.get_handlers()
+			local handlers = user_lsp.override_and_get_handlers()
 
 			local opts = {
 				on_attach = on_attach,

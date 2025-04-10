@@ -2,13 +2,24 @@ local M = {}
 
 local _border = "rounded"
 
-function M.get_handlers()
-	local handlers = {
-		["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = _border,
-		}),
+function M.override_and_get_handlers()
+	local hover = vim.lsp.buf.hover
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.lsp.buf.hover = function(opts)
+		local config = vim.tbl_deep_extend("keep", { border = "rounded" }, opts or {})
+		hover(config)
+	end
 
-		["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = _border }),
+	local signature_help = vim.lsp.buf.signature_help
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.lsp.buf.signature_help = function(opts)
+		local config = vim.tbl_deep_extend("keep", { border = "rounded" }, opts or {})
+		signature_help(config)
+	end
+
+	local handlers = {
+		["textDocument/hover"] = vim.lsp.buf.hover,
+		["textDocument/signatureHelp"] = vim.lsp.buf.signature_help,
 	}
 
 	return handlers
