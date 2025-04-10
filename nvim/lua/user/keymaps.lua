@@ -1,13 +1,27 @@
 local M = {}
 
 function M.lsp(t_builtin, inlay_hint_supported)
+	local function next_diagnostic()
+		vim.diagnostic.jump({ count = 1, float = true })
+	end
+
+	local function prev_diagnostic()
+		vim.diagnostic.jump({ count = -1, float = true })
+	end
+
+	-- NOTE: this does not seem to work correctly, some errors appear, such as NO_SUCH_MAPPING
+	-- remove builtin keymaps
+	-- vim.keymap.del('n', 'grr')
+	-- vim.keymap.del('n', 'gri')
+	-- vim.keymap.del('n', 'grn')
+	-- vim.keymap.del('n', 'gra')
+
 	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 	vim.keymap.set("n", "<leader>ld", t_builtin.lsp_definitions, { desc = "Go to definition" })
 
 	vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostics message" })
-	vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
-	vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
-	vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Refactor Rename" })
+	vim.keymap.set("n", "<leader>lj", next_diagnostic, { desc = "Go to next LSP diagnostics problem" })
+	vim.keymap.set("n", "<leader>lk", prev_diagnostic, { desc = "Go to previous LSP diagnostics problem" })
 	vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, { desc = "Show hover popup" })
 	-- vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "Populate location list with diagnostics" })
 	vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Populate quickfix list with diagnostics" })
@@ -46,7 +60,6 @@ function M.lsp(t_builtin, inlay_hint_supported)
 	vim.keymap.set({ "n", "v" }, "<leader>ll", vim.lsp.codelens.run, { desc = "Run Code Lens" })
 
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Definitions" })
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "References" })
 	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Implementations" })
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
@@ -55,8 +68,8 @@ function M.lsp(t_builtin, inlay_hint_supported)
 	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next LSP diagnostics problem" })
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous LSP diagnostics problem" })
+	vim.keymap.set("n", "]d", next_diagnostic, { desc = "Go to next LSP diagnostics problem" })
+	vim.keymap.set("n", "[d", prev_diagnostic, { desc = "Go to previous LSP diagnostics problem" })
 
 	if inlay_hint_supported then
 		vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
