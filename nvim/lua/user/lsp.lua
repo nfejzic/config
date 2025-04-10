@@ -2,6 +2,31 @@ local M = {}
 
 local _border = "rounded"
 
+---@return LspPicker
+function M.get_telescope_picker(t_builtin)
+	return {
+		definitions = t_builtin.lsp_definitions,
+		references = t_builtin.lsp_references,
+		implementations = t_builtin.lsp_implementations,
+		doc_symbols = t_builtin.document_symbols,
+		workspace_symbols = t_builtin.workspace_symbols,
+		buf_diagnostics = function() t_builtin.diagnostic({ buffer = 0 }) end
+	}
+end
+
+---@param snacks Snacks
+---@return LspPicker
+function M.get_snacks_picker(snacks)
+	return {
+		definitions = snacks.picker.lsp_definitions,
+		implementations = snacks.picker.lsp_implementations,
+		references = snacks.picker.lsp_references,
+		doc_symbols = snacks.picker.lsp_symbols,
+		workspace_symbols = snacks.picker.lsp_workspace_symbols,
+		buf_diagnostics = snacks.picker.diagnostics_buffer,
+	}
+end
+
 function M.override_and_get_handlers()
 	local hover = vim.lsp.buf.hover
 	---@diagnostic disable-next-line: duplicate-set-field
@@ -68,9 +93,10 @@ M.setup_ui = function()
 	vim.fn.sign_define("DapStopped", { text = "->", texthl = "DiagnosticSignInfo" })
 end
 
-M.get_on_attach = function(t_builtin)
+---@param get_picker fun(): LspPicker
+M.get_on_attach = function(get_picker)
 	return function(client, bufnr)
-		local telescope_builtin = t_builtin()
+		local picker = get_picker()
 
 		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
 
@@ -83,7 +109,7 @@ M.get_on_attach = function(t_builtin)
 		end
 
 		-- Diagnostic keymaps
-		require("user.keymaps").lsp(telescope_builtin, inlay_hint_supported)
+		require("user.keymaps").lsp(picker, inlay_hint_supported)
 
 		vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 

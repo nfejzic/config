@@ -2,6 +2,7 @@ return {
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = false,
 		lazy = true,
 		event = { "VeryLazy" },
 		dependencies = {
