@@ -9,6 +9,9 @@ return {
 					winblend = 0,
 				},
 			},
+			select = {
+				enabled = false,
+			}
 		},
 		lazy = true,
 		event = "VeryLazy",

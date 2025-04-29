@@ -1,6 +1,7 @@
 return {
 	"ibhagwan/fzf-lua",
 
+	enabled = false,
 	lazy = true,
 	cmd = "FzfLua",
 
