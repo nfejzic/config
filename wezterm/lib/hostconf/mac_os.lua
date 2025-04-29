@@ -282,12 +282,12 @@ end
 ---@diagnostic disable-next-line: unused-local
 local jetbrains_mono = {
 	family = "JetBrains Mono",
-	size = 22,
+	size = 26,
 	cell_width = 1,
-	line_height = 1.05,
+	line_height = 1.00,
 	harfbuzz_features = {
-		"cv01", --    slab 'l'
-		"cv12", -- regular 'u'
+		-- "cv01", --    slab 'l'
+		-- "cv12", -- regular 'u'
 	},
 }
 
@@ -295,9 +295,9 @@ local jetbrains_mono = {
 ---@diagnostic disable-next-line: unused-local
 local comic_code = {
 	family = "Comic Code",
-	size = 22,
-	line_height = 1.15,
-	cell_width = 1,
+	size = 26,
+	line_height = 1.10,
+	cell_width = 1.00,
 	harfbuzz_features = { "zero", "dlig" },
 }
 
@@ -305,14 +305,59 @@ local comic_code = {
 --- @diagnostic disable-next-line: unused-local
 local monolisa = {
 	family = "MonoLisa",
-	size = 26,
-	line_height = 1,
+	size = 25,
+	line_height = 1.00,
 	cell_width = 1,
 	harfbuzz_features = {
-		"ss02", -- cursive letters
+		-- "ss02", -- cursive letters
 		-- "ss04", -- single-loop 'g'
 		-- "ss07", -- more agressive '{' and '}'
 		"ss11", -- centered 'x' in 0xF
+	},
+}
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local commit_mono = {
+	family = "CommitMonoHS",
+	size = 26,
+	line_height = 1.25,
+	cell_width = 1,
+	harfbuzz_features = {
+		"liga"
+		-- "ss02", -- cursive letters
+		-- "ss04", -- single-loop 'g'
+		-- "ss07", -- more agressive '{' and '}'
+		-- "ss11", -- centered 'x' in 0xF
+	},
+}
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local berkeley_mono = {
+	family = "Berkeley Mono",
+	size = 27,
+	line_height = 1.05,
+	cell_width = 1.00,
+	harfbuzz_features = {
+		-- "ss02", -- cursive letters
+		-- "ss04", -- single-loop 'g'
+		-- "ss07", -- more agressive '{' and '}'
+		-- "ss11", -- centered 'x' in 0xF
+	},
+}
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local recursive_mono_linear = {
+	family = "Recursive Mono Linear Static",
+	size = 27,
+	line_height = 1.05,
+	cell_width = 1.00,
+	harfbuzz_features = {
+		"ss03", -- simplified 'f'
+		"ss10", -- dotted '0'
+		"ss12", -- simplified '@'
 	},
 }
 
@@ -326,10 +371,16 @@ local config = {
 	},
 	get_keybindings = get_keybindings,
 	window_padding = { top = "0cell", right = "0cell", bottom = "0cell", left = "0cell" },
+	-- window_decorations = "MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
+	window_decorations = "TITLE|RESIZE"
 }
 
 config.font = comic_code
 config.font = monolisa
+-- config.font = commit_mono
+config.font = jetbrains_mono
+-- config.font = berkeley_mono
+-- config.font = recursive_mono_linear
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
 return config
