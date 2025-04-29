@@ -117,12 +117,18 @@ function M.setup(wezterm, config)
 
 	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
 
+	-- TODO(nfejzic): Is there a better way to handle this?
+	local dpi_4k_27in = 124
+	local dpi_4k_32in = 108
+	local dpi_macbook_pro_14in = 122
+
 	config.dpi_by_screen = {
-		["LG HDR QHD"] = 120,
-		["LG HDR 4K"] = 120,
-		["Built-in Retina Display"] = 109,
-		["LEN T27p-10"] = 120,
-		["DELL P3223QE"] = 118,
+		["Built-in Retina Display"] = dpi_macbook_pro_14in,
+		["LG HDR QHD"] = dpi_4k_27in,
+		["LG HDR 4K"] = dpi_4k_27in,
+		["LEN T27p-10"] = dpi_4k_27in,
+		["DELL P3223QE"] = dpi_4k_32in,
+		["DELL P3225QE"] = dpi_4k_32in,
 	}
 end
 
