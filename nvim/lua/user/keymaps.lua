@@ -155,7 +155,14 @@ function M.snacks_picker_keymaps(picker)
 
 	-- Search menu for which-key
 	vim.keymap.set("n", "<leader>s", "", { desc = "Search" })
-	vim.keymap.set("n", "<leader>sl", picker.grep, { desc = "Live grep string" })
+	vim.keymap.set("n", "<leader>sl", function()
+		picker.grep({
+			exclude = {
+				-- NOTE: don't search in files such as 'Cargo.lock'
+				"*.lock",
+			}
+		})
+	end, { desc = "Live grep string" })
 	vim.keymap.set("n", "<leader>sL", function()
 		picker.grep({
 			args = { "--case-sensitive" },
