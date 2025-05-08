@@ -57,6 +57,7 @@ M.setup_ui = function()
 	local diagnostic_cfg = {
 		enable = true,
 		virtual_text = true,
+		virtual_lines = false,
 		underline = true,
 		float = {
 			-- focusable = false,

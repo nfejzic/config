@@ -19,6 +19,15 @@ function M.lsp(picker, inlay_hint_supported)
 		vim.diagnostic.jump({ count = -1, float = true })
 	end
 
+	-- When lines are on, text is off. Text on, lines off. Minimize clutter.
+	vim.keymap.set('', 'gl', function()
+		vim.diagnostic.config({
+			virtual_lines = not vim.diagnostic.config().virtual_lines,
+			virtual_text = not vim.diagnostic.config().virtual_text,
+		})
+	end, { desc = 'Toggle dia[g]nostic [l]ines' })
+
+
 	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 	vim.keymap.set("n", "<leader>ld", picker.definitions, { desc = "Go to definition" })
 
