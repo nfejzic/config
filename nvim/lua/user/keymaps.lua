@@ -87,7 +87,7 @@ function M.lsp(picker, inlay_hint_supported)
 	-- rust specific
 	if vim.fn.exists(':RustLsp') then
 		vim.keymap.set("n", "<leader>lx", "<cmd>RustLsp expandMacro<cr>", { desc = "RustLsp expand macro" })
-		vim.keymap.set("n", "gh", "<cmd>RustLsp renderDiagnostic<cr>", { desc = "RustLsp expand macro" })
+		vim.keymap.set("n", "gh", "<cmd>RustLsp renderDiagnostic<cr>", { desc = "RustLsp render diagnostic" })
 	end
 end
 
