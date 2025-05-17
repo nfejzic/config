@@ -50,7 +50,7 @@ function M.override_and_get_handlers()
 	return handlers
 end
 
-M.setup_ui = function()
+function M.setup_ui()
 	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 	---@type table|nil
