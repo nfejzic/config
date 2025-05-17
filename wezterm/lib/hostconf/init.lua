@@ -12,28 +12,20 @@
 ---@field bottom string
 ---@field left string
 
+---@alias GetKeybindingsFn fun(wezterm: table, program_paths: ProgramPaths, utils: Utils, tab_api: TabApi): table
+
 ---@class HostConfig
 ---@field dpi integer|nil
 ---@field font FontConfig
 ---@field update_dpi boolean
----@field get_keybindings function|nil
+---@field get_keybindings GetKeybindingsFn|nil
 ---@field window_decorations string|nil
 ---@field window_padding WindowPadding|nil
 
----@type HostConfig
-local mac_hostconf = require("lib.hostconf.mac_os")
-
----@type HostConfig
-local mirza_mac_conf = require("lib.utils").table.copy(mac_hostconf)
-mirza_mac_conf.dpi = nil
-mirza_mac_conf.window_padding.top = "28pt"
-
 --- @type table<string, HostConfig>
 local configs = {
-	["zenith"] = mac_hostconf,
-	["Mirzas-mac.local"] = mirza_mac_conf,
+	["zenith"] = require("lib.hostconf.mac_os"),
 	["edification"] = require("lib.hostconf.fedora_linux"),
-	["percolation"] = require("lib.hostconf.percolation"),
 }
 
 local M = {}
@@ -44,7 +36,7 @@ function M.get_hostconf(hostname)
 	if configs[hostname] ~= nil then
 		return configs[hostname]
 	else
-		return mac_hostconf
+		return configs["zenith"]
 	end
 end
 

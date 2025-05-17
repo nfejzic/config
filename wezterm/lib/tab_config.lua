@@ -1,3 +1,4 @@
+---@class TabApi
 local M = {}
 
 -- Equivalent to POSIX basename(3)
@@ -33,7 +34,8 @@ local function tab_title(tab, max_width)
 	if path ~= nil then
 		local dir_name = basename(path.file_path)
 
-		require("wezterm").log_info("#result + #title + #dir_name + 2 = " .. #result + #title + #dir_name + 2)
+		require("wezterm").log_info("#result + #title + #dir_name + 2 = " ..
+			#result + #title + #dir_name + 2)
 		require("wezterm").log_info("             max_width = " .. max_width)
 
 		if #result + #title + #dir_name + 2 > max_width then
@@ -71,6 +73,24 @@ function M.tab_bar_colors(colors, is_transparent)
 	end
 
 	return colors.tab_bar(term_bg, colors)
+end
+
+local function active_tab_idx(mux_win)
+	for _, item in ipairs(mux_win:tabs_with_info()) do
+		-- wezterm.log_info('idx: ', idx, 'tab:', item)
+		if item.is_active then
+			return item.index
+		end
+	end
+end
+
+function M.spawn_tab_next_to_active(wezterm)
+	return function(win, pane)
+		local mux_win = win:mux_window()
+		local idx = active_tab_idx(mux_win)
+		local _ = mux_win:spawn_tab({})
+		win:perform_action(wezterm.action.MoveTab(idx + 1), pane)
+	end
 end
 
 return M

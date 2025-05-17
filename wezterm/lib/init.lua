@@ -1,3 +1,4 @@
+---@class Config
 local M = {}
 
 --- @param wezterm table
@@ -84,26 +85,38 @@ end
 --- @param config table
 function M.setup(wezterm, config)
 	local color_config = require("lib.colors").init(wezterm, 'kanagawa-wave')
-	local tab_fns = require("lib.tab_config")
+	local tab_api = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
-
-	local keybindings
+	local utils = require('lib.utils')
 
 	local program_paths = {
 		fd = require("lib.utils").execute("which fd")
 	}
 
+	local keybindings = keys.get_keybindings(wezterm, program_paths, utils,
+		tab_api)
+
 	if hostconf.get_keybindings ~= nil then
-		keybindings = hostconf.get_keybindings(wezterm, program_paths)
-	else
-		keybindings = keys.get_keybindings(wezterm, program_paths)
+		local host_specific_keys = hostconf.get_keybindings(wezterm,
+			program_paths, utils, tab_api)
+
+		if host_specific_keys.leader ~= nil then
+			keybindings.leader = host_specific_keys.leader
+		end
+
+		if host_specific_keys.keys ~= nil and type(host_specific_keys.keys) == "table" then
+			for _, value in pairs(host_specific_keys.keys) do
+				table.insert(keybindings.keys, value)
+			end
+		end
 	end
 
 	config.leader = keybindings.leader
 	config.keys = keybindings.keys
 
-	local is_transparent = config.window_background_opacity ~= nil and config.window_background_opacity < 1.0
+	local is_transparent = config.window_background_opacity ~= nil and
+		config.window_background_opacity < 1.0
 
 	set_opts(wezterm, config, hostconf, color_config.theme)
 
@@ -113,20 +126,32 @@ function M.setup(wezterm, config)
 
 	require("lib.hyperlinks").configure_hyperlinks(config, wezterm)
 
-	config.colors.tab_bar = tab_fns.tab_bar_colors(color_config.colors, is_transparent)
+	config.colors.tab_bar = tab_api.tab_bar_colors(
+		color_config.colors,
+		is_transparent
+	)
 
-	require("lib.custom_events").register_events(wezterm, tab_fns, color_config.colors, hostconf)
+	require("lib.custom_events").register_events(
+		wezterm, tab_api,
+		color_config.colors, hostconf, utils
+	)
+
+	-- local scale_factor = 2.21
+	local scale_factor = 1.8
+	local macbook_scale_factor = 1.62
 
 	-- TODO(nfejzic): Is there a better way to handle this?
-	local dpi_4k_27in = 124
-	local dpi_4k_32in = 108
-	local dpi_macbook_pro_14in = 122
+	local dpi_4k_27in = 124 * scale_factor
+	local dpi_4k_32in = 108 * scale_factor
+	-- NOTE: macbook is a little different...
+	local dpi_macbook_pro_14in = 140 * macbook_scale_factor
 
 	config.dpi_by_screen = {
 		["Built-in Retina Display"] = dpi_macbook_pro_14in,
 		["LG HDR QHD"] = dpi_4k_27in,
 		["LG HDR 4K"] = dpi_4k_27in,
 		["LEN T27p-10"] = dpi_4k_27in,
+		["DELL U2724DE"] = dpi_4k_27in,
 		["DELL P3223QE"] = dpi_4k_32in,
 		["DELL P3225QE"] = dpi_4k_32in,
 	}

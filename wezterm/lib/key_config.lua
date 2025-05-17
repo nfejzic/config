@@ -1,18 +1,20 @@
-local utils = require "lib.utils"
 -- This is the default keybindings configuration. See hostconf for keybindings specific to the given hosts
+--- @class KeybindConfig
 local M = {}
 -- timeout_milliseconds defaults to 1000 and can be omitted
 
---- @param wezterm table
---- @param program_paths ProgramPaths
-M.get_keybindings = function(wezterm, program_paths)
+---@type GetKeybindingsFn
+function M.get_keybindings(wezterm, program_paths, utils, _)
 	local act = wezterm.action
 
-	local sessionizer = require("lib.sessionizer").setup(wezterm, {
-		program_paths = program_paths,
-		paths = { os.getenv("HOME") .. "/Developer" },
-		wezterm = wezterm,
-	})
+	local sessionizer = require("lib.sessionizer").setup(
+		wezterm, {
+			program_paths = program_paths,
+			paths = { os.getenv("HOME") .. "/Developer" },
+			wezterm = wezterm,
+		},
+		utils
+	)
 
 	return {
 		leader = {
@@ -28,102 +30,10 @@ M.get_keybindings = function(wezterm, program_paths)
 				action = act.ActivateCopyMode,
 			},
 
-			{
-				key = "n",
-				mods = "LEADER",
-				action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "d",
-				mods = "LEADER",
-				action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "c",
-				mods = "LEADER",
-				action = act.CloseCurrentPane({ confirm = false }),
-			},
-
-			-- go to pane to the left of current pane
-			{
-				key = "h",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Left"),
-			},
-
-			-- go to pane to the right of current pane
-			{
-				key = "l",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Right"),
-			},
-
-			-- go to pane below current pane
-			{
-				key = "j",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Down"),
-			},
-
-			-- go to pane above current pane
-			{
-				key = "k",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Up"),
-			},
-
-			-- pane resizing
-			{
-				key = "H",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Left", 5 }),
-			},
-
-			{
-				key = "J",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Down", 5 }),
-			},
-
-			{
-				key = "K",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Up", 5 }),
-			},
-
-			{
-				key = "L",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Right", 5 }),
-			},
-
-			-- create new tab
-			{
-				key = "t",
-				mods = "LEADER",
-				action = act.SpawnTab("CurrentPaneDomain"),
-			},
-
-			-- go to next tab
-			{
-				key = "n",
-				mods = "ALT",
-				action = act.ActivateTabRelative(1),
-			},
-
-			-- go to previous tab
-			{
-				key = "p",
-				mods = "ALT",
-				action = act.ActivateTabRelative(-1),
-			},
-
 			-- Prompt for a name to use for a new workspace and switch to it.
 			{
 				key = "n",
-				mods = "SUPER",
+				mods = "LEADER",
 				action = wezterm.action_callback(function(_win, _p, _l)
 					local active_workspaces = wezterm.mux.get_workspace_names()
 
@@ -146,7 +56,8 @@ M.get_keybindings = function(wezterm, program_paths)
 								{ Foreground = { AnsiColor = "Fuchsia" } },
 								{ Text = t },
 							}),
-							action = wezterm.action_callback(function(window, pane, line)
+							action = wezterm.action_callback(function(window,
+																	  pane, line)
 								-- line will be `nil` if they hit escape without entering anything
 								-- An empty string if they just hit enter
 								-- Or the actual line of text they wrote
@@ -169,14 +80,47 @@ M.get_keybindings = function(wezterm, program_paths)
 			{
 				key = "s",
 				mods = "LEADER",
-				action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+
+				action = wezterm.action_callback(function(window, pane)
+					local workspaces = wezterm.mux.get_workspace_names()
+
+					local workspaces_list = {}
+
+					for _, workspace in pairs(workspaces) do
+						table.insert(workspaces_list,
+							{ label = workspace, id = workspace })
+					end
+
+					window:perform_action(
+						act.InputSelector({
+							action = wezterm.action_callback(function(win, _, id,
+																	  label)
+								if not id and not label then
+									wezterm.log_info(
+										"Switch workspace cancelled")
+								else
+									wezterm.log_info("Selected workspace " ..
+										label)
+									utils.workspace_switch_event(wezterm)
+									win:perform_action(
+										act.SwitchToWorkspace({ name = id }),
+										pane)
+								end
+							end),
+							choices = workspaces_list,
+							fuzzy = true,
+						}),
+						pane
+					)
+				end)
 			},
 
 			{
 				key = "l",
 				mods = "LEADER",
 				action = act.ShowLauncherArgs({
-					flags = "FUZZY|TABS|DOMAINS|KEY_ASSIGNMENTS|WORKSPACES|COMMANDS|LAUNCH_MENU_ITEMS",
+					flags =
+					"FUZZY|TABS|DOMAINS|KEY_ASSIGNMENTS|WORKSPACES|COMMANDS|LAUNCH_MENU_ITEMS",
 				}),
 			},
 
@@ -204,6 +148,12 @@ M.get_keybindings = function(wezterm, program_paths)
 				key = "F",
 				mods = "LEADER",
 				action = wezterm.action_callback(sessionizer.resetCacheAndToggle),
+			},
+
+			{
+				key = " ",
+				mods = "LEADER|ALT",
+				action = act.EmitEvent(utils.events.SWITCH_TO_LAST_WORKSPACE),
 			},
 		},
 	}

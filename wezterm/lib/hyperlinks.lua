@@ -1,3 +1,4 @@
+---@class HyperlinkConfig
 local M = {}
 
 ---@param config table

@@ -1,4 +1,4 @@
-local utils = require "lib.utils"
+--- @class SessionizerApi
 local M = {}
 
 local cached = {}
@@ -9,7 +9,8 @@ local cached = {}
 --- @param fd string
 --- @param paths table<string, string>,
 --- @param wezterm table
-local function createToggleFn(fd, paths, wezterm)
+--- @param utils Utils
+local function createToggleFn(fd, paths, wezterm, utils)
 	local act = wezterm.action
 
 	--- @param window table
@@ -38,7 +39,8 @@ local function createToggleFn(fd, paths, wezterm)
 					local project = line:gsub("/.git/$", "")
 					local label = project
 					local id = project:gsub(".*/", "")
-					table.insert(cached, { label = tostring(label), id = tostring(id) })
+					table.insert(cached,
+						{ label = tostring(label), id = tostring(id) })
 				end
 			end
 		end
@@ -51,7 +53,9 @@ local function createToggleFn(fd, paths, wezterm)
 					else
 						wezterm.log_info("Selected " .. label)
 						utils.workspace_switch_event(wezterm)
-						win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }), pane)
+						win:perform_action(
+							act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }),
+							pane)
 					end
 				end),
 				fuzzy = true,
@@ -90,11 +94,11 @@ local SessionizerConfig = setmetatable({}, {
 
 --- @param sessionizer SessionizerConfig
 --- @return Sessionizer
-function M.setup(wezterm, sessionizer)
+function M.setup(wezterm, sessionizer, utils)
 	local fd = sessionizer.program_paths.fd
 	local paths = sessionizer.paths
 
-	local toggleFn = createToggleFn(fd, paths, wezterm)
+	local toggleFn = createToggleFn(fd, paths, wezterm, utils)
 	local resetCacheAndToggleFn = createResetCacheAndToggleFn(wezterm, toggleFn)
 
 	return {
