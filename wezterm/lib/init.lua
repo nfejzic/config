@@ -84,7 +84,7 @@ end
 --- @param wezterm table
 --- @param config table
 function M.setup(wezterm, config)
-	local color_config = require("lib.colors").init(wezterm, 'kanagawa-wave')
+	local color_config = require("lib.colors").init('kanagawa-wave')
 	local tab_api = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
