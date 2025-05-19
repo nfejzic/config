@@ -250,7 +250,7 @@ function set_theme
     set -l fish_transparent "fish default"
 
     if test (fish_config theme list | rg transparent)
-        set -l fish_transparent transparent
+        set fish_transparent transparent
     end
 
     __theme_fish $cleaned $fish_transparent
