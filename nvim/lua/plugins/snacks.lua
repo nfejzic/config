@@ -1,7 +1,17 @@
+---@diagnostic disable-next-line: unused-local
 local dropdown_preset = {
 	preset = "dropdown",
 	layout = { width = 0.85, height = 0.9 },
 }
+
+---@diagnostic disable-next-line: unused-local
+local ivy_preset = {
+	preset = "ivy",
+	preview = "main",
+	-- layout = { width = 0.85, height = 0.9 },
+}
+
+local layout_preset = ivy_preset
 
 return {
 	{
@@ -21,7 +31,7 @@ return {
 				picker = {
 					enabled = true,
 					ui_select = true,
-					layout = dropdown_preset,
+					layout = layout_preset,
 					sources = {
 						select = {
 							layout = {
