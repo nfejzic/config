@@ -4,14 +4,14 @@ local utils = require("user.utils")
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		-- Conform will run multiple formatters sequentially
 		python = { "isort", "black", stop_after_first = false },
-		-- Use a sub-list to run only the first available formatter
-		javascript = { "prettierd", "prettier", stop_after_first = true },
-		typescript = { "prettierd", "prettier", stop_after_first = true },
-		vue = { "prettierd", "prettier", stop_after_first = true },
-		html = { "prettierd", "prettier", stop_after_first = true },
-		markdown = { "prettierd", "prettier", stop_after_first = true },
+		javascript = { "prettierd", stop_after_first = true },
+		typescript = { "prettierd", stop_after_first = true },
+		typescriptreact = { "prettierd", stop_after_first = true },
+		tsx = { "prettierd", stop_after_first = true },
+		vue = { "prettierd", stop_after_first = true },
+		html = { "prettierd", stop_after_first = true },
+		markdown = { "prettierd", stop_after_first = true },
 		yaml = { "yamlfmt" },
 		nix = { "nixfmt" },
 		rust = {},
@@ -46,7 +46,7 @@ conform.setup({
 		-- disable json formatting in idana projects
 		local is_json = string.match(buf_name, ".*idana.*.json")
 
-		local timeout_ms = 1500
+		local timeout_ms = 3000
 		if is_nix_file then
 			-- nix fmt takes a long time to format file, but it's ok...
 			timeout_ms = 10000
