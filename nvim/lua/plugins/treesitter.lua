@@ -58,7 +58,8 @@ return {
 					},
 				},
 				indent = {
-					enable = true,
+					-- this does not seem to be working good, so let's disable it...
+					enable = false,
 				},
 				textobjects = {
 					select = {
