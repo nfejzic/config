@@ -1,5 +1,5 @@
 ---@type GetKeybindingsFn
-local function get_keybindings(wezterm, _, utils, tab_api)
+local function get_keybindings(wezterm, _, _, tab_api)
 	local act = wezterm.action
 
 	return {
