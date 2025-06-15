@@ -53,7 +53,7 @@ end
 
 --- @param colors ColorTheme
 ---@diagnostic disable-next-line: unused-local
-M.format_tab_title = function(colors)
+function M.format_tab_title(colors)
 	---@diagnostic disable-next-line: unused-local
 	return function(tab, _tabs, _panes, _config, _hover, max_width)
 		local title = tab_title(tab, max_width)
