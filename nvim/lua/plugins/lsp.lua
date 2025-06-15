@@ -133,6 +133,11 @@ return {
 				setup_rust_analyzer()
 			end
 
+			if lspconfig.just ~= nil then
+				-- configure just
+				lspconfig.just.setup(opts)
+			end
+
 			mason_lsp.setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
