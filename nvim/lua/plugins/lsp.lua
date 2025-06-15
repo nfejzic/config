@@ -28,7 +28,13 @@ return {
 			},
 
 			-- TypeScript utilities
-			{ "jose-elias-alvarez/nvim-lsp-ts-utils" },
+			{
+				"https://github.com/pmizio/typescript-tools.nvim",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+					"neovim/nvim-lspconfig"
+				},
+			},
 
 			-- fidget spinner shows LSP loading progress
 			{
@@ -85,6 +91,7 @@ return {
 
 			neoconf.setup()
 			require("neodev").setup()
+			require("typescript-tools").setup({})
 
 			local on_attach = user_lsp.get_on_attach(function()
 				local snacks_ok, snacks = pcall(require, "snacks")
@@ -138,7 +145,6 @@ return {
 				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
 				["zls"] = user_lsp.zig_lsp(opts, lspconfig, neoconf),
 				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
-				["vtsls"] = user_lsp.vtsls(opts, lspconfig, neoconf),
 				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
 				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
 				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),

@@ -256,50 +256,6 @@ function M.go_lsp(opts, lspconfig, neoconf)
 	end
 end
 
-function M.vtsls(opts, lspconfig, neoconf)
-	return function()
-		if neoconf.get("tsserver.disable") then
-			return
-		end
-
-		if neoconf.get("ts_ls.disable") then
-			return
-		end
-
-		if neoconf.get("vtsls.disable") then
-			return
-		end
-
-		lspconfig.vtsls.setup({
-			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			},
-			on_attach = function(client, bufnr)
-				client.server_capabilities.documentFormattingProvider = false
-
-				local ts_utils = require("nvim-lsp-ts-utils")
-				ts_utils.setup({})
-				ts_utils.setup_client(client)
-
-				opts.on_attach(client, bufnr)
-			end,
-			capabilites = opts.capabilites,
-			handlers = opts.handlers,
-		})
-	end
-end
-
 function M.jsonls(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("jsonls.disable") then
