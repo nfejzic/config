@@ -11,7 +11,7 @@ return {
 				-- Use LSP semantic token highlighting
 				lsp = true,
 				-- Load the referenced buffers to apply more accurate highlights (may be slow)
-				load_buffers = true,
+				load_buffers = false,
 			},
 
 			keys = {
