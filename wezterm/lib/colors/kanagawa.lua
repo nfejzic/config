@@ -255,19 +255,18 @@ function M.lotus()
 		palette.lotusRed3,
 		palette.lotusGreen,
 		palette.lotusOrange2,
-		palette.lotusTeal2,
+		palette.lotusBlue4,
 		palette.lotusPink,
 		palette.lotusAqua2,
 		palette.lotusWhite1
 	}
 
-
 	return {
 		foreground = palette.lotusInk1,
-		background = palette.lotusWhite1,
+		background = palette.lotusWhite3,
 
 		-- Background for the tab bar
-		background_secondary = palette.lotusWhite0,
+		background_secondary = palette.lotusWhite4,
 
 		cursor_bg = palette.lotusInk1,
 		cursor_fg = palette.lotusWhite1,
