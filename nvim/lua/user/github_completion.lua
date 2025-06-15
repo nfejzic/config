@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup_github_cmp = function(cmp, PlenaryJob)
+function M.setup_github_cmp(cmp, PlenaryJob)
 	local source = {}
 
 	source.new = function()

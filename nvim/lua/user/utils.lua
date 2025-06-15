@@ -4,13 +4,13 @@ local function is_nightly()
 	return vim.fn.has("nvim-0.10") > 0
 end
 
-M.if_not_nightly = function(fn)
+function M.if_not_nightly(fn)
 	if not is_nightly then
 		fn()
 	end
 end
 
-M.if_nightly = function(fn)
+function M.if_nightly(fn)
 	if is_nightly() then
 		fn()
 		-- is nightly and we ran the function
@@ -21,13 +21,13 @@ M.if_nightly = function(fn)
 	return false
 end
 
-M.if_nightly_else = function(fn, else_fn)
+function M.if_nightly_else(fn, else_fn)
 	if not M.if_nightly(fn) then
 		else_fn()
 	end
 end
 
-M.print_table = function(tbl, indent)
+function M.print_table(tbl, indent)
 	if not indent then
 		indent = 0
 	end

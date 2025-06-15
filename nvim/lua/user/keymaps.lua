@@ -91,7 +91,7 @@ function M.lsp(picker, inlay_hint_supported)
 	end
 end
 
-M.conform = function()
+function M.conform()
 	vim.keymap.set("n", "<leader>lf", "<cmd>Format<cr>", { desc = "Format buffer" })
 	vim.keymap.set("v", "<leader>lf", "<cmd>'<,'>Format<cr>", { desc = "Format buffer" })
 end
@@ -127,7 +127,7 @@ function M.neotest(neotest)
 	})
 end
 
-M.neogen = function(neogen)
+function M.neogen(neogen)
 	vim.keymap.set(
 		"n",
 		"<leader>lc",
@@ -243,7 +243,7 @@ function M.telescope_keymaps(telescope, t_builtin)
 end
 
 M.dap_trigger_keys = "<leader>d"
-M.dap = function(dap, dapui)
+function M.dap(dap, dapui)
 	-- Breakpoints
 	vim.keymap.set("n", "<leader>dp", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
 
@@ -314,7 +314,7 @@ M.dap = function(dap, dapui)
 	})
 end
 
-M.gitsigns = function(gs)
+function M.gitsigns(gs)
 	vim.keymap.set("n", "]g", gs.next_hunk, { desc = "Next git hunk" })
 	vim.keymap.set("n", "[g", gs.prev_hunk, { desc = "Previous git hunk" })
 	vim.keymap.set("n", "<leader>gb", gs.blame_line, { desc = "Blame current line" })
@@ -345,14 +345,14 @@ local function setup_wk_prefixes(wk)
 	})
 end
 
-M.oil = function(oil)
+function M.oil(oil)
 	-- opens oil with current file being under the cursor
 	vim.keymap.set("n", "<leader>ft", oil.open, { desc = "Open File Explorer (Oil)" })
 	vim.keymap.set("n", "-", oil.open, { desc = "Open File Explorer (Oil)" })
 	vim.keymap.set("n", "<leader>fr", oil.toggle_float, { desc = "Open floating file explorer (Oil)" })
 end
 
-M.general = function()
+function M.general()
 	local wk = require("which-key")
 
 	---@diagnostic disable-next-line: missing-fields

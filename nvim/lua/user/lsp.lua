@@ -95,7 +95,7 @@ function M.setup_ui()
 end
 
 ---@param get_picker fun(): LspPicker
-M.get_on_attach = function(get_picker)
+function M.get_on_attach(get_picker)
 	return function(client, bufnr)
 		local picker = get_picker()
 
@@ -207,7 +207,7 @@ function M.rust_analyzer(opts, neoconf)
 	end
 end
 
-M.zig_lsp = function(opts, lspconfig, neoconf)
+function M.zig_lsp(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("zig_lsp.disable") then
 			return
@@ -225,7 +225,7 @@ M.zig_lsp = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.go_lsp = function(opts, lspconfig, neoconf)
+function M.go_lsp(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("go_lsp.disable") then
 			return
@@ -300,7 +300,7 @@ function M.vtsls(opts, lspconfig, neoconf)
 	end
 end
 
-M.jsonls = function(opts, lspconfig, neoconf)
+function M.jsonls(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("jsonls.disable") then
 			return
@@ -319,7 +319,7 @@ M.jsonls = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.eslint = function(opts, lspconfig, neoconf)
+function M.eslint(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("eslint.disable") then
 			return
@@ -333,7 +333,7 @@ M.eslint = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.lua_ls = function(opts, lspconfig, neoconf)
+function M.lua_ls(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("lua_ls.disable") then
 			return
@@ -387,7 +387,7 @@ function M.volar(opts, lspconfig, neoconf)
 	end
 end
 
-M.vue_ls = function(opts, lspconfig, neoconf)
+function M.vue_ls(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("vue_ls.disable") then
 			return
