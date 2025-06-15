@@ -138,7 +138,7 @@ end
 
 -- LSPs
 
-M.clangd = function(opts, lspconfig, neoconf)
+function M.clangd(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("clangd.disable") then
 			return
@@ -256,7 +256,7 @@ M.go_lsp = function(opts, lspconfig, neoconf)
 	end
 end
 
-M.vtsls = function(opts, lspconfig, neoconf)
+function M.vtsls(opts, lspconfig, neoconf)
 	return function()
 		if neoconf.get("tsserver.disable") then
 			return

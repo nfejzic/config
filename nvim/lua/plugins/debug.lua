@@ -6,7 +6,7 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 			"nvim-neotest/nvim-nio",
-			"williamboman/mason.nvim",
+			{ "williamboman/mason.nvim",   version = "1.*" },
 
 			{ "mxsdev/nvim-dap-vscode-js", lazy = false },
 			{ "folke/which-key.nvim" },

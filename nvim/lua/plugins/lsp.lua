@@ -7,6 +7,7 @@ return {
 			{ "folke/which-key.nvim" },
 			{
 				"williamboman/mason.nvim",
+				version = "1.*",
 				opts = {
 					ui = {
 						border = "rounded",
@@ -14,7 +15,7 @@ return {
 				},
 			},
 
-			{ "williamboman/mason-lspconfig.nvim", config = true },
+			{ "williamboman/mason-lspconfig.nvim", config = true, version = "1.*" },
 			{ "folke/neodev.nvim" },
 			{ "folke/neoconf.nvim" },
 
