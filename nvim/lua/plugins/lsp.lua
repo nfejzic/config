@@ -47,7 +47,6 @@ return {
 					},
 				},
 				lazy = true,
-				event = "UIEnter",
 			},
 
 			{
