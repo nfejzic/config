@@ -13,7 +13,7 @@ return {
 				"isak102/telescope-git-file-history.nvim",
 				dependencies = { "tpope/vim-fugitive" },
 			},
-			{ "folke/neoconf.nvim" },
+			{ "folke/neoconf.nvim", opts = { import = { vscode = true } } },
 		},
 
 		config = function()
@@ -23,17 +23,21 @@ return {
 				"node_modules",
 			}
 
-			local neoconf_ignore_patterns = neoconf.get("telescope.ignore")
+			local neoconf_ignore_patterns = neoconf.get("vscode.search.exclude")
 
-			if neoconf_ignore_patterns then
-				for _, pattern in ipairs(neoconf_ignore_patterns) do
-					table.insert(file_ignore_patterns, pattern)
+			if neoconf_ignore_patterns ~= nil then
+				for pattern, is_disabled in pairs(neoconf_ignore_patterns) do
+					if is_disabled then
+						table.insert(file_ignore_patterns, pattern)
+					end
 				end
 			end
 
+			require('user.utils').print_table(file_ignore_patterns)
+
 			require("telescope").setup({
 				defaults = {
-					file_ignore_patterns,
+					file_ignore_patterns = file_ignore_patterns,
 					layout_strategy = "vertical",
 					layout_config = {
 						vertical = {
