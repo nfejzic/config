@@ -126,7 +126,7 @@ local function get_keybindings(wezterm, _, _, tab_api)
 	}
 end
 
-local font_size = 13
+local font_size = 11.7
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
@@ -134,7 +134,7 @@ local jetbrains_mono = {
 	family = "JetBrains Mono",
 	size = font_size + 0.5,
 	cell_width = 1,
-	line_height = 1.00,
+	line_height = 1.02,
 }
 
 --- @type FontConfig
@@ -195,15 +195,10 @@ local commit_mono = {
 --- @diagnostic disable-next-line: unused-local
 local berkeley_mono = {
 	family = "Berkeley Mono",
-	size = font_size,
-	line_height = 1.05,
-	cell_width = 0.95,
-	harfbuzz_features = {
-		-- "ss02", -- cursive letters
-		-- "ss04", -- single-loop 'g'
-		-- "ss07", -- more agressive '{' and '}'
-		-- "ss11", -- centered 'x' in 0xF
-	},
+	size = font_size + 0.5,
+	line_height = 1.12,
+	cell_width = 1.0,
+	harfbuzz_features = {},
 }
 
 --- @type FontConfig
@@ -242,6 +237,8 @@ local config = {
 }
 
 config.font = monolisa
+-- config.font = codelia
+-- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
 return config
