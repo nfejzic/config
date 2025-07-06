@@ -308,7 +308,7 @@ function M.lua_ls(opts, lspconfig, neoconf)
 						globals = { "vim" },
 					},
 					workspace = {
-						-- let `folke/neodev` handle this
+						-- let `folke/lazydev` handle this
 						-- library = vim.api.nvim_get_runtime_file("", true),
 					},
 				},

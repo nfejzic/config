@@ -16,7 +16,6 @@ return {
 			},
 
 			{ "williamboman/mason-lspconfig.nvim", config = true, version = "1.*" },
-			{ "folke/neodev.nvim" },
 			{ "folke/neoconf.nvim",                config = true },
 
 			-- formatters and formatting
@@ -88,7 +87,6 @@ return {
 
 			local neoconf = require("neoconf")
 
-			require("neodev").setup()
 			require("typescript-tools").setup({})
 
 			local on_attach = user_lsp.get_on_attach(function()
