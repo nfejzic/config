@@ -3,7 +3,9 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true, event = "VeryLazy" },
 
 	-- do not lazy load in order to replace netrw
-	lazy = false,
+	lazy = true,
+	cmd = "Oil",
+	event = { "VimEnter */*,.*", "BufNew */*,.*" },
 
 	config = function()
 		local oil = require("oil")

@@ -25,7 +25,6 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.relativenumber = true
 vim.o.nu = true
-
 vim.g.loaded = 1
 
 -- add ruler line where text limit should be
