@@ -27,6 +27,7 @@ return {
 			require('nvim-treesitter').install({
 				-- languages
 				"rust", "lua", "fish", "c", "cpp", "typescript", "javascript", "tsx", "jsx", "markdown",
+				"toml", "yaml", "json",
 				-- git
 				"gitcommit", "gitignore", "gitattribute", "git_rebase", "git_config",
 			})
