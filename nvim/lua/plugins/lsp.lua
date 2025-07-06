@@ -17,7 +17,7 @@ return {
 
 			{ "williamboman/mason-lspconfig.nvim", config = true, version = "1.*" },
 			{ "folke/neodev.nvim" },
-			{ "folke/neoconf.nvim" },
+			{ "folke/neoconf.nvim",                config = true },
 
 			-- formatters and formatting
 			{
@@ -88,7 +88,6 @@ return {
 
 			local neoconf = require("neoconf")
 
-			neoconf.setup()
 			require("neodev").setup()
 			require("typescript-tools").setup({})
 
