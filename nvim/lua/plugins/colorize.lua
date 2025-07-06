@@ -13,7 +13,7 @@ return {
 			colorize.setup({
 				compile = false, -- enable compiling the colorscheme
 				undercurl = true, -- enable undercurls
-				commentStyle = { italic = true },
+				commentStyle = { italic = false },
 				functionStyle = {},
 				keywordStyle = { italic = false, bold = false },
 				statementStyle = { bold = false },
@@ -21,7 +21,11 @@ return {
 				transparent = false, -- do not set background color
 				dimInactive = false, -- dim inactive window `:h hl-NormalNC`
 				terminalColors = true, -- define vim.g.terminal_color_{0,17}
-				theme = "kanagawa-wave", -- Load "kanagawa" theme when 'background' option is not set
+				theme = "kanagawa-wave", -- Load "kanagawa-wave" theme when 'background' option is not set
+				background = {
+					dark = "kanagawa-wave",
+					light = "kanagawa-lotus",
+				},
 				semantic_highlighting = "minimal",
 			})
 		end
