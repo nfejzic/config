@@ -74,10 +74,7 @@ function __theme_fzf -a scheme
             # 5 = magenta, 6 = cyan, 7 = white/gray, 8 = darkgrey, 9 = brightred
             # 10 = brgreen, 11 = brorange, 12 = brblue, 13 = pink, 14 = aqua,
             # 15 = lightgray, 16 = black
-            set -gx FZF_DEFAULT_OPTS "--ansi
-            --color=bg+:7,bg:0,spinner:9,hl:12 \
-            --color=fg:8,header:12,info:10,pointer:1 \
-            --color=marker:1,fg+:0,prompt:10,hl+:9"
+            set -gx FZF_DEFAULT_OPTS --ansi
 
             # case "*"
             #     # use themes from fish theme
