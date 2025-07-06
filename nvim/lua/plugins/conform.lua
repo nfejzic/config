@@ -109,7 +109,10 @@ return {
 				})
 			end, { range = true })
 
-			require("user.keymaps").conform()
+			require("user.keymaps").set_keys({
+				{ "n", "<leader>lf", "<cmd>Format<cr>",      "Format buffer" },
+				{ "v", "<leader>lf", "<cmd>'<,'>Format<cr>", "Format buffer" },
+			})
 		end,
 	},
 }

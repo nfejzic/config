@@ -1,3 +1,5 @@
+local triggers = { "-", "<leader>ft", "<leader>fr" }
+
 return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true, event = "VeryLazy" },
@@ -6,7 +8,7 @@ return {
 	lazy = true,
 	cmd = "Oil",
 	event = { "VimEnter */*,.*", "BufNew */*,.*" },
-	keys = require("user.keymaps").oil().triggers,
+	keys = triggers,
 
 	config = function()
 		local oil = require("oil")
@@ -25,6 +27,11 @@ return {
 			delete_to_trash = true,
 		})
 
-		require("user.keymaps").oil().setup(oil)
+		require("user.keymaps").set_keys({
+			-- opens oil with current file being under the cursor
+			{ "n", "<leader>ft", oil.open,         "Open File Explorer (Oil)" },
+			{ "n", "-",          oil.open,         "Open File Explorer (Oil)" },
+			{ "n", "<leader>fr", oil.toggle_float, "Open floating file explorer (Oil)" },
+		})
 	end,
 }

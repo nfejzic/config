@@ -1,3 +1,5 @@
+local trigger_keys = { "<leader>d" }
+
 return {
 	{
 		"mfussenegger/nvim-dap",
@@ -15,18 +17,14 @@ return {
 				lazy = false,
 				enabled = false,
 				build = "npm ci --legacy-peer-deps && npm run compile",
-				keys = function()
-					return require("user.keymaps").dap_trigger_keys
-				end,
+				keys = trigger_keys,
 			},
 		},
 
 		lazy = true,
 		event = "VeryLazy",
 
-		keys = function()
-			return require("user.keymaps").dap_trigger_keys
-		end,
+		keys = trigger_keys,
 
 		config = function()
 			require("user.debug")

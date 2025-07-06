@@ -2,6 +2,15 @@ local M = {}
 
 local _border = "rounded"
 
+---@class LspPicker
+---@field definitions fun(): nil
+---@field references fun(): nil
+---@field implementations fun(): nil
+---@field doc_symbols fun(): nil
+---@field workspace_symbols fun(): nil
+---@field buf_diagnostics fun(): nil
+---@field buf_diagnostics fun(): nil
+
 ---@return LspPicker
 function M.get_telescope_picker(t_builtin)
 	return {
@@ -14,8 +23,8 @@ function M.get_telescope_picker(t_builtin)
 	}
 end
 
----@param snacks Snacks
----@return LspPicker
+--- @param snacks Snacks
+--- @return LspPicker
 function M.get_snacks_picker(snacks)
 	return {
 		definitions = snacks.picker.lsp_definitions,
@@ -117,11 +126,95 @@ function M.get_on_attach(get_picker)
 			vim.lsp.inlay_hint.enable(false, {}) -- disable inlay hints by default
 		end
 
+		local function next_diagnostic()
+			vim.diagnostic.jump({ count = 1, float = true })
+		end
+
+		local function prev_diagnostic()
+			vim.diagnostic.jump({ count = -1, float = true })
+		end
+
+
+		local function code_action_fn()
+			local code_actions_available = false
+			local code_action_chck_grp = vim.api.nvim_create_augroup("CodeActionCheck", { clear = true })
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+				group = code_action_chck_grp,
+				callback = function()
+					code_actions_available = true
+				end,
+			})
+
+			-- check whether code action succeeded
+			vim.lsp.buf.code_action()
+
+			if not code_actions_available then
+				-- then try with codelens
+				vim.lsp.codelens.run()
+			end
+		end
+
+
+		if inlay_hint_supported then
+			vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
+		end
+
+		local keymaps = require("user.keymaps")
+
 		-- Diagnostic keymaps
-		require("user.keymaps").lsp(picker, inlay_hint_supported)
+		keymaps.set_keys({
+			-- When lines are on, text is off. Text on, lines off. Minimize clutter.
+			{ '', 'gl', function()
+				vim.diagnostic.config({
+					virtual_lines = not vim.diagnostic.config().virtual_lines,
+					virtual_text = not vim.diagnostic.config().virtual_text,
+				})
+			end, 'Toggle dia[g]nostic [l]ines' },
+
+
+			{ "n", "<leader>lD", vim.lsp.buf.declaration,   "Go to Declaration" },
+			{ "n", "<leader>ld", picker.definitions,        "Go to definition" },
+
+			{ "n", "<leader>le", vim.diagnostic.open_float, "Show diagnostics message" },
+			{ "n", "<leader>lj", next_diagnostic,           "Go to next LSP diagnostics problem" },
+			{ "n", "<leader>lk", prev_diagnostic,           "Go to previous LSP diagnostics problem" },
+			{ "n", "<leader>lp", vim.lsp.buf.hover,         "Show hover popup" },
+			{ "n", "<leader>lq", vim.diagnostic.setqflist,
+				"Populate quickfix list with diagnostics" },
+
+			{ "n",          "<leader>lr", picker.references,           "Go to References" },
+			{ "n",          "<leader>li", picker.implementations,      "Implementations" },
+			{ "n",          "<leader>ls", picker.doc_symbols,          "Document symbols" },
+			{ "n",          "<leader>lw", picker.workspace_symbols,    "Workspace symbols" },
+			{ "n",          "<leader>lM", vim.diagnostic.setqflist,    "Diagnostic messages in all buffers" },
+			{ "n",          "<leader>lm", picker.buf_diagnostics,      "Diagnostic messages in current buffer" },
+			{ { "n", "v" }, "<leader>.",  code_action_fn,              "Code actions" },
+			{ { "n", "v" }, "<leader>a",  code_action_fn,              "Code actions" },
+			{ { "n", "v" }, "<leader>ll", vim.lsp.codelens.run,        "Run Code Lens" },
+
+			{ "n",          "gd",         vim.lsp.buf.definition,      "Definitions" },
+			{ "n",          "gI",         vim.lsp.buf.implementation,  "Implementations" },
+			{ "n",          "gD",         vim.lsp.buf.declaration,     "Go to Declaration" },
+			{ "n",          "gt",         vim.lsp.buf.type_definition, "Go to Type Definition" },
+			{ "n",          "gh",         vim.diagnostic.open_float,   "Show diagnostics message/help" },
+			{ "n",          "K",          vim.lsp.buf.hover,           "LSP Hover" },
+			{ "n",          "gs",         vim.lsp.buf.signature_help,  "Show signature help" },
+			{ "i",          "<C-h>",      vim.lsp.buf.signature_help,  "Show signature help" },
+
+			{ "n",          "]d",         next_diagnostic,             "Go to next LSP diagnostics problem" },
+			{ "n",          "[d",         prev_diagnostic,             "Go to previous LSP diagnostics problem" },
+		})
+
+		-- rust specific
+		if vim.fn.exists(':RustLsp') then
+			keymaps.set_keys({
+				{ "n", "<leader>lx", "<cmd>RustLsp expandMacro<cr>",      "RustLsp expand macro" },
+				{ "n", "gh",         "<cmd>RustLsp renderDiagnostic<cr>", "RustLsp render diagnostic" },
+			})
+		end
 
 		vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-
 
 		-- disable semantic highlighting
 		-- client.server_capabilities.semanticTokensProvider = nil
@@ -388,17 +481,6 @@ function M.setup()
 		on_attach = on_attach,
 		capabilities = global_capabilities,
 		handlers = handlers,
-	}
-
-	local default_config = {
-		log_level = vim.lsp.protocol.MessageType.Warning,
-		message_level = vim.lsp.protocol.MessageType.Warning,
-		settings = vim.empty_dict(),
-		init_options = vim.empty_dict(),
-		handlers = opts.handlers,
-		autostart = true,
-		capabilities = opts.capabilities,
-		on_attach = opts.on_attach,
 	}
 
 	vim.lsp.config("*", {

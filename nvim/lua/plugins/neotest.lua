@@ -40,7 +40,39 @@ return {
 					build_flags = "-tags=unit,integration",
 				},
 			})
-			require("user.keymaps").neotest(neotest)
+
+
+			local keymaps = require("user.keymaps")
+
+			local function go_cmds()
+				vim.api.nvim_create_user_command("GoTestDebug", function()
+					require("dap-go").debug_test()
+				end, {})
+
+				keymaps.set_keys({
+					{ "n", "<leader>dt", "GoTestDebug", "Debug test under cursor" }
+				})
+			end
+
+			if vim.bo.filetype == "go" then
+				vim.api.nvim_create_user_command("GoTestDebug", function()
+					require("dap-go").debug_test()
+				end, {})
+
+				keymaps.set_keys({
+					{ "n", "<leader>dt", "GoTestDebug", "Debug test under cursor" },
+				})
+			end
+
+			vim.api.nvim_create_autocmd("BufRead", {
+				pattern = "*.go",
+				callback = go_cmds,
+			})
+
+			require("user.keymaps").set_keys({
+				{ "n", "]t", function() neotest.jump.next() end, "Go to next test (in buffer)" },
+				{ "n", "[t", function() neotest.jump.prev() end, "Go to prev test (in buffer)" },
+			})
 		end,
 	},
 }

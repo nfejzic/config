@@ -22,7 +22,6 @@ return {
 			},
 		},
 
-
 		config = function()
 			require('nvim-treesitter').install({
 				-- languages

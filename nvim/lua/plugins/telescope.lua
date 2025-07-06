@@ -78,7 +78,58 @@ return {
 
 			vim.api.nvim_create_user_command("TodoTelescope", openTodos, {})
 
-			require("user.keymaps").telescope_keymaps(telescope, t_builtin)
+			require("user.keymaps").set_keys({
+				{ "n", "<leader>ff", function()
+					-- t_builtin.find_files({ find_command = { "rg", "--files", "--follow", "--ignore-file", ".gitignore" } })
+					t_builtin.find_files()
+				end, "Find file" },
+
+				-- Ctrl-P make it be the same
+				{ "n", "<C-p>", function()
+					t_builtin.find_files()
+				end, "Find file (in git repository)" },
+
+				{ "n", "<leader>fa", function()
+					t_builtin.find_files({ find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore" } })
+				end, "Find all files, including hidden" },
+
+				{ "n", "<leader>fd", "<cmd>TodoTelescope<CR>", "Todo / Fixme etc" },
+				{ "n", "<leader>fg", t_builtin.git_status,     "git - modified files" },
+				{ "n", "<leader>;",  t_builtin.buffers,        "Telescope search buffers" },
+
+				{
+					"n",
+					"<leader>gh",
+					telescope.extensions.git_file_history.git_file_history,
+					"Browse through git history of current file" }
+				,
+
+				{ "n",          "<leader>b",  t_builtin.buffers,     "Telescope search buffers" },
+
+				-- Search menu for which-key
+				{ "n",          "<leader>s",  "",                    "Search" },
+				{ { "n", "v" }, "<leader>sd", t_builtin.grep_string, "Grep string" },
+				{ "n",          "<leader>sl", t_builtin.live_grep,   "Live grep string" },
+				{ "n", "<leader>sL", function()
+					t_builtin.live_grep({
+						additional_args = function()
+							return { "--case-sensitive" }
+						end,
+					})
+				end, "Live grep string, case sensitive" },
+
+				{ "n", "<leader>sg", function()
+					t_builtin.live_grep({
+						additional_args = function()
+							return { "--hidden" }
+						end,
+					})
+				end, "Live grep string, including hidden" },
+
+				{ "n", "<leader>ss", function()
+					t_builtin.current_buffer_fuzzy_find({ find_command = "rg" })
+				end, "Fuzzy search in buffer" },
+			})
 		end,
 	},
 }

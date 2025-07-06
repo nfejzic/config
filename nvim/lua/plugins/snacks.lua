@@ -17,7 +17,14 @@ return {
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
-		lazy = false,
+		lazy = true,
+		keys = {
+			"<leader>f",
+			"<leader>;",
+			"<leader>b",
+			"<leader>s",
+			"<leader>g",
+		},
 
 		config = function()
 			local snacks = require("snacks")
@@ -53,10 +60,52 @@ return {
 				gitbrowse = { enabled = true },
 			})
 
-			local keymaps = require("user.keymaps")
-			keymaps.snacks_picker_keymaps(snacks.picker)
-			keymaps.snacks_gitbrowse_keymaps(snacks.gitbrowse)
-		end,
+			local picker = snacks.picker
+			local gitbrowse = snacks.gitbrowse
 
+			require("user.keymaps").set_keys({
+				{ "n", "<leader>ff", picker.files,                                   "Find file" },
+				-- Ctrl-P make it be the same
+				{ "n", "<C-p>",      picker.files,                                   "Find file (in git repository)" },
+				-- TODO: how to find hidden files?
+				{ "n", "<leader>fa", function() picker.files({ hidden = true }) end, "Find all files, including hidden" },
+
+				-- vim.keymap.set("n", "<leader>fd", snacks.picker.todo_comments, { desc = "Todo / Fixme etc" })
+				{ "n", "<leader>fg", picker.git_diff,                                "git - modified files" },
+				{ "n", "<leader>;",  picker.buffers,                                 "Telescope search buffers" },
+
+				-- TODO: figure out if snacks.picker has git history
+				-- {
+				--     "n",
+				--     "<leader>gh",
+				--     telescope.extensions.git_file_history.git_file_history,
+				--     "Browse through git history of current file",
+				-- }
+
+				{ "n", "<leader>b",  picker.buffers,                                 "Telescope search buffers" },
+
+				-- Search menu for which-key
+				{ "n", "<leader>s",  "",                                             "Search" },
+
+				-- NOTE: don't search in files such as 'Cargo.lock'
+				{ "n", "<leader>sl", function()
+					picker.grep({ exclude = { "*.lock", } })
+				end, "Live grep string" },
+
+				{ "n", "<leader>sL", function()
+					picker.grep({
+						args = { "--case-sensitive" },
+					})
+				end, "Live grep string, case sensitive" },
+
+				{ "n", "<leader>sg", function()
+					picker.grep({
+						hidden = true,
+					})
+				end, "Live grep string, including hidden" },
+
+				{ "n", "<leader>go", gitbrowse.open, "Open current repository in browser" },
+			})
+		end,
 	},
 }
