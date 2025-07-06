@@ -10,6 +10,7 @@ local M = {}
 ---@field buf_diagnostics fun(): nil
 
 ---@param picker LspPicker
+---@param inlay_hint_supported boolean
 function M.lsp(picker, inlay_hint_supported)
 	local function next_diagnostic()
 		vim.diagnostic.jump({ count = 1, float = true })
@@ -345,11 +346,16 @@ local function setup_wk_prefixes(wk)
 	})
 end
 
-function M.oil(oil)
-	-- opens oil with current file being under the cursor
-	vim.keymap.set("n", "<leader>ft", oil.open, { desc = "Open File Explorer (Oil)" })
-	vim.keymap.set("n", "-", oil.open, { desc = "Open File Explorer (Oil)" })
-	vim.keymap.set("n", "<leader>fr", oil.toggle_float, { desc = "Open floating file explorer (Oil)" })
+function M.oil()
+	return {
+		triggers = { "-", "<leader>ft", "<leader>fr" },
+		setup = function(oil)
+			-- opens oil with current file being under the cursor
+			vim.keymap.set("n", "<leader>ft", oil.open, { desc = "Open File Explorer (Oil)" })
+			vim.keymap.set("n", "-", oil.open, { desc = "Open File Explorer (Oil)" })
+			vim.keymap.set("n", "<leader>fr", oil.toggle_float, { desc = "Open floating file explorer (Oil)" })
+		end
+	}
 end
 
 function M.general()

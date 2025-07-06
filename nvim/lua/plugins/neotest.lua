@@ -4,7 +4,7 @@ return {
 		"nvim-neotest/neotest",
 
 		lazy = true,
-		event = "VeryLazy",
+		event = "LspAttach",
 
 		dependencies = {
 			{ "nvim-neotest/neotest-go" },

@@ -1,159 +1,28 @@
 return {
 	{
-		"neovim/nvim-lspconfig",
-		lazy = true,
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		"https://github.com/pmizio/typescript-tools.nvim",
 		dependencies = {
-			{ "folke/which-key.nvim" },
-			{
-				"williamboman/mason.nvim",
-				version = "1.*",
-				opts = {
-					ui = {
-						border = "rounded",
-					},
-				},
-			},
-
-			{ "williamboman/mason-lspconfig.nvim", config = true, version = "1.*" },
-			{ "folke/neoconf.nvim",                config = true },
-
-			-- formatters and formatting
-			{
-				"stevearc/conform.nvim",
-				config = function()
-					require("user.formatting")
-				end,
-			},
-
-			-- TypeScript utilities
-			{
-				"https://github.com/pmizio/typescript-tools.nvim",
-				dependencies = {
-					"nvim-lua/plenary.nvim",
-					"neovim/nvim-lspconfig"
-				},
-			},
-
-			-- fidget spinner shows LSP loading progress
-			{
-				"j-hui/fidget.nvim",
-				opts = {
-					notification = {
-						window = {
-							winblend = 0,
-						},
-					},
-				},
-				lazy = true,
-			},
-
-			{
-				"mrcjkb/rustaceanvim",
-				version = "^5",
-				ft = { "rust" },
-			},
-
-			-- "hrsh7th/cmp-nvim-lsp", -- for auto-completion
-			'saghen/blink.cmp', -- for autocompletion
-
-			-- Go
-			{
-				"crispgm/nvim-go",
-				lazy = true,
-				filetype = { "go", "gomod" },
-				config = function()
-					require("go").setup({
-						auto_format = false, -- done by conform
-						auto_lint = false,
-						-- linters: revive, errcheck, staticcheck, golangci-lint
-						linter = "golangci-lint",
-						-- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}
-						linter_flags = {},
-						-- lint_prompt_style: qf (quickfix), vt (virtual text)
-						lint_prompt_style = "qf",
-						test_flags = { "-v", "-tags=unit,integration" },
-					})
-				end,
-			},
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig"
 		},
 
-		config = function()
-			local user_lsp = require("user.lsp")
-			local lspconfig = require("lspconfig")
-			local mason_lsp = require("mason-lspconfig")
-			local blink_ok, blink = pcall(require, "blink.cmp")
-			local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+		lazy = true,
+		config = true,
+		ft = { "typescript", "typescriptreact", "tsx", "javascript", "javascriptreact", "jsx", "vue" },
+	},
+	{
+		"williamboman/mason.nvim",
+		version = "1.*",
+		opts = {
+			ui = {
+				border = "rounded",
+			},
+		},
+	},
 
-			local neoconf = require("neoconf")
-
-			require("typescript-tools").setup({})
-
-			local on_attach = user_lsp.get_on_attach(function()
-				local snacks_ok, snacks = pcall(require, "snacks")
-				if snacks_ok then
-					return require("user.lsp").get_snacks_picker(snacks)
-				end
-
-				-- just try to load telescope, it'll show errors if not available
-				return require("user.lsp").get_snacks_picker(require("telescope.builtin"))
-			end)
-
-			local get_cmp_capabilities = nil
-
-			if blink_ok then
-				get_cmp_capabilities = blink.get_lsp_capabilities
-			elseif cmp_ok then
-				get_cmp_capabilities = cmp_nvim_lsp.default_capabilities
-			end
-
-			local global_capabilities = user_lsp.get_global_capabilities(get_cmp_capabilities)
-			local handlers = user_lsp.override_and_get_handlers()
-
-			local opts = {
-				on_attach = on_attach,
-				capabilities = global_capabilities,
-				handlers = handlers,
-			}
-
-			lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-				capabilities = global_capabilities,
-			})
-
-			-- NOTE: rustaceanvim recommends that we don't use mason, but rather
-			-- install the rust-analyzer through rustup. In case rust-analyzer
-			-- is not installed through, the `setup_handlers` won't be called.
-			-- So let's call the setup here:
-			if not require('mason-registry').is_installed('rust-analyzer') then
-				local setup_rust_analyzer = user_lsp.rust_analyzer(opts, neoconf)
-				setup_rust_analyzer()
-			end
-
-			if lspconfig.just ~= nil then
-				-- configure just
-				lspconfig.just.setup(opts)
-			end
-
-			mason_lsp.setup_handlers({
-				-- The first entry (without a key) will be the default handler
-				-- and will be called for each installed server that doesn't have
-				-- a dedicated handler.
-				function(server_name) -- default handler (optional)
-					lspconfig[server_name].setup(opts)
-				end,
-				-- Next, targeted overrides for specific servers.
-				["clangd"] = user_lsp.clangd(opts, lspconfig, neoconf),
-				["rust_analyzer"] = user_lsp.rust_analyzer(opts, neoconf),
-				["zls"] = user_lsp.zig_lsp(opts, lspconfig, neoconf),
-				["gopls"] = user_lsp.go_lsp(opts, lspconfig, neoconf),
-				["jsonls"] = user_lsp.jsonls(opts, lspconfig, neoconf),
-				["eslint"] = user_lsp.eslint(opts, lspconfig, neoconf),
-				["lua_ls"] = user_lsp.lua_ls(opts, lspconfig, neoconf),
-				["vuels"] = user_lsp.vue_ls(opts, lspconfig, neoconf),
-				["volar"] = user_lsp.volar(opts, lspconfig, neoconf),
-			})
-
-			user_lsp.setup_ui()
-		end,
+	-- fidget spinner shows LSP loading progress
+	{
+		"j-hui/fidget.nvim",
+		lazy = true,
 	},
 }

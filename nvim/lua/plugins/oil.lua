@@ -6,6 +6,7 @@ return {
 	lazy = true,
 	cmd = "Oil",
 	event = { "VimEnter */*,.*", "BufNew */*,.*" },
+	keys = require("user.keymaps").oil().triggers,
 
 	config = function()
 		local oil = require("oil")
@@ -24,6 +25,6 @@ return {
 			delete_to_trash = true,
 		})
 
-		require("user.keymaps").oil(oil)
+		require("user.keymaps").oil().setup(oil)
 	end,
 }

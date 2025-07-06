@@ -1,5 +1,10 @@
 return {
 	"stevearc/quicker.nvim",
+
+	enabled = true,
+	lazy = true,
+	ft = "qf",
+
 	config = function()
 		local quicker = require('quicker')
 		quicker.setup({

@@ -1,6 +1,8 @@
 return {
-	{
-		"folke/neoconf.nvim",
-		opts = {},
-	},
+    {
+        "folke/neoconf.nvim",
+        enabled = true,
+        lazy = true,
+        opts = {},
+    },
 }
