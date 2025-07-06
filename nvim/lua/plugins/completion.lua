@@ -1,34 +1,4 @@
 return {
-	-- {
-	-- 	-- NOTE: using `magazine.nvim` fork for now with recent updates, more features etc.
-	-- 	"iguanacucumber/magazine.nvim",
-	-- 	name = "nvim-cmp", -- Otherwise highlighting gets messed up
-	-- 	-- "hrsh7th/nvim-cmp",
-	--
-	-- 	dependencies = {
-	-- 		{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
-	-- 		{ "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
-	-- 		{ "iguanacucumber/mag-buffer",   name = "cmp-buffer" },
-	-- 		{ "iguanacucumber/mag-cmdline",  name = "cmp-cmdline" },
-	-- 		"https://codeberg.org/FelipeLema/cmp-async-path", -- not by me, but better than cmp-path
-	--
-	-- 		{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-	-- 		{ "L3MON4D3/LuaSnip",                   lazy = true },
-	-- 		{ "saadparwaiz1/cmp_luasnip",           lazy = true },
-	-- 		{ "nvim-lua/plenary.nvim" },
-	--
-	-- 		-- Icons in auto-complete of LSP (i.e. function, variable etc)
-	-- 		{ "onsails/lspkind-nvim" },
-	-- 	},
-	--
-	-- 	lazy = true,
-	-- 	event = { "InsertEnter", "CmdlineEnter" },
-	--
-	-- 	config = function()
-	-- 		require("user.completion")
-	-- 	end,
-	-- },
-
 	{
 		'saghen/blink.cmp',
 		-- optional: provides snippets for the snippet source
@@ -37,9 +7,11 @@ return {
 			{ "L3MON4D3/LuaSnip", lazy = true },
 		},
 
+		lazy = true,
+
 		-- use a release tag to download pre-built binaries
-		-- version = '1.*',
-		build = 'nix run .#build-plugin',
+		version = '1.*',
+		-- build = 'nix run .#build-plugin',
 
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
