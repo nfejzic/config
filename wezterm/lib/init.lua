@@ -84,7 +84,17 @@ end
 --- @param wezterm table
 --- @param config table
 function M.setup(wezterm, config)
-	local color_config = require("lib.colors").init('kanagawa-wave')
+	local os_appearance = 'Dark'
+
+	if wezterm.gui then
+		os_appearance = wezterm.gui.get_appearance()
+	end
+
+	local color_config = require("lib.colors").init(
+		{ dark = 'kanagawa-wave', light = 'kanagawa-lotus' },
+		os_appearance
+	)
+
 	local tab_api = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
@@ -138,11 +148,11 @@ function M.setup(wezterm, config)
 
 	-- local scale_factor = 2.21
 	local scale_factor = 1.8
-	local macbook_scale_factor = 1.62
+	local macbook_scale_factor = 1.63
 
 	-- TODO(nfejzic): Is there a better way to handle this?
 	local dpi_4k_27in = 124 * scale_factor
-	local dpi_4k_32in = 108 * scale_factor
+	local dpi_4k_32in = 112 * scale_factor
 	-- NOTE: macbook is a little different...
 	local dpi_macbook_pro_14in = 140 * macbook_scale_factor
 
@@ -150,6 +160,7 @@ function M.setup(wezterm, config)
 		["Built-in Retina Display"] = dpi_macbook_pro_14in,
 		["LG HDR QHD"] = dpi_4k_27in,
 		["LG HDR 4K"] = dpi_4k_27in,
+		["LG ULTRAFINE"] = dpi_4k_27in,
 		["LEN T27p-10"] = dpi_4k_27in,
 		["DELL U2724DE"] = dpi_4k_27in,
 		["DELL P3223QE"] = dpi_4k_32in,

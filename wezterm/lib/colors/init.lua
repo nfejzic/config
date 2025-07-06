@@ -186,7 +186,7 @@ local function colorize(palette)
 	}
 end
 
---- @enum (key) PaletteFn
+--- @enum (key) PaletteFnName
 local palette_fns = {
 	["gruvbox-dark-hard"] = require('lib.colors.gruvbox').dark_hard,
 	["catppuccin"] = require('lib.colors.catppuccin').mocha,
@@ -198,10 +198,22 @@ local palette_fns = {
 	["rose-pine-dawn"] = require('lib.colors.rose_pine').dawn,
 }
 
----@param theme PaletteFn
+--- @class ThemeConfig
+--- @field dark PaletteFnName
+--- @field light PaletteFnName
+
+--- @alias OsAppearance 'Dark'|'DarkHighContrast'|'Light'|'LightHighContrast'
+
+---@param theme ThemeConfig
+---@param os_appearance OsAppearance
 ---@return { colors: ColorTheme, theme: string|ColorTheme }
-function M.init(theme)
-	local get_palette = palette_fns[theme]
+function M.init(theme, os_appearance)
+	local get_palette = palette_fns[theme.dark]
+
+	if os_appearance == 'Light' or os_appearance == 'LightHighContrast' then
+		get_palette = palette_fns[theme.light]
+	end
+
 	local palette = get_palette()
 	local colors = colorize(palette)
 
