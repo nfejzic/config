@@ -59,9 +59,9 @@ function M.general()
 			local count = vim.v.count or 1
 
 			if direction == 'next' then
-				vim.cmd(count .. "cn")
+				pcall(function(command) vim.cmd(command) end, count .. "cn")
 			elseif direction == 'prev' then
-				vim.cmd(count .. "cp")
+				pcall(function(command) vim.cmd(command) end, count .. "cp")
 			end
 		end
 	end

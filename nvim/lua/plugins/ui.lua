@@ -8,7 +8,6 @@ return {
 			"nfejzic/colorize.nvim",
 		},
 		config = function()
-			---@diagnostic disable-next-line: undefined-field
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
