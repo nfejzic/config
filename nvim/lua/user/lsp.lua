@@ -1,3 +1,4 @@
+local lspconfig = require "lazydev.integrations.lspconfig"
 local M = {}
 
 local _border = "rounded"
@@ -456,6 +457,9 @@ function M.setup()
 	local cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 	local _, neoconf = pcall(require, "neoconf")
 
+	-- NOTE: make sure that lspconfig is loaded so that configs are setup
+	require("lspconfig")
+
 	local on_attach = M.get_on_attach(function()
 		local snacks_ok, snacks = pcall(require, "snacks")
 		if snacks_ok then
@@ -497,6 +501,9 @@ function M.setup()
 	M.jsonls(neoconf, opts.on_attach)
 	M.eslint(neoconf)
 	M.vuels(neoconf)
+	vim.lsp.enable("nil_ls")
+	vim.lsp.enable("buf_ls")
+	vim.lsp.enable("just")
 
 	M.setup_ui()
 end

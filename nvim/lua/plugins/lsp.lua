@@ -1,4 +1,5 @@
 return {
+	{ "neovim/nvim-lspconfig" },
 	{
 		"https://github.com/pmizio/typescript-tools.nvim",
 		dependencies = {
