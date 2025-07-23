@@ -504,6 +504,7 @@ function M.setup()
 	vim.lsp.enable("nil_ls")
 	vim.lsp.enable("buf_ls")
 	vim.lsp.enable("just")
+	vim.lsp.enable('fish_lsp')
 
 	M.setup_ui()
 end
