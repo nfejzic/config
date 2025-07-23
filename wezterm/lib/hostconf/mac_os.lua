@@ -142,7 +142,7 @@ local jetbrains_mono = {
 local comic_code = {
 	family = "Comic Code",
 	size = font_size,
-	line_height = 1.17,
+	line_height = 1.06,
 	cell_width = 1.00,
 	harfbuzz_features = { "zero", "dlig" },
 }
@@ -237,6 +237,7 @@ local config = {
 }
 
 config.font = monolisa
+config.font = comic_code
 -- config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
