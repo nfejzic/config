@@ -11,7 +11,7 @@ return {
 			vim.g.colorize_lualine_bold = true
 
 			colorize.setup({
-				compile = false, -- enable compiling the colorscheme
+				compile = true, -- enable compiling the colorscheme
 				undercurl = true, -- enable undercurls
 				commentStyle = { italic = false },
 				functionStyle = {},
