@@ -21,13 +21,24 @@ nvim/plugin/packer_compiled.lua
 .luarc.json
 
 # emacs
+emacs/#init.el#
+emacs/*cache
+emacs/*shell
+emacs/.cache
+emacs/.lsp-session
+emacs/auto-save-list
+emacs/backups
+emacs/custom-vars.el
 emacs/elpa
 emacs/elpaca
-emacs/backups
-emacs/auto-save-list
-emacs/transient
-emacs/#init.el#
+emacs/history
 emacs/init.el~
+emacs/places
+emacs/projects
+emacs/recentf
+emacs/straight
+emacs/transient
+emacs/tree-sitter
 /**/*.el~
 /**/*.elc
 

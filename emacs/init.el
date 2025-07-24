@@ -237,10 +237,10 @@
   ;; Configure font settings based on the operating system.
   ;; Ok, this kickstart is meant to be used on the terminal, not on GUI.
   ;; But without this, I fear you could start Graphical Emacs and be sad :(
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 100)
-  (when (eq system-type 'darwin)       ;; Check if the system is macOS.
+  (set-face-attribute 'default nil :family "Comic Code"  :height 170)
+  (when (eq system-type 'darwin)       ;; Check if the system is m
     (setq mac-command-modifier 'meta)  ;; Set the Command key to act as the Meta key.
-    (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 130))
+    (set-face-attribute 'default nil :family "Comic Code" :height 150))
 
   ;; Save manual customizations to a separate file instead of cluttering `init.el'.
   ;; You can M-x customize, M-x customize-group, or M-x customize-themes, etc.
@@ -348,7 +348,7 @@
 (use-package dired
   :ensure nil                                                ;; This is built-in, no need to fetch it.
   :custom
-  (dired-listing-switches "-lah --group-directories-first")  ;; Display files in a human-readable format and group directories first.
+  ;; (dired-listing-switches "-lah --group-directories-first")  ;; Display files in a human-readable format and group directories first.
   (dired-dwim-target t)                                      ;; Enable "do what I mean" for target directories.
   (dired-guess-shell-alist-user
    '(("\\.\\(png\\|jpe?g\\|tiff\\)" "feh" "xdg-open" "open") ;; Open image files with `feh' or the default viewer.
@@ -357,30 +357,9 @@
   (dired-kill-when-opening-new-dired-buffer t)               ;; Close the previous buffer when opening a new `dired' instance.
   :config
   (when (eq system-type 'darwin)
-    (let ((gls (executable-find "gls")))                     ;; Use GNU ls on macOS if available.
-      (when gls
-        (setq insert-directory-program gls)))))
-
-
-;;; ERC
-;; In this section, we introduce ERC (Emacs Relay Chat), a built-in IRC client
-;; that allows you to engage in real-time chat directly within Emacs. While
-;; we're aiming to maintain functionality similar to Neovim, it's important to
-;; recognize that Emacs is often viewed as more than just a text editor. Many
-;; users leverage Emacs for a variety of tasks beyond editing text: from watching
-;; videos and listening to music, to managing emails and even serving as a window
-;; manager in Xorg, freeing themselves from traditional desktop environments.
-;;
-;; While this kickstarter focuses on essential configurations, I wanted to present
-;; ERC as a glimpse into Emacs's versatility. With ERC, you can seamlessly connect
-;; to IRC channels and interact with communities without leaving your editor.
-(use-package erc
-  :defer t ;; Load ERC when needed rather than at startup. (Load it with `M-x erc RET')
-  :custom
-  (erc-join-buffer 'window)                                        ;; Open a new window for joining channels.
-  (erc-hide-list '("JOIN" "PART" "QUIT"))                          ;; Hide messages for joins, parts, and quits to reduce clutter.
-  (erc-timestamp-format "[%H:%M]")                                 ;; Format for timestamps in messages.
-  (erc-autojoin-channels-alist '((".*\\.libera\\.chat" "#emacs"))));; Automatically join the #emacs channel on Libera.Chat.
+    (let ((eza (executable-find "eza")))                     ;; Use GNU ls on macOS if available.
+      (when eza
+        (setq insert-directory-program eza)))))
 
 
 ;;; ISEARCH
@@ -701,6 +680,7 @@
          (tsx-ts-mode . lsp)                            ;; Enable LSP for TSX
          (js-mode . lsp)                                ;; Enable LSP for JavaScript
          (js-ts-mode . lsp)                             ;; Enable LSP for JavaScript (TS mode)
+         (rust-ts-mode . lsp)                             ;; Enable LSP for JavaScript (TS mode)
          (lsp-mode . lsp-enable-which-key-integration)) ;; Integrate with Which Key
   :commands lsp
   :custom
@@ -838,7 +818,7 @@
   :straight t
   :ensure t
   :hook
-  (prog-mode . indent-guide-mode)  ;; Activate indent-guide in programming modes.
+  ; (prog-mode . indent-guide-mode)  ;; Activate indent-guide in programming modes.
   :config
   (setq indent-guide-char "│"))    ;; Set the character used for the indent guide.
 
@@ -1098,7 +1078,7 @@
   :config
   ;; Set the directory where `undo-tree' will save its history files.
   ;; This keeps undo history across sessions, stored in a cache directory.
-  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/.cache/undo"))))
+  (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/.cache/undo"))))
 
 
 ;;; RAINBOW DELIMITERS
@@ -1230,29 +1210,38 @@
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)) ;; Setup icons in the marginalia mode for enhanced completion display.
 
 
-;;; CATPPUCCIN THEME
-;; The `catppuccin-theme' package provides a visually pleasing color theme
-;; for Emacs that is inspired by the popular Catppuccin color palette.
+;;; KANAGAWA THEME
+;; The `kanagawa-theme' package provides a visually pleasing color theme
+;; for Emacs that is inspired by the popular Kanagawa color palette.
 ;; This theme aims to create a comfortable and aesthetic coding environment
 ;; with soft colors that are easy on the eyes.
-(use-package catppuccin-theme
+(use-package kanagawa-themes
   :ensure t
   :straight t
   :config
-  (custom-set-faces
-   ;; Set the color for changes in the diff highlighting to blue.
-   `(diff-hl-change ((t (:background unspecified :foreground ,(catppuccin-get-color 'blue))))))
+  ;; NOTE(nfejzic): this does not seem to work in kanagawa theme
+  ;; (custom-set-faces
+  ;;  ;; Set the color for changes in the diff highlighting to blue.
+  ;;  `(diff-hl-change ((t (:background unspecified :foreground ,(kanagawa-get-color 'blue))))))
 
-  (custom-set-faces
-   ;; Set the color for deletions in the diff highlighting to red.
-   `(diff-hl-delete ((t (:background unspecified :foreground ,(catppuccin-get-color 'red))))))
+  ;; (custom-set-faces
+  ;;  ;; Set the color for deletions in the diff highlighting to red.
+  ;;  `(diff-hl-delete ((t (:background unspecified :foreground ,(kanagawa-get-color 'red))))))
 
-  (custom-set-faces
-   ;; Set the color for insertions in the diff highlighting to green.
-   `(diff-hl-insert ((t (:background unspecified :foreground ,(catppuccin-get-color 'green))))))
+  ;; (custom-set-faces
+  ;;  ;; Set the color for insertions in the diff highlighting to green.
+  ;;  `(diff-hl-insert ((t (:background unspecified :foreground ,(kanagawa-get-color 'green))))))
 
-  ;; Load the Catppuccin theme without prompting for confirmation.
-  (load-theme 'catppuccin :no-confirm))
+  ;; Load the Kanagawa theme without prompting for confirmation.
+  (load-theme 'kanagawa-wave :no-confirm))
+
+
+(use-package vterm
+  :ensure t
+  :straight t)
+
+(add-to-list 'exec-path "/opt/homebrew/bin")
+(add-to-list 'exec-path "~/.cargo/bin")
 
 
 ;;; UTILITARY FUNCTION TO INSTALL EMACS-KICK
