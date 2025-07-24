@@ -11,7 +11,6 @@ return {
 			{ "williamboman/mason.nvim",   version = "1.*" },
 
 			{ "mxsdev/nvim-dap-vscode-js", lazy = false },
-			{ "folke/which-key.nvim" },
 			{
 				"microsoft/vscode-js-debug",
 				lazy = false,

@@ -11,17 +11,16 @@ function M.set_keys(mappings)
 	end
 end
 
-local function setup_wk_prefixes(wk)
-	wk.add({
+local function get_wk_prefixes()
+	return {
 		{ "<leader>B", group = "Buffer" },
 		{ "<leader>d", group = "Debug / DAP" },
 		{ "<leader>f", group = "Find/File" },
 		{ "<leader>g", group = "Git" },
-		-- { "<leader>k", group = "Collapse / Fold" },
 		{ "<leader>l", group = "LSP" },
 		{ "<leader>s", group = "Search" },
 		{ "<leader>w", group = "Lsp Workspace" },
-	})
+	}
 end
 
 function M.general()
@@ -37,12 +36,12 @@ function M.general()
 				"NeoTree",
 			},
 			bt = {
-				"nofile",
+				"prompt",
 			},
 		},
 	})
 
-	setup_wk_prefixes(wk)
+	wk.add(get_wk_prefixes())
 
 	-- Buffer
 	M.set_keys({
