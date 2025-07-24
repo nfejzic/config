@@ -57,16 +57,4 @@ return {
 			vim.g.fugitive_dynamic_colors = 1
 		end,
 	},
-
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-
-			-- NOTE: Only one of these is needed.
-			-- "nvim-telescope/telescope.nvim",
-			"folke/snacks.nvim",
-		},
-	}
 }
