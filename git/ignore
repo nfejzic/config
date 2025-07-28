@@ -19,3 +19,6 @@ compile_commands.json
 __pycache__
 
 .ignored/
+
+*.upgrade
+.squid

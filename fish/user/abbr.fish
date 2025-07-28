@@ -83,6 +83,10 @@ else
     __print -e "fish: could not setup abbr for git, git not found"
 end
 
+if type -q chopin
+    abbr -a ccm 'chopin /commit-msg'
+end
+
 # Devilbox (http://devilbox.org/)
 if type -q docker-compose
     abbr -a dbox-lamp-up 'docker-compose up -d httpd php mysql bind' # launch lamp stack + bind

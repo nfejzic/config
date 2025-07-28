@@ -171,8 +171,9 @@ local codelia = {
 	line_height = 1.07,
 	cell_width = 1,
 	harfbuzz_features = {
-		"zero", -- dotted '0'
-		"ss02", -- serif 'l'
+		--                    ////
+		"zero", -- dotted '0' ///
+		"ss02", -- serif 'l'  //
 	},
 }
 
@@ -194,11 +195,14 @@ local commit_mono = {
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
 local berkeley_mono = {
-	family = "Berkeley Mono",
+	family = "TX-02",
 	size = font_size + 0.5,
 	line_height = 1.12,
 	cell_width = 1.0,
-	harfbuzz_features = {},
+	harfbuzz_features = {
+		"ss06",
+		"calt=0" -- /// // |
+	},
 }
 
 --- @type FontConfig
