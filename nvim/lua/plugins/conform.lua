@@ -22,7 +22,7 @@ return {
 					rust = {},
 					c = {},
 					go = { "gofumpt" },
-					sql = { "sql_formatter", "sqlfmt", stop_after_first = false },
+					sql = { "postgresql_formatter", "sql_formatter", "sqlfmt", stop_after_first = true },
 					fish = { "fish_indent" },
 					["*"] = { "injected" },
 				},
@@ -36,7 +36,12 @@ return {
 						command = "nixfmt",
 						args = { "$FILENAME" },
 						stdin = false,
-					}
+					},
+					postgresql_formatter = {
+						command = "sql-formatter",
+						args = { "-l", "postgresql" },
+						stdin = true,
+					},
 				},
 				format_on_save = function(bufnr)
 					local buf_name = vim.api.nvim_buf_get_name(bufnr)
