@@ -59,9 +59,9 @@ local function workspace_switching(wezterm, utils)
 		local current_workspace = wezterm.mux.get_active_workspace()
 
 		wezterm.log_info("Switching from '" ..
-		current_workspace .. "' to '" .. last_workspace .. "'")
+			current_workspace .. "' to '" .. last_workspace .. "'")
 		window:perform_action(
-		wezterm.action.SwitchToWorkspace({ name = last_workspace }), pane)
+			wezterm.action.SwitchToWorkspace({ name = last_workspace }), pane)
 
 		last_workspace = current_workspace
 	end)
