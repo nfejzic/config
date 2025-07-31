@@ -24,3 +24,7 @@ end
 
 starship init fish | source
 set fish_greeting
+
+if test -d $HOME/Developer/nix-template
+    source $HOME/Developer/nix-template/config/fish/init.fish
+end
