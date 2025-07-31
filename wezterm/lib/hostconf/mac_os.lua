@@ -126,7 +126,7 @@ local function get_keybindings(wezterm, _, _, tab_api)
 	}
 end
 
-local font_size = 11.7
+local font_size = 14.25
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
@@ -142,7 +142,7 @@ local jetbrains_mono = {
 local comic_code = {
 	family = "Comic Code",
 	size = font_size,
-	line_height = 1.06,
+	line_height = 1.15,
 	cell_width = 1.00,
 	harfbuzz_features = { "zero", "dlig" },
 }
@@ -241,8 +241,8 @@ local config = {
 }
 
 config.font = monolisa
-config.font = comic_code
--- config.font = codelia
+-- config.font = comic_code
+config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
