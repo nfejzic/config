@@ -411,12 +411,12 @@ function M.volar(opts, lspconfig, neoconf)
 	end
 end
 
-function M.vuels(neoconf)
+function M.vue_ls(neoconf)
 	if neoconf ~= nil and neoconf.get("vue_ls.disable") then
 		return
 	end
 
-	vim.lsp.config("vuels", {
+	vim.lsp.config("vue_ls", {
 		settings = {
 			vetur = {
 				completion = {
@@ -449,7 +449,13 @@ function M.vuels(neoconf)
 		},
 	})
 
-	vim.lsp.enable("vuels")
+	vim.lsp.enable("vue_ls")
+end
+
+local function enable_if_installed(name, fn, ...)
+	if vim.fn.executable(name) == 1 then
+		fn(...)
+	end
 end
 
 function M.setup()
@@ -493,18 +499,19 @@ function M.setup()
 		on_attach = opts.on_attach,
 	})
 
-	M.rust_analyzer(neoconf, opts)
-	M.lua_ls(neoconf)
-	M.clangd(neoconf)
-	M.zig_lsp(neoconf)
-	M.gopls(neoconf)
-	M.jsonls(neoconf, opts.on_attach)
-	M.eslint(neoconf)
-	M.vuels(neoconf)
-	vim.lsp.enable("nil_ls")
-	vim.lsp.enable("buf_ls")
-	vim.lsp.enable("just")
-	vim.lsp.enable('fish_lsp')
+	enable_if_installed("rust-analyzer", M.rust_analyzer, neoconf, opts)
+	enable_if_installed("lua-language-server", M.lua_ls, neoconf)
+	enable_if_installed("clangd", M.clangd, neoconf)
+	enable_if_installed("vscode-eslint-language-server", M.eslint, neoconf)
+	enable_if_installed("nil", vim.lsp.enable, "nil_ls")
+	enable_if_installed("buf", vim.lsp.enable, "buf_ls")
+	enable_if_installed("just-lsp", vim.lsp.enable, "just")
+	enable_if_installed("fish-lsp", vim.lsp.enable, 'fish_lsp')
+
+	enable_if_installed("zls", M.zig_lsp, neoconf)
+	enable_if_installed("gopls", M.gopls, neoconf)
+	enable_if_installed("vscode-json-language-server", M.jsonls, neoconf, opts.on_attach)
+	enable_if_installed("vue-language-server", M.vue_ls, neoconf)
 
 	M.setup_ui()
 end
