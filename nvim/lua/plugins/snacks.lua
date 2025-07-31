@@ -95,6 +95,8 @@ return {
 				{ "n", "<leader>fg", picker.git_diff,                                "git - modified files" },
 				{ "n", "<leader>;",  picker.buffers,                                 "Telescope search buffers" },
 
+				{ "n", "<leader>ss", picker.treesitter,                              "Search treesitter symbols" },
+
 				-- TODO: figure out if snacks.picker has git history
 				-- {
 				--     "n",
