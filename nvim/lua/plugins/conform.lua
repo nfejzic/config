@@ -24,6 +24,7 @@ return {
 					go = { "gofumpt" },
 					sql = { "postgresql_formatter", "sql_formatter", "sqlfmt", stop_after_first = true },
 					fish = { "fish_indent" },
+					sh = { "shfmt" },
 					["*"] = { "injected" },
 				},
 				formatters = {
