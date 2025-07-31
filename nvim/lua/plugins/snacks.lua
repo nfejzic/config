@@ -85,17 +85,17 @@ return {
 			local gitbrowse = snacks.gitbrowse
 
 			require("user.keymaps").set_keys({
-				{ "n", "<leader>ff", picker.files,                                   "Find file" },
+				{ "n", "<leader>ff", picker.files,                                                   "Find file" },
 				-- Ctrl-P make it be the same
-				{ "n", "<C-p>",      picker.files,                                   "Find file (in git repository)" },
+				{ "n", "<C-p>",      picker.files,                                                   "Find file (in git repository)" },
 				-- TODO: how to find hidden files?
-				{ "n", "<leader>fa", function() picker.files({ hidden = true }) end, "Find all files, including hidden" },
+				{ "n", "<leader>fa", function() picker.files({ hidden = true, ignored = true }) end, "Find all files, including hidden" },
 
 				-- vim.keymap.set("n", "<leader>fd", snacks.picker.todo_comments, { desc = "Todo / Fixme etc" })
-				{ "n", "<leader>fg", picker.git_diff,                                "git - modified files" },
-				{ "n", "<leader>;",  picker.buffers,                                 "Telescope search buffers" },
+				{ "n", "<leader>fg", picker.git_diff,                                                "git - modified files" },
+				{ "n", "<leader>;",  picker.buffers,                                                 "Telescope search buffers" },
 
-				{ "n", "<leader>ss", picker.treesitter,                              "Search treesitter symbols" },
+				{ "n", "<leader>ss", picker.treesitter,                                              "Search treesitter symbols" },
 
 				-- TODO: figure out if snacks.picker has git history
 				-- {
@@ -105,10 +105,10 @@ return {
 				--     "Browse through git history of current file",
 				-- }
 
-				{ "n", "<leader>b",  picker.buffers,                                 "Telescope search buffers" },
+				{ "n", "<leader>b",  picker.buffers,                                                 "Telescope search buffers" },
 
 				-- Search menu for which-key
-				{ "n", "<leader>s",  "",                                             "Search" },
+				{ "n", "<leader>s",  "",                                                             "Search" },
 
 				-- NOTE: don't search in files such as 'Cargo.lock'
 				{ "n", "<leader>sl", function()
