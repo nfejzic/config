@@ -1,0 +1,15 @@
+[submodule "tmux/plugins/tmux-sensible"]
+	path = tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "tmux/plugins/tmux-ssh-split"]
+	path = tmux/plugins/tmux-ssh-split
+	url = https://github.com/pschmitt/tmux-ssh-split
+[submodule "tmux/plugins/tmux-jump"]
+	path = tmux/plugins/tmux-jump
+	url = https://github.com/schasse/tmux-jump
+[submodule "tmux/plugins/tmux-reset"]
+	path = tmux/plugins/tmux-reset
+	url = https://github.com/hallazzang/tmux-reset
+[submodule "tmux/plugins/tmux-fingers"]
+	path = tmux/plugins/tmux-fingers
+	url = https://github.com/Morantron/tmux-fingers
