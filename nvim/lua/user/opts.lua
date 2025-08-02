@@ -94,7 +94,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		if string.match(ev.file, "ghostty/.*/config") then
 			-- Ghostty config file, e.g. ~/Developer/config/ghostty/zenith-tmux/config
 			--			   matches with:                    ghostty/     .*    /config
-			vim.o.filetype = "ghostty"
+			vim.o.filetype = "config"
 			vim.o.colorcolumn = "+1"
 			vim.o.textwidth = 80
 		end
