@@ -1,8 +1,6 @@
+# font configuration
 font-family = MonoLisa
 font-size = 18
-adjust-cell-width = 0
-adjust-cell-height = 1
-adjust-cursor-height = 0
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
@@ -11,181 +9,51 @@ font-synthetic-style = false
 
 # cursive
 # font-feature = ss02
+
 # single-loop 'g'
 # font-feature = ss04
+
 # more pronounced '{' and '}'
 # font-feature = ss07
+
 # centered 'x' in 0xF
 font-feature = ss11
 
-# font-family = Comic Code
-# font-size = 21
-# adjust-cell-height = 8
-# adjust-cursor-height = 8
-# font-feature = zero
-
+# 100% is way too thin
 adjust-cursor-thickness = 200%
 
-# A named theme to use. The available themes are currently hardcoded to the
-# themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
-# Contents/Resources/ghostty/themes` directory. On Linux, this list is in the
-# `share/ghostty/themes` directory (wherever you installed the Ghostty "share"
-# directory.
-# 
 # To see a list of available themes, run `ghostty +list-themes`.
-# 
 # Any additional colors specified via background, foreground, palette, etc.
 # will override the colors specified in the theme.
-# 
-# A future update will allow custom themes to be installed in certain
-# directories.
 theme = Kanagawa Wave
-
-# If you select across cells with differing foregrounds and backgrounds, the
-# selection color will vary across the selection.
 selection-invert-fg-bg = false
-
-# Swap the foreground and background colors of the cell under the cursor. This
-# option overrides the `cursor-color` and `cursor-text` options.
 cursor-invert-fg-bg = false
-
-# The opacity level (opposite of transparency) of the cursor. A value of 1
-# is fully opaque and a value of 0 is fully transparent. A value less than 0
-# or greater than 1 will be clamped to the nearest valid value. Note that a
-# sufficiently small value such as 0.3 may be effectively invisible and may
-# make it difficult to find the cursor.
 cursor-opacity = 1
 
-# The style of the cursor. This sets the default style. A running program can
-# still request an explicit cursor style using escape sequences (such as `CSI
-# q`). Shell configurations will often request specific cursor styles.
-# 
-# Note that shell integration will automatically set the cursor to a bar at
-# a prompt, regardless of this configuration. You can disable that behavior
-# by specifying `shell-integration-features = no-cursor` or disabling shell
-# integration entirely.
-# 
+# The default, style of the cursor.
+#
 # Valid values are:
 # 
 #   * `block`
 #   * `bar`
 #   * `underline`
-# 
 cursor-style = block
 
-# Sets the default blinking state of the cursor. This is just the default
-# state; running programs may override the cursor style using `DECSCUSR` (`CSI
-# q`).
-# 
-# If this is not set, the cursor blinks by default. Note that this is not the
-# same as a "true" value, as noted below.
-# 
-# If this is not set at all (`null`), then Ghostty will respect DEC Mode 12
-# (AT&T cursor blink) as an alternate approach to turning blinking on/off. If
-# this is set to any value other than null, DEC mode 12 will be ignored but
-# `DECSCUSR` will still be respected.
-# 
+# Sets the default blinking state of the cursor. 
+#
 # Valid values are:
 # 
 #   * `` (blank)
 #   * `true`
 #   * `false`
-# 
 cursor-style-blink = false
-
-# Hide the mouse immediately when typing. The mouse becomes visible again when
-# the mouse is used. The mouse is only hidden if the mouse cursor is over the
-# active terminal surface.
-mouse-hide-while-typing = false
-
-# The size of the scrollback buffer in bytes. This also includes the active
-# screen. No matter what this is set to, enough memory will always be
-# allocated for the visible screen and anything leftover is the limit for
-# the scrollback.
-# 
-# When this limit is reached, the oldest lines are removed from the
-# scrollback.
-# 
-# Scrollback currently exists completely in memory. This means that the
-# larger this value, the larger potential memory usage. Scrollback is
-# allocated lazily up to this limit, so if you set this to a very large
-# value, it will not immediately consume a lot of memory.
-# 
-# This size is per terminal surface, not for the entire application.
-# 
-# It is not currently possible to set an unlimited scrollback buffer.
-# This is a future planned feature.
-# 
-# This can be changed at runtime but will only affect new terminal surfaces.
-scrollback-limit = 10000000
-
-# The title Ghostty will use for the window. This will force the title of the
-# window to be this title at all times and Ghostty will ignore any set title
-# escape sequences programs (such as Neovim) may send.
+mouse-hide-while-typing = true
 title = Ghostty 👻
 
-# Key bindings. The format is `trigger=action`. Duplicate triggers will
-# overwrite previously set values.
-# 
-# Trigger: `+`-separated list of keys and modifiers. Example: `ctrl+a`,
-# `ctrl+shift+b`, `up`. Some notes:
-# 
-#   * modifiers cannot repeat, `ctrl+ctrl+a` is invalid.
-# 
-#   * modifiers and keys can be in any order, `shift+a+ctrl` is *weird*,
-#     but valid.
-# 
-#   * only a single key input is allowed, `ctrl+a+b` is invalid.
-# 
-#   * the key input can be prefixed with `physical:` to specify a
-#     physical key mapping rather than a logical one. A physical key
-#     mapping responds to the hardware keycode and not the keycode
-#     translated by any system keyboard layouts. Example: "ctrl+physical:a"
-# 
-# Valid modifiers are `shift`, `ctrl` (alias: `control`), `alt` (alias: `opt`,
-# `option`), and `super` (alias: `cmd`, `command`). You may use the modifier
-# or the alias. When debugging keybinds, the non-aliased modifier will always
-# be used in output.
-# 
-# Action is the action to take when the trigger is satisfied. It takes the
-# format `action` or `action:param`. The latter form is only valid if the
-# action requires a parameter.
-# 
-#   * `ignore` - Do nothing, ignore the key input. This can be used to
-#     black hole certain inputs to have no effect.
-# 
-#   * `unbind` - Remove the binding. This makes it so the previous action
-#     is removed, and the key will be sent through to the child command
-#     if it is printable.
-# 
-#   * `csi:text` - Send a CSI sequence. i.e. `csi:A` sends "cursor up".
-# 
-#   * `esc:text` - Send an escape sequence. i.e. `esc:d` deletes to the
-#     end of the word to the right.
-# 
-#   * `text:text` - Send a string. Uses Zig string literal syntax.
-#     i.e. `text:\x15` sends Ctrl-U.
-# 
-# Some notes for the action:
-# 
-#   * The parameter is taken as-is after the `:`. Double quotes or
-#     other mechanisms are included and NOT parsed. If you want to
-#     send a string value that includes spaces, wrap the entire
-#     trigger/action in double quotes. Example: `--keybind="up=csi:A B"`
-# 
-# There are some additional special values that can be specified for
-# keybind:
-# 
-#   * `keybind=clear` will clear all set keybindings. Warning: this
-#     removes ALL keybindings up to this point, including the default
-#     keybindings.
-# 
-# A keybind by default causes the input to be consumed. This means that the
-# associated encoding (if any) will not be sent to the running program
-# in the terminal. If you wish to send the encoded value to the program,
-# specify the "unconsumed:" prefix before the entire keybind. For example:
-# "unconsumed:ctrl+a=reload_config"
-
+# Key bindings. The format is `trigger=action`. Duplicates will overwrite
+# previously set values.
+#
+# clear all so we have clean slate for TMUX
 keybind=clear
 
 # we pass through SUPER+... as ALT+... to tmux
@@ -240,8 +108,6 @@ keybind = super+zero=reset_font_size
 keybind = super+comma=open_config
 keybind = super+shift+comma=reload_config
 
-# keybind = ctrl+l=clear_screen
-
 # bind opt+backspace and ctrl+backspace to ctrl-w for easy deletion in shell
 # and neovim
 keybind = ctrl+backspace=text:\x17
@@ -249,242 +115,13 @@ keybind = opt+backspace=text:\x17
 keybind = super+shift+t=text:\x1bT
 keybind = super+control+t=toggle_quick_terminal
 
-# Horizontal window padding. This applies padding between the terminal cells
-# and the left and right window borders. The value is in points, meaning that
-# it will be scaled appropriately for screen DPI.
-# 
-# If this value is set too large, the screen will render nothing, because the
-# grid will be completely squished by the padding. It is up to you as the user
-# to pick a reasonable value. If you pick an unreasonable value, a warning
-# will appear in the logs.
-# 
-# Changing this configuration at runtime will only affect new terminals, i.e.
-# new windows, tabs, etc.
-# 
-# To set a different left and right padding, specify two numerical values
-# separated by a comma. For example, `window-padding-x = 2,4` will set the
-# left padding to 2 and the right padding to 4. If you want to set both
-# paddings to the same value, you can use a single value. For example,
-# `window-padding-x = 2` will set both paddings to 2.
-window-padding-x = 0
-
-# Vertical window padding. This applies padding between the terminal cells and
-# the top and bottom window borders. The value is in points, meaning that it
-# will be scaled appropriately for screen DPI.
-# 
-# If this value is set too large, the screen will render nothing, because the
-# grid will be completely squished by the padding. It is up to you as the user
-# to pick a reasonable value. If you pick an unreasonable value, a warning
-# will appear in the logs.
-# 
-# Changing this configuration at runtime will only affect new terminals,
-# i.e. new windows, tabs, etc.
-# 
-# To set a different top and bottom padding, specify two numerical values
-# separated by a comma. For example, `window-padding-y = 2,4` will set the
-# top padding to 2 and the bottom padding to 4. If you want to set both
-# paddings to the same value, you can use a single value. For example,
-# `window-padding-y = 2` will set both paddings to 2.
 window-padding-y = 0
-
-# The viewport dimensions are usually not perfectly divisible by the cell
-# size. In this case, some extra padding on the end of a column and the bottom
-# of the final row may exist. If this is `true`, then this extra padding
-# is automatically balanced between all four edges to minimize imbalance on
-# one side. If this is `false`, the top left grid cell will always hug the
-# edge with zero padding other than what may be specified with the other
-# `window-padding` options.
-# 
-# If other `window-padding` fields are set and this is `true`, this will still
-# apply. The other padding is applied first and may affect how many grid cells
-# actually exist, and this is applied last in order to balance the padding
-# given a certain viewport size and grid cell size.
 window-padding-balance = true
-
-# The color of the padding area of the window. Valid values are:
-# 
-# * `background` - The background color specified in `background`.
-# * `extend` - Extend the background color of the nearest grid cell.
-# * `extend-always` - Same as "extend" but always extends without applying
-#   any of the heuristics that disable extending noted below.
-# 
-# The "extend" value will be disabled in certain scenarios. On primary
-# screen applications (i.e. not something like Neovim), the color will not
-# be extended vertically if any of the following are true:
-# 
-# * The nearest row has any cells that have the default background color.
-#   The thinking is that in this case, the default background color looks
-#   fine as a padding color.
-# * The nearest row is a prompt row (requires shell integration). The
-#   thinking here is that prompts often contain powerline glyphs that
-#   do not look good extended.
-# * The nearest row contains a perfect fit powerline character. These
-#   don't look good extended.
-# 
 window-padding-color = extend
-
-# If true, new windows and tabs will inherit the working directory of the
-# previously focused window. If no window was previously focused, the default
-# working directory will be used (the `working-directory` option).
-window-inherit-working-directory = true
-
-# If true, new windows and tabs will inherit the font size of the previously
-# focused window. If no window was previously focused, the default font size
-# will be used. If this is false, the default font size specified in the
-# configuration `font-size` will be used.
 window-inherit-font-size = true
 
-# Valid values:
-# 
-#   * `true`
-#   * `false` - windows won't have native decorations, i.e. titlebar and
-#      borders. On MacOS this also disables tabs and tab overview.
-# 
-# The "toggle_window_decoration" keybind action can be used to create
-# a keybinding to toggle this setting at runtime.
-# 
-# Changing this configuration in your configuration and reloading will
-# only affect new windows. Existing windows will not be affected.
-window-decoration = true
-
-# Whether to automatically copy selected text to the clipboard. `true` will
-# only copy on systems that support a selection clipboard.
-# 
-# The value `clipboard` will copy to the system clipboard, making this work on
-# macOS. Note that middle-click will also paste from the system clipboard in
-# this case.
-# 
-# Note that if this is disabled, middle-click paste will also be disabled.
-copy-on-select = true
-
-# Whether to enable shell integration auto-injection or not. Shell integration
-# greatly enhances the terminal experience by enabling a number of features:
-# 
-#   * Working directory reporting so new tabs, splits inherit the
-#     previous terminal's working directory.
-# 
-#   * Prompt marking that enables the "jump_to_prompt" keybinding.
-# 
-#   * If you're sitting at a prompt, closing a terminal will not ask
-#     for confirmation.
-# 
-#   * Resizing the window with a complex prompt usually paints much
-#     better.
-# 
-# Allowable values are:
-# 
-#   * `none` - Do not do any automatic injection. You can still manually
-#     configure your shell to enable the integration.
-# 
-#   * `detect` - Detect the shell based on the filename.
-# 
-#   * `bash`, `elvish`, `fish`, `zsh` - Use this specific shell injection scheme.
-# 
-# The default value is `detect`.
 shell-integration = detect
-
-# Shell integration features to enable if shell integration itself is enabled.
-# The format of this is a list of features to enable separated by commas. If
-# you prefix a feature with `no-` then it is disabled. If you omit a feature,
-# its default value is used, so you must explicitly disable features you don't
-# want. You can also use `true` or `false` to turn all features on or off.
-# 
-# Available features:
-# 
-#   * `cursor` - Set the cursor to a blinking bar at the prompt.
-# 
-#   * `sudo` - Set sudo wrapper to preserve terminfo.
-# 
-#   * `title` - Set the window title via shell integration.
-# 
-# Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
 shell-integration-features = no-cursor,no-sudo,no-title
 
-# The style of the macOS titlebar. Available values are: "native",
-# "transparent", and "tabs".
-# 
-# The "native" style uses the native macOS titlebar with zero customization.
-# The titlebar will match your window theme (see `window-theme`).
-# 
-# The "transparent" style is the same as "native" but the titlebar will
-# be transparent and allow your window background color to come through.
-# This makes a more seamless window appearance but looks a little less
-# typical for a macOS application and may not work well with all themes.
-# 
-# The "tabs" style is a completely custom titlebar that integrates the
-# tab bar into the titlebar. This titlebar always matches the background
-# color of the terminal. There are some limitations to this style:
-# On macOS 13 and below, saved window state will not restore tabs correctly.
-# macOS 14 does not have this issue and any other macOS version has not
-# been tested.
-# 
-# The default value is "transparent". This is an opinionated choice
-# but its one I think is the most aesthetically pleasing and works in
-# most cases.
-# 
-# Changing this option at runtime only applies to new windows.
 macos-titlebar-style = transparent
-
-# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
-# is the icon that represents the folder of the current working directory.
-# You can see this very clearly in the macOS built-in Terminal.app
-# titlebar.
-#
-# The proxy icon is only visible with the native macOS titlebar style.
-#
-# Valid values are:
-#
-#   * `visible` - Show the proxy icon.
-#   * `hidden` - Hide the proxy icon.
-#
-# The default value is `visible`.
-#
-# This setting can be changed at runtime and will affect all currently
-# open windows but only after their working directory changes again.
-# Therefore, to make this work after changing the setting, you must
-# usually `cd` to a different directory, open a different file in an
-# editor, etc.
-macos-titlebar-proxy-icon = hidden
-
-# If `true`, the *Option* key will be treated as *Alt*. This makes terminal
-# sequences expecting *Alt* to work properly, but will break Unicode input
-# sequences on macOS if you use them via the *Alt* key. You may set this to
-# `false` to restore the macOS *Alt* key unicode sequences but this will break
-# terminal sequences expecting *Alt* to work.
-# 
-# Note that if an *Option*-sequence doesn't produce a printable character, it
-# will be treated as *Alt* regardless of this setting. (i.e. `alt+ctrl+a`).
-# 
-# This does not work with GLFW builds.
-macos-option-as-alt = true
-
-# Whether to enable the macOS window shadow. The default value is true.
-# With some window managers and window transparency settings, you may
-# find false more visually appealing.
-macos-window-shadow = true
-
-# If `true` (default), applications running in the terminal can show desktop
-# notifications using certain escape sequences such as OSC 9 or OSC 777.
-desktop-notifications = true
-
-# If `true`, the bold text will use the bright color palette.
 bold-is-bright = true
-
-# This will be used to set the `TERM` environment variable.
-# HACK: We set this with an `xterm` prefix because vim uses that to enable key
-# protocols (specifically this will enable `modifyOtherKeys`), among other
-# features. An option exists in vim to modify this: `:set
-# keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
-# from working properly. https://github.com/vim/vim/pull/13211 fixes this.
-term = xterm-ghostty
-
-# The colorspace to use for the terminal window. The default is `srgb` but
-# this can also be set to `display-p3` to use the Display P3 colorspace.
-#
-# Changing this value at runtime will only affect new windows.
-#
-# This setting is only supported on macOS.
-#
-# NOTE: display-p3 has more accurate color rendering.
-#       Maybe relevant issue: https://github.com/ghostty-org/ghostty/issues/2125
-window-colorspace = srgb
