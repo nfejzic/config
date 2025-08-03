@@ -32,7 +32,7 @@ vim.o.colorcolumn = "+1"
 
 -- more useful diffs (nvim -d)
 -- by ignoring whitespace
-vim.opt.diffopt:append("iwhite")
+-- vim.opt.diffopt:append("iwhite")
 -- and using a smarter algorithm
 -- https://vimways.org/2018/the-power-of-diff/
 -- https://stackoverflow.com/questions/32365271/whats-the-difference-between-git-diff-patience-and-git-diff-histogram
