@@ -119,6 +119,7 @@ keybind = opt+backspace=text:\x17
 keybind = super+shift+t=text:\x1bT
 keybind = super+control+t=toggle_quick_terminal
 
+window-padding-x = 0
 window-padding-y = 0
 window-padding-balance = true
 window-padding-color = extend
