@@ -128,4 +128,5 @@ shell-integration = detect
 shell-integration-features = no-cursor,no-sudo,no-title
 
 macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
 bold-is-bright = true
