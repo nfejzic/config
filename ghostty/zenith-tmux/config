@@ -19,6 +19,9 @@ font-synthetic-style = false
 # centered 'x' in 0xF
 font-feature = ss11
 
+# disable whitespace ligatures, such as in '//' and '///'
+font-feature = -calt
+
 # 100% is way too thin
 adjust-cursor-thickness = 200%
 
