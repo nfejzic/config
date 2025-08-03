@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{ import = "plugins" },
+	{ import = "work_plugins" },
 
 	-- show help popup for keymaps (like in emacs)
 	{ "folke/which-key.nvim" },
