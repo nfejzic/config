@@ -1,4 +1,3 @@
-local lspconfig = require "lazydev.integrations.lspconfig"
 local M = {}
 
 local _border = "rounded"
