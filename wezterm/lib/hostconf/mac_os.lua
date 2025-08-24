@@ -149,6 +149,22 @@ local comic_code = {
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
+local atkinson_hyperlegible = {
+	family = "Atkinson Hyperlegible Mono",
+	size = font_size,
+	line_height = 1.15,
+	cell_width = 1.00,
+	harfbuzz_features = {
+		-- -> != !==
+		"liga",
+		"calt",
+		"dlig",
+		"zero",
+	},
+}
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
 local monolisa = {
 	family = "MonoLisa",
 	size = font_size,
@@ -197,11 +213,12 @@ local commit_mono = {
 local berkeley_mono = {
 	family = "TX-02",
 	size = font_size + 0.5,
-	line_height = 1.12,
+	line_height = 1.1,
 	cell_width = 1.0,
 	harfbuzz_features = {
+		-- ->
 		"ss06",
-		"calt=0" -- /// // |
+		"calt=1" -- /// // |
 	},
 }
 
@@ -236,14 +253,19 @@ local config = {
 		bottom = "0cell",
 		left = "0cell"
 	},
-	-- window_decorations = "MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
-	window_decorations = "TITLE|RESIZE"
+	window_decorations = "MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
+	-- window_decorations = "TITLE|RESIZE"
 }
 
 config.font = monolisa
--- config.font = comic_code
-config.font = codelia
+-- config.font = berkeley_mono
+config.font = comic_code
+-- config.font = atkinson_hyperlegible
+-- config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
+config.font.harfbuzz_features = {
+	"liga=0"
+}
 
 return config

@@ -63,16 +63,70 @@ function M.format_tab_title(colors)
 	end
 end
 
---- @param colors ColorTheme
+--- @param colors Theme
 --- @param is_transparent boolean
 function M.tab_bar_colors(colors, is_transparent)
-	local term_bg = colors.background_secondary
+	local term_bg = colors.ansi[1]
 
 	if is_transparent then
 		term_bg = "rgba(0% 0% 0% 0%)"
 	end
 
-	return colors.tab_bar(term_bg, colors)
+	local background = colors.ansi[1]
+	local active_tab_bg = colors.ansi[1]
+	local inactive_fg = colors.ansi[8]
+	local active_tab_fg = colors.ansi[4]
+	local tab_hover_fg = colors.ansi[5]
+
+	return {
+		-- The color of the inactive tab bar edge/divider
+		inactive_tab_edge = term_bg,
+		-- background = colors.background,
+		background = background,
+
+		active_tab = {
+			-- The color of the background area for the tab
+			bg_color = active_tab_bg,
+			-- The color of the text for the tab
+			fg_color = active_tab_fg,
+
+			-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
+			-- label shown for this tab.
+			-- The default is "Normal"
+			intensity = "Normal",
+
+			-- Specify whether you want "None", "Single" or "Double" underline for
+			-- label shown for this tab.
+			-- The default is "None"
+			underline = "None",
+
+			-- Specify whether you want the text to be italic (true) or not (false)
+			-- for this tab.  The default is false.
+			italic = false,
+
+			-- Specify whether you want the text to be rendered with strikethrough (true)
+			-- or not for this tab.  The default is false.
+			strikethrough = false,
+		},
+		inactive_tab = {
+			bg_color = term_bg,
+			fg_color = inactive_fg,
+			intensity = "Normal",
+		},
+		inactive_tab_hover = {
+			bg_color = term_bg,
+			fg_color = tab_hover_fg,
+			italic = false,
+		},
+		new_tab = {
+			bg_color = term_bg,
+			fg_color = term_bg,
+		},
+		new_tab_hover = {
+			bg_color = term_bg,
+			fg_color = tab_hover_fg,
+		},
+	}
 end
 
 local function active_tab_idx(mux_win)

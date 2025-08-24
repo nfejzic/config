@@ -33,8 +33,8 @@ local function format_workspace_name(wezterm, colors)
 
 		window:set_left_status(wezterm.format({
 			{ Attribute = { Intensity = "Normal" } },
-			{ Background = { Color = colors.background_secondary } },
-			{ Foreground = { Color = foreground_color } },
+			{ Background = { AnsiColor = "Black" } },
+			{ Foreground = { AnsiColor = "BrWhite" } },
 			{ Text = " [" .. workspace .. "] " },
 		}))
 	end

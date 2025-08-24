@@ -4,7 +4,7 @@ local M = {}
 --- @param wezterm table
 --- @param config table
 --- @param hostconf HostConfig
---- @param theme string | ColorTheme
+--- @param theme string
 local function set_opts(wezterm, config, hostconf, theme)
 	if hostconf.dpi ~= nil then
 		config.dpi = hostconf.dpi
@@ -36,16 +36,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 
 	config.bold_brightens_ansi_colors = "BrightAndBold"
 
-	if type(theme) == "string" then
-		config.color_scheme = theme
-	elseif type(theme) == "table" then
-		config.colors = {}
-		for key, value in pairs(theme) do
-			if not theme.is_not_standard(key) then
-				config.colors[key] = value
-			end
-		end
-	end
+	config.color_scheme = theme
 
 	if hostconf.window_padding ~= nil then
 		config.window_padding = hostconf.window_padding
@@ -91,8 +82,9 @@ function M.setup(wezterm, config)
 	end
 
 	local color_config = require("lib.colors").init(
-		{ dark = 'kanagawa-wave', light = 'kanagawa-lotus' },
-		os_appearance
+		{ dark = 'Gruvbox dark, hard (base16)', light = 'Gruvbox dark, hard (base16)' },
+		os_appearance,
+		wezterm
 	)
 
 	local tab_api = require("lib.tab_config")
