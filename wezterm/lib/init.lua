@@ -82,7 +82,7 @@ function M.setup(wezterm, config)
 	end
 
 	local color_config = require("lib.colors").init(
-		{ dark = 'Gruvbox dark, hard (base16)', light = 'Gruvbox dark, hard (base16)' },
+		{ dark = 'Gruvbox dark, hard (base16)', light = 'Gruvbox light, medium (base16)' },
 		os_appearance,
 		wezterm
 	)

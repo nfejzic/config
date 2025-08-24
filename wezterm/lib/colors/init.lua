@@ -27,7 +27,7 @@ local M = {}
 --- @field ansi AnsiColors
 --- @field brights BrightColors
 
-local function is_dark_mode(os_appearance)
+local function is_light_mode(os_appearance)
 	return os_appearance == 'Light' or os_appearance == 'LightHighContrast'
 end
 
@@ -37,7 +37,7 @@ end
 function M.init(theme, os_appearance, wezterm)
 	local schemes = wezterm.get_builtin_color_schemes()
 
-	local theme_name = is_dark_mode(os_appearance) and theme.dark or theme.light
+	local theme_name = is_light_mode(os_appearance) and theme.light or theme.dark
 	local colors = schemes[theme_name]
 
 	return { colors = colors, theme = theme_name }
