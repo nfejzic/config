@@ -72,21 +72,37 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.max_fps = 255
 end
 
+--- @param hostconf_bindings GetKeybindingsFn
+--- @param keys KeysConfig
+--- @param wezterm Wezterm
+--- @param program_paths ProgramPaths
+--- @param utils Utils
+--- @param tab_api TabApi
+--- @param config table
+local function configure_keybindings(hostconf_bindings, keys, wezterm, program_paths, utils, tab_api, config)
+	local host_bindings = hostconf_bindings(wezterm)
+	local keybindings = keys.get_keybindings(wezterm, program_paths, utils, tab_api, host_bindings)
+
+	if host_bindings.custom_keybinds and type(host_bindings.custom_keybinds) == "table" then
+		for _, value in pairs(host_bindings.custom_keybinds) do
+			table.insert(keybindings.keys, value)
+		end
+	end
+
+	config.leader = keybindings.leader
+	config.keys = keybindings.keys
+end
+
 --- @param wezterm table
 --- @param config table
 function M.setup(wezterm, config)
-	local os_appearance = 'Dark'
-
-	if wezterm.gui then
-		os_appearance = wezterm.gui.get_appearance()
-	end
+	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
 	local color_config = require("lib.colors").init(
 		{ dark = 'Gruvbox dark, hard (base16)', light = 'Gruvbox light, medium (base16)' },
 		os_appearance,
 		wezterm
 	)
-
 	local tab_api = require("lib.tab_config")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
@@ -96,30 +112,7 @@ function M.setup(wezterm, config)
 		fd = require("lib.utils").execute("which fd")
 	}
 
-	local keybindings = keys.get_keybindings(wezterm, program_paths, utils,
-		tab_api)
-
-	if hostconf.get_keybindings ~= nil then
-		local host_specific_keys = hostconf.get_keybindings(wezterm,
-			program_paths, utils, tab_api)
-
-		if host_specific_keys.leader ~= nil then
-			keybindings.leader = host_specific_keys.leader
-		end
-
-		if host_specific_keys.keys ~= nil and type(host_specific_keys.keys) == "table" then
-			for _, value in pairs(host_specific_keys.keys) do
-				table.insert(keybindings.keys, value)
-			end
-		end
-	end
-
-	config.leader = keybindings.leader
-	config.keys = keybindings.keys
-
-	local is_transparent = config.window_background_opacity ~= nil and
-		config.window_background_opacity < 1.0
-
+	configure_keybindings(hostconf.get_keybindings, keys, wezterm, program_paths, utils, tab_api, config)
 	set_opts(wezterm, config, hostconf, color_config.theme)
 
 	if config.colors == nil then
@@ -128,14 +121,11 @@ function M.setup(wezterm, config)
 
 	require("lib.hyperlinks").configure_hyperlinks(config, wezterm)
 
-	config.colors.tab_bar = tab_api.tab_bar_colors(
-		color_config.colors,
-		is_transparent
-	)
+	config.colors.tab_bar = tab_api.tab_bar_colors(color_config.colors)
 
 	require("lib.custom_events").register_events(
 		wezterm, tab_api,
-		color_config.colors, hostconf, utils
+		color_config.colors, utils
 	)
 
 	-- local scale_factor = 2.21

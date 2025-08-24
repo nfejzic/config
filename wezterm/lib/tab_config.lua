@@ -51,7 +51,7 @@ local function tab_title(tab, max_width)
 	return result .. " "
 end
 
---- @param colors ColorTheme
+--- @param colors Theme
 ---@diagnostic disable-next-line: unused-local
 function M.format_tab_title(colors)
 	---@diagnostic disable-next-line: unused-local
@@ -64,16 +64,11 @@ function M.format_tab_title(colors)
 end
 
 --- @param colors Theme
---- @param is_transparent boolean
-function M.tab_bar_colors(colors, is_transparent)
-	local term_bg = colors.ansi[1]
+function M.tab_bar_colors(colors)
+	local term_bg = colors.indexed[18] or colors.background
 
-	if is_transparent then
-		term_bg = "rgba(0% 0% 0% 0%)"
-	end
-
-	local background = colors.ansi[1]
-	local active_tab_bg = colors.ansi[1]
+	local background = term_bg
+	local active_tab_bg = term_bg
 	local inactive_fg = colors.ansi[8]
 	local active_tab_fg = colors.ansi[4]
 	local tab_hover_fg = colors.ansi[5]

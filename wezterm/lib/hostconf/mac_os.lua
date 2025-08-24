@@ -1,10 +1,12 @@
----@type GetKeybindingsFn
-local function get_keybindings(wezterm, _, _, tab_api)
+--- @type GetKeybindingsFn
+local function get_keybindings(wezterm)
 	local act = wezterm.action
 
+	--- @type KeybindsConfig
 	return {
-		keys = {
-			-- send Ctrl-w on Ctrl-Backspace | Opt-Backspace
+		super = 'SUPER',
+		super_shift = 'SUPER|SHIFT',
+		custom_keybinds = {
 			{
 				key = 'Backspace',
 				mods = 'OPT',
@@ -13,116 +15,7 @@ local function get_keybindings(wezterm, _, _, tab_api)
 					mods = 'CTRL',
 				},
 			},
-
-			{
-				key = 'Backspace',
-				mods = 'CTRL',
-				action = act.SendKey {
-					key = 'w',
-					mods = 'CTRL',
-				},
-			},
-
-			{
-				key = "d",
-				mods = "SUPER",
-				action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "d",
-				mods = "SUPER|SHIFT",
-				action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "w",
-				mods = "SUPER",
-				action = act.CloseCurrentPane({ confirm = false }),
-			},
-
-			-- go to pane to the left of current pane
-			{
-				key = "h",
-				mods = "SUPER",
-				action = act.ActivatePaneDirection("Left"),
-			},
-
-			-- go to pane to the right of current pane
-			{
-				key = "l",
-				mods = "SUPER",
-				action = act.ActivatePaneDirection("Right"),
-			},
-
-			-- go to pane below current pane
-			{
-				key = "j",
-				mods = "SUPER",
-				action = act.ActivatePaneDirection("Down"),
-			},
-
-			-- go to pane above current pane
-			{
-				key = "k",
-				mods = "SUPER",
-				action = act.ActivatePaneDirection("Up"),
-			},
-
-			-- pane resizing
-			{
-				key = "H",
-				mods = "SUPER|SHIFT",
-				action = act.AdjustPaneSize({ "Left", 5 }),
-			},
-
-			{
-				key = "J",
-				mods = "SUPER|SHIFT",
-				action = act.AdjustPaneSize({ "Down", 5 }),
-			},
-
-			{
-				key = "K",
-				mods = "SUPER|SHIFT",
-				action = act.AdjustPaneSize({ "Up", 5 }),
-			},
-
-			{
-				key = "L",
-				mods = "SUPER|SHIFT",
-				action = act.AdjustPaneSize({ "Right", 5 }),
-			},
-
-			-- create tab next to the active tab
-			{
-				key = "t",
-				mods = "SUPER",
-				action = wezterm.action_callback(tab_api
-					.spawn_tab_next_to_active(wezterm)),
-			},
-
-			{
-				key = "t",
-				mods = "SUPER|SHIFT",
-				action = act.SpawnTab("CurrentPaneDomain"),
-			},
-
-			-- go to next tab
-			{
-				key = "n",
-				mods = "SUPER",
-				action = act.ActivateTabRelative(1),
-			},
-
-			-- go to previous tab
-			{
-				key = "p",
-				mods = "SUPER",
-				action = act.ActivateTabRelative(-1),
-			},
-
-		},
+		}
 	}
 end
 

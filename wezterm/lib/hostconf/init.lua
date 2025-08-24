@@ -12,13 +12,18 @@
 ---@field bottom string
 ---@field left string
 
----@alias GetKeybindingsFn fun(wezterm: table, program_paths: ProgramPaths, utils: Utils, tab_api: TabApi): table
+--- @class KeybindsConfig
+--- @field super string
+--- @field super_shift string
+--- @field custom_keybinds table
+
+---@alias GetKeybindingsFn fun(wezterm: table): KeybindsConfig
 
 ---@class HostConfig
 ---@field dpi integer|nil
 ---@field font FontConfig
 ---@field update_dpi boolean
----@field get_keybindings GetKeybindingsFn|nil
+---@field get_keybindings GetKeybindingsFn
 ---@field window_decorations string|nil
 ---@field window_padding WindowPadding|nil
 

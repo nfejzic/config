@@ -1,124 +1,19 @@
 ---@type GetKeybindingsFn
-local function get_keybindings(wezterm, _, _, tab_api)
+local function get_keybindings(wezterm)
 	local act = wezterm.action
 
+	--- @type KeybindsConfig
 	return {
-		keys = {
+		super = 'ALT',
+		super_shift = 'ALT|SHIFT',
+		custom_keybinds = {
+			-- mimic macos Cmd-V for paste
 			{
 				key = "v",
 				mods = "ALT",
 				action = act.PasteFrom('Clipboard'),
 			},
-
-			{
-				key = "Backspace",
-				mods = "CTRL",
-				action = act.SendKey({
-					key = 'w',
-					mods = 'CTRL',
-				})
-			},
-
-			{
-				key = "d",
-				mods = "ALT",
-				action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "d",
-				mods = "ALT|SHIFT",
-				action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-			},
-
-			{
-				key = "w",
-				mods = "ALT",
-				action = act.CloseCurrentPane({ confirm = false }),
-			},
-
-			-- go to pane to the left of current pane
-			{
-				key = "h",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Left"),
-			},
-
-			-- go to pane to the right of current pane
-			{
-				key = "l",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Right"),
-			},
-
-			-- go to pane below current pane
-			{
-				key = "j",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Down"),
-			},
-
-			-- go to pane above current pane
-			{
-				key = "k",
-				mods = "ALT",
-				action = act.ActivatePaneDirection("Up"),
-			},
-
-			-- pane resizing
-			{
-				key = "H",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Left", 5 }),
-			},
-
-			{
-				key = "J",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Down", 5 }),
-			},
-
-			{
-				key = "K",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Up", 5 }),
-			},
-
-			{
-				key = "L",
-				mods = "ALT|SHIFT",
-				action = act.AdjustPaneSize({ "Right", 5 }),
-			},
-
-			-- create new tab
-			{
-				key = "t",
-				mods = "ALT|SHIFT",
-				action = act.SpawnTab("CurrentPaneDomain"),
-			},
-
-			-- create tab next to the active tab
-			{
-				key = "t",
-				mods = "SUPER",
-				action = wezterm.action_callback(tab_api
-					.spawn_tab_next_to_active(wezterm)),
-			},
-
-			-- go to next tab
-			{
-				key = "n",
-				mods = "ALT",
-				action = act.ActivateTabRelative(1),
-			},
-
-			-- go to previous tab
-			{
-				key = "p",
-				mods = "ALT",
-				action = act.ActivateTabRelative(-1),
-			},
-		},
+		}
 	}
 end
 
