@@ -15,16 +15,29 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	{ import = "plugins" },
-	{ import = "work_plugins" },
+---@return table<number, table<number, string>>
+local function plugins_spec()
+	local plugins = {
+		-- show help popup for keymaps (like in emacs)
+		{ "folke/which-key.nvim" },
 
-	-- show help popup for keymaps (like in emacs)
-	{ "folke/which-key.nvim" },
+		-- btor2 syntax highlighting
+		{ "phlo/vim-btor2" },
+	}
 
-	-- btor2 syntax highlighting
-	{ "phlo/vim-btor2" },
-}, {
+	table.insert(plugins, { import = "plugins" })
+
+	local work_plugins_path = vim.fn.stdpath('config') .. '/lua/work_plugins'
+
+	if vim.uv.fs_stat(work_plugins_path) ~= nil then
+		table.insert(plugins, { import = 'work_plugins' })
+	end
+
+	return plugins
+end
+
+
+require("lazy").setup(plugins_spec(), {
 	dev = { path = vim.uv.os_homedir() .. "/Developer/nvim" },
 
 	change_detection = {
