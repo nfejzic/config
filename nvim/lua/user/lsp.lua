@@ -511,6 +511,9 @@ function M.setup()
 	enable_if_installed("gopls", M.gopls, neoconf)
 	enable_if_installed("vscode-json-language-server", M.jsonls, neoconf, opts.on_attach)
 	enable_if_installed("vue-language-server", M.vue_ls, neoconf)
+	enable_if_installed("gitlab-ci-ls", vim.lsp.enable, "gitlab_ci_ls")
+	enable_if_installed("taplo", vim.lsp.enable, "taplo")
+	enable_if_installed("ruff", vim.lsp.enable, "ruff")
 
 	M.setup_ui()
 end
