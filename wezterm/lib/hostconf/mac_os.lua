@@ -176,8 +176,8 @@ config.font = comic_code
 -- config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
-config.font.harfbuzz_features = {
-	"liga=0"
-}
+
+table.insert(config.font.harfbuzz_features, "liga=0")
+table.insert(config.font.harfbuzz_features, "dlig=0")
 
 return config
