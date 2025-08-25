@@ -7,7 +7,7 @@ local M = {}
 --- @param program_paths ProgramPaths
 --- @param utils Utils
 --- @param tab_api TabApi
---- @param mods { super: string, shift_super: string }
+--- @param mods { super: string, super_shift: string }
 function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 	local act = wezterm.action
 
@@ -28,6 +28,16 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 		},
 
 		keys = {
+			-- Delete word on CTRL + Backspace
+			{
+				key = 'Backspace',
+				mods = 'CTRL',
+				action = act.SendKey {
+					key = 'w',
+					mods = 'CTRL',
+				},
+			},
+
 			{
 				key = "d",
 				mods = mods.super,
@@ -137,7 +147,7 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 			{
 				key = "n",
 				mods = "LEADER",
-				action = wezterm.action_callback(function(_win, _p, _l)
+				action = wezterm.action_callback(function(_win, _p, _)
 					local active_workspaces = wezterm.mux.get_workspace_names()
 
 					local t = ""
@@ -153,6 +163,8 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 					t = t .. "Enter name for new (or existing) workspace"
 
 					_win:perform_action(
+					-- NOTE: it seems like these warnings are false positive
+					---@diagnostic disable-next-line: param-type-mismatch
 						act.PromptInputLine({
 							description = wezterm.format({
 								{ Attribute = { Intensity = "Bold" } },
@@ -167,6 +179,7 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 								if line then
 									utils.workspace_switch_event(wezterm)
 									window:perform_action(
+									---@diagnostic disable-next-line: param-type-mismatch
 										act.SwitchToWorkspace({
 											name = line,
 										}),
@@ -195,6 +208,8 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 					end
 
 					window:perform_action(
+					-- NOTE: it seems like these warnings are false positive
+					---@diagnostic disable-next-line: param-type-mismatch
 						act.InputSelector({
 							action = wezterm.action_callback(function(win, _, id,
 																	  label)
@@ -206,6 +221,7 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 										label)
 									utils.workspace_switch_event(wezterm)
 									win:perform_action(
+									---@diagnostic disable-next-line: param-type-mismatch
 										act.SwitchToWorkspace({ name = id }),
 										pane)
 								end

@@ -1,3 +1,4 @@
+--- @type Wezterm
 local wezterm = require("wezterm")
 
 -- In newer versions of wezterm, use the config_builder which will

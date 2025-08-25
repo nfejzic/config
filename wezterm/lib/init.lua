@@ -1,4 +1,4 @@
----@class Config
+---@class MyConfig
 local M = {}
 
 --- @param wezterm table
@@ -79,12 +79,17 @@ end
 --- @param utils Utils
 --- @param tab_api TabApi
 --- @param config table
-local function configure_keybindings(hostconf_bindings, keys, wezterm, program_paths, utils, tab_api, config)
+local function configure_keybindings(hostconf_bindings, keys, wezterm,
+									 program_paths, utils, tab_api, config)
 	local host_bindings = hostconf_bindings(wezterm)
-	local keybindings = keys.get_keybindings(wezterm, program_paths, utils, tab_api, host_bindings)
+	local keybindings = keys.get_keybindings(wezterm, program_paths, utils,
+		tab_api, host_bindings)
 
 	if host_bindings.custom_keybinds and type(host_bindings.custom_keybinds) == "table" then
+		wezterm.log_info("setting custom keybindings")
 		for _, value in pairs(host_bindings.custom_keybinds) do
+			wezterm.log_info("keybind = ")
+			wezterm.log_info(value)
 			table.insert(keybindings.keys, value)
 		end
 	end
@@ -99,7 +104,11 @@ function M.setup(wezterm, config)
 	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
 	local color_config = require("lib.colors").init(
-		{ dark = 'Gruvbox dark, hard (base16)', light = 'Gruvbox light, medium (base16)' },
+		{
+			dark = 'Gruvbox dark, hard (base16)',
+			light =
+			'Gruvbox light, medium (base16)'
+		},
 		os_appearance,
 		wezterm
 	)
@@ -112,7 +121,8 @@ function M.setup(wezterm, config)
 		fd = require("lib.utils").execute("which fd")
 	}
 
-	configure_keybindings(hostconf.get_keybindings, keys, wezterm, program_paths, utils, tab_api, config)
+	configure_keybindings(hostconf.get_keybindings, keys, wezterm, program_paths,
+		utils, tab_api, config)
 	set_opts(wezterm, config, hostconf, color_config.theme)
 
 	if config.colors == nil then
