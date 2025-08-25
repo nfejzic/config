@@ -19,7 +19,7 @@ local function get_keybindings(wezterm)
 	}
 end
 
-local font_size = 14.25
+local font_size = 15
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
@@ -74,6 +74,23 @@ local monolisa = {
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
+local maple_mono = {
+	family = "Maple Mono",
+	size = font_size + 0.75,
+	line_height = 1.00,
+	cell_width = 1,
+	harfbuzz_features = {
+		"cv02", -- regular 'a'
+		"cv04", -- slab 'l',
+		"cv05", -- alternative 'g',
+		"cv08", -- serif 'r'
+		"zero", -- dotted '0',
+	},
+}
+
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
 local codelia = {
 	family = "Codelia Ligatures",
 	size = font_size,
@@ -82,7 +99,7 @@ local codelia = {
 	harfbuzz_features = {
 		--                    ////
 		"zero", -- dotted '0' ///
-		"ss02", -- serif 'l'  //
+		"ss02", -- serif 'l'  // ->  == !=
 	},
 }
 
@@ -146,7 +163,8 @@ local config = {
 		bottom = "0cell",
 		left = "0cell"
 	},
-	window_decorations = "MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
+	window_decorations =
+	"MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
 	-- window_decorations = "TITLE|RESIZE"
 }
 
@@ -154,6 +172,7 @@ config.font = monolisa
 -- config.font = berkeley_mono
 config.font = comic_code
 -- config.font = atkinson_hyperlegible
+-- config.font = maple_mono
 -- config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
