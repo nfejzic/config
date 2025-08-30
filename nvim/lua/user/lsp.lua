@@ -110,7 +110,7 @@ function M.get_on_attach(get_picker)
 		require("fidget").setup({
 			notification = {
 				window = {
-					winblend = 0,
+					winblend = 100,
 				},
 			},
 		})
