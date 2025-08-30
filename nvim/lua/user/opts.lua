@@ -1,5 +1,5 @@
 -- vim.opt.guicursor = "a:block"
--- vim.opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
+vim.opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
 
 --Remap space as leader key
 vim.g.mapleader = " "
