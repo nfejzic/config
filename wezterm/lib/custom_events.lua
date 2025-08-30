@@ -23,19 +23,15 @@ local last_workspace = nil
 local function workspace_switching(wezterm, utils)
 	wezterm.on(utils.events.WORKSPACE_SWITCHED, function(_, _)
 		last_workspace = wezterm.mux.get_active_workspace()
-		wezterm.log_info("Update last_workspace = '" .. last_workspace .. "'")
 	end)
 
 	wezterm.on(utils.events.SWITCH_TO_LAST_WORKSPACE, function(window, pane)
 		if last_workspace == nil then
-			wezterm.log_warn("No last workspace, nothing to switch to")
 			return
 		end
 
 		local current_workspace = wezterm.mux.get_active_workspace()
 
-		wezterm.log_info("Switching from '" ..
-			current_workspace .. "' to '" .. last_workspace .. "'")
 		window:perform_action(
 			wezterm.action.SwitchToWorkspace({ name = last_workspace }), pane)
 

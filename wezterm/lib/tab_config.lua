@@ -126,7 +126,6 @@ end
 
 local function active_tab_idx(mux_win)
 	for _, item in ipairs(mux_win:tabs_with_info()) do
-		-- wezterm.log_info('idx: ', idx, 'tab:', item)
 		if item.is_active then
 			return item.index
 		end

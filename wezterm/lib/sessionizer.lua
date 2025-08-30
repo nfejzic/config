@@ -16,7 +16,6 @@ local function createToggleFn(fd, paths, wezterm, utils)
 	--- @param window table
 	--- @param pane table
 	return function(window, pane)
-		wezterm.log_info("toggle sessionizer")
 		if next(cached) == nil then
 			for _, path in pairs(paths) do
 				local success, stdout, stderr = wezterm.run_child_process({
@@ -49,9 +48,8 @@ local function createToggleFn(fd, paths, wezterm, utils)
 			act.InputSelector({
 				action = wezterm.action_callback(function(win, _, id, label)
 					if not id and not label then
-						wezterm.log_info("Cancelled")
+						return
 					else
-						wezterm.log_info("Selected " .. label)
 						utils.workspace_switch_event(wezterm)
 						win:perform_action(
 							act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }),
@@ -71,7 +69,6 @@ end
 --- @param toggleFn function(window: table, pane: table)
 local function createResetCacheAndToggleFn(wezterm, toggleFn)
 	return function(window, pane)
-		wezterm.log_info("toggle sessionizer cache clear")
 		cached = {}
 		toggleFn(window, pane)
 	end

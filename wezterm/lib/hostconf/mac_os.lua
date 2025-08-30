@@ -2,20 +2,45 @@
 local function get_keybindings(wezterm)
 	local act = wezterm.action
 
+	local custom_keybinds = {
+		{
+			key = 'Backspace',
+			mods = 'OPT',
+			action = act.SendKey {
+				key = 'w',
+				mods = 'CTRL',
+			},
+		}
+	}
+
+	for _, key in pairs({ "h", "j", "k", "l" }) do
+		table.insert(custom_keybinds, {
+			key = key,
+			mods = 'SUPER',
+			action = act.DisableDefaultAssignment,
+		})
+
+		table.insert(custom_keybinds, {
+			key = key,
+			mods = 'SUPER',
+			action = act.SpawnTab("CurrentPaneDomain"),
+		})
+
+		table.insert(custom_keybinds, {
+			key = key,
+			mods = 'SUPER|SHIFT',
+			action = act.SendKey {
+				key = key,
+				mods = 'OPT|SHIFT',
+			}
+		})
+	end
+
 	--- @type KeybindsConfig
 	return {
 		super = 'SUPER',
 		super_shift = 'SUPER|SHIFT',
-		custom_keybinds = {
-			{
-				key = 'Backspace',
-				mods = 'OPT',
-				action = act.SendKey {
-					key = 'w',
-					mods = 'CTRL',
-				},
-			},
-		}
+		custom_keybinds = custom_keybinds,
 	}
 end
 
@@ -70,6 +95,16 @@ local monolisa = {
 		"ss11", -- centered 'x' in 0xF
 		"calt=0", -- no white-space ligatures
 	},
+}
+
+--- @type FontConfig
+--- @diagnostic disable-next-line: unused-local
+local sf_mono = {
+	family = "SF Mono",
+	size = font_size,
+	line_height = 1.15,
+	cell_width = 1.0,
+	harfbuzz_features = {},
 }
 
 --- @type FontConfig
@@ -169,6 +204,7 @@ local config = {
 }
 
 config.font = monolisa
+-- config.font = sf_mono
 -- config.font = berkeley_mono
 config.font = comic_code
 -- config.font = atkinson_hyperlegible

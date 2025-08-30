@@ -1,10 +1,11 @@
 ---@class MyConfig
 local M = {}
 
---- @param wezterm table
---- @param config table
+--- @module "wezterm"
+--- @param wezterm Wezterm
+--- @param config Config
 --- @param hostconf HostConfig
---- @param theme string
+--- @param theme ThemeName
 local function set_opts(wezterm, config, hostconf, theme)
 	if hostconf.dpi ~= nil then
 		config.dpi = hostconf.dpi
@@ -78,29 +79,49 @@ end
 --- @param program_paths ProgramPaths
 --- @param utils Utils
 --- @param tab_api TabApi
+--- @param smart_splits table
 --- @param config table
-local function configure_keybindings(hostconf_bindings, keys, wezterm,
-									 program_paths, utils, tab_api, config)
+local function configure_keybindings(
+	hostconf_bindings,
+	keys,
+	wezterm,
+	program_paths,
+	utils,
+	tab_api,
+	smart_splits,
+	config
+)
 	local host_bindings = hostconf_bindings(wezterm)
 	local keybindings = keys.get_keybindings(wezterm, program_paths, utils,
 		tab_api, host_bindings)
 
 	if host_bindings.custom_keybinds and type(host_bindings.custom_keybinds) == "table" then
-		wezterm.log_info("setting custom keybindings")
 		for _, value in pairs(host_bindings.custom_keybinds) do
-			wezterm.log_info("keybind = ")
-			wezterm.log_info(value)
 			table.insert(keybindings.keys, value)
 		end
 	end
 
 	config.leader = keybindings.leader
 	config.keys = keybindings.keys
+
+	smart_splits.apply_to_config(config, {
+		modifiers = {
+			move = {
+				wezterm = host_bindings.super,
+				neovim = "ALT",
+			},
+			resize = {
+				wezterm = host_bindings.super_shift,
+				neovim = "ALT|SHIFT",
+			},
+		},
+	})
 end
 
 --- @param wezterm table
 --- @param config table
-function M.setup(wezterm, config)
+--- @param plugins UserPlugins
+function M.setup(wezterm, config, plugins)
 	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
 	local color_config = require("lib.colors").init(
@@ -122,7 +143,8 @@ function M.setup(wezterm, config)
 	}
 
 	configure_keybindings(hostconf.get_keybindings, keys, wezterm, program_paths,
-		utils, tab_api, config)
+		utils, tab_api, plugins.smart_splits, config)
+
 	set_opts(wezterm, config, hostconf, color_config.theme)
 
 	if config.colors == nil then
@@ -132,6 +154,7 @@ function M.setup(wezterm, config)
 	require("lib.hyperlinks").configure_hyperlinks(config, wezterm)
 
 	config.colors.tab_bar = tab_api.tab_bar_colors(color_config.colors)
+	config.colors.compose_cursor = color_config.colors.brights[5]
 
 	require("lib.custom_events").register_events(
 		wezterm, tab_api,

@@ -17,7 +17,7 @@
 --- @field super_shift string
 --- @field custom_keybinds table
 
----@alias GetKeybindingsFn fun(wezterm: table): KeybindsConfig
+---@alias GetKeybindingsFn fun(wezterm: Wezterm): KeybindsConfig
 
 ---@class HostConfig
 ---@field dpi integer|nil
