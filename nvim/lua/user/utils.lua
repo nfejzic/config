@@ -44,19 +44,6 @@ function M.print_table(tbl, indent)
 	end
 end
 
---- @param package string the name of the Mason package
---- @return string|nil path path of the package, or nil if not installed
-function M.mason_path(package)
-	local mr = require("mason-registry")
-
-	if not mr.is_installed(package) then
-		return nil
-	else
-		local pkg = mr.get_package(package)
-		return pkg:get_install_path()
-	end
-end
-
 --- @param tbl table the table we want to check, has `string` values
 --- @param val string the value we're looking for
 --- @return boolean `true` if table contains the value, otherwise `false`
