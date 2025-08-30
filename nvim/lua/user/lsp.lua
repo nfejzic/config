@@ -12,14 +12,15 @@ local _border = "rounded"
 ---@field buf_diagnostics fun(): nil
 
 ---@return LspPicker
-function M.get_telescope_picker(t_builtin)
+function M.get_telescope_picker()
+	local t_builtin = require("telescope.builtin")
 	return {
 		definitions = t_builtin.lsp_definitions,
 		references = t_builtin.lsp_references,
 		implementations = t_builtin.lsp_implementations,
-		doc_symbols = t_builtin.document_symbols,
-		workspace_symbols = t_builtin.workspace_symbols,
-		buf_diagnostics = function() t_builtin.diagnostic({ buffer = 0 }) end
+		doc_symbols = t_builtin.lsp_document_symbols,
+		workspace_symbols = t_builtin.lsp_workspace_symbols,
+		buf_diagnostics = function() t_builtin.diagnostics({ buffer = 0 }) end
 	}
 end
 
@@ -472,7 +473,7 @@ function M.setup()
 		end
 
 		-- just try to load telescope, it'll show errors if not available
-		return M.get_snacks_picker(require("telescope.builtin"))
+		return M.get_telescope_picker()
 	end)
 
 	local get_cmp_capabilities = nil
