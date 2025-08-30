@@ -2,6 +2,9 @@ return {
 	-- formatters and formatting
 	{
 		"stevearc/conform.nvim",
+		lazy = true,
+		event = { "BufWritePre" },
+		cmd = { "Format", "FormatInjected" },
 		config = function()
 			local conform = require("conform")
 			local utils = require("user.utils")
@@ -22,7 +25,7 @@ return {
 					rust = {},
 					c = {},
 					go = { "gofumpt" },
-					sql = { "postgresql_formatter", "sql_formatter", "sqlfmt", stop_after_first = true },
+					sql = { "postgresql_formatter", sql_formatter = "fallback", sqlfmt = "fallback", stop_after_first = true },
 					fish = { "fish_indent" },
 					sh = { "shfmt" },
 					["*"] = { "injected" },
