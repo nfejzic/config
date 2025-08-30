@@ -29,6 +29,9 @@ return {
 				"toml", "yaml", "json",
 				-- git
 				"gitcommit", "gitignore", "gitattribute", "git_rebase", "git_config",
+
+				-- neovim query langauges
+				"scheme", "query",
 			})
 
 			require("nvim-treesitter-textobjects").setup({
