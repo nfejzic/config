@@ -26,7 +26,7 @@ local M = {}
 --- @class Theme
 --- @field ansi AnsiColors
 --- @field brights BrightColors
---- @field indexed table<number, string>
+--- @field indexed table<number, string>|nil
 --- @field background string
 --- @field foreground string
 --- @field cursor_bg string
@@ -45,8 +45,7 @@ end
 function M.init(theme, os_appearance, wezterm)
 	local schemes = wezterm.get_builtin_color_schemes()
 
-	local theme_name = is_light_mode(os_appearance) and theme.light or theme
-	.dark
+	local theme_name = is_light_mode(os_appearance) and theme.light or theme.dark
 	local colors = schemes[theme_name]
 
 	return { colors = colors, theme = theme_name }
