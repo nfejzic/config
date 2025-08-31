@@ -49,7 +49,7 @@ for _, parser in pairs(parsersInstalled) do
 	vim.api.nvim_create_autocmd({ "FileType" }, {
 		pattern = filetypes,
 		callback = function()
-			-- vim.treesitter.start()
+			vim.treesitter.start()
 		end,
 	})
 end
