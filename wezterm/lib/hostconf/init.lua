@@ -1,3 +1,5 @@
+--- @module "wezterm"
+
 ---@class FontConfig
 ---@field family string
 ---@field size number
@@ -5,12 +7,6 @@
 ---@field cell_width number|nil
 ---@field freetype_load_flags string|nil
 ---@field harfbuzz_features table<number, string>|nil
-
----@class WindowPadding
----@field top string
----@field right string
----@field bottom string
----@field left string
 
 --- @class KeybindsConfig
 --- @field super string
