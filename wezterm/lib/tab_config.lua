@@ -34,10 +34,6 @@ local function tab_title(tab, max_width)
 	if path ~= nil then
 		local dir_name = basename(path.file_path)
 
-		require("wezterm").log_info("#result + #title + #dir_name + 2 = " ..
-			#result + #title + #dir_name + 2)
-		require("wezterm").log_info("             max_width = " .. max_width)
-
 		if #result + #title + #dir_name + 2 > max_width then
 			-- -1 for the appended dot
 			local dir_len = max_width - #result - #title - 2 - 1
