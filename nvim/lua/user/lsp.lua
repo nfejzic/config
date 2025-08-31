@@ -115,9 +115,11 @@ function M.get_on_attach(get_picker)
 			},
 		})
 
+		require("user.plugins.conform").call()
+
 		local picker = get_picker()
 
-		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
+		local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client:supports_method("textDocument/inlayHint")
 
 		if inlay_hint_supported then
 			vim.api.nvim_create_user_command("LspToggleInlayHints", function()
@@ -161,7 +163,7 @@ function M.get_on_attach(get_picker)
 			vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
 		end
 
-		local keymaps = require("user.keymaps")
+		local keymaps = require("user.core.keymaps")
 
 		-- Diagnostic keymaps
 		keymaps.set_keys({

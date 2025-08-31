@@ -1,7 +1,8 @@
-require("user.opts")
-require("user.lazy")
-require("user.keymaps").general()
+-- require("user.lazy")
+require("user.core")
+require("user.plugins")
 
-require("user.lsp").setup()
+-- require("user.lsp").setup()
 
 vim.cmd("colo colorize")
+-- test 
