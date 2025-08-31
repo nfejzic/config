@@ -44,7 +44,8 @@ local function get_keybindings(wezterm)
 	}
 end
 
-local font_size = 15
+-- local font_size = 15
+local font_size = 21.5
 
 --- @type FontConfig
 --- @diagnostic disable-next-line: unused-local
@@ -204,13 +205,6 @@ local config = {
 }
 
 config.font = monolisa
--- config.font = sf_mono
--- config.font = berkeley_mono
-config.font = comic_code
--- config.font = atkinson_hyperlegible
--- config.font = maple_mono
--- config.font = codelia
--- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
 table.insert(config.font.harfbuzz_features, "liga=0")
