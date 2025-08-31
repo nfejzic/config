@@ -19,8 +19,9 @@ local function instance()
 	if neotest == nil then
 		neotest = require("neotest")
 
+		-- NOTE: diagnostic complains about missing fields, but should be fine
+		---@diagnostic disable-next-line: missing-fields
 		neotest.setup({
-			-- diagnostic complains about missing fields, but should be fine
 			adapters = {
 				require("neotest-go")({
 					experimental = {
@@ -40,6 +41,8 @@ local function instance()
 				build_flags = "-tags=unit,integration",
 			},
 		})
+
+		vim.notify("Loaded neotest")
 	end
 
 	return neotest

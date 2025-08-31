@@ -10,8 +10,9 @@ local ss = nil
 local function call(method)
 	return function()
 		if ss == nil then
-			vim.notify("loading smart splits")
 			ss = require("smart-splits")
+
+			vim.notify("Loaded smart splits")
 		end
 
 		ss[method]()

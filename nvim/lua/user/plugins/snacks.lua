@@ -68,7 +68,6 @@ local function setup(snacks)
 		words = { enabled = false },
 		gitbrowse = { enabled = true },
 	})
-
 end
 
 function M.instance()
@@ -77,31 +76,32 @@ function M.instance()
 	else
 		instance = require("snacks")
 		setup(instance)
+
+		vim.notify("Loaded Snacks")
 		return instance
 	end
 end
 
-local picker = function() return M.instance().picker end
-local gitbrowse = function() return M.instance().gitbrowse end
+local function picker() return M.instance().picker end
+local function gitbrowse() return M.instance().gitbrowse end
 
 vim.notify("Preparing keymaps")
 require("user.core.keymaps").set_keys({
-	{ "n", "<leader>ff", picker().files,                                                   "Find file" },
+	{ "n", "<leader>ff", function() picker().files() end,                                  "Find file" },
 	-- Ctrl-P make it be the same
-	{ "n", "<C-p>",      picker().files,                                                   "Find file (in git repository)" },
+	{ "n", "<C-p>",      function() picker().files() end,                                  "Find file (in git repository)" },
 	-- TODO: how to find hidden files?
 	{ "n", "<leader>fa", function() picker().files({ hidden = true, ignored = true }) end, "Find all files, including hidden" },
 
-	-- vim.keymap.set("n", "<leader>fd", snacks.picker.todo_comments, { desc = "Todo / Fixme etc" })
-	{ "n", "<leader>fg", picker().git_diff,                                                "git - modified files" },
-	{ "n", "<leader>;",  picker().buffers,                                                 "Telescope search buffers" },
+	{ "n", "<leader>fg", function() picker().git_diff() end,                               "git - modified files" },
+	{ "n", "<leader>;",  function() picker().buffers() end,                                "Telescope search buffers" },
 
-	{ "n", "<leader>ss", picker().treesitter,                                              "Search treesitter symbols" },
+	{ "n", "<leader>ss", function() picker().treesitter() end,                             "Search treesitter symbols" },
 
-	{ "n", "<leader>b",  picker().buffers,                                                 "Telescope search buffers" },
+	{ "n", "<leader>b",  function() picker().buffers() end,                                "Telescope search buffers" },
 
 	-- Search menu for which-key
-	{ "n", "<leader>s",  "",                                                             "Search" },
+	{ "n", "<leader>s",  "",                                                               "Search" },
 
 	-- NOTE: don't search in files such as 'Cargo.lock'
 	{ "n", "<leader>sl", function()
@@ -120,7 +120,7 @@ require("user.core.keymaps").set_keys({
 		})
 	end, "Live grep string, including hidden" },
 
-	{ "n", "<leader>go", gitbrowse().open, "Open current repository in browser" },
+	{ "n", "<leader>go", function() gitbrowse().open() end, "Open current repository in browser" },
 })
 
 return M

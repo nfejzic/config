@@ -20,7 +20,6 @@ local function instance()
 	if M == nil then
 		local dap = require("dap")
 		local dapui = require("dapui")
-		local keymaps = require("user.core.keymaps")
 
 		require("nvim-dap-virtual-text").setup({
 			-- Don't show virtual text for sensitive variables. Probably
@@ -45,10 +44,17 @@ local function instance()
 		require("user.debug_adapters.c_cpp").setup(dap)
 		require("user.debug_adapters.typescript").setup(dap)
 
+		dap.listeners.before.attach.dapui_config = dapui.open
+		dap.listeners.before.launch.dapui_config = dapui.open
+		dap.listeners.before.event_terminated.dapui_config = dapui.close
+		dap.listeners.before.event_exited.dapui_config = dapui.close
+
 		M = {
 			dap = dap,
 			dapui = dapui,
 		}
+
+		vim.notify("Loaded DAP")
 	end
 
 	return M
@@ -58,15 +64,15 @@ local keymaps = require("user.core.keymaps")
 
 -- setup keymaps
 keymaps.set_keys({
-	{ "n", "<leader>dp", instance().dap.toggle_breakpoint, "Toggle breakpoint" },
+	{ "n", "<leader>dp", function() instance().dap.toggle_breakpoint() end, "Toggle breakpoint" },
 
 	-- Stepping
-	{ "n", "<leader>dc", instance().dap.continue,          "Debug Continue" },
-	{ "n", "<leader>di", instance().dap.step_into,         "Debug Step Into" },
-	{ "n", "<leader>do", instance().dap.step_out,          "Debug Step Out" },
-	{ "n", "<leader>dj", instance().dap.step_over,         "Debug Step Over" },
-	{ "n", "<leader>dk", instance().dap.step_back,         "Debug Step Back" },
-	{ "n", "<leader>dr", instance().dap.restart,           "Debug Restart" },
+	{ "n", "<leader>dc", function() instance().dap.continue() end,          "Debug Continue" },
+	{ "n", "<leader>di", function() instance().dap.step_into() end,         "Debug Step Into" },
+	{ "n", "<leader>do", function() instance().dap.step_out() end,          "Debug Step Out" },
+	{ "n", "<leader>dj", function() instance().dap.step_over() end,         "Debug Step Over" },
+	{ "n", "<leader>dk", function() instance().dap.step_back() end,         "Debug Step Back" },
+	{ "n", "<leader>dr", function() instance().dap.restart() end,           "Debug Restart" },
 
 	-- REPL toggle
 	-- { "n", "<leader>dr", req_dap.repl.toggle,  "Debug Toggle REPL" },
@@ -111,16 +117,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*.rs",
 	callback = rust_mapping,
 })
-
-instance().dap.listeners.before.attach.dapui_config = function()
-	instance().dapui.open()
-end
-instance().dap.listeners.before.launch.dapui_config = function()
-	instance().dapui.open()
-end
-instance().dap.listeners.before.event_terminated.dapui_config = function()
-	instance().dapui.close()
-end
-instance().dap.listeners.before.event_exited.dapui_config = function()
-	instance().dapui.close()
-end

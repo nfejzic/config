@@ -57,9 +57,6 @@ end
 local select = require("nvim-treesitter-textobjects.select")
 local move = require("nvim-treesitter-textobjects.move")
 
-local select = require("nvim-treesitter-textobjects.select")
-local move = require("nvim-treesitter-textobjects.move")
-
 -- You can use the capture groups defined in `textobjects.scm`
 vim.keymap.set({ "x", "o" }, "af", function()
 	select.select_textobject("@function.outer", "textobjects")

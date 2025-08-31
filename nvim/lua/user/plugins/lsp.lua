@@ -39,17 +39,12 @@ local M = {}
 function M.setup_ui()
 	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
-	---@type table|nil
+	--- @type vim.diagnostic.Opts
 	local diagnostic_cfg = {
 		enable = true,
 		virtual_text = true,
 		virtual_lines = false,
 		underline = true,
-		-- float = {
-		-- 	-- focusable = false,
-		-- 	-- style = "minimal",
-		-- 	source = "always",
-		-- },
 		signs = {
 			text = {
 				[vim.diagnostic.severity.ERROR] = signs.Error,
@@ -57,62 +52,14 @@ function M.setup_ui()
 				[vim.diagnostic.severity.HINT] = signs.Hint,
 				[vim.diagnostic.severity.INFO] = signs.Info,
 			},
-		}
-		-- 	texthl = {
-		-- 		[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
-		-- 	},
-		-- 	numhl = {
-		-- 		[vim.diagnostic.severity.ERROR] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.WARN] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.HINT] = "DiagnosticDefault",
-		-- 		[vim.diagnostic.severity.INFO] = "DiagnosticDefault",
-		-- 	},
-		-- 	severity_sort = true,
-		-- },
+		},
+		severity_sort = true,
 	}
 
 	vim.diagnostic.config(diagnostic_cfg)
 
 	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError" })
 	vim.fn.sign_define("DapStopped", { text = "->", texthl = "DiagnosticSignInfo" })
-end
-
-function M.gopls()
-	vim.lsp.enable("gopls")
-end
-
-function M.jsonls()
-	vim.lsp.enable("jsonls")
-end
-
-function M.vue_ls()
-	vim.lsp.enable("vue_ls")
-end
-
-function M.override_and_get_handlers()
-	local hover = vim.lsp.buf.hover
-	---@diagnostic disable-next-line: duplicate-set-field
-	vim.lsp.buf.hover = function(opts)
-		local config = vim.tbl_deep_extend("keep", { border = "rounded" }, opts or {})
-		hover(config)
-	end
-
-	local signature_help = vim.lsp.buf.signature_help
-	---@diagnostic disable-next-line: duplicate-set-field
-	vim.lsp.buf.signature_help = function(opts)
-		local config = vim.tbl_deep_extend("keep", { border = "rounded" }, opts or {})
-		signature_help(config)
-	end
-
-	local handlers = {
-		["textDocument/hover"] = vim.lsp.buf.hover,
-		["textDocument/signatureHelp"] = vim.lsp.buf.signature_help,
-	}
-
-	return handlers
 end
 
 function M.get_on_attach()
@@ -339,7 +286,6 @@ function M.setup()
 
 	vim.lsp.config("*", {
 		capabilities = blink.get_lsp_capabilities(),
-		handlers = M.override_and_get_handlers(),
 	})
 
 	vim.api.nvim_create_autocmd('LspAttach', {
