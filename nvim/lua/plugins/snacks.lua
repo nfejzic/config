@@ -8,7 +8,6 @@ local dropdown_preset = {
 local ivy_preset = {
 	preset = "ivy",
 	preview = "main",
-	-- layout = { width = 0.85, height = 0.9 },
 }
 
 local layout_preset = ivy_preset
@@ -34,7 +33,13 @@ return {
 				dashboard = { enabled = false },
 				explorer = { enabled = false },
 				indent = { enabled = false },
-				input = { enabled = false },
+				input = {
+					enabled = true,
+					prompt_pos = "title",
+					win = {
+						relative = "cursor",
+					},
+				},
 				image = {
 					enabled = true,
 					formats = {

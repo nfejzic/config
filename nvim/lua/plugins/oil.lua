@@ -1,14 +1,6 @@
-local triggers = { "-", "<leader>ft", "<leader>fr" }
-
 return {
 	"stevearc/oil.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true, event = "VeryLazy" },
-
-	-- do not lazy load in order to replace netrw
-	lazy = true,
-	cmd = "Oil",
-	event = { "VimEnter */*,.*", "BufNew */*,.*" },
-	keys = triggers,
+	dependencies = { "nvim-mini/mini.icons", lazy = true },
 
 	config = function()
 		local oil = require("oil")

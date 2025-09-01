@@ -1,6 +1,11 @@
 -- vim.opt.guicursor = "a:block"
 vim.opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
 
+-- stabilize windows
+vim.opt.splitkeep = "screen"
+
+vim.opt.winborder = "rounded"
+
 --Remap space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -39,13 +44,6 @@ vim.o.colorcolumn = "+1"
 -- https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.diffopt:append("indent-heuristic")
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-	pattern = "*",
-	callback = function()
-		require("user.custom_hl").customize()
-	end,
-})
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "typescript", "javascript", "vue" },

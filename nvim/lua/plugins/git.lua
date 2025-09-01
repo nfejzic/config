@@ -38,15 +38,6 @@ return {
 		end,
 	},
 
-	-- git conflicts visualisation and resolving
-	{
-		"akinsho/git-conflict.nvim",
-		version = "*",
-		config = true,
-		lazy = true,
-		enabled = false,
-	},
-
 	{
 		"tpope/vim-fugitive",
 		lazy = true,
@@ -57,46 +48,4 @@ return {
 			vim.g.fugitive_dynamic_colors = 1
 		end,
 	},
-
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-
-			-- NOTE: Only one of these is needed.
-			-- "nvim-telescope/telescope.nvim",
-			"folke/snacks.nvim",
-		},
-
-		cmd = "Neogit",
-
-		config = function()
-			local neogit = require('neogit')
-
-			neogit.setup({
-				graph_style = "kitty",
-				disable_context_highlighting = true,
-				highlight = {
-					italic = false,
-				},
-				integrations = {
-					diffview = true,
-					snacks = true,
-				},
-				signs = {
-					-- { CLOSED, OPENED }
-					hunk = { "", "" },
-					item = { "", "" },
-					section = { "", "" },
-				},
-				mappings = {
-					status = {
-						[">"] = "OpenFold",
-						["<"] = "CloseFold",
-					}
-				}
-			})
-		end,
-	}
 }

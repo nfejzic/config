@@ -4,6 +4,7 @@ return {
 		lazy = true,
 		ft = "markdown",
 		build = "deno task --quiet build:fast",
+		enabled = false,
 		config = function()
 			require("peek").setup({
 				app = "browser",

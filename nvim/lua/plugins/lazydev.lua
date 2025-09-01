@@ -14,9 +14,7 @@ return {
 				blink = true,
 			},
 			library = {
-				-- Needs `justinsgithub/wezterm-types` to be installed
 				{ path = "wezterm-types",      mods = { "wezterm" } },
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			}
 		},

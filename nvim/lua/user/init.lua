@@ -1,6 +1,6 @@
 require("user.opts")
 require("user.lazy")
-require("user.keymaps").general()
+require("user.keymaps")
 
 require("user.lsp").setup()
 

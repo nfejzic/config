@@ -3,6 +3,6 @@ return {
 	{
 		"AndrewRadev/tagalong.vim",
 		lazy = true,
-		ft = { "html", "html5", "vue", "markdown", "jsx", "tsx" },
+		ft = { "html", "html5", "vue", "markdown", "jsx", "javascriptreact", "tsx", "typescriptreact" },
 	},
 }
