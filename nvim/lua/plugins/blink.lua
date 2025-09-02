@@ -2,12 +2,13 @@ return {
 	'saghen/blink.cmp',
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		'rafamadriz/friendly-snippets',
+		-- 'rafamadriz/friendly-snippets',
 		{ "L3MON4D3/LuaSnip", lazy = true },
 	},
 
 	lazy = true,
 	version = '1.*',
+	event = { "InsertEnter", "CmdwinEnter" },
 
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
@@ -92,7 +93,7 @@ return {
 			}
 		},
 
-		snippets = { preset = "luasnip" },
+		-- snippets = { preset = "luasnip" },
 		fuzzy = { implementation = "prefer_rust_with_warning" }
 	},
 	opts_extend = { "sources.default" }

@@ -2,7 +2,6 @@ return {
 	-- git signs in gutter
 	{
 		"lewis6991/gitsigns.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
 
 		lazy = true,
 		event = "VeryLazy",
