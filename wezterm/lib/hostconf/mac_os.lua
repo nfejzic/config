@@ -1,3 +1,5 @@
+---@diagnostic disable: unused-local
+
 --- @type GetKeybindingsFn
 local function get_keybindings(wezterm)
 	local act = wezterm.action
@@ -44,46 +46,10 @@ local function get_keybindings(wezterm)
 	}
 end
 
-local font_size = 15
+local font_size = 21.5
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local jetbrains_mono = {
-	family = "JetBrains Mono",
-	size = font_size + 0.5,
-	cell_width = 1,
-	line_height = 1.02,
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local comic_code = {
-	family = "Comic Code",
-	size = font_size,
-	line_height = 1.15,
-	cell_width = 1.00,
-	harfbuzz_features = { "zero", "dlig" },
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local atkinson_hyperlegible = {
-	family = "Atkinson Hyperlegible Mono",
-	size = font_size,
-	line_height = 1.15,
-	cell_width = 1.00,
-	harfbuzz_features = {
-		-- -> != !==
-		"liga",
-		"calt",
-		"dlig",
-		"zero",
-	},
-}
-
---- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local monolisa = {
+local defaults = {
 	family = "MonoLisa",
 	size = font_size,
 	line_height = 1.00,
@@ -97,83 +63,78 @@ local monolisa = {
 	},
 }
 
+local utils = require("lib.utils")
+
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local sf_mono = {
-	family = "SF Mono",
-	size = font_size,
+local jetbrains_mono = utils.tbl.copy_and_overwrite(defaults, {
+	family = "JetBrains Mono",
+	size = font_size + 0.5,
+	line_height = 1.02,
+})
+
+--- @type FontConfig
+local comic_code = utils.tbl.copy_and_overwrite(defaults, {
+	family = "Comic Code",
 	line_height = 1.15,
-	cell_width = 1.0,
-	harfbuzz_features = {},
-}
+	harfbuzz_features = { "zero", "dlig" },
+})
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local maple_mono = {
-	family = "Maple Mono",
-	size = font_size + 0.75,
-	line_height = 1.00,
-	cell_width = 1,
+local monolisa = utils.tbl.copy_and_overwrite(defaults, {
+	family = "MonoLisa",
 	harfbuzz_features = {
-		"cv02", -- regular 'a'
-		"cv04", -- slab 'l',
-		"cv05", -- alternative 'g',
-		"cv08", -- serif 'r'
-		"zero", -- dotted '0',
+		-- "ss02", -- cursive letters
+		-- "ss04", -- single-loop 'g'
+		-- "ss07", -- more agressive '{' and '}'
+		"ss11", -- centered 'x' in 0xF
+		"calt=0", -- no white-space ligatures
 	},
-}
-
+})
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local codelia = {
+local sf_mono = utils.tbl.copy_and_overwrite(defaults, {
+	family = "SF Mono",
+	line_height = 1.15,
+})
+
+--- @type FontConfig
+local codelia = utils.tbl.copy_and_overwrite(defaults, {
 	family = "Codelia Ligatures",
-	size = font_size,
 	line_height = 1.07,
-	cell_width = 1,
 	harfbuzz_features = {
 		--                    ////
 		"zero", -- dotted '0' ///
 		"ss02", -- serif 'l'  // ->  == !=
 	},
-}
+})
 
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local commit_mono = {
+local commit_mono = utils.tbl.copy_and_overwrite(defaults, {
 	family = "CommitMonoHS",
-	size = font_size,
 	line_height = 1.2,
-	cell_width = 1,
 	harfbuzz_features = {
 		"calt=0",
 		"ss01", -- math ligatures e.g. '<='
 		"ss02", -- arrow ligatures e.g. '->' or '=>'
 	},
-}
+})
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local berkeley_mono = {
+local berkeley_mono = utils.tbl.copy_and_overwrite(defaults, {
 	family = "TX-02",
 	size = font_size + 0.5,
 	line_height = 1.1,
-	cell_width = 1.0,
 	harfbuzz_features = {
 		-- ->
 		"ss06",
-		"calt=1" -- /// // |
 	},
-}
+})
 
 --- @type FontConfig
---- @diagnostic disable-next-line: unused-local
-local recursive_mono_linear = {
+local recursive_mono_linear = utils.tbl.copy_and_overwrite(defaults, {
 	family = "Recursive Mono Linear Static",
-	size = font_size,
 	line_height = 1.1,
-	cell_width = 1.0,
 	harfbuzz_features = {
 		"ss03", -- simplified 'f'
 		"ss10", -- dotted '0'
@@ -181,7 +142,7 @@ local recursive_mono_linear = {
 		"liga", -- ->
 		"dlig",
 	},
-}
+})
 
 --- @type HostConfig
 local config = {
@@ -202,6 +163,13 @@ local config = {
 	"MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE"
 	-- window_decorations = "TITLE|RESIZE"
 }
+
+local noto_sans_mono = require("lib.utils").tbl.copy_and_overwrite(monolisa, {
+	family = "Noto Sans Mono",
+	size = font_size + 1,
+	line_height = 0.97,
+	harfbuzz_features = {},
+})
 
 config.font = monolisa
 -- config.font = sf_mono

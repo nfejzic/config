@@ -1,20 +1,47 @@
 ---@class Utils
 local M = {
-	table = {}
+	tbl = {}
 }
 
 ---Perform a deep copy of a table.
----@param table table Table that we want to make a deep copy of.
-function M.table.copy(table)
+---@generic T: table
+---@param tbl T Table that we want to make a deep copy of.
+---@return T
+function M.tbl.copy(tbl)
 	local t2 = {};
-	for k, v in pairs(table) do
+	for k, v in pairs(tbl) do
 		if type(v) == "table" then
-			t2[k] = M.table.copy(v);
+			t2[k] = M.tbl.copy(v);
 		else
 			t2[k] = v;
 		end
 	end
 	return t2;
+end
+
+--- @generic T: table
+--- @param tbl T
+--- @param overwrites T
+function M.tbl.overwrite(tbl, overwrites)
+	for key, value in pairs(tbl) do
+		if overwrites[key] == nil then
+			tbl[key] = value
+		elseif type(tbl[key]) == "table" then
+			M.tbl.overwrite(tbl[key], overwrites[key])
+		else
+			tbl[key] = overwrites[key]
+		end
+	end
+end
+
+---Perform a deep copy of a table.
+---@generic K, V
+---@param tbl table<K, V> Table that we want to make a deep copy of.
+---@return table<K, V>
+function M.tbl.copy_and_overwrite(tbl, overwrites)
+	local copy = M.tbl.copy(tbl)
+	M.tbl.overwrite(copy, overwrites)
+	return copy;
 end
 
 ---@param command string Command to execute in the user's default shell

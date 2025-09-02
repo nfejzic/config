@@ -163,7 +163,7 @@ function M.setup(wezterm, config, plugins)
 
 	-- local scale_factor = 2.21
 	local scale_factor = 1.2
-	local macbook_scale_factor = 1.2
+	local macbook_scale_factor = 0.98
 
 	-- TODO(nfejzic): Is there a better way to handle this?
 	local dpi_4k_27in = 124 * scale_factor

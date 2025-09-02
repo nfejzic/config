@@ -1,3 +1,5 @@
+---@module "wezterm"
+
 ---@class TabApi
 local M = {}
 
@@ -34,10 +36,6 @@ local function tab_title(tab, max_width)
 	if path ~= nil then
 		local dir_name = basename(path.file_path)
 
-		require("wezterm").log_info("#result + #title + #dir_name + 2 = " ..
-			#result + #title + #dir_name + 2)
-		require("wezterm").log_info("             max_width = " .. max_width)
-
 		if #result + #title + #dir_name + 2 > max_width then
 			-- -1 for the appended dot
 			local dir_len = max_width - #result - #title - 2 - 1
@@ -49,6 +47,21 @@ local function tab_title(tab, max_width)
 
 	result = result .. title
 	return result .. " "
+end
+
+--- @param wezterm Wezterm
+--- @param colors Theme
+function M.format_workspace_name(wezterm, colors)
+	return function(window, _)
+		local workspace = window:active_workspace()
+
+		window:set_left_status(wezterm.format({
+			{ Attribute = { Intensity = "Normal" } },
+			{ Background = { Color = colors.tab_bar_bg } },
+			{ Foreground = { Color = colors.ansi[8] } },
+			{ Text = " [" .. workspace .. "] " },
+		}))
+	end
 end
 
 --- @param colors Theme
@@ -65,7 +78,7 @@ end
 
 --- @param colors Theme
 function M.tab_bar_colors(colors)
-	local term_bg = colors.indexed[18] or colors.background
+	local term_bg = colors.tab_bar_bg
 
 	local background = term_bg
 	local active_tab_bg = term_bg

@@ -1,24 +1,11 @@
+---@module "wezterm"
+
 ---@class CustomEvents
 local M = {}
 
---- @param wezterm table
---- @param colors Theme
-local function format_workspace_name(wezterm, colors)
-	return function(window, _)
-		local workspace = window:active_workspace()
-
-		window:set_left_status(wezterm.format({
-			{ Attribute = { Intensity = "Normal" } },
-			{ Background = { Color = colors.indexed[18] or colors.background } },
-			{ Foreground = { Color = colors.ansi[8] } },
-			{ Text = " [" .. workspace .. "] " },
-		}))
-	end
-end
-
 local last_workspace = nil
 
---- @param wezterm table
+--- @param wezterm Wezterm
 --- @param utils Utils
 local function workspace_switching(wezterm, utils)
 	wezterm.on(utils.events.WORKSPACE_SWITCHED, function(_, _)
@@ -39,13 +26,13 @@ local function workspace_switching(wezterm, utils)
 	end)
 end
 
---- @param wezterm table
---- @param tab_fns table
+--- @param wezterm Wezterm
+--- @param tab_fns TabApi
 --- @param colors Theme
 --- @param utils Utils
 function M.register_events(wezterm, tab_fns, colors, utils)
 	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
-	wezterm.on("update-status", format_workspace_name(wezterm, colors))
+	wezterm.on("update-status", tab_fns.format_workspace_name(wezterm, colors))
 
 	workspace_switching(wezterm, utils)
 end
