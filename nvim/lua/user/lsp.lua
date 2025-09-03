@@ -181,21 +181,24 @@ function M.setup()
 
 	-- NOTE: no need to enable rust_analyzer. Rustaceanvim does that automatically
 	enable_if_installed({
-		{ "lua-language-server",           "lua_ls" },
 		{ "clangd",                        "clangd" },
-		{ "vscode-eslint-language-server", "eslint" },
-		{ "nil",                           "nil_ls" },
-		{ "buf",                           "buf_ls" },
-		{ "just-lsp",                      "just" },
-		{ "fish-lsp",                      'fish_lsp' },
-
 		{ "zls",                           "zig_lsp" },
 		{ "gopls",                         "gopls" },
-		{ "vscode-json-language-server",   "jsonls" },
-		{ "vue-language-server",           "vue_ls" },
+		{ "lua-language-server",           "lua_ls" },
+		{ "fish-lsp",                      'fish_lsp' },
+		{ "nil",                           "nil_ls" },
+		{ "buf",                           "buf_ls" },
+		{ "ruff",                          "ruff" },
+
+		{ "just-lsp",                      "just" },
 		{ "gitlab-ci-ls",                  "gitlab_ci_ls" },
 		{ "taplo",                         "taplo" },
-		{ "ruff",                          "ruff" },
+
+		-- webdev
+		{ "vscode-eslint-language-server", "eslint" },
+		{ "vscode-json-language-server",   "jsonls" },
+		{ "vue-language-server",           "vue_ls" },
+		{ "vtsls",                         "vtsls" },
 	})
 
 	M.setup_ui()
