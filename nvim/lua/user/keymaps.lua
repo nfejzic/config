@@ -2,7 +2,7 @@ local M = {}
 
 --- @param mappings { [1]: string|string[], [2]: string, [3]: fun()|string, [4]: string|nil }[]
 function M.set_keys(mappings)
-	for _, mapping in ipairs(mappings) do
+	for _, mapping in pairs(mappings) do
 		local modes = mapping[1]
 		local keys = mapping[2]
 		local execute = mapping[3]
