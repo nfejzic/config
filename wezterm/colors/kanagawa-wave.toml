@@ -1,0 +1,86 @@
+[metadata]
+name = "kanagawa-wave"
+author = "Nadir Fejzić"
+
+[colors]
+foreground = "#DCD7BA"
+background = "#1F1F28"
+cursor_bg = "#DCD7BA"
+cursor_border = "#DCD7BA"
+cursor_fg = "#1F1F28"
+compose_cursor = "#7FB4CA"
+selection_bg = "#223249"
+selection_fg = "#DCD7BA"
+scrollbar_thumb = "#2A2A37" # same as tab bar
+split = "#2A2A37"           # same as tab bar
+visual_bell = "#FF5D62"     # ansi 2
+
+ansi = [
+    "#2A2A37",
+    "#FF5D62",
+    "#76946A",
+    "#C0A36E",
+    "#7E9CD8",
+    "#957FB8",
+    "#6A9589",
+    "#DCD7BA",
+]
+brights = [
+    "#C8C093",
+    "#E82424",
+    "#98BB6C",
+    "#FF9E3B",
+    "#7FB4CA",
+    "#D27E99",
+    "#A3D4D5",
+    "#C8C093",
+]
+
+[colors.indexed]
+16 = "#FFA066"
+17 = "#E82424"
+
+[colors.tab_bar]
+background = "#2A2A37"
+inactive_tab_edge = "#2A2A37"
+inactive_tab_edge_hover = "#2A2A37"
+
+[colors.tab_bar.active_tab]
+bg_color = "#2A2A37"
+fg_color = "#C0A36E"  # ansi 4
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#2A2A37"
+fg_color = "#DCD7BA"  # ansi 8 / foreground
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#2A2A37"
+fg_color = "#7E9CD8"  # ansi 5
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#2A2A37"
+fg_color = "#DCD7BA"  # ansi 8 / foreground
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#2A2A37"
+fg_color = "#7E9CD8"  # ansi 5
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"

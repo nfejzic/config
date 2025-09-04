@@ -1,0 +1,86 @@
+[metadata]
+name = "kanagawa-lotus"
+author = "Nadir Fejzić"
+
+[colors]
+foreground = "#545464"
+background = "#f2ecbc"
+cursor_bg = "#545464"
+cursor_border = "#545464"
+cursor_fg = "#f2ecbc"
+compose_cursor = "#6693bf"
+selection_bg = "#d5cea3"
+selection_fg = "#545464"
+scrollbar_thumb = "#e7dba0" # same as tab bar
+split = "#e7dba0"           # same as tab bar
+visual_bell = "#c84053"
+
+ansi = [
+    "#e5ddb0",
+    "#c84053",
+    "#6e915f",
+    "#836f4a",
+    "#4d699b",
+    "#624c83",
+    "#5e857a",
+    "#545464",
+]
+brights = [
+    "#43436c",
+    "#e82424",
+    "#6f894e",
+    "#e98a00",
+    "#6693bf",
+    "#b35b79",
+    "#5e857a",
+    "#43436c",
+]
+
+[colors.indexed]
+16 = "#cc6d00"
+17 = "#e82424"
+
+[colors.tab_bar]
+background = "#e7dba0"
+inactive_tab_edge = "#e7dba0"
+inactive_tab_edge_hover = "#e7dba0"
+
+[colors.tab_bar.active_tab]
+bg_color = "#e7dba0"
+fg_color = "#c84053"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#e7dba0"
+fg_color = "#545464"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#e7dba0"
+fg_color = "#4d699b"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#e7dba0"
+fg_color = "#545464"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#e7dba0"
+fg_color = "#4d699b"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"

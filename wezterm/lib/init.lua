@@ -5,8 +5,8 @@ local M = {}
 --- @param wezterm Wezterm
 --- @param config Config
 --- @param hostconf HostConfig
---- @param theme ThemeName
-local function set_opts(wezterm, config, hostconf, theme)
+--- @param color_scheme string
+local function set_opts(wezterm, config, hostconf, color_scheme)
 	if hostconf.dpi ~= nil then
 		config.dpi = hostconf.dpi
 	end
@@ -37,7 +37,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 
 	config.bold_brightens_ansi_colors = "BrightAndBold"
 
-	config.color_scheme = theme
+	config.color_scheme = color_scheme
 
 	if hostconf.window_padding ~= nil then
 		config.window_padding = hostconf.window_padding
@@ -68,6 +68,7 @@ local function set_opts(wezterm, config, hostconf, theme)
 	config.use_fancy_tab_bar = false
 	config.tab_bar_at_bottom = true
 	config.show_new_tab_button_in_tab_bar = false
+	config.enable_kitty_keyboard = true
 
 	-- default is 60, so increase to prevent stuttering. Max is 255 (u8 in Rust)
 	config.max_fps = 255
@@ -92,8 +93,7 @@ local function configure_keybindings(
 	config
 )
 	local host_bindings = hostconf_bindings(wezterm)
-	local keybindings = keys.get_keybindings(wezterm, program_paths, utils,
-		tab_api, host_bindings)
+	local keybindings = keys.get_keybindings(wezterm, program_paths, utils, tab_api, host_bindings)
 
 	if host_bindings.custom_keybinds and type(host_bindings.custom_keybinds) == "table" then
 		for _, value in pairs(host_bindings.custom_keybinds) do
@@ -124,16 +124,11 @@ end
 function M.setup(wezterm, config, plugins)
 	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
-	local color_config = require("lib.colors").init(
-		{
-			dark = 'Gruvbox dark, hard (base16)',
-			light =
-			'Gruvbox light, medium (base16)'
-		},
-		os_appearance,
-		wezterm
+	local color_scheme = require("lib.colors").get_color_scheme(
+		{ dark = 'kanagawa-wave', light = 'kanagawa-lotus' },
+		os_appearance
 	)
-	local tab_api = require("lib.tab_config")
+	local tab_api = require("lib.tab_api")
 	local keys = require("lib.key_config")
 	local hostconf = require("lib.hostconf").get_hostconf(wezterm.hostname())
 	local utils = require('lib.utils')
@@ -145,21 +140,11 @@ function M.setup(wezterm, config, plugins)
 	configure_keybindings(hostconf.get_keybindings, keys, wezterm, program_paths,
 		utils, tab_api, plugins.smart_splits, config)
 
-	set_opts(wezterm, config, hostconf, color_config.theme)
-
-	if config.colors == nil then
-		config.colors = {}
-	end
+	set_opts(wezterm, config, hostconf, color_scheme)
 
 	require("lib.hyperlinks").configure_hyperlinks(config, wezterm)
 
-	config.colors.tab_bar = tab_api.tab_bar_colors(color_config.colors)
-	config.colors.compose_cursor = color_config.colors.brights[5]
-
-	require("lib.custom_events").register_events(
-		wezterm, tab_api,
-		color_config.colors, utils
-	)
+	require("lib.custom_events").register_events(wezterm, tab_api, utils)
 
 	-- local scale_factor = 2.21
 	local scale_factor = 1.2

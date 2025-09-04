@@ -56,73 +56,11 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 				action = act.CloseCurrentPane({ confirm = false }),
 			},
 
-			-- -- go to pane to the left of current pane
-			-- {
-			-- 	key = "h",
-			-- 	mods = mods.super,
-			-- 	-- action = act.ActivatePaneDirection("Left"),
-			-- 	action = act.SendKey({ key = "h", mods = mods.super }),
-			-- },
-
-			-- -- go to pane to the right of current pane
-			-- {
-			-- 	key = "l",
-			-- 	mods = mods.super,
-			-- 	action = act.SendKey({ key = "l", mods = mods.super }),
-			-- 	-- action = act.ActivatePaneDirection("Right"),
-			-- },
-
-			-- -- go to pane below current pane
-			-- {
-			-- 	key = "j",
-			-- 	mods = mods.super,
-			-- 	action = act.SendKey({ key = "j", mods = mods.super }),
-			-- 	-- action = act.ActivatePaneDirection("Down"),
-			-- },
-
-			-- -- go to pane above current pane
-			-- {
-			-- 	key = "k",
-			-- 	mods = mods.super,
-			-- 	action = act.SendKey({ key = "k", mods = mods.super }),
-			-- 	-- action = act.ActivatePaneDirection("Up"),
-			-- },
-
-			-- -- pane resizing
-			-- {
-			-- 	key = "H",
-			-- 	mods = mods.super_shift,
-			-- 	action = act.SendKey({ key = "h", mods = mods.super_shift }),
-			-- 	-- action = act.AdjustPaneSize({ "Left", 5 }),
-			-- },
-
-			-- {
-			-- 	key = "J",
-			-- 	mods = mods.super_shift,
-			-- 	action = act.SendKey({ key = "j", mods = mods.super_shift }),
-			-- 	-- action = act.AdjustPaneSize({ "Down", 5 }),
-			-- },
-
-			-- {
-			-- 	key = "K",
-			-- 	mods = mods.super_shift,
-			-- 	action = act.SendKey({ key = "k", mods = mods.super_shift }),
-			-- 	-- action = act.AdjustPaneSize({ "Up", 5 }),
-			-- },
-
-			-- {
-			-- 	key = "L",
-			-- 	mods = mods.super_shift,
-			-- 	action = act.SendKey({ key = "l", mods = mods.super_shift }),
-			-- 	-- action = act.AdjustPaneSize({ "Right", 5 }),
-			-- },
-
 			-- create tab next to the active tab
 			{
 				key = "t",
 				mods = mods.super,
-				action = wezterm.action_callback(tab_api
-					.spawn_tab_next_to_active(wezterm)),
+				action = wezterm.action_callback(tab_api.spawn_tab_next_to_active(wezterm)),
 			},
 
 			{

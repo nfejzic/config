@@ -28,11 +28,10 @@ end
 
 --- @param wezterm Wezterm
 --- @param tab_fns TabApi
---- @param colors Theme
 --- @param utils Utils
-function M.register_events(wezterm, tab_fns, colors, utils)
-	wezterm.on("format-tab-title", tab_fns.format_tab_title(colors))
-	wezterm.on("update-status", tab_fns.format_workspace_name(wezterm, colors))
+function M.register_events(wezterm, tab_fns, utils)
+	wezterm.on("format-tab-title", tab_fns.format_tab_title)
+	wezterm.on("update-status", tab_fns.format_workspace_name(wezterm))
 
 	workspace_switching(wezterm, utils)
 end

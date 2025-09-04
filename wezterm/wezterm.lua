@@ -5,8 +5,7 @@ local wezterm = require("wezterm")
 -- help provide clearer error messages
 local config = wezterm.config_builder()
 
-local smart_splits = wezterm.plugin.require(
-	'https://github.com/mrjones2014/smart-splits.nvim')
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
 --- @class UserPlugins
 local plugins = {
