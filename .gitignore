@@ -8,7 +8,6 @@ fish/conf.d/fzf.fish
 fish/functions/*
 fish/functions/fisher.fish
 fish/fish_variables
-fish/themes/Catppuccin*
 fish/user/theme_env.fish
 
 # helix files
