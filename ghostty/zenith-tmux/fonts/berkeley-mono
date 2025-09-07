@@ -1,0 +1,7 @@
+# font configuration
+font-family = TX-02
+font-size = 22
+font-synthetic-style = false
+
+# disable ligatures, don't look good on this font...
+font-feature = -calt
