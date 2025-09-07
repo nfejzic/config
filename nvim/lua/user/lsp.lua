@@ -202,6 +202,7 @@ function M.setup()
 
 		-- infrastructure
 		{ "terraform-ls",                  "terraform-ls" },
+		{ "bash-language-server",          "bashls" },
 	})
 
 	M.setup_ui()
