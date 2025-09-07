@@ -199,6 +199,9 @@ function M.setup()
 		{ "vscode-json-language-server",   "jsonls" },
 		{ "vue-language-server",           "vue_ls" },
 		{ "vtsls",                         "vtsls" },
+
+		-- infrastructure
+		{ "terraform-ls",                  "terraform-ls" },
 	})
 
 	M.setup_ui()

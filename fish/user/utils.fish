@@ -84,10 +84,12 @@ function log
     end
 end
 
+# This function is used interactively
+# @fish-lsp-disable-next-line 4004
 function remove_from_path
     set -l value $argv[1]
     echo "Trying to remove $value from PATH, fish_user_path"
-    
+
     if set -l index (contains -i $value $PATH)
         echo "Removing \$PATH[$index] = $value"
         set -e PATH[$index]
@@ -96,5 +98,23 @@ function remove_from_path
     if set -l index (contains -i $value $fish_user_paths)
         echo "Removing \$fish_user_paths[$index] = $value"
         set -e fish_user_paths[$index]
+    end
+end
+
+if type -q tmux
+    # This function is used by tmux to set the title of the pane
+    # @fish-lsp-disable-next-line 4004
+    function tmux_pane_title -a current_command -a current_dir
+        set max_width 11
+        set dir (basename $current_dir)
+
+        # we assume both current_command and current_dir are always available!
+        # we have command + () + dir, must fit in max_width
+        set occupied_len (math "$(string length $current_command) + 2")
+        set space_for_dir (math "$max_width - $occupied_len")
+
+        set dir (string shorten -c . -m $space_for_dir $dir)
+
+        echo "$current_command($dir)"
     end
 end

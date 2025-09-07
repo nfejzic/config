@@ -35,7 +35,7 @@ local function set_opts(wezterm, config, hostconf, color_scheme)
 
 	config.adjust_window_size_when_changing_font_size = false
 
-	config.bold_brightens_ansi_colors = "BrightAndBold"
+	config.bold_brightens_ansi_colors = true
 
 	config.color_scheme = color_scheme
 

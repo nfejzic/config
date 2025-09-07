@@ -1,5 +1,7 @@
+---@module "wezterm"
 ---@diagnostic disable: unused-local
 
+--- @param wezterm Wezterm
 --- @type GetKeybindingsFn
 local function get_keybindings(wezterm)
 	local act = wezterm.action
@@ -58,8 +60,8 @@ local defaults = {
 		-- "ss02", -- cursive letters
 		-- "ss04", -- single-loop 'g'
 		-- "ss07", -- more agressive '{' and '}'
-		"ss11", -- centered 'x' in 0xF
-		"calt=0", -- no white-space ligatures
+		-- "ss11", -- centered 'x' in 0xF
+		-- "calt=0", -- no white-space ligatures
 	},
 }
 
@@ -80,8 +82,11 @@ local comic_code = utils.tbl.copy_and_overwrite(defaults, {
 })
 
 --- @type FontConfig
-local monolisa = utils.tbl.copy_and_overwrite(defaults, {
+local monolisa = {
 	family = "MonoLisa",
+	size = font_size - 1,
+	line_height = 1.0,
+	cell_width = 1,
 	harfbuzz_features = {
 		-- "ss02", -- cursive letters
 		-- "ss04", -- single-loop 'g'
@@ -89,7 +94,7 @@ local monolisa = utils.tbl.copy_and_overwrite(defaults, {
 		"ss11", -- centered 'x' in 0xF
 		"calt=0", -- no white-space ligatures
 	},
-})
+}
 
 --- @type FontConfig
 local sf_mono = utils.tbl.copy_and_overwrite(defaults, {
@@ -121,15 +126,16 @@ local commit_mono = utils.tbl.copy_and_overwrite(defaults, {
 })
 
 --- @type FontConfig
-local berkeley_mono = utils.tbl.copy_and_overwrite(defaults, {
+local berkeley_mono = {
 	family = "TX-02",
-	size = font_size + 0.5,
-	line_height = 1.1,
+	size = font_size - 0.5,
+	line_height = 1.0,
+	cell_width = 1.0,
 	harfbuzz_features = {
-		-- ->
-		"ss06",
+		-- NOTE: this font does not implement ligatures well unfortunately...
+		"calt=0",
 	},
-})
+}
 
 --- @type FontConfig
 local recursive_mono_linear = utils.tbl.copy_and_overwrite(defaults, {
@@ -173,15 +179,17 @@ local noto_sans_mono = require("lib.utils").tbl.copy_and_overwrite(monolisa, {
 
 config.font = monolisa
 -- config.font = sf_mono
--- config.font = berkeley_mono
-config.font = comic_code
+config.font = berkeley_mono
+-- config.font = comic_code
+-- config.font = noto_sans_mono
 -- config.font = atkinson_hyperlegible
 -- config.font = maple_mono
 -- config.font = codelia
 -- config.font = jetbrains_mono
 config.font.freetype_load_flags = "NO_AUTOHINT"
 
-table.insert(config.font.harfbuzz_features, "liga=0")
-table.insert(config.font.harfbuzz_features, "dlig=0")
+-- table.insert(config.font.harfbuzz_features, "calt=0")
+-- table.insert(config.font.harfbuzz_features, "liga=0")
+-- table.insert(config.font.harfbuzz_features, "dlig=0")
 
 return config

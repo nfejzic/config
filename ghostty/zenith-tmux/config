@@ -1,5 +1,5 @@
 # font configuration
-font-family = MonoLisa
+font-family = TX-02
 font-size = 22
 font-style = Regular
 font-style-bold = Bold
@@ -28,8 +28,8 @@ adjust-cursor-thickness = 200%
 # To see a list of available themes, run `ghostty +list-themes`.
 # Any additional colors specified via background, foreground, palette, etc.
 # will override the colors specified in the theme.
-# theme = Kanagawa Wave
-theme = GruvboxDarkHard
+theme = dark:kanagawa-wave,light:kanagawa-lotus
+
 selection-invert-fg-bg = false
 cursor-invert-fg-bg = false
 cursor-opacity = 1
