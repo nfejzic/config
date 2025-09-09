@@ -20,7 +20,3 @@ function reset_rectangle
     pkill -x Rectangle
     open /Applications/Rectangle.app
 end
-
-if not test (uname -s) = Darwin
-    functions -e set_yabai_for_streaming
-end

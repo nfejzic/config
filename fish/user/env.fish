@@ -3,6 +3,10 @@ set -gx EMAIL 'nadir@notfloor.com'
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 
+set -gx EDITOR (which nvim)
+set -gx VISUAL (which nvim)
+set -gx SUDO_EDITOR $(which nvim)
+
 if set -q FISH_BLOCK_CURSOR
     set -gx fish_cursor_default block
     set -gx fish_cursor_insert block blink
@@ -21,9 +25,4 @@ if status is-interactive
     if string match -q -r -- '.*ghostty.*|xterm-256color' $TERM
         set -g fish_vi_force_cursor 1
     end
-end
-
-if string match -q -- percolation $hostname
-    set --export BUN_INSTALL "$HOME/.bun"
-    set --export PATH $BUN_INSTALL/bin $PATH
 end
