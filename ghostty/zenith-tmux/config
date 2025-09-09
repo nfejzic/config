@@ -33,6 +33,20 @@ cursor-style-blink = false
 mouse-hide-while-typing = true
 title = Ghostty 👻
 
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+window-padding-color = extend
+window-inherit-font-size = true
+
+shell-integration = detect
+shell-integration-features = no-cursor,no-sudo,no-title
+
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = true
+bold-is-bright = true
+
 # Key bindings. The format is `trigger=action`. Duplicates will overwrite
 # previously set values.
 #
@@ -97,17 +111,3 @@ keybind = ctrl+backspace=text:\x17
 keybind = opt+backspace=text:\x17
 keybind = super+shift+t=text:\x1bT
 keybind = super+control+t=toggle_quick_terminal
-
-window-padding-x = 0
-window-padding-y = 0
-window-padding-balance = true
-window-padding-color = extend
-window-inherit-font-size = true
-
-shell-integration = detect
-shell-integration-features = no-cursor,no-sudo,no-title
-
-macos-titlebar-style = transparent
-macos-titlebar-proxy-icon = hidden
-macos-option-as-alt = true
-bold-is-bright = true
