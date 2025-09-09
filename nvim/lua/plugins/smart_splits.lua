@@ -19,6 +19,8 @@ return {
 				{ "n", "<A-J>", smart_splits.resize_down,       "Move cursor to window on the left" },
 				{ "n", "<A-K>", smart_splits.resize_up,         "Move cursor to window on the left" },
 				{ "n", "<A-L>", smart_splits.resize_right,      "Move cursor to window on the left" },
+
+				{ "n", "<A-w>", "<CMD>quit<CR>",                "Close the currently focused window" },
 			})
 		end,
 	}
