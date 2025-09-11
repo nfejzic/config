@@ -1,13 +1,10 @@
 # load font
-config-file = ./fonts/sf-mono
+config-file = ./fonts/comic-code
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%
 
-# To see a list of available themes, run `ghostty +list-themes`.
-# Any additional colors specified via background, foreground, palette, etc.
-# will override the colors specified in the theme.
-theme = dark:kanagawa-wave,light:kanagawa-lotus
+theme = dark:gruvbox-dark-hard,light:gruvbox-light
 
 selection-invert-fg-bg = false
 cursor-invert-fg-bg = false

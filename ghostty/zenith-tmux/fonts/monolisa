@@ -1,5 +1,5 @@
 font-family = MonoLisa
-font-size = 20
+font-size = 19
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
@@ -20,3 +20,7 @@ font-feature = ss11
 
 # disable whitespace ligatures, such as in '//' and '///'
 font-feature = -calt
+
+# disable all ligatures, try it out this way
+font-feature = -liga
+font-feature = -dlig

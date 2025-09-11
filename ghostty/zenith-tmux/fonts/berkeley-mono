@@ -2,6 +2,7 @@
 font-family = TX-02
 font-size = 20
 font-synthetic-style = false
+adjust-cell-height = 3
 
 # disable ligatures, don't look good on this font...
 font-feature = -calt
