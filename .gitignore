@@ -5,8 +5,6 @@ fish/completions/*
 fish/conf.d/nvm.fish
 fish/conf.d/rustup.fish
 fish/conf.d/fzf.fish
-fish/functions/*
-fish/functions/fisher.fish
 fish/fish_variables
 fish/user/theme_env.fish
 
