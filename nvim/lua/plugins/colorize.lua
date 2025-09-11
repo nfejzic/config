@@ -17,13 +17,13 @@ return {
 			keywordStyle = { italic = false, bold = false },
 			statementStyle = { bold = false },
 			typeStyle = { italic = false, bold = false },
-			transparent = false, -- do not set background color
-			dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-			terminalColors = true, -- define vim.g.terminal_color_{0,17}
-			theme = "kanagawa-wave", -- Load "kanagawa-wave" theme when 'background' option is not set
+			transparent = false,
+			dimInactive = false,
+			terminalColors = true,
+			theme = "gruvbox-dark-hard",
 			background = {
-				dark = "kanagawa-wave",
-				light = "kanagawa-lotus",
+				dark = "gruvbox-dark-hard",
+				light = "gruvbox-light",
 			},
 			semantic_highlighting = "minimal",
 		})
