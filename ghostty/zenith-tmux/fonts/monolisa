@@ -1,5 +1,5 @@
 font-family = MonoLisa
-font-size = 19
+font-size = 20
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
@@ -7,7 +7,7 @@ font-style-bold-italic = Bold Italic
 font-synthetic-style = false
 
 # cursive
-font-feature = ss02
+# font-feature = ss02
 
 # single-loop 'g'
 # font-feature = ss04
@@ -22,5 +22,5 @@ font-feature = ss11
 font-feature = -calt
 
 # disable all ligatures, try it out this way
-font-feature = -liga
-font-feature = -dlig
+# font-feature = -liga
+# font-feature = -dlig
