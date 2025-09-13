@@ -1,3 +1,0 @@
-tmux-plugins/tmux-sensible
-pschmitt/tmux-ssh-split
-Morantron/tmux-fingers
