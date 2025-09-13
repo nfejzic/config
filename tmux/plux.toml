@@ -1,2 +1,4 @@
 [plugins]
-smart-splits = "https://github.com/mrjones2014/smart-splits.nvim"
+smart-splits = { url = "https://github.com/mrjones2014/smart-splits.nvim", tag = "v2.0.3"}
+tmux-ssh-split = "https://github.com/pschmitt/tmux-ssh-split"
+tmux-fingers = "https://github.com/Morantron/tmux-fingers"
