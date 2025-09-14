@@ -1,0 +1,6 @@
+font-family = JetBrains Mono
+font-size = 20
+font-synthetic-style = false
+
+# slab 'l'
+font-feature = cv01
