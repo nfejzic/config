@@ -38,6 +38,11 @@ return {
 					prompt_pos = "title",
 					win = {
 						relative = "cursor",
+						on_buf = function()
+							vim.schedule(function()
+								vim.cmd.stopinsert()
+							end)
+						end
 					},
 				},
 				image = {
