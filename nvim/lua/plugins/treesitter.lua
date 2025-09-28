@@ -53,8 +53,10 @@ return {
 				local filetypes = vim.treesitter.language.get_filetypes(parser)
 				vim.api.nvim_create_autocmd({ "FileType" }, {
 					pattern = filetypes,
-					callback = function()
+					callback = function(_)
 						vim.treesitter.start()
+						vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end,
 				})
 			end
