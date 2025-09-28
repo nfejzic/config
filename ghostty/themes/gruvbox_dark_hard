@@ -1,22 +1,40 @@
+# black
 palette = 0=#1d2021
+# red
 palette = 1=#cc241d
+# green
 palette = 2=#98971a
+# yellow
 palette = 3=#d79921
+# blue
 palette = 4=#458588
+# magenta
 palette = 5=#b16286
+# cyan
 palette = 6=#689d6a
+# dark gray
 palette = 7=#a89984
+# bright gray
 palette = 8=#928374
+# bright red
 palette = 9=#fb4934
+# bright green
 palette = 10=#b8bb26
+# bright yellow
 palette = 11=#fabd2f
+# bright blue
 palette = 12=#83a598
+# bright magenta
 palette = 13=#d3869b
+# bright cyan
 palette = 14=#8ec07c
+# white
 palette = 15=#ebdbb2
 
 background = 1d2021
 foreground = ebdbb2
+
 cursor-color = ebdbb2
+
 selection-background = 665c54
 selection-foreground = ebdbb2
