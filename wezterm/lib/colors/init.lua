@@ -5,8 +5,8 @@ local M = {}
 --- @alias ThemeName
 --- | "kanagawa-wave"
 --- | "kanagawa-lotus"
+--- | "gruvbox-dark-hard"
 -- NOTE: following themes are nice, but not yet configured
--- --- | "Gruvbox dark, hard (base16)"
 -- --- | "Gruvbox light, medium (base16)"
 -- --- | "catppuccin-frappe"
 -- --- | "catppuccin-latte"
@@ -31,6 +31,11 @@ end
 ---@param os_appearance OsAppearance
 ---@return string
 function M.get_color_scheme(theme, os_appearance)
+	if theme == "gruvbox-dark-hard" then
+		require("wezterm").color.load_scheme(
+		"~/Developer/config/wezterm/lib/colors/gruvbox-dark-hard.lua")
+	end
+
 	local theme_name = is_light_mode(os_appearance) and theme.light or theme.dark
 
 	return theme_name
