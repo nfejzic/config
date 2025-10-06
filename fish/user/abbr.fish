@@ -28,7 +28,7 @@ abbr -a sgds 'GIT_PAGER="delta --side-by-side" git diff --stat'
 abbr -a sgso 'GIT_PAGER="delta --side-by-side" git show'
 
 abbr -a ga 'git add'
-abbr -a gr 'git remove'
+abbr -a gr 'git rebase'
 abbr -a gc 'git commit'
 abbr -a gam 'git commit --amend'
 abbr -a gk 'git checkout'
