@@ -1,0 +1,126 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+let mapleader = ' '
+let maplocalleader = ' '
+set clipboard+=unnamed
+
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+set relativenumber
+set nowrap
+
+" highlight current search live
+set incsearch
+set ignorecase
+set smartcase
+
+" perform join lines via IDE
+set ideajoin
+
+" don't timeout vim keybinds
+set notimeout
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+" replacing surround characters quickly (such as ", ', <> etc.)
+set surround
+
+set colorcolumn=+1
+
+set which-key
+" also show default vim actions
+let g:WhichKey_ShowVimActions = "true"
+" but don't show immediately
+let g:WhichKey_DefaultDelay = 600
+
+set NERDTree
+
+" highlight on yank
+set highlightedyank
+" make highlight last very short time, 100ms
+let g:highlightedyank_highlight_duration = "100"
+
+map <leader>. <Action>(ShowIntentionActions)
+imap <C-j> <Action>(EditorChooseLookupItem)
+imap <C-j> <Esc>:action EditorChooseLookupItem<CR>a
+
+map <leader>le <Action>(ShowErrorDescription)
+map <leader>lM <Action>(ShowErrorDescription)
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoNextError)
+
+map <leader>dd <Action>(Debug)
+map <leader>db <Action>(ToggleLineBreakpoint)
+
+map <leader>ff <Action>(GotoFile)
+map <leader>fe :NERDTree<CR>
+map <leader>fr <action>(RecentFiles)
+map <leader>fc <action>(FindInPath)
+map <leader>fl <action>(RecentLocations)
+map <leader>fs <action>(NewScratchFile)
+map <leader>sl <Action>(TextSearchAction)
+
+" Cmd-N and Cmd-P for next and previous tabs
+map <D-n> :tabnext<CR>
+map <D-p> :tabprev<CR>
+
+map <leader><space> <C-^>
+
+map <leader>lh <Action>(ToggleInlayHintsGloballyAction)
+map <leader>ls <Action>(GotoSymbol)
+
+" Git blame current file
+map <leader>gb <Action>(Annotate)
+" Git diff current file
+map <leader>gd <Action>(Compare.SameVersion)
+map <leader>gs <Action>(ChangesView.AddUnversioned)
+map <leader>gu <Action>(Git.Reset)
+map [g <Action>(VcsShowPrevChangeMarker)
+map ]g <Action>(VcsShowNextChangeMarker)
+
+" Close window keybind
+map <C-w>q <Action>(CloseContent)
+
+nmap gf <Action>(Back)
+nmap gb <Action>(Forward)
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gri <Action>(GotoImplementation)
+" AKA go to references
+nmap grr <Action>(ShowUsages)
+nmap grt <Action>(GotoTest)
+
+" go to next function
+nmap ]f <Action>(MethodDown)
+nmap [f <Action>(MethodUp)
+
+map <leader>zo <Action>(ExpandRegion)
+map <leader>zO <Action>(ExpandAllRegions)
+map <leader>zc <Action>(CollapseRegion)
+map <leader>zC <Action>(CollapseAllRegions)
+
+imap <C-u> <Action>(EditorPageUp)
+imap <C-d> <Action>(EditorPageDown)
+map <C-n> <Action>(EditorDown)
+map <C-p> <Action>(EditorUp)
+
+" REFACTORING
+
+" Popup menu with refactoring options, works with selection
+map <leader>rt <Action>(Refactorings.QuickListPopupAction)
+
+" Rename element, for example rename function
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>rs <Action>(ChangeSignature)
