@@ -22,8 +22,8 @@ return {
 			terminalColors = true,
 			theme = "gruvbox-dark-hard",
 			background = {
-				dark = "gruvbox-dark-hard",
-				light = "gruvbox-light",
+				dark = "kanagawa-wave",
+				light = "kanagawa-lotus",
 			},
 			semantic_highlighting = "minimal",
 		})
