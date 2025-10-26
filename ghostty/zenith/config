@@ -1,527 +1,111 @@
-# The font families to use.
-# 
-# You can generate the list of valid values using the CLI:
-# 
-#     ghostty +list-fonts
-# 
-# This configuration can be repeated multiple times to specify preferred
-# fallback fonts when the requested codepoint is not available in the primary
-# font. This is particularly useful for multiple languages, symbolic fonts,
-# etc.
-# 
-# The specific styles (bold, italic, bold italic) do not need to be
-# explicitly set. If a style is not set, then the regular style (font-family)
-# will be searched for stylistic variants. If an italic style is not found,
-# Ghostty will auto-italicize the regular style by applying a slant. If
-# a bold style is not found, Ghostty will look for another monospace
-# font.
-# 
-# You can disable styles completely by using the `font-style` set of
-# configurations. See the documentation for `font-style` for more information.
-# 
-# If you want to overwrite a previous set value rather than append a fallback,
-# specify the value as `""` (empty string) to reset the list and then set the
-# new values. For example:
-# 
-#     font-family = ""
-#     font-family = "My Favorite Font"
-# 
-# Setting any of these as CLI arguments will automatically clear the
-# values set in configuration files so you don't need to specify
-# `--font-family=""` before setting a new value. You only need to specify
-# this within config files if you want to clear previously set values in
-# configuration files or on the CLI if you want to clear values set on the
-# CLI.
-# 
-# Changing this configuration at runtime will only affect new terminals, i.e.
-# new windows, tabs, etc.
+# load font
+config-file = ./fonts/jetbrains-mono
 
-# # JetBrains Mono
-# font-family = "JetBrains Mono"
-# font-size = 23
-# font-feature = cv01
+# 100% is way too thin
+adjust-cursor-thickness = 200%
 
-# # MonoLisa
-# font-family = "MonoLisa"
-# font-style = "Regular"
-# font-style-bold = "Bold"
-# font-style-italic = "Regular Italic"
-# font-style-bold-italic = "Bold Italic"
-# # MonoLisa centered hexadecimal '0xF'
-# font-feature = ss11
-# font-size = 21
+theme = kanagawa-wave
 
-font-family = Comic Code
-font-feature = zero
-font-size = 22
-adjust-cell-height = 7
-adjust-cursor-height = 7
-
-# Draw fonts with a thicker stroke, if supported. This is only supported
-# currently on MacOS.
-font-thicken = false
-
-theme = Kanagawa Wave
 selection-invert-fg-bg = false
+cursor-invert-fg-bg = false
+cursor-opacity = 1
 
+# The default, style of the cursor.
+#
 # Valid values are:
 # 
 #   * `block`
 #   * `bar`
 #   * `underline`
-# 
 cursor-style = block
 
+# Sets the default blinking state of the cursor. 
+#
 # Valid values are:
 # 
 #   * `` (blank)
 #   * `true`
 #   * `false`
-# 
 cursor-style-blink = false
-
-# Hide the mouse immediately when typing. The mouse becomes visible again when
-# the mouse is used. The mouse is only hidden if the mouse cursor is over the
-# active terminal surface.
-mouse-hide-while-typing = false
-
-# The title Ghostty will use for the window. This will force the title of the
-# window to be this title at all times and Ghostty will ignore any set title
-# escape sequences programs (such as Neovim) may send.
+mouse-hide-while-typing = true
 title = Ghostty 👻
 
-# Key bindings. The format is `trigger=action`. Duplicate triggers will
-# overwrite previously set values.
-# 
-# Trigger: `+`-separated list of keys and modifiers. Example: `ctrl+a`,
-# `ctrl+shift+b`, `up`. Some notes:
-# 
-#   * modifiers cannot repeat, `ctrl+ctrl+a` is invalid.
-# 
-#   * modifiers and keys can be in any order, `shift+a+ctrl` is *weird*,
-#     but valid.
-# 
-#   * only a single key input is allowed, `ctrl+a+b` is invalid.
-# 
-#   * the key input can be prefixed with `physical:` to specify a
-#     physical key mapping rather than a logical one. A physical key
-#     mapping responds to the hardware keycode and not the keycode
-#     translated by any system keyboard layouts. Example: "ctrl+physical:a"
-# 
-# Valid modifiers are `shift`, `ctrl` (alias: `control`), `alt` (alias: `opt`,
-# `option`), and `super` (alias: `cmd`, `command`). You may use the modifier
-# or the alias. When debugging keybinds, the non-aliased modifier will always
-# be used in output.
-# 
-# Action is the action to take when the trigger is satisfied. It takes the
-# format `action` or `action:param`. The latter form is only valid if the
-# action requires a parameter.
-# 
-#   * `ignore` - Do nothing, ignore the key input. This can be used to
-#     black hole certain inputs to have no effect.
-# 
-#   * `unbind` - Remove the binding. This makes it so the previous action
-#     is removed, and the key will be sent through to the child command
-#     if it is printable.
-# 
-#   * `csi:text` - Send a CSI sequence. i.e. `csi:A` sends "cursor up".
-# 
-#   * `esc:text` - Send an escape sequence. i.e. `esc:d` deletes to the
-#     end of the word to the right.
-# 
-#   * `text:text` - Send a string. Uses Zig string literal syntax.
-#     i.e. `text:\x15` sends Ctrl-U.
-# 
-# Some notes for the action:
-# 
-#   * The parameter is taken as-is after the `:`. Double quotes or
-#     other mechanisms are included and NOT parsed. If you want to
-#     send a string value that includes spaces, wrap the entire
-#     trigger/action in double quotes. Example: `--keybind="up=csi:A B"`
-# 
-# There are some additional special values that can be specified for
-# keybind:
-# 
-#   * `keybind=clear` will clear all set keybindings. Warning: this
-#     removes ALL keybindings up to this point, including the default
-#     keybindings.
-# 
-# A keybind by default causes the input to be consumed. This means that the
-# associated encoding (if any) will not be sent to the running program
-# in the terminal. If you wish to send the encoded value to the program,
-# specify the "unconsumed:" prefix before the entire keybind. For example:
-# "unconsumed:ctrl+a=reload_config"
-
-# keybind=clear
-# SPLITS:
-keybind = alt+l=goto_split:right
-keybind = alt+j=goto_split:bottom
-keybind = alt+h=goto_split:left
-keybind = alt+k=goto_split:top
-keybind = shift+alt+l=resize_split:right,30
-keybind = shift+alt+j=resize_split:down,30
-keybind = shift+alt+h=resize_split:left,30
-keybind = shift+alt+k=resize_split:up,30
-# Deactive for now, use in tmux
-# keybind = shift+alt+l=unbind
-# keybind = shift+alt+j=unbind
-# keybind = shift+alt+h=unbind
-# keybind = shift+alt+k=unbind
-
-keybind = super+d=new_split:right
-keybind = super+shift+d=new_split:down
-keybind = alt+shift+equal=equalize_splits
-# keybind = super+shift+enter=toggle_split_zoom
-
-# TABS:
-keybind = opt+n=next_tab
-keybind = super+n=next_tab
-keybind = opt+p=previous_tab
-keybind = super+p=previous_tab
-keybind = super+t=new_tab
-
-keybind = super+physical:one=goto_tab:1
-keybind = super+physical:two=goto_tab:2
-keybind = super+physical:three=goto_tab:3
-keybind = super+physical:four=goto_tab:4
-keybind = super+physical:five=goto_tab:5
-keybind = super+physical:six=goto_tab:6
-keybind = super+physical:seven=goto_tab:7
-keybind = super+physical:eight=goto_tab:8
-keybind = super+physical:nine=goto_tab:9
-
-# SCROLL:
-keybind = super+home=scroll_to_top
-keybind = super+page_up=scroll_page_up
-keybind = super+alt+shift+j=write_scrollback_file:open
-
-keybind = super+alt+i=inspector:toggle
-keybind = super+w=close_surface
-
-keybind = super+shift+down=jump_to_prompt:1
-keybind = super+shift+w=close_window
-keybind = shift+up=adjust_selection:up
-keybind = super+enter=toggle_fullscreen
-keybind = super+c=copy_to_clipboard
-keybind = shift+left=adjust_selection:left
-keybind = super+equal=increase_font_size:1
-keybind = shift+page_up=adjust_selection:page_up
-
-keybind = shift+end=adjust_selection:end
-keybind = super+plus=increase_font_size:1
-keybind = super+q=quit
-keybind = super+shift+up=jump_to_prompt:-1
-keybind = shift+right=adjust_selection:right
-keybind = super+comma=open_config
-keybind = super+shift+comma=reload_config
-keybind = super+minus=decrease_font_size:1
-keybind = shift+page_down=adjust_selection:page_down
-keybind = super+a=select_all
-
-
-keybind = super+ctrl+f=toggle_fullscreen
-keybind = shift+down=adjust_selection:down
-keybind = super+shift+n=new_window
-keybind = super+page_down=scroll_page_down
-keybind = super+alt+shift+w=close_all_windows
-# keybind = super+left_bracket=goto_split:previous
-# keybind = super+right_bracket=goto_split:next
-keybind = super+end=scroll_to_bottom
-keybind = super+shift+j=write_scrollback_file:paste
-
-keybind = super+zero=reset_font_size
-keybind = shift+home=adjust_selection:home
-keybind = super+k=clear_screen
-keybind = ctrl+l=clear_screen
-keybind = super+v=paste_from_clipboard
-
-# bind opt+backspace and ctrl+backspace to ctrl-w for easy deletion in shell
-# and neovim
-keybind = ctrl+backspace=text:\x17
-keybind = opt+backspace=text:\x17
-
-# Horizontal window padding.
 window-padding-x = 0
-
-# Vertical window padding.
 window-padding-y = 0
-
 window-padding-balance = true
-
-# The color of the padding area of the window. Valid values are:
-# 
-# * `background` - The background color specified in `background`.
-# * `extend` - Extend the background color of the nearest grid cell.
-# * `extend-always` - Same as "extend" but always extends without applying
-#   any of the heuristics that disable extending noted below.
-window-padding-color = background
-
-# If true, new windows and tabs will inherit the working directory of the
-# previously focused window. If no window was previously focused, the default
-# working directory will be used (the `working-directory` option).
-window-inherit-working-directory = true
-
-# If true, new windows and tabs will inherit the font size of the previously
-# focused window. If no window was previously focused, the default font size
-# will be used. If this is false, the default font size specified in the
-# configuration `font-size` will be used.
+window-padding-color = extend
 window-inherit-font-size = true
 
-# The font that will be used for the application's window and tab titles.
-# 
-# This is currently only supported on macOS.
-window-title-font-family = Comic Code
-
-# The position where new tabs are created. Valid values:
-# 
-#   * `current` - Insert the new tab after the currently focused tab,
-#     or at the end if there are no focused tabs.
-# 
-#   * `end` - Insert the new tab at the end of the tab list.
-# 
-# This configuration currently only works with GTK.
-window-new-tab-position = current
-
-# This controls when resize overlays are shown. Resize overlays are a
-# transient popup that shows the size of the terminal while the surfaces are
-# being resized. The possible options are:
-# 
-#   * `always` - Always show resize overlays.
-#   * `never` - Never show resize overlays.
-#   * `after-first` - The resize overlay will not appear when the surface
-#                     is first created, but will show up if the surface is
-#                     subsequently resized.
-# 
-# The default is `after-first`.
-resize-overlay = after-first
-
-focus-follows-mouse = false
-
-clipboard-write = allow
-
-# Trims trailing whitespace on data that is copied to the clipboard. This does
-# not affect data sent to the clipboard via `clipboard-write`.
-clipboard-trim-trailing-spaces = true
-
-# Confirms that a surface should be closed before closing it. This defaults to
-# true. If set to false, surfaces will close without any confirmation.
-confirm-close-surface = false
-
-# This controls whether an initial window is created when Ghostty
-# is run. Note that if `quit-after-last-window-closed` is `true` and
-# `quit-after-last-window-closed-delay` is set, setting `initial-window` to
-# `false` will mean that Ghostty will quit after the configured delay if no
-# window is ever created. Only implemented on Linux.
-initial-window = true
-
-# Whether to enable shell integration auto-injection or not. Shell integration
-# greatly enhances the terminal experience by enabling a number of features:
-# 
-#   * Working directory reporting so new tabs, splits inherit the
-#     previous terminal's working directory.
-# 
-#   * Prompt marking that enables the "jump_to_prompt" keybinding.
-# 
-#   * If you're sitting at a prompt, closing a terminal will not ask
-#     for confirmation.
-# 
-#   * Resizing the window with a complex prompt usually paints much
-#     better.
-# 
-# Allowable values are:
-# 
-#   * `none` - Do not do any automatic injection. You can still manually
-#     configure your shell to enable the integration.
-# 
-#   * `detect` - Detect the shell based on the filename.
-# 
-#   * `bash`, `elvish`, `fish`, `zsh` - Use this specific shell injection scheme.
-# 
-# The default value is `detect`.
 shell-integration = detect
+shell-integration-features = no-cursor,no-sudo,no-title
 
-# Shell integration features to enable if shell integration itself is enabled.
-# The format of this is a list of features to enable separated by commas. If
-# you prefix a feature with `no-` then it is disabled. If you omit a feature,
-# its default value is used, so you must explicitly disable features you don't
-# want. You can also use `true` or `false` to turn all features on or off.
-# 
-# Available features:
-# 
-#   * `cursor` - Set the cursor to a blinking bar at the prompt.
-# 
-#   * `sudo` - Set sudo wrapper to preserve terminfo.
-# 
-#   * `title` - Set the window title via shell integration.
-# 
-# Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
-shell-integration-features = no-cursor,no-sudo,title
-
-# The style of the macOS titlebar. Available values are: "native",
-# "transparent", and "tabs".
-# 
-# The "native" style uses the native macOS titlebar with zero customization.
-# The titlebar will match your window theme (see `window-theme`).
-# 
-# The "transparent" style is the same as "native" but the titlebar will
-# be transparent and allow your window background color to come through.
-# This makes a more seamless window appearance but looks a little less
-# typical for a macOS application and may not work well with all themes.
-# 
-# The "tabs" style is a completely custom titlebar that integrates the
-# tab bar into the titlebar. This titlebar always matches the background
-# color of the terminal. There are some limitations to this style:
-# On macOS 13 and below, saved window state will not restore tabs correctly.
-# macOS 14 does not have this issue and any other macOS version has not
-# been tested.
-# 
-# The default value is "transparent". This is an opinionated choice
-# but its one I think is the most aesthetically pleasing and works in
-# most cases.
-# 
-# Changing this option at runtime only applies to new windows.
-macos-titlebar-style = "transparent"
-
-# If `true`, the *Option* key will be treated as *Alt*. This makes terminal
-# sequences expecting *Alt* to work properly, but will break Unicode input
-# sequences on macOS if you use them via the *Alt* key. You may set this to
-# `false` to restore the macOS *Alt* key unicode sequences but this will break
-# terminal sequences expecting *Alt* to work.
-# 
-# Note that if an *Option*-sequence doesn't produce a printable character, it
-# will be treated as *Alt* regardless of this setting. (i.e. `alt+ctrl+a`).
-# 
-# This does not work with GLFW builds.
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
+window-show-tab-bar = always
+bold-is-bright = true
 
-# Whether to enable the macOS window shadow. The default value is true.
-# With some window managers and window transparency settings, you may
-# find false more visually appealing.
-macos-window-shadow = true
+# Key bindings. The format is `trigger=action`. Duplicates will overwrite
+# previously set values.
+#
+# clear all so we have clean slate for TMUX
+# keybind=clear
 
-# Put every surface (tab, split, window) into a dedicated Linux cgroup.
-# 
-# This makes it so that resource management can be done on a per-surface
-# granularity. For example, if a shell program is using too much memory,
-# only that shell will be killed by the oom monitor instead of the entire
-# Ghostty process. Similarly, if a shell program is using too much CPU,
-# only that surface will be CPU-throttled.
-# 
-# This will cause startup times to be slower (a hundred milliseconds or so),
-# so the default value is "single-instance." In single-instance mode, only
-# one instance of Ghostty is running (see gtk-single-instance) so the startup
-# time is a one-time cost. Additionally, single instance Ghostty is much
-# more likely to have many windows, tabs, etc. so cgroup isolation is a
-# big benefit.
-# 
-# This feature requires systemd. If systemd is unavailable, cgroup
-# initialization will fail. By default, this will not prevent Ghostty
-# from working (see linux-cgroup-hard-fail).
-# 
-# Valid values are:
-# 
-#   * `never` - Never use cgroups.
-#   * `always` - Always use cgroups.
-#   * `single-instance` - Enable cgroups only for Ghostty instances launched
-#     as single-instance applications (see gtk-single-instance).
-# 
-linux-cgroup = single-instance
+# we pass through SUPER+... as ALT+... to tmux
 
-# Memory limit for any individual terminal process (tab, split, window,
-# etc.) in bytes. If this is unset then no memory limit will be set.
-# 
-# Note that this sets the "memory.high" configuration for the memory
-# controller, which is a soft limit. You should configure something like
-# systemd-oom to handle killing processes that have too much memory
-# pressure.
-linux-cgroup-memory-limit = 
-
-# Number of processes limit for any individual terminal process (tab, split,
-# window, etc.). If this is unset then no limit will be set.
-# 
-# Note that this sets the "pids.max" configuration for the process number
-# controller, which is a hard limit.
-linux-cgroup-processes-limit = 
-
-# If this is false, then any cgroup initialization (for linux-cgroup)
-# will be allowed to fail and the failure is ignored. This is useful if
-# you view cgroup isolation as a "nice to have" and not a critical resource
-# management feature, because Ghostty startup will not fail if cgroup APIs
-# fail.
-# 
-# If this is true, then any cgroup initialization failure will cause
-# Ghostty to exit or new surfaces to not be created.
-# 
-# Note: this currently only affects cgroup initialization. Subprocesses
-# must always be able to move themselves into an isolated cgroup.
-linux-cgroup-hard-fail = false
-
-# If `true`, the Ghostty GTK application will run in single-instance mode:
-# each new `ghostty` process launched will result in a new window if there is
-# already a running process.
-# 
-# If `false`, each new ghostty process will launch a separate application.
-# 
-# The default value is `detect` which will default to `true` if Ghostty
-# detects that it was launched from the `.desktop` file such as an app
-# launcher (like Gnome Shell)  or by D-Bus activation. If Ghostty is launched
-# from the command line, it will default to `false`.
-# 
-# Note that debug builds of Ghostty have a separate single-instance ID
-# so you can test single instance without conflicting with release builds.
-gtk-single-instance = desktop
-
-# When enabled, the full GTK titlebar is displayed instead of your window
-# manager's simple titlebar. The behavior of this option will vary with your
-# window manager.
-# 
-# This option does nothing when `window-decoration` is false or when running
-# under macOS.
-# 
-# Changing this value at runtime and reloading the configuration will only
-# affect new windows.
-gtk-titlebar = true
-
-# Determines the side of the screen that the GTK tab bar will stick to.
-# Top, bottom, left, and right are supported. The default is top.
-gtk-tabs-location = top
-
-# If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
-# are the new typical Gnome style where tabs fill their available space.
-# If you set this to `false` then tabs will only take up space they need,
-# which is the old style.
-gtk-wide-tabs = true
-
-# If `true` (default), Ghostty will enable libadwaita theme support. This
-# will make `window-theme` work properly and will also allow Ghostty to
-# properly respond to system theme changes, light/dark mode changing, etc.
-# This requires a GTK4 desktop with a GTK4 theme.
-# 
-# If you are running GTK3 or have a GTK3 theme, you may have to set this
-# to false to get your theme picked up properly. Having this set to true
-# with GTK3 should not cause any problems, but it may not work exactly as
-# expected.
-# 
-# This configuration only has an effect if Ghostty was built with
-# libadwaita support.
-gtk-adwaita = true
-
-# If `true` (default), applications running in the terminal can show desktop
-# notifications using certain escape sequences such as OSC 9 or OSC 777.
-desktop-notifications = true
-
-# If `true`, the bold text will use the bright color palette.
-bold-is-bright = false
-
-# This will be used to set the `TERM` environment variable.
-# HACK: We set this with an `xterm` prefix because vim uses that to enable key
-# protocols (specifically this will enable `modifyOtherKeys`), among other
-# features. An option exists in vim to modify this: `:set
-# keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
-# from working properly. https://github.com/vim/vim/pull/13211 fixes this.
-term = xterm-ghostty
-
-# String to send when we receive `ENQ` (`0x05`) from the command that we are
-# running. Defaults to an empty string if not set.
-enquiry-response = 
-
+# # SPLITS:
+# keybind = super+l=esc:l
+# keybind = super+j=esc:j
+# keybind = super+h=esc:h
+# keybind = super+k=esc:k
+# keybind = shift+super+l=esc:L
+# keybind = shift+super+j=esc:J
+# keybind = shift+super+h=esc:H
+# keybind = shift+super+k=esc:K
+#
+# keybind = super+d=esc:d
+# keybind = super+shift+d=esc:D
+# keybind = alt+shift+equal=equalize_splits
+#
+# # TABS:
+# keybind = super+n=esc:n
+# keybind = super+p=esc:p
+# keybind = super+t=esc:t
+# keybind = super+w=esc:w
+#
+# keybind = super+physical:one=esc:1
+# keybind = super+physical:two=esc:2
+# keybind = super+physical:three=esc:3
+# keybind = super+physical:four=esc:4
+# keybind = super+physical:five=esc:5
+# keybind = super+physical:six=esc:6
+# keybind = super+physical:seven=esc:7
+# keybind = super+physical:eight=esc:8
+# keybind = super+physical:nine=esc:9
+#
+# keybind = super+alt+i=inspector:toggle
+#
+# keybind = super+shift+w=close_window
+# keybind = super+q=quit
+# keybind = super+ctrl+f=toggle_fullscreen
+# keybind = super+shift+n=new_window
+#
+# keybind = super+c=copy_to_clipboard
+# keybind = super+v=paste_from_clipboard
+#
+# keybind = super+enter=toggle_window_decorations
+#
+# keybind = super+equal=increase_font_size:1
+# keybind = super+plus=increase_font_size:1
+# keybind = super+minus=decrease_font_size:1
+# keybind = super+zero=reset_font_size
+#
+# keybind = super+comma=open_config
+# keybind = super+shift+comma=reload_config
+#
+# # bind opt+backspace and ctrl+backspace to ctrl-w for easy deletion in shell
+# # and neovim
+# keybind = ctrl+backspace=text:\x17
+# keybind = opt+backspace=text:\x17
+# keybind = super+shift+t=text:\x1bT
+# keybind = super+control+t=toggle_quick_terminal

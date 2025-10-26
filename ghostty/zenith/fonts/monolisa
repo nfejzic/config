@@ -1,0 +1,26 @@
+font-family = MonoLisa
+font-size = 21
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Regular Italic
+font-style-bold-italic = Bold Italic
+font-synthetic-style = false
+
+# cursive
+# font-feature = ss02
+
+# single-loop 'g'
+# font-feature = ss04
+
+# more pronounced '{' and '}'
+# font-feature = ss07
+
+# centered 'x' in 0xF
+font-feature = ss11
+
+# disable whitespace ligatures, such as in '//' and '///'
+font-feature = -calt
+
+# disable all ligatures, try it out this way
+font-feature = -liga
+font-feature = -dlig
