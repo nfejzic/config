@@ -33,6 +33,7 @@ return {
 				{ "n",          "<leader>gr", gs.reset_hunk,                      "Reset hunk" },
 				{ "n",          "<leader>gd", gs.diffthis,                        "Diff this" },
 				{ "n",          "<leader>gq", gs.setqflist,                       "Show changes in quickfix list" },
+				{ "n",          "<leader>gl", "<CMD>Git log<CR>",                 "Show changes in quickfix list" },
 			})
 		end,
 	},
