@@ -1,7 +1,0 @@
-# TODO: font configuration
-font-family = SF Mono
-font-size = 20
-font-style-bold = Bold
-font-style-italic = Regular Italic
-font-style-bold-italic = Bold Italic
-adjust-cell-height = 6

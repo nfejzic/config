@@ -1,5 +1,5 @@
 # load font
-config-file = ./fonts/jetbrains-mono
+config-file = ../fonts/jetbrains-mono
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%

@@ -1,9 +1,0 @@
-font-family = Codelia Ligatures
-font-size = 20
-font-synthetic-style = false
-
-# dotted '0'
-font-feature=zero
-
-# slab 'l'
-font-feature=ss02
