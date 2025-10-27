@@ -96,8 +96,6 @@ return {
 
 			require("user.keymaps").set_keys({
 				{ "n", "<leader>ff", picker.files,                                                   "Find file" },
-				-- Ctrl-P make it be the same
-				{ "n", "<C-p>",      picker.files,                                                   "Find file (in git repository)" },
 				-- TODO: how to find hidden files?
 				{ "n", "<leader>fa", function() picker.files({ hidden = true, ignored = true }) end, "Find all files, including hidden" },
 
