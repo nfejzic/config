@@ -1,0 +1,41 @@
+# black, gutter
+palette = 0=#403e41
+# red
+palette = 1=#ff6188
+# green
+palette = 2=#a9dc76
+# yellow
+palette = 3=#ffd866
+# blue
+palette = 4=#78dce8
+# magenta
+palette = 5=#ab9df2
+# cyan 
+palette = 6=#fc9867
+# grey
+palette = 7=#727072
+# br black
+palette = 8=#665c54
+# br red
+palette = 9=#ff6188
+# br green
+palette = 10=#a9dc76
+# br yellow
+palette = 11=#ffd866
+# br blue
+palette = 12=#78dce8
+# br magenta
+palette = 13=#ab9df2
+# br cyan
+palette = 14=#fc9867
+# white
+palette = 15=#fcfcfa
+
+background = #2d2a2e
+foreground = #fcfcfa
+
+cursor-color = #fcfcfa
+cursor-text = #2d2a2e
+
+selection-background = #727072
+selection-foreground = #fcfcfa
