@@ -1,10 +1,10 @@
 # load font
-config-file = ./fonts/comic-code
+config-file = ./fonts/monolisa
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%
 
-theme = dark:kanagawa-wave,light:kanagawa-lotus
+theme = dark:gruvbox-dark-hard,light:gruvbox-light
 
 selection-invert-fg-bg = false
 cursor-invert-fg-bg = false
