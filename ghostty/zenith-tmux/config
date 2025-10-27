@@ -36,6 +36,10 @@ window-padding-balance = true
 window-padding-color = extend
 window-inherit-font-size = true
 
+background-opacity = 1
+background-opacity-cells = true
+background-blur = true
+
 shell-integration = detect
 shell-integration-features = no-cursor,no-sudo,no-title
 
