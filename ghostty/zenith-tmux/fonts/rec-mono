@@ -9,10 +9,16 @@ font-size = 20
 adjust-cell-height = 4
 
 # dotted 0
-font-feature = ss10
+# font-feature = ss10
+
+# single story 'g'
+font-feature = ss02
 
 # simplified 'f'
 font-feature = ss03
+
+# simplified italic kk rls
+font-feature = ss07
 
 # no serifs on 'L' and 'Z'
 font-feature = ss08

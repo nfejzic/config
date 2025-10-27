@@ -3,13 +3,10 @@ font-size = 21
 font-synthetic-style = false
 adjust-cell-height = 2
 
-# slab 'l'
-font-feature = cv01
-
-# serif 'r'
-font-feature = cv10
-
 # disable ligatures
 font-feature = -dlig
 font-feature = -calt
 font-feature = -liga
+
+# slab 'l'
+# font-feature = cv01
