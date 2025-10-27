@@ -8,7 +8,8 @@ local M = {}
 --- @param utils Utils
 --- @param tab_api TabApi
 --- @param mods { super: string, super_shift: string }
-function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
+--- @param smart_splits SmartSplits
+function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods, smart_splits)
 	local act = wezterm.action
 
 	local sessionizer = require("lib.sessionizer").setup(
@@ -53,7 +54,16 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods)
 			{
 				key = "w",
 				mods = mods.super,
-				action = act.CloseCurrentPane({ confirm = false }),
+				action = wezterm.action_callback(
+					function(win, pane)
+						if smart_splits.is_vim(pane) then
+							win:perform_action(act.SendKey({ key = "w", mods = 'ALT' }), pane)
+						else
+							wezterm.log_info("closing current pane")
+							win:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
+						end
+					end
+				)
 			},
 
 			-- create tab next to the active tab

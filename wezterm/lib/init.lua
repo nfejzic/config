@@ -80,7 +80,7 @@ end
 --- @param program_paths ProgramPaths
 --- @param utils Utils
 --- @param tab_api TabApi
---- @param smart_splits table
+--- @param smart_splits SmartSplits
 --- @param config table
 local function configure_keybindings(
 	hostconf_bindings,
@@ -93,7 +93,9 @@ local function configure_keybindings(
 	config
 )
 	local host_bindings = hostconf_bindings(wezterm)
-	local keybindings = keys.get_keybindings(wezterm, program_paths, utils, tab_api, host_bindings)
+	local keybindings = keys.get_keybindings(
+		wezterm, program_paths, utils, tab_api, host_bindings,
+		smart_splits)
 
 	if host_bindings.custom_keybinds and type(host_bindings.custom_keybinds) == "table" then
 		for _, value in pairs(host_bindings.custom_keybinds) do
@@ -119,13 +121,13 @@ local function configure_keybindings(
 end
 
 --- @param wezterm table
---- @param config table
+--- @param config Config
 --- @param plugins UserPlugins
 function M.setup(wezterm, config, plugins)
 	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
 	local color_scheme = require("lib.colors").get_color_scheme(
-		{ dark = 'kanagawa-wave', light = 'kanagawa-lotus' },
+		{ dark = 'gruvbox-dark-hard', light = 'kanagawa-lotus' },
 		os_appearance
 	)
 	local tab_api = require("lib.tab_api")

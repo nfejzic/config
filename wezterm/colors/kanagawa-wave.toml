@@ -5,12 +5,16 @@ author = "Nadir Fejzić"
 [colors]
 foreground = "#DCD7BA"
 background = "#1F1F28"
+
 cursor_bg = "#DCD7BA"
 cursor_border = "#DCD7BA"
 cursor_fg = "#1F1F28"
+
 compose_cursor = "#7FB4CA"
+
 selection_bg = "#223249"
 selection_fg = "#DCD7BA"
+
 scrollbar_thumb = "#2A2A37" # same as tab bar
 split = "#2A2A37"           # same as tab bar
 visual_bell = "#FF5D62"     # ansi 2
@@ -26,14 +30,14 @@ ansi = [
     "#DCD7BA",
 ]
 brights = [
-    "#C8C093",
+    "#717C7C",
     "#E82424",
     "#98BB6C",
-    "#FF9E3B",
+    "#E6C384",
     "#7FB4CA",
     "#D27E99",
     "#A3D4D5",
-    "#C8C093",
+    "#DCD7BA",
 ]
 
 [colors.indexed]

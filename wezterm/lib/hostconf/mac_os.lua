@@ -5,6 +5,8 @@
 --- @type GetKeybindingsFn
 local function get_keybindings(wezterm)
 	local act = wezterm.action
+	local super = 'SUPER'
+	local super_shift = 'SUPER|SHIFT'
 
 	local custom_keybinds = {
 		{
@@ -20,35 +22,29 @@ local function get_keybindings(wezterm)
 	for _, key in pairs({ "h", "j", "k", "l" }) do
 		table.insert(custom_keybinds, {
 			key = key,
-			mods = 'SUPER',
+			mods = super,
 			action = act.DisableDefaultAssignment,
-		})
-
-		table.insert(custom_keybinds, {
-			key = key,
-			mods = 'SUPER',
-			action = act.SpawnTab("CurrentPaneDomain"),
-		})
-
-		table.insert(custom_keybinds, {
-			key = key,
-			mods = 'SUPER|SHIFT',
-			action = act.SendKey {
-				key = key,
-				mods = 'OPT|SHIFT',
-			}
 		})
 	end
 
+	-- table.insert(custom_keybinds, {
+	-- 	key = key,
+	-- 	mods = super_shift,
+	-- 	action = act.SendKey {
+	-- 		key = key,
+	-- 		mods = 'OPT|SHIFT',
+	-- 	}
+	-- })
+
 	--- @type KeybindsConfig
 	return {
-		super = 'SUPER',
-		super_shift = 'SUPER|SHIFT',
+		super = super,
+		super_shift = super_shift,
 		custom_keybinds = custom_keybinds,
 	}
 end
 
-local font_size = 21.5
+local font_size = 19
 
 --- @type FontConfig
 local defaults = {
@@ -178,8 +174,8 @@ local noto_sans_mono = require("lib.utils").tbl.copy_and_overwrite(monolisa, {
 })
 
 config.font = monolisa
--- config.font = sf_mono
-config.font = berkeley_mono
+config.font = sf_mono
+-- config.font = berkeley_mono
 -- config.font = comic_code
 -- config.font = noto_sans_mono
 -- config.font = atkinson_hyperlegible
