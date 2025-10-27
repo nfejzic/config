@@ -20,11 +20,6 @@ return {
 			transparent = false,
 			dimInactive = false,
 			terminalColors = true,
-			theme = "gruvbox-dark-hard",
-			background = {
-				dark = "kanagawa-wave",
-				light = "kanagawa-lotus",
-			},
 			semantic_highlighting = false,
 		})
 	end
