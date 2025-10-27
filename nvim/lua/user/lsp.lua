@@ -203,6 +203,8 @@ function M.setup()
 		-- infrastructure
 		{ "terraform-ls",                  "terraform-ls" },
 		{ "bash-language-server",          "bashls" },
+		{ "emmet-language-server",         "emmet_language_server" },
+		{ "tailwindcss-language-server",   "tailwindcss" },
 	})
 
 	M.setup_ui()
