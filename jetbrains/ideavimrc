@@ -13,6 +13,9 @@ set scrolloff=5
 set relativenumber
 set nowrap
 
+set visualbell
+set noerrorbells
+
 " highlight current search live
 set incsearch
 set ignorecase
@@ -50,19 +53,32 @@ set highlightedyank
 let g:highlightedyank_highlight_duration = "100"
 
 map <leader>. <Action>(ShowIntentionActions)
-imap <C-j> <Action>(EditorChooseLookupItem)
-imap <C-j> <Esc>:action EditorChooseLookupItem<CR>a
+" imap <C-j> <Action>(EditorChooseLookupItem)
+" imap <C-j> <Esc>:action EditorChooseLookupItem<CR>a
 
 map <leader>le <Action>(ShowErrorDescription)
 map <leader>lM <Action>(ShowErrorDescription)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoNextError)
 
+" start debugging whatever target is under the cursor, for example a test function
 map <leader>dd <Action>(Debug)
+map <leader>dw <Action>(ActivateDebugToolWindow)
+" add or remove breakpoint on current line
 map <leader>db <Action>(ToggleLineBreakpoint)
+" continue execution of program
+map <leader>dr <Action>(Resume)
+" step into the invocation
+map <leader>di <Action>(StepInto)
+" step out of the invocation
+map <leader>do <Action>(StepOut)
+" step over to the next line of code in current file
+map <leader>dl <Action>(StepOver)
+
+map <leader>bw <Action>(ActivateBuildToolWindow>
 
 map <leader>ff <Action>(GotoFile)
-map <leader>fe :NERDTree<CR>
+map <leader>fe <Action>(SelectInProjectView)
 map <leader>fr <action>(RecentFiles)
 map <leader>fc <action>(FindInPath)
 map <leader>fl <action>(RecentLocations)
@@ -80,15 +96,26 @@ map <leader>ls <Action>(GotoSymbol)
 
 " Git blame current file
 map <leader>gb <Action>(Annotate)
+map <leader>gl <Action>(Git.Branches)
+map <leader>gg <Action>(VcsGroups)
 " Git diff current file
 map <leader>gd <Action>(Compare.SameVersion)
-map <leader>gs <Action>(ChangesView.AddUnversioned)
-map <leader>gu <Action>(Git.Reset)
-map [g <Action>(VcsShowPrevChangeMarker)
-map ]g <Action>(VcsShowNextChangeMarker)
+
+map <leader>gs <Action>(Vcs.Diff.IncludeChangedLinesIntoCommit)
+map <leader>gu <Action>(Vcs.Diff.ExcludeChangedLinesFromCommit)
+map <leader>gr <Action>(Vcs.RollbackChangedLines)
+map <leader>gA <Action>(Git.Add)
+
+map <leader>gm <Action>(Vcs.MoveChangedLinesToChangelist)
+map <leader>gw <Action>(ActivateVersionControlToolWindow)
+map <leader>gc <Action>(ActivateCommitToolWindow)
+
+map [g <Action>(VcsShowPrevChangeMarker)<Action>(PreviousDiff)
+map ]g <Action>(VcsShowNextChangeMarker)<Action>(NextDiff)
 
 " Close window keybind
 map <C-w>q <Action>(CloseContent)
+map <C-w>o :only<CR>
 
 nmap gf <Action>(Back)
 nmap gb <Action>(Forward)
@@ -124,3 +151,9 @@ map <leader>rm <Action>(ExtractMethod)
 map <leader>rv <Action>(IntroduceVariable)
 map <leader>rf <Action>(IntroduceField)
 map <leader>rs <Action>(ChangeSignature)
+
+map <leader>t <Action>(ActivateTerminalToolWindow)
+
+command! Git action ActivateVersionControlToolWindow
+command! Build action ActivateBuildToolWindow
+command! Debug action ActivateDebugToolWindow
