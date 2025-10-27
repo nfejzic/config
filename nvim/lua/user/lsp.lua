@@ -36,7 +36,7 @@ local function on_attach(client, bufnr)
 	require("fidget").setup({
 		notification = {
 			window = {
-				winblend = 100,
+				winblend = 0,
 			},
 		},
 	})
