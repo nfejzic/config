@@ -14,8 +14,8 @@ return {
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = true },
 			functionStyle = {},
-			keywordStyle = { italic = false, bold = false },
-			statementStyle = { bold = false },
+			keywordStyle = { italic = false, bold = true },
+			statementStyle = { bold = true },
 			typeStyle = { italic = false, bold = false },
 			transparent = false,
 			dimInactive = false,
@@ -25,7 +25,7 @@ return {
 				dark = "kanagawa-wave",
 				light = "kanagawa-lotus",
 			},
-			semantic_highlighting = "minimal",
+			semantic_highlighting = false,
 		})
 	end
 }
