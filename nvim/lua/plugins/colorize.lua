@@ -14,13 +14,13 @@ return {
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = true },
 			functionStyle = {},
-			keywordStyle = { italic = false, bold = true },
+			keywordStyle = { italic = false, bold = false },
 			statementStyle = { bold = true },
 			typeStyle = { italic = false, bold = false },
 			transparent = false,
 			dimInactive = false,
 			terminalColors = true,
-			semantic_highlighting = false,
+			semantic_highlighting = "minimal",
 		})
 	end
 }
