@@ -9,13 +9,16 @@ return {
 	cmd = { "GoTestDebug" },
 
 	dependencies = {
-		{ "nvim-neotest/neotest-go" },
-		{ "nvim-neotest/neotest-jest" },
-		{ "rouge8/neotest-rust" },
-		{ "leoluz/nvim-dap-go" },
-		{ "mfussenegger/nvim-dap" },
-		{ "nvim-neotest/nvim-nio" },
-		{ "marilari88/neotest-vitest" },
+		"antoinemadec/FixCursorHold.nvim",
+		"leoluz/nvim-dap-go",
+		"marilari88/neotest-vitest",
+		"mfussenegger/nvim-dap",
+		"nvim-lua/plenary.nvim",
+		"nvim-neotest/neotest-go",
+		"nvim-neotest/neotest-jest",
+		"nvim-neotest/nvim-nio",
+		"nvim-treesitter/nvim-treesitter",
+		"rouge8/neotest-rust",
 	},
 
 	config = function()
