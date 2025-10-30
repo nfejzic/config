@@ -63,6 +63,7 @@ return {
 			{ "n", "<leader>dj", dap.step_over,         "Debug Step Over" },
 			{ "n", "<leader>dk", dap.step_back,         "Debug Step Back" },
 			{ "n", "<leader>dr", dap.restart,           "Debug Restart" },
+			{ "n", "<leader>ds", dap.stop,              "Debug Stop" },
 
 			-- REPL toggle
 			-- { "n", "<leader>dr", req_dap.repl.toggle,  "Debug Toggle REPL" },
@@ -95,7 +96,7 @@ return {
 				{ "n", "<leader>dD", with_args("RustLsp debug"),       "Debug RustLsp debuggable under cursor with arguments" },
 				{ "n", "<leader>da", "<CMD>RustLsp debuggables<CR>",   "All RustLsp debuggables" },
 				{ "n", "<leader>dA", with_args("RustLsp debuggables"), "All RustLsp debuggables with arguments" },
-				{ "n", "<leader>ds", "<cmd>RustLsp! debuggables<CR>",  "Run same RustLsp debuggable as last time" },
+				{ "n", "<leader>dS", "<cmd>RustLsp! debuggables<CR>",  "Run same RustLsp debuggable as last time" },
 			})
 		end
 
