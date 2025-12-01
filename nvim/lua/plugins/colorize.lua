@@ -12,10 +12,10 @@ return {
 		colorize.setup({
 			compile = true, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
-			commentStyle = { italic = true },
+			commentStyle = { italic = false },
 			functionStyle = {},
 			keywordStyle = { italic = false, bold = false },
-			statementStyle = { bold = true },
+			statementStyle = { bold = false },
 			typeStyle = { italic = false, bold = false },
 			transparent = false,
 			dimInactive = false,
