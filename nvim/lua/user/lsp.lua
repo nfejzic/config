@@ -144,11 +144,11 @@ local function on_attach(client, bufnr)
 	-- client.server_capabilities.semanticTokensProvider = nil
 end
 
---- @param servers [string, string][]
+--- @param servers {binary: string, server: string}[]
 local function enable_if_installed(servers)
 	for _, binary_server in pairs(servers) do
-		local binary = binary_server[1]
-		local server = binary_server[2]
+		local binary = binary_server.binary
+		local server = binary_server.server
 		if vim.fn.executable(binary) == 1 then
 			vim.lsp.enable(server)
 		end
@@ -181,30 +181,32 @@ function M.setup()
 
 	-- NOTE: no need to enable rust_analyzer. Rustaceanvim does that automatically
 	enable_if_installed({
-		{ "clangd",                        "clangd" },
-		{ "zls",                           "zig_lsp" },
-		{ "gopls",                         "gopls" },
-		{ "lua-language-server",           "lua_ls" },
-		{ "fish-lsp",                      'fish_lsp' },
-		{ "nil",                           "nil_ls" },
-		{ "buf",                           "buf_ls" },
-		{ "ruff",                          "ruff" },
+		{ binary = "clangd",                        server = "clangd" },
+		{ binary = "zls",                           server = "zig_lsp" },
+		{ binary = "gopls",                         server = "gopls" },
+		{ binary = "lua-language-server",           server = "lua_ls" },
+		{ binary = "fish-lsp",                      server = 'fish_lsp' },
+		{ binary = "nil",                           server = "nil_ls" },
+		{ binary = "buf",                           server = "buf_ls" },
+		{ binary = "ruff",                          server = "ruff" },
 
-		{ "just-lsp",                      "just" },
-		{ "gitlab-ci-ls",                  "gitlab_ci_ls" },
-		{ "taplo",                         "taplo" },
+		{ binary = "just-lsp",                      server = "just" },
+		{ binary = "gitlab-ci-ls",                  server = "gitlab_ci_ls" },
+		{ binary = "taplo",                         server = "taplo" },
 
 		-- webdev
-		{ "vscode-eslint-language-server", "eslint" },
-		{ "vscode-json-language-server",   "jsonls" },
-		{ "vue-language-server",           "vue_ls" },
-		{ "vtsls",                         "vtsls" },
+		{ binary = "vscode-eslint-language-server", server = "eslint" },
+		{ binary = "vscode-json-language-server",   server = "jsonls" },
+		{ binary = "vue-language-server",           server = "vue_ls" },
+		-- { "vtsls",                         "vtsls" },
+		{ binary = "tsgo",                          server = "tsgo" },
 
 		-- infrastructure
-		{ "terraform-ls",                  "terraform-ls" },
-		{ "bash-language-server",          "bashls" },
-		{ "emmet-language-server",         "emmet_language_server" },
-		{ "tailwindcss-language-server",   "tailwindcss" },
+		{ binary = "terraform-ls",                  server = "terraform-ls" },
+		{ binary = "bash-language-server",          server = "bashls" },
+		{ binary = "emmet-language-server",         server = "emmet_language_server" },
+		{ binary = "tailwindcss-language-server",   server = "tailwindcss" },
+		{ binary = "pyright",                       server = "pyright" },
 	})
 
 	M.setup_ui()
