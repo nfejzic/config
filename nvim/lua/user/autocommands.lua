@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 	group = group,
-	callback = function() vim.highlight.on_yank() end,
+	callback = function() vim.hl.on_yank() end,
 })
 
 -- jump to last edit position on opening file
