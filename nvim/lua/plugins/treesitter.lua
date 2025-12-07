@@ -13,15 +13,32 @@ return {
 				"nvim-treesitter/nvim-treesitter-textobjects",
 				branch = "main",
 			},
-			-- {
-			-- 	"nvim-treesitter/nvim-treesitter-context",
-			-- 	opts = {
-			-- 		max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
-			-- 		separator = nil,
-			-- 	},
-			-- 	lazy = true,
-			-- 	event = "",
-			-- },
+			{
+				"nvim-treesitter/nvim-treesitter-context",
+				config = function()
+					local ctx = require("treesitter-context")
+					ctx.setup({
+						max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+						multiwindow = false, -- Enable multiwindow support.
+						separator = nil,
+					})
+
+					function only()
+						local cw = vim.api.nvim_get_current_win()
+						vim
+							.iter(vim.api.nvim_tabpage_list_wins(0))
+							:filter(
+								function(w) return w ~= cw and vim.api.nvim_win_get_config(w).focusable and true or false end
+							)
+							:each(function(w) pcall(vim.api.nvim_win_close, w, true) end)
+					end
+
+					require("user.keymaps").set_keys({
+						{ "n", "<C-W>o", only, "Close all other non-floating windows except for the focused one" },
+					})
+				end,
+				lazy = true,
+			},
 		},
 
 		config = function()
