@@ -1,0 +1,8 @@
+font-family = Noto Sans Mono
+font-size = 20
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold
+font-synthetic-style = false
+adjust-cell-height = -2

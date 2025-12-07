@@ -1,10 +1,13 @@
 font-family = MonoLisa
-font-size = 22
+font-size = 19
+font-size = 23
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
 font-style-bold-italic = Bold Italic
 font-synthetic-style = false
+adjust-cell-height = 0
+adjust-cell-width = 0
 
 # cursive
 # font-feature = ss02
