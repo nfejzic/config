@@ -13,6 +13,7 @@ return {
 	-- Might be worth testing in some files without treesitter support
 	{
 		"tpope/vim-sleuth",
+		enabled = true,
 		lazy = false,
 	},
 }
