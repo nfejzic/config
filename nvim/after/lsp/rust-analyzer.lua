@@ -13,25 +13,6 @@ vim.g.rustaceanvim = {
 	--       If that's not the case, then the binary installed through 'Mason' will be used
 	server = {
 		standalone = false,
-		default_settings = {
-			-- rust-analyzer language server configuration
-			["rust-analyzer"] = {
-				hover = {
-					links = {
-						enable = false,
-					},
-				},
-				checkOnSave = true,
-				check = {
-					enable = true,
-					command = "clippy",
-					features = "all",
-				},
-				files = {
-					excludeDirs = { '.direnv' },
-				},
-			},
-		},
 	},
 	-- DAP configuration
 	dap = {
@@ -39,4 +20,23 @@ vim.g.rustaceanvim = {
 	},
 }
 
-return {}
+return {
+	settings = {
+		["rust-analyzer"] = {
+			hover = {
+				links = {
+					enable = false,
+				},
+			},
+			checkOnSave = true,
+			check = {
+				enable = true,
+				command = "clippy",
+				features = "all",
+			},
+			files = {
+				excludeDirs = { '.direnv', '.nix' },
+			},
+		},
+	},
+}
