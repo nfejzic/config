@@ -209,6 +209,9 @@ function M.setup()
 
 		-- Python
 		{ binary = "pyright",                       server = "pyright" },
+
+		-- Svelte
+		{ binary = "svelteserver",                  server = "svelte" },
 	})
 
 	M.setup_ui()
