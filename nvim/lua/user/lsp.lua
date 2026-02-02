@@ -206,6 +206,8 @@ function M.setup()
 		{ binary = "bash-language-server",          server = "bashls" },
 		{ binary = "emmet-language-server",         server = "emmet_language_server" },
 		{ binary = "tailwindcss-language-server",   server = "tailwindcss" },
+
+		-- Python
 		{ binary = "pyright",                       server = "pyright" },
 	})
 
