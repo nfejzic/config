@@ -23,7 +23,7 @@ return {
 						separator = nil,
 					})
 
-					function only()
+					local function only()
 						local cw = vim.api.nvim_get_current_win()
 						vim
 							.iter(vim.api.nvim_tabpage_list_wins(0))
@@ -47,7 +47,7 @@ return {
 				"rust", "lua", "fish", "c", "cpp", "typescript", "javascript", "tsx", "jsx", "markdown",
 				"toml", "yaml", "json",
 				-- git
-				"gitcommit", "gitignore", "gitattribute", "git_rebase", "git_config",
+				"gitcommit", "gitignore", "gitattributes", "git_rebase", "git_config",
 
 				-- neovim query langauges
 				"scheme", "query",
