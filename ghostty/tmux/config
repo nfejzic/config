@@ -1,5 +1,8 @@
 # load font
+# config-file = ../fonts/noto-sans-mono
 config-file = ../fonts/monolisa
+# config-file = ../fonts/tx_02
+# config-file = ../fonts/codelia
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%

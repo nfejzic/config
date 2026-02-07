@@ -1,6 +1,8 @@
 font-family = Codelia Ligatures
 font-size = 20
 font-synthetic-style = false
+adjust-cell-height = 1
+adjust-cell-width = 0
 
 # dotted '0'
 font-feature=zero

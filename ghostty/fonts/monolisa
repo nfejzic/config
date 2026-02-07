@@ -1,6 +1,5 @@
 font-family = MonoLisa
 font-size = 19
-font-size = 23
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Regular Italic
@@ -13,7 +12,7 @@ adjust-cell-width = 0
 # font-feature = ss02
 
 # single-loop 'g'
-font-feature = ss04
+# font-feature = ss04
 
 # more pronounced '{' and '}'
 # font-feature = ss07
