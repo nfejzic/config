@@ -1,5 +1,9 @@
+local utils = require("user.utils")
+
 return {
 	{ "neovim/nvim-lspconfig" },
+
+	cond = not utils.is_llm_prompt(),
 
 	-- TODO: figure out what to do with typescript-tools
 	-- {

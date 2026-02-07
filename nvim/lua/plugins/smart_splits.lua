@@ -1,9 +1,13 @@
+local utils = require("user.utils")
+
 return {
 	{
 		'mrjones2014/smart-splits.nvim',
 
 		lazy = true,
 		event = "UiEnter",
+
+		cond = not utils.is_llm_prompt(),
 
 		config = function()
 			local smart_splits = require('smart-splits')

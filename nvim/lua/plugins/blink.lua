@@ -1,3 +1,5 @@
+local utils = require("user.utils")
+
 return {
 	'saghen/blink.cmp',
 	-- optional: provides snippets for the snippet source
@@ -9,6 +11,8 @@ return {
 	lazy = true,
 	version = '1.*',
 	event = { "InsertEnter", "CmdwinEnter" },
+
+	cond = not utils.is_llm_prompt(),
 
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config

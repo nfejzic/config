@@ -3,6 +3,10 @@ require("user.lazy")
 require("user.keymaps")
 require("user.autocommands")
 
-require("user.lsp").setup()
+local utils = require("user.utils")
+
+if not utils.is_llm_prompt() then
+	require("user.lsp").setup()
+end
 
 vim.cmd("colo colorize")

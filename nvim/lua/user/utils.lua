@@ -27,23 +27,6 @@ function M.if_nightly_else(fn, else_fn)
 	end
 end
 
-function M.print_table(tbl, indent)
-	if not indent then
-		indent = 0
-	end
-	for k, v in pairs(tbl) do
-		local formatting = string.rep("  ", indent) .. k .. ": "
-		if type(v) == "table" then
-			print(formatting)
-			M.print_table(v, indent + 1)
-		elseif type(v) == "boolean" then
-			print(formatting .. tostring(v))
-		else
-			print(formatting .. v)
-		end
-	end
-end
-
 --- @param tbl table the table we want to check, has `string` values
 --- @param val string the value we're looking for
 --- @return boolean `true` if table contains the value, otherwise `false`
@@ -86,23 +69,17 @@ function M.filter_out_formatters(conform, fmts, bufnr)
 	return formatters
 end
 
-function M.minutesToMilis(minutes)
-	assert(minutes >= 0, "Minutes should not be negative")
-	local seconds = minutes * 60
-	return seconds * 1000
-end
-
-function M.setInterval(interval, callback)
-	local timer = vim.uv.new_timer()
-	timer:start(interval, interval, function()
-		callback()
-	end)
-	return timer
-end
-
 function M.clearInterval(timer)
 	timer:stop()
 	timer:close()
+end
+
+--- Checks (naively) whether we're in an LLM prompt by matching file name against patterns.
+function M.is_llm_prompt()
+	local buf_name = vim.api.nvim_buf_get_name(0)
+	local is_prompt = string.match(buf_name, "claude%-prompt")
+
+	return is_prompt
 end
 
 return M
