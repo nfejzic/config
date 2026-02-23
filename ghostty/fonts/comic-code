@@ -1,8 +1,12 @@
 font-family = Comic Code
-font-size = 23
+font-size = 19
 font-synthetic-style = false
-adjust-cell-height = 8
+adjust-cell-height = 5
 adjust-cell-width = 0
 
 # dotted zero
 font-feature = zero
+# enable ligatures
+font-feature = liga
+font-feature = dlig
+font-feature = calt
