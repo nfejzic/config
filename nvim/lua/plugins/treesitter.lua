@@ -45,12 +45,15 @@ return {
 			require('nvim-treesitter').install({
 				-- languages
 				"rust", "lua", "fish", "c", "cpp", "typescript", "javascript", "tsx", "jsx", "markdown",
-				"toml", "yaml", "json", "nix",
+				"toml", "yaml", "json", "nix", "css", "scss", "html",
 				-- git
 				"gitcommit", "gitignore", "gitattributes", "git_rebase", "git_config",
 
 				-- neovim query langauges
 				"scheme", "query",
+
+				-- misc
+				"comment",
 			})
 
 			require("nvim-treesitter-textobjects").setup({
