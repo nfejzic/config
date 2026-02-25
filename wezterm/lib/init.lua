@@ -7,59 +7,35 @@ local M = {}
 --- @param hostconf HostConfig
 --- @param color_scheme string
 local function set_opts(wezterm, config, hostconf, color_scheme)
-	if hostconf.dpi ~= nil then
-		config.dpi = hostconf.dpi
-	end
-
-	-- font test
-	local _ = "gq 1Il l O0 0123456789 --> -> => == === != !== <= >= U u"
-
+	config.dpi = hostconf.dpi or config.dpi
 	config.font = wezterm.font(hostconf.font.family)
 	config.font_size = hostconf.font.size
-
-	if hostconf.font.line_height ~= nil then
-		config.line_height = hostconf.font.line_height
-	end
-
-	if hostconf.font.cell_width ~= nil then
-		config.cell_width = hostconf.font.cell_width
-	end
-
-	if hostconf.font.freetype_load_flags ~= nil then
-		config.freetype_load_flags = hostconf.font.freetype_load_flags
-	end
-
-	if hostconf.font.harfbuzz_features ~= nil then
-		config.harfbuzz_features = hostconf.font.harfbuzz_features
-	end
-
+	config.line_height = hostconf.font.line_height or config.line_height
+	config.cell_width = hostconf.font.cell_width or config.cell_width
+	config.freetype_load_flags = hostconf.font.freetype_load_flags or config.freetype_load_flags
+	config.harfbuzz_features = hostconf.font.harfbuzz_features or config.harfbuzz_features
 	config.adjust_window_size_when_changing_font_size = false
-
 	config.bold_brightens_ansi_colors = true
-
 	config.color_scheme = color_scheme
 
-	if hostconf.window_padding ~= nil then
-		config.window_padding = hostconf.window_padding
-	else
-		config.window_padding = {
-			left = "0cell",
-			right = "0cell",
-			top = "0cell",
-			bottom = "0cell",
-		}
-	end
+	config.window_padding = hostconf.window_padding or {
+		left = "0cell",
+		right = "0cell",
+		top = "0cell",
+		bottom = "0cell",
+	}
+
+	config.window_content_alignment = {
+		horizontal = 'Center',
+		vertical = 'Center',
+	}
 
 	config.warn_about_missing_glyphs = true
 	config.hide_mouse_cursor_when_typing = true
 	config.cursor_blink_rate = 0
 	config.enable_scroll_bar = false
 
-	if hostconf.window_decorations ~= nil then
-		config.window_decorations = hostconf.window_decorations
-	else
-		config.window_decorations = "TITLE|RESIZE"
-	end
+	config.window_decorations = hostconf.window_decorations or "TITLE|RESIZE"
 
 	config.window_background_opacity = 0.95
 	config.window_background_opacity = 1
@@ -150,7 +126,7 @@ function M.setup(wezterm, config, plugins)
 
 	-- local scale_factor = 2.21
 	local scale_factor = 1.2
-	local macbook_scale_factor = 0.98
+	local macbook_scale_factor = 1.05
 
 	-- TODO(nfejzic): Is there a better way to handle this?
 	local dpi_4k_27in = 124 * scale_factor
