@@ -6,4 +6,8 @@ function fish_user_key_bindings
     bind -e --preset -M insert ctrl-d
     bind -e --preset -M normal ctrl-d
     bind -e --preset -M visual ctrl-d
+
+    if type -q fzf
+        fzf --fish | source
+    end
 end
