@@ -124,7 +124,7 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods, smart_s
 						act.PromptInputLine({
 							description = wezterm.format({
 								{ Attribute = { Intensity = "Bold" } },
-								{ Foreground = { AnsiColor = "Fuchsia" } },
+								{ Foreground = { AnsiColor = "White" } },
 								{ Text = t },
 							}),
 							action = wezterm.action_callback(function(window,
@@ -228,6 +228,37 @@ function M.get_keybindings(wezterm, program_paths, utils, tab_api, mods, smart_s
 				key = " ",
 				mods = "LEADER|ALT",
 				action = act.EmitEvent(utils.events.SWITCH_TO_LAST_WORKSPACE),
+			},
+		},
+
+		key_tables = {
+			copy_mode = {
+				{
+					key = 'e',
+					mods = 'CTRL',
+					action = act.Multiple {
+						act.ScrollByLine(1),
+						act.CopyMode 'MoveDown',
+					}
+				},
+				{
+					key = 'y',
+					mods = 'CTRL',
+					action = act.Multiple {
+						act.ScrollByLine(-1),
+						act.CopyMode "MoveUp"
+					}
+				},
+				{
+					key = 'd',
+					mods = 'CTRL',
+					action = act.CopyMode "PageDown",
+				},
+				{
+					key = 'u',
+					mods = 'CTRL',
+					action = act.CopyMode "PageUp",
+				},
 			},
 		},
 	}

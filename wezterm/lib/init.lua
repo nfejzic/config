@@ -90,6 +90,12 @@ local function configure_keybindings(
 
 	config.leader = keybindings.leader
 	config.keys = keybindings.keys
+	config.key_tables = wezterm.gui.default_key_tables()
+
+	local copy_mode = config.key_tables.copy_mode
+	for _, value in pairs(keybindings.key_tables.copy_mode) do
+		table.insert(copy_mode, value)
+	end
 
 	smart_splits.apply_to_config(config, {
 		modifiers = {
