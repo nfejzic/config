@@ -15,6 +15,9 @@ palette = 13=#b35b79
 palette = 14=#5e857a
 palette = 15=#43436c
 
+# tmux accent color
+palette = 16=#b35b79
+
 background = #f2ecbc
 foreground = #545464
 
