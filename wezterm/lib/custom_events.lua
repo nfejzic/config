@@ -30,7 +30,6 @@ end
 --- @param tab_fns TabApi
 --- @param utils Utils
 function M.register_events(wezterm, tab_fns, utils)
-	wezterm.on("format-tab-title", tab_fns.format_tab_title)
 	wezterm.on("update-status", tab_fns.format_workspace_name(wezterm))
 
 	workspace_switching(wezterm, utils)
