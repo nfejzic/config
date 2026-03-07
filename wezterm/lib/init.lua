@@ -7,6 +7,15 @@ local M = {}
 --- @param hostconf HostConfig
 --- @param color_scheme string
 local function set_opts(wezterm, config, hostconf, color_scheme)
+	config.unix_domains = {
+		-- NOTE: as per docs only this is necessary:
+		--       See: https://wezterm.org/multiplexing.html#unix-domains
+		---@diagnostic disable-next-line: missing-fields
+		{ name = 'unix' }
+	}
+	config.default_gui_startup_args = { 'connect', 'unix' }
+
+
 	config.dpi = hostconf.dpi or config.dpi
 	config.font = wezterm.font(hostconf.font.family)
 	config.font_size = hostconf.font.size
