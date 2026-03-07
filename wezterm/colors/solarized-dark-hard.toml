@@ -1,0 +1,90 @@
+[metadata]
+name = "solarized-dark-hard"
+author = "Nadir Fejzić"
+
+[colors]
+foreground = "#839496"
+background = "#00141D"
+
+cursor_bg = "#839496"     # same as foreground
+cursor_border = "#839496"
+cursor_fg = "#00141D"     # same as background
+
+compose_cursor = "#268BD2" # br_blue
+
+selection_bg = "#002B36"
+selection_fg = "#839496"
+
+scrollbar_thumb = "#073642" # same as tab bar
+split = "#073642"           # same as tab bar
+visual_bell = "#422D33"     # ansi 2
+
+ansi = [
+    "#073642", # black
+    "#422D33", # red 
+    "#274C25", # green
+    "#364725", # yellow
+    "#0B4764", # blue
+    "#3F2E4C", # magenta
+    "#0C4E53", # cyan
+    "#839496", # white
+]
+brights = [
+    "#586E75", # black
+    "#DC322F", # red 
+    "#859900", # green
+    "#B58900", # yellow
+    "#268BD2", # blue
+    "#D33682", # magenta
+    "#2AA198", # cyan
+    "#839496", # white
+]
+
+[colors.indexed]
+16 = "#CB4B16"
+17 = "#D33682"
+
+[colors.tab_bar]
+background = "#073642"
+inactive_tab_edge = "#073642"
+inactive_tab_edge_hover = "#073642"
+
+[colors.tab_bar.active_tab]
+bg_color = "#073642"
+fg_color = "#B58900"  # brights 4
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#073642"
+fg_color = "#839496"  # brights 8 / foreground
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#073642"
+fg_color = "#268BD2"  # brights 5
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#073642"
+fg_color = "#839496"  # brights 8 / foreground
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#073642"
+fg_color = "#268BD2"  # brights 5
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
