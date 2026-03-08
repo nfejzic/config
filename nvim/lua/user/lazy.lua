@@ -1,3 +1,5 @@
+local utils = require("user.utils")
+
 -- ensure Lazy.nvim is installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 ---@diagnostic disable-next-line: undefined-field
@@ -27,8 +29,17 @@ local function plugins_spec()
 
 	table.insert(plugins, { import = "plugins" })
 
-	local work_plugins_path = vim.fn.stdpath('config') .. '/lua/work_plugins'
+	-- NOTE(nfejzic): install plugins for specific hosts...
+	local home_only_plugins_path = vim.fn.stdpath('config') .. '/lua/private_plugins'
 
+	if
+		vim.uv.fs_stat(home_only_plugins_path) ~= nil
+		and utils.is_private_machine()
+	then
+		table.insert(plugins, { import = 'private_plugins' })
+	end
+
+	local work_plugins_path = vim.fn.stdpath('config') .. '/lua/work_plugins'
 	if vim.uv.fs_stat(work_plugins_path) ~= nil then
 		table.insert(plugins, { import = 'work_plugins' })
 	end

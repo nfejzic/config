@@ -82,4 +82,15 @@ function M.is_llm_prompt()
 	return is_prompt
 end
 
+--- Checks whether the current hostname matches a known private machine.
+--- @return boolean `true` when running on a private host, otherwise `false`
+function M.is_private_machine()
+	local private_hostnames = {
+		['zenith'] = true,
+		['zenith.local'] = true,
+	}
+
+	return private_hostnames[vim.fn.hostname()] ~= nil
+end
+
 return M

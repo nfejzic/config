@@ -14,6 +14,7 @@ helix/runtime
 # neovim files
 nvim/lazy-lock.json
 nvim/plugin/packer_compiled.lua
+nvim/lua/private_plugins
 
 .luarc.json
 
