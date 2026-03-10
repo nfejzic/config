@@ -39,6 +39,7 @@ abbr -a gpp 'git push'
 abbr -a gpf 'git push --force-with-lease'
 abbr -a gb 'git branch'
 abbr -a gbd 'git branch -vv | rg ": gone]" | awk \'{print $1}\' | xargs -p -I _ git branch -D _'
+abbr -a gwd git_worktree_prune_gone
 abbr -a gw 'git worktree'
 abbr -a gwa 'git worktree add' # checkout branch (directory) in worktree
 abbr -a gwr 'git worktree remove' # remove branch (directory) in worktree
