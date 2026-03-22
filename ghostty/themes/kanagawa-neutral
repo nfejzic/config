@@ -1,0 +1,28 @@
+palette = 0=#2b2b2e
+palette = 1=#f96058
+palette = 2=#71965e
+palette = 3=#b9a562
+palette = 4=#8a9ccd
+palette = 5=#9a7fae
+palette = 6=#6a967e
+palette = 7=#70725f
+palette = 8=#717d72
+palette = 9=#e12a18
+palette = 10=#8fbd5e
+palette = 11=#dec577
+palette = 12=#86b5bf
+palette = 13=#d07f8f
+palette = 14=#a5d5c9
+palette = 15=#d8d9ae
+
+# tmux accent color
+palette = 16=#dec577
+
+background = #202020
+foreground = #d8d9ae
+
+cursor-color = #d8d9ae
+cursor-text = #202020
+
+selection-background = #283240
+selection-foreground = #d8d9ae
