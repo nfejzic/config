@@ -7,6 +7,9 @@ set -gx EDITOR (which nvim)
 set -gx VISUAL (which nvim)
 set -gx SUDO_EDITOR $(which nvim)
 
+# suppress starship warning messages
+set -gx STARSHIP_LOG error
+
 if set -q FISH_BLOCK_CURSOR
     set -gx fish_cursor_default block
     set -gx fish_cursor_insert block blink

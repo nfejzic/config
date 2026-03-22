@@ -11,6 +11,8 @@ $line_break\
 $python\
 $character"""
 
+command_timeout = 50
+
 [time]
 disabled = false
 style = "bright-blue"
