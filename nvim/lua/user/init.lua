@@ -9,4 +9,4 @@ if not utils.is_llm_prompt() then
 	require("user.lsp").setup()
 end
 
-vim.cmd("colo colorize")
+vim.cmd("colo rose-pine")
