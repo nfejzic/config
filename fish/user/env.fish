@@ -26,3 +26,14 @@ if status is-interactive
         set -g fish_vi_force_cursor 1
     end
 end
+
+# nicer manpages
+
+if test $(uname) = Darwin
+    # this disables some ANSI output from man to better work with bat
+    set -gx MANROFFOPT -c
+    # 'col -bx' removes backspaces etc to make it cleaner for bat
+    set -gx MANPAGER "sh -c 'col -bx | bat -lman -p'"
+else
+    set -gx MANPAGER "bat -lman -p"
+end
