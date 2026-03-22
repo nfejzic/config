@@ -69,6 +69,9 @@ return {
 
 				highlight_groups = {
 					QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
+					GitSignsAddInline = { link = "DiffText" },
+					GitSignsChangeInline = { link = "DiffText" },
+					GitSignsDeleteInline = { link = "DiffText" },
 				},
 			})
 		end
