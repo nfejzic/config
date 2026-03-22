@@ -66,6 +66,10 @@ return {
 				styles = {
 					italic = false,
 				},
+
+				highlight_groups = {
+					QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
+				},
 			})
 		end
 	},
