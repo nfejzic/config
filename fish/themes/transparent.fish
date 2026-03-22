@@ -1,45 +1,45 @@
 # name: 'Transparent Theme'
 # Uses colors set by the terminal
 
-set -g fish_color_normal normal
-set -g fish_color_command blue
-set -g fish_color_keyword magenta --bold
-set -g fish_color_param cyan
-set -g fish_color_redirection cyan --bold
-set -g fish_color_comment red
-set -g fish_color_error brred
-set -g fish_color_escape brcyan
-set -g fish_color_operator brcyan
-set -g fish_color_end green
-set -g fish_color_quote yellow
-set -g fish_color_autosuggestion black --dim
-set -g fish_color_user brgreen
-set -g fish_color_host normal
-set -g fish_color_host_remote yellow
-set -g fish_color_valid_path --underline
-set -g fish_color_status red
+fish_color_normal normal
+fish_color_command blue
+fish_color_keyword magenta --bold
+fish_color_param cyan
+fish_color_redirection cyan --bold
+fish_color_comment brwhite --dim
+fish_color_error brred
+fish_color_escape brcyan
+fish_color_operator brcyan
+fish_color_end green
+fish_color_quote yellow
+fish_color_autosuggestion brblack --dim
+fish_color_user brgreen
+fish_color_host normal
+fish_color_host_remote yellow
+fish_color_valid_path --underline
+fish_color_status red
 
-set -g fish_color_cwd green
-set -g fish_color_cwd_root red
+fish_color_cwd green
+fish_color_cwd_root red
 
 # Background color for search matches
-set -g fish_color_search_match bryellow --background=brblack
+fish_color_search_match bryellow --background=brblack
 
 # Background color for selections
-set -g fish_color_selection brblue --reverse
+fish_color_selection brblue --reverse
 
 # XXX fish_color_cancel was added in 2.6, but this was added to post-2.3 initialization
 # when 2.4 and 2.5 were already released
-set -g fish_color_cancel -r
+fish_color_cancel -r
 
 # Pager colors
-set -g fish_pager_color_prefix normal --bold --underline
-set -g fish_pager_color_completion normal
-set -g fish_pager_color_description yellow -i
-set -g fish_pager_color_progress brwhite --background=cyan
-set -g fish_pager_color_selected_background -r
+fish_pager_color_prefix normal --bold --underline
+fish_pager_color_completion normal
+fish_pager_color_description yellow -i
+fish_pager_color_progress brwhite --background=cyan
+fish_pager_color_selected_background -r
 
 #
 # Directory history colors
 #
-set -g fish_color_history_current --bold
+fish_color_history_current --bold
