@@ -37,6 +37,7 @@ staged = "​"
 renamed = "​"
 deleted = "​"
 stashed = "≡"
+ignore_submodules = true
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
