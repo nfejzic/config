@@ -1,13 +1,10 @@
 # load font
-# config-file = ../fonts/noto-sans-mono
 config-file = ../fonts/monolisa
-# config-file = ../fonts/tx_02
-# config-file = ../fonts/codelia
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%
 
-theme = dark:gruvbox-dark-hard,light:gruvbox-light
+theme = dark:Rose Pine Moon,light:Rose Pine Dawn
 
 selection-invert-fg-bg = false
 cursor-invert-fg-bg = false
@@ -68,6 +65,7 @@ keybind = shift+super+l=esc:L
 keybind = shift+super+j=esc:J
 keybind = shift+super+h=esc:H
 keybind = shift+super+k=esc:K
+keybind = unconsumed:super+h=esc:h
 
 keybind = super+d=esc:d
 keybind = super+shift+d=esc:D
