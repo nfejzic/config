@@ -39,10 +39,6 @@ abbr -a gpp 'git push'
 abbr -a gpf 'git push --force-with-lease'
 abbr -a gb 'git branch'
 abbr -a gbd 'git branch -vv | rg ": gone]" | awk \'{print $1}\' | xargs -p -I _ git branch -D _'
-abbr -a gwd git_worktree_prune_gone
-abbr -a gw 'git worktree'
-abbr -a gwa 'git worktree add' # checkout branch (directory) in worktree
-abbr -a gwr 'git worktree remove' # remove branch (directory) in worktree
 abbr -a gll 'git log' # show git commits
 abbr -a gl 'git log --oneline' # show git commits with less info (only commit message headline)
 abbr -a glp 'git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all' # show git commits with graph and commit message headline
@@ -50,6 +46,12 @@ abbr -a glpv 'git log --graph --abbrev-commit --decorate --format=format:"%C(bol
 
 abbr -a gsh 'git stash' # G-it S-tash H-ide
 abbr -a gsp 'git stash pop' # G-it S-tash P-op
+
+# git worktree:
+abbr -a gw 'git worktree'
+abbr -a gwa git_worktree_add
+abbr -a gwd git_worktree_prune_gone
+abbr -a gwr 'git worktree remove' # remove branch (directory) in worktree
 
 abbr -a cn 'cargo nextest'
 
