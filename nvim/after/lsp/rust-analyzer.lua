@@ -7,13 +7,16 @@ vim.g.rustaceanvim = {
 			focusable = true,
 		},
 	},
-
-	-- LSP configuration
-	-- NOTE: If 'rust-analyzer' is installed through rustup, it has priority and will be used
-	--       If that's not the case, then the binary installed through 'Mason' will be used
 	server = {
-		standalone = false,
+		default_settings = {
+			["rust-analyzer"] = {
+				files = {
+					exclude = { ".direnv" }
+				}
+			}
+		},
 	},
+
 	-- DAP configuration
 	dap = {
 		autoload_configurations = true,
@@ -34,8 +37,13 @@ return {
 				command = "clippy",
 				features = "all",
 			},
+			cargo = {
+				targetDir = true,
+			},
 			files = {
-				excludeDirs = { '.direnv', '.nix' },
+				excludeDirs = { '**/.direnv', '.direnv', '.nix' },
+				exclude = { '**/.direnv', '.direnv', '.nix' },
+				watcher = "client",
 			},
 		},
 	},
