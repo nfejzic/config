@@ -1,7 +1,5 @@
 local M = {}
 
-local _border = "rounded"
-
 function M.setup_ui()
 	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
@@ -12,7 +10,6 @@ function M.setup_ui()
 		virtual_lines = false,
 		underline = true,
 		float = {
-			border = _border,
 			source = "always",
 		},
 		signs = {

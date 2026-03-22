@@ -33,7 +33,7 @@ return {
 
 		completion = {
 			menu = {
-				border = "rounded",
+				border = "none",
 				draw = {
 					treesitter = { "lsp", "path", "snippets", },
 					columns = {
@@ -44,9 +44,6 @@ return {
 			},
 			documentation = {
 				auto_show = true,
-				window = {
-					border = "rounded",
-				},
 			},
 			ghost_text = {
 				enabled = true,
@@ -56,7 +53,7 @@ return {
 		signature = {
 			enabled = true,
 			window = {
-				border = "rounded",
+				border = "none",
 			},
 		},
 

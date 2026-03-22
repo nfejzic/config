@@ -9,21 +9,21 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- rounded borders by default
-vim.opt.winborder = "rounded"
+vim.opt.winborder = "none"
 
 --Remap space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.listchars = {
-	eol = "↲",
-	tab = "» ",
-	space = "·",
-	trail = "·",
-	extends = "…",
-	precedes = "…",
-	conceal = "┊",
-	nbsp = "☠",
+    eol = "↲",
+    tab = "» ",
+    space = "·",
+    trail = "·",
+    extends = "…",
+    precedes = "…",
+    conceal = "┊",
+    nbsp = "☠",
 }
 
 vim.opt.list = false

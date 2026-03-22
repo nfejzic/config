@@ -12,9 +12,6 @@ return {
 				signs = {},
 				numhl = false,
 				current_line_blame = false,
-				preview_config = {
-					border = "rounded",
-				},
 			})
 
 			require("user.keymaps").set_keys({
