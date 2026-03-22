@@ -61,7 +61,8 @@ return {
 				variant = "auto", -- auto, main, moon, or dawn
 				dark_variant = "moon", -- main, moon, or dawn
 
-				disable_background = true,
+				dim_inactive_windows = true,
+				disable_background = false,
 				styles = {
 					italic = false,
 				},
