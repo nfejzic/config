@@ -33,7 +33,6 @@ return {
 
 		completion = {
 			menu = {
-				border = "none",
 				draw = {
 					treesitter = { "lsp", "path", "snippets", },
 					columns = {
@@ -52,9 +51,6 @@ return {
 
 		signature = {
 			enabled = true,
-			window = {
-				border = "none",
-			},
 		},
 
 		sources = {

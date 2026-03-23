@@ -32,9 +32,13 @@ return {
 				statementStyle = { bold = false },
 				typeStyle = { italic = false, bold = false },
 				transparent = false,
-				dimInactive = false,
+				dimInactive = true,
 				terminalColors = true,
 				semantic_highlighting = "minimal",
+				background = {
+					dark = "kanagawa-wave",
+					light = "kanagawa-lotus",
+				}
 			})
 		end
 	},
@@ -45,6 +49,7 @@ return {
 		opts = {
 			compile = true, -- enable compiling the colorscheme
 			theme = "wave", -- Load "wave" theme
+			transparent = false,
 			background = { -- map the value of 'background' option to a theme
 				dark = "wave", -- try "dragon" !
 				light = "lotus"
@@ -72,6 +77,23 @@ return {
 					GitSignsAddInline = { link = "DiffText" },
 					GitSignsChangeInline = { link = "DiffText" },
 					GitSignsDeleteInline = { link = "DiffText" },
+					["@lsp.type.formatSpecifier"] = { fg = "love" },
+
+					-- make coloring consistent...
+					Variable = { fg = "text" },
+					["@variable"] = { link = "Variable" },
+					["@variable.member"] = { link = "Variable" },
+					["@lsp.type.variable"] = { link = "Variable" },
+					-- the '_' in Rust... who linked this to 'Character'
+					["@character.special.rust"] = { link = "Variable" },
+					["@property"] = { link = "Variable" },
+
+					["@lsp.type.namespace"] = { link = "@module" },
+
+					["@constant.macro"] = { link = "PreProc" },
+					["@function.macro.rust"] = { link = "PreProc" },
+					["@keyword.exception"] = { link = "PreProc" },
+					["@mutable_specifier"] = { fg = "love" },
 				},
 			})
 		end

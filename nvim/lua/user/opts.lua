@@ -16,14 +16,14 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.listchars = {
-    eol = "↲",
-    tab = "» ",
-    space = "·",
-    trail = "·",
-    extends = "…",
-    precedes = "…",
-    conceal = "┊",
-    nbsp = "☠",
+	eol = "↲",
+	tab = "» ",
+	space = "·",
+	trail = "·",
+	extends = "…",
+	precedes = "…",
+	conceal = "┊",
+	nbsp = "☠",
 }
 
 vim.opt.list = false
