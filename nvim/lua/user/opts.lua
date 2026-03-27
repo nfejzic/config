@@ -50,6 +50,14 @@ vim.o.colorcolumn = "+1"
 vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.diffopt:append("indent-heuristic")
 
+-- linematch messes up with :diffget, has some issues with precision etc.
+-- References:
+--   - https://github.com/neovim/neovim/issues/37892
+--   - https://github.com/neovim/neovim/issues/22696
+--   - https://github.com/tpope/vim-fugitive/issues/2186
+--   - https://github.com/tpope/vim-fugitive/issues/2444
+vim.opt.diffopt:remove("linematch:40")
+
 --Enable mouse mode
 vim.o.mouse = "a"
 
