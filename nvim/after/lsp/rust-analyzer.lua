@@ -6,16 +6,6 @@ vim.g.rustaceanvim = {
 			focusable = true,
 		},
 	},
-	server = {
-		default_settings = {
-			["rust-analyzer"] = {
-				files = {
-					exclude = { ".direnv" }
-				}
-			}
-		},
-	},
-
 	-- DAP configuration
 	dap = {
 		autoload_configurations = true,
@@ -32,9 +22,8 @@ return {
 			},
 			checkOnSave = true,
 			check = {
-				enable = true,
+				-- NOTE: setting 'features = "all"' might break diagnostics...
 				command = "clippy",
-				features = "all",
 			},
 			cargo = {
 				targetDir = true,
