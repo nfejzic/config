@@ -84,6 +84,7 @@ return {
 					["@variable"] = { link = "Variable" },
 					["@variable.member"] = { link = "Variable" },
 					["@lsp.type.variable"] = { link = "Variable" },
+					["@parameter"] = { link = "Variable" },
 					-- the '_' in Rust... who linked this to 'Character'
 					["@character.special.rust"] = { link = "Variable" },
 					["@property"] = { link = "Variable" },
@@ -94,6 +95,8 @@ return {
 					["@function.macro.rust"] = { link = "PreProc" },
 					["@keyword.exception"] = { link = "PreProc" },
 					["@mutable_specifier"] = { fg = "love" },
+
+					BlinkCmpDocBorder = { link = "FloatBorder" },
 				},
 			})
 		end
