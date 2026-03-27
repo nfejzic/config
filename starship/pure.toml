@@ -19,6 +19,7 @@ style = "bright-blue"
 
 [directory]
 style = "bright-blue"
+fish_style_pwd_dir_length = 3
 
 [character]
 success_symbol = "[❯](purple)"
@@ -28,6 +29,7 @@ vimcmd_symbol = "[❮](green)"
 [git_branch]
 format = "[$branch]($style)"
 style = "bright-black"
+ignore_bare_repo = true
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](red) ($ahead_behind$stashed )]($style)"
