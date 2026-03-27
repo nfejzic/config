@@ -8,8 +8,8 @@ vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- rounded borders by default
-vim.opt.winborder = "none"
+-- set default window borders
+vim.opt.winborder = "solid"
 
 --Remap space as leader key
 vim.g.mapleader = " "
