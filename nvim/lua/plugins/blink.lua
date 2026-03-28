@@ -33,6 +33,8 @@ return {
 
 		completion = {
 			menu = {
+				-- NOTE: completion does not need a border as it's sufficiently visible
+				border = 'none',
 				draw = {
 					treesitter = { "lsp", "path", "snippets", },
 					columns = {
