@@ -113,3 +113,11 @@ keybind = ctrl+backspace=text:\x17
 keybind = opt+backspace=text:\x17
 keybind = super+shift+t=text:\x1bT
 keybind = super+control+t=toggle_quick_terminal
+
+# search keybindings
+keybind = super+f=start_search
+keybind = super+e=search_selection
+keybind = super+shift+f=end_search
+keybind = escape=end_search
+keybind = super+g=navigate_search:next
+keybind = super+shift+g=navigate_search:previous
