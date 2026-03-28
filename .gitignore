@@ -7,6 +7,11 @@ fish/conf.d/rustup.fish
 fish/conf.d/fzf.fish
 fish/fish_variables
 fish/user/theme_env.fish
+fish/functions/_*
+fish/functions/*fzf*
+fish/functions/bass.fish
+fish/functions/fisher.fish
+fish/functions/theme_*
 
 # helix files
 helix/runtime
