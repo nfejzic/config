@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-tmuxsessions=$(tmux list-sessions)
+set -l tmuxsessions (tmux list-sessions)
 
-choice=$(tmux list-sessions | fzf | awk -F ':' '{print $1}')
+set -l choice (tmux list-sessions | fzf | awk -F ':' '{print $1}')
 
-if [[ -z $TMUX ]]; then
+if test -z $TMUX
     tmux attach -t "$choice"
 else
     tmux switch-client -t "$choice"
-fi
+end
