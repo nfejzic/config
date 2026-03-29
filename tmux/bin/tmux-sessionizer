@@ -1,29 +1,39 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
+if test (count $argv) -eq 1
+    set selected $argv[1]
 else
-    selected=$(fd -H -td "^.git$" "$HOME/Developer" --exec dirname | fzf)
-fi
+    set selected (
+        fd -H -t d -t f -g ".git" "$HOME/Developer" |
+        while read -l gitpath
+            if test -d "$gitpath"
+                dirname "$gitpath"
+            else
+                set gitdir (string replace "gitdir: " "" (cat "$gitpath"))
+                echo $gitdir | string replace -r 'worktrees/.*' ''
+            end
+        end | sort -u | fzf
+    )
+end
 
-if [[ -z $selected ]]; then
+if test -z "$selected"
     exit 0
-fi
+end
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+set selected_name (basename "$selected" | string replace "." "_")
+set tmux_running (pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+if test -z "$TMUX"; and test -z "$tmux_running"
+    tmux new-session -s "$selected_name" -c "$selected"
     exit 0
-fi
+end
 
-if ! tmux has-session -t=$selected_name 2>/dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-fi
+if not tmux has-session -t "$selected_name" ^/dev/null
+    tmux new-session -ds "$selected_name" -c "$selected"
+end
 
-if [[ -z $TMUX ]] && [[ -n $tmux_running ]]; then
-    tmux attach -t $selected_name
+if test -z "$TMUX"; and test -n "$tmux_running"
+    tmux attach -t "$selected_name"
 else
-    tmux switch-client -t $selected_name
-fi
+    tmux switch-client -t "$selected_name"
+end
