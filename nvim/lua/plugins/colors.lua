@@ -17,6 +17,7 @@ return {
 		lazy = false,
 		dev = true,
 		priority = 1000,
+		enabled = false,
 
 		config = function()
 			local colorize = require('colorize')
@@ -69,7 +70,7 @@ return {
 				dim_inactive_windows = true,
 				disable_background = false,
 				styles = {
-					italic = false,
+					italic = true,
 				},
 
 				highlight_groups = {
@@ -83,6 +84,7 @@ return {
 					Variable = { fg = "text" },
 					["@variable"] = { link = "Variable" },
 					["@variable.member"] = { link = "Variable" },
+					["@variable.parameter"] = { link = "Variable" },
 					["@lsp.type.variable"] = { link = "Variable" },
 					["@parameter"] = { link = "Variable" },
 					-- the '_' in Rust... who linked this to 'Character'
@@ -96,7 +98,7 @@ return {
 					["@keyword.exception"] = { link = "PreProc" },
 					["@mutable_specifier"] = { fg = "love" },
 
-					BlinkCmpDocBorder = { link = "FloatBorder" },
+					DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
 				},
 			})
 		end
