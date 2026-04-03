@@ -99,6 +99,8 @@ return {
 					["@mutable_specifier"] = { fg = "love" },
 
 					DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
+
+					BlinkCmpDocBorder = { link = "FloatBorder" },
 				},
 			})
 		end
