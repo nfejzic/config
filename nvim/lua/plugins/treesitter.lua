@@ -104,7 +104,6 @@ return {
 
 			vim.keymap.set({ "n", "x", "o" }, "]f", function() move.goto_next_start("@function.outer", "textobjects") end)
 			vim.keymap.set({ "n", "x", "o" }, "]]", function() move.goto_next_start("@class.outer", "textobjects") end)
-			vim.keymap.set({ "n", "x", "o" }, "]c", function() move.goto_next_start("@comment.outer", "textobjects") end)
 			vim.keymap.set({ "n", "x", "o" }, "]a",
 				function() move.goto_next_start("@parameter.inner", "textobjects") end)
 
@@ -117,8 +116,6 @@ return {
 				function() move.goto_previous_start("@function.outer", "textobjects") end)
 			vim.keymap.set({ "n", "x", "o" }, "[[",
 				function() move.goto_previous_start("@class.outer", "textobjects") end)
-			vim.keymap.set({ "n", "x", "o" }, "[c",
-				function() move.goto_previous_start("@comment.outer", "textobjects") end)
 			vim.keymap.set({ "n", "x", "o" }, "[a",
 				function() move.goto_previous_start("@parameter.inner", "textobjects") end)
 
