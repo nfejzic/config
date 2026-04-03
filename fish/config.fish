@@ -23,21 +23,19 @@ function fish_title
     set -l cmd (test -n "$argv[1]"; and echo $argv[1]; or echo fish)
     set -l cmd (string split " " "$cmd")[1]
 
-    if git rev-parse --is-inside-work-tree &>/dev/null
+    if git rev-parse --is-bare-repository &>/dev/null
         set -l repo (git remote -vv 2>/dev/null \
             | awk '{print $2}' \
             | awk -F '/' '{print $NF}' \
             | awk -F '.' '{print $1}' \
             | head -n 1)
 
-        set -l gitdir (git rev-parse --git-dir 2>/dev/null)
-        set -l commondir (git rev-parse --git-common-dir 2>/dev/null)
-        if test (realpath "$gitdir") != (realpath "$commondir")
-            gen_title $cmd $repo $(git branch --show-current)
-        else
-            gen_title $cmd $repo
+        if test (string length $repo) -eq 0
+            set repo x
         end
+
+        gen_title $cmd $repo $(git branch --show-current)
     else
-        gen_title $cmd (basename "$(prompt_pwd)")
+        gen_title $cmd (basename "$(prompt_pwd)") none
     end
 end
