@@ -45,4 +45,9 @@ return {
 			vim.g.fugitive_dynamic_colors = 1
 		end,
 	},
+
+	{
+		"dlyongemallo/diffview.nvim",
+		version = "*",
+	}
 }
