@@ -96,7 +96,7 @@ return {
 					["@constant.macro"] = { link = "PreProc" },
 					["@function.macro.rust"] = { link = "PreProc" },
 					["@keyword.exception"] = { link = "PreProc" },
-					["@mutable_specifier"] = { fg = "love" },
+					["@accent"] = { fg = "love" },
 
 					DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
 
