@@ -82,6 +82,7 @@ return {
 
 					-- make coloring consistent...
 					Variable = { fg = "text" },
+					["@variable.builtin"] = { fg = "gold", italic = true },
 					["@variable"] = { link = "Variable" },
 					["@variable.member"] = { link = "Variable" },
 					["@variable.parameter"] = { link = "Variable" },
@@ -92,7 +93,10 @@ return {
 					["@property"] = { link = "Variable" },
 
 					["@lsp.type.namespace"] = { link = "@module" },
+					["@lsp.mod.defaultLibrary"] = { bold = true },
+					["@lsp.type.const"] = { link = "Constant" },
 
+					["@keyword.operator"] = { link = "Keyword" },
 					["@constant.macro"] = { link = "PreProc" },
 					["@function.macro.rust"] = { link = "PreProc" },
 					["@keyword.exception"] = { link = "PreProc" },
