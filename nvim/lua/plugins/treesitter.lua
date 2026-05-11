@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		branch = "main",
+		commit = "4916d65",
 
 		-- NOTE: this plugin does not support lazy loading!
 		lazy = false,
