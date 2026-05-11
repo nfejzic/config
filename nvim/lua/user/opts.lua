@@ -146,3 +146,6 @@ vim.o.laststatus = 3
 vim.opt.foldenable = false
 vim.opt.foldmethod = "manual"
 vim.opt.foldlevelstart = 99
+
+-- NOTE: this is experimental!
+require('vim._core.ui2').enable()
