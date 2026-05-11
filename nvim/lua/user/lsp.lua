@@ -39,7 +39,7 @@ local function on_attach(client, bufnr)
 	})
 
 	local picker = require("snacks").picker
-	local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client.supports_method("textDocument/inlayHint")
+	local inlay_hint_supported = vim.lsp.inlay_hint ~= nil and client:supports_method("textDocument/inlayHint")
 
 	if inlay_hint_supported then
 		vim.api.nvim_create_user_command("LspToggleInlayHints", function()
