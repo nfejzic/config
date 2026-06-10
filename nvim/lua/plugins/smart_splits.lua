@@ -21,19 +21,25 @@ local config = function()
 
 		{ "n", "<A-w>", "<CMD>quit<CR>", "Close the currently focused window" },
 	})
+
+	-- Re-assert `@pane-is-vim=1` on this pane whenever nvim regains
+	-- focus. Works around smart-splits' on_exit using
+	-- `display-message -p '#{pane_id}'`, which from inside a tmux
+	-- popup resolves to the *underlying* pane and clobbers its flag
+	-- when a popup nvim exits. Without this, M-hjkl in the outer
+	-- nvim silently start hitting tmux's `select-pane` fallback
+	-- because tmux thinks the pane is no longer vim.
+	vim.api.nvim_create_autocmd("FocusGained", {
+		group = vim.api.nvim_create_augroup("SmartSplitsResyncPaneIsVim", { clear = true }),
+		callback = function()
+			local pane_id = os.getenv("TMUX_PANE")
+			if not pane_id then return end
+			vim.fn.jobstart(
+				{ "tmux", "set-option", "-pt", pane_id, "@pane-is-vim", "1" },
+				{ detach = true }
+			)
+		end,
+	})
 end
 
 config()
-
--- return {
--- 	{
--- 		"mrjones2014/smart-splits.nvim",
---
--- 		lazy = true,
--- 		event = "UiEnter",
---
--- 		cond = not utils.is_llm_prompt(),
---
--- 		config = config,
--- 	},
--- }
