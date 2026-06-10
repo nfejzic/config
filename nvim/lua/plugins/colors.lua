@@ -79,6 +79,7 @@ return {
 					GitSignsChangeInline = { link = "DiffText" },
 					GitSignsDeleteInline = { link = "DiffText" },
 					["@lsp.type.formatSpecifier"] = { fg = "love" },
+					["@lsp.type.builtinType"] = { link = "@type.builtin" },
 
 					-- make coloring consistent...
 					Variable = { fg = "text" },
@@ -105,6 +106,9 @@ return {
 					DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
 
 					BlinkCmpDocBorder = { link = "FloatBorder" },
+
+					-- NOTE: custom treesitter queries for accented keywords
+					["@accent"] = { fg = "love" },
 				},
 			})
 		end
