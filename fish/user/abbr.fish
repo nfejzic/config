@@ -55,7 +55,7 @@ abbr -a gsp 'git stash pop' # G-it S-tash P-op
 abbr -a gw 'git worktree'
 abbr -a gwa git_worktree_add
 abbr -a gwd git_worktree_prune_gone
-abbr -a gwr 'git worktree remove' # remove branch (directory) in worktree
+abbr -a gwr "git worktree list | awk '{print \$1}' | fzf | xargs git worktree remove"
 
 abbr -a cn 'cargo nextest'
 
