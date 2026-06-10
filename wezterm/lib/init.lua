@@ -118,7 +118,7 @@ function M.setup(wezterm, config, plugins)
 	local os_appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 
 	local color_scheme = require("lib.colors").get_color_scheme(
-		{ dark = 'gruvbox-dark-hard', light = 'kanagawa-lotus' },
+		{ dark = 'rose-pine-moon-custom', light = 'kanagawa-lotus' },
 		os_appearance
 	)
 	local tab_api = require("lib.tab_api")

@@ -7,6 +7,7 @@ local M = {}
 --- | "kanagawa-lotus"
 --- | "gruvbox-dark-hard"
 --- | "solarized-dark-hard"
+--- | "rose-pine-moon-custom"
 -- NOTE: following themes are nice, but not yet configured
 -- --- | "Gruvbox light, medium (base16)"
 -- --- | "catppuccin-frappe"
