@@ -1,23 +1,36 @@
-
 [window]
-decorations = "None"
+decorations = "Full"
 startup_mode = "Maximized"
 opacity = 1
 blur = true
+
+[keyboard]
+bindings = [
+    { key = "Space", mods = "Option", chars = "\x1b " },
+    { key = "t", mods = "Super", chars = "\x1bt" },
+    { key = "w", mods = "Super", chars = "\x1bw" },
+    { key = "d", mods = "Super", chars = "\x1bd" },
+    { key = "d", mods = "Super", chars = "\x1bd" },
+    { key = "d", mods = "Super|Shift", chars = "\x1bD" },
+
+    { key = "1", mods = "Super", chars = "\x1b1" },
+    { key = "2", mods = "Super", chars = "\x1b2" },
+    { key = "3", mods = "Super", chars = "\x1b3" },
+    { key = "4", mods = "Super", chars = "\x1b4" },
+    { key = "5", mods = "Super", chars = "\x1b5" },
+    { key = "6", mods = "Super", chars = "\x1b6" },
+    { key = "7", mods = "Super", chars = "\x1b7" },
+    { key = "8", mods = "Super", chars = "\x1b8" },
+    { key = "9", mods = "Super", chars = "\x1b9" },
+]
 
 [font]
 normal      = { family = "MonoLisa", style = "Light" }
 italic      = { family = "MonoLisa", style = "Light Italic" }
 bold        = { family = "MonoLisa", style = "Regular" }
-size        = 20
+size        = 16
 
 [general]
 import = [
     "~/.config/alacritty/colors/gruvbox_dark_hard.toml"
-
-    # "~/.config/alacritty/colors/kanagawa.toml"
-    # "~/.config/alacritty/colors/catppuccin-macchiato.toml"
 ]
-
-[terminal]
-shell = "fish"
