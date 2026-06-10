@@ -9,7 +9,7 @@ adjust-cell-height = 0
 adjust-cell-width = 0
 
 # cursive
-# font-feature = ss02
+font-feature = ss02
 
 # single-loop 'g'
 # font-feature = ss04
