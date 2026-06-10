@@ -149,3 +149,7 @@ vim.opt.foldlevelstart = 99
 
 -- NOTE: this is experimental!
 require('vim._core.ui2').enable()
+
+-- enable undo-tree
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open)
