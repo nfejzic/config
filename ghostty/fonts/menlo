@@ -1,0 +1,7 @@
+font-family = Menlo
+font-size = 17
+adjust-cell-height = 0
+font-synthetic-style = false
+
+# i 
+font-feature = cv09
