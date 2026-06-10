@@ -9,9 +9,9 @@ function M.format_workspace_name(wezterm)
 		local workspace = window:active_workspace()
 
 		window:set_left_status(wezterm.format({
-			{ Attribute = { Intensity = "Normal" } },
+			-- { Attribute = { Intensity = "Normal", Underline = "None" } },
 			-- { Background = { Color = colors.tab_bar_bg } },
-			-- { Foreground = { Color = colors.palette.ansi[8] } },
+			{ Foreground = { AnsiColor = "Grey" } },
 			{ Text = " [" .. workspace .. "] " },
 		}))
 	end
