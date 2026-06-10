@@ -4,7 +4,20 @@ adjust-cursor-thickness = 200%
 theme = dark:Rose Pine Moon,light:Rose Pine Dawn
 
 selection-invert-fg-bg = false
-cursor-invert-fg-bg = false
+# The color of the cursor. If this is not set, a default will be chosen.
+#
+# Direct colors can be specified as either hex (`#RRGGBB` or `RRGGBB`)
+# or a named X11 color.
+#
+# Additionally, special values can be used to set the color to match
+# other colors at runtime:
+#
+#   * `cell-foreground` - Match the cell foreground color.
+#     (Available since: 1.2.0)
+#
+#   * `cell-background` - Match the cell background color.
+#     (Available since: 1.2.0)
+# cursor-color = cell-foreground
 cursor-opacity = 1
 
 command = "$SHELL -c 'tmux new -s default -A'"
