@@ -3,6 +3,7 @@ builtin source "$HOME/.config/fish/user/init.fish"
 function gen_title
     set cmd_name $argv[1]
     set dir $argv[2]
+    set branch $argv[3]
     set max_width 15
 
     set occupied_len (math "$(string length $cmd_name) + 2")
@@ -11,7 +12,7 @@ function gen_title
     if set -q argv[3]
         set -l avail (math "$space_for_dir - 1")
         set -l half (math "ceil($avail / 2)")
-        set dir (string shorten -c "" -m $half $dir):(string shorten -c '' -m (math "$avail - $half") $argv[3])
+        set dir (string shorten -c "" -m $half $dir):(string shorten -c '' -m (math "$avail - $half") (string replace '/' '|' $branch))
     else
         set dir (string shorten -c . -m $space_for_dir $dir)
     end
