@@ -6,3 +6,11 @@ adjust-cell-width = 0
 
 # nicer 'r'
 font-feature = ss05
+
+# alternative '|'
+# font-feature = ss06
+
+# disable ligatures as they look bad in this font ->  |> 
+# in my version I did not buy these anyways
+# font-feature = -dlig
+# font-feature = -calt
