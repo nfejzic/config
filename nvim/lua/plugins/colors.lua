@@ -1,5 +1,117 @@
 return {
 	{
+		"ellisonleao/gruvbox.nvim",
+
+		config = function()
+			local gruvbox = require("gruvbox")
+			local p = gruvbox.palette
+
+			local function choose(light, dark)
+				return vim.o.background == 'light' and light or dark
+			end
+
+			local function create_config()
+				return {
+					terminal_colors = true,
+					undercurl = true,
+					underline = true,
+					bold = true,
+					italic = {
+						strings = false,
+						emphasis = true,
+						comments = true,
+						operators = false,
+						folds = true,
+					},
+					strikethrough = true,
+					invert_selection = false,
+					invert_signs = false,
+					invert_tabline = false,
+					inverse = true,
+					contrast = "hard",
+					palette_overrides = {},
+					overrides = {
+						-- QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
+						GitSignsAddInline = { link = "DiffText" },
+						GitSignsChangeInline = { link = "DiffText" },
+						GitSignsDeleteInline = { link = "DiffText" },
+						-- ["@lsp.type.formatSpecifier"] = { fg = "love" },
+						["@lsp.type.builtinType"] = { link = "@type.builtin" },
+						["@lsp.type.interface"] = { link = "Type" },
+
+						-- make coloring consistent...
+						["@variable"] = { link = "Variable" },
+						["@variable.member"] = { link = "Variable" },
+						["@variable.parameter"] = { link = "Variable" },
+						["@lsp.type.variable"] = { link = "Variable" },
+						["@parameter"] = { link = "Variable" },
+						-- the '_' in Rust... who linked this to 'Character'
+						["@character.special.rust"] = { link = "Variable" },
+						["@property"] = { link = "Variable" },
+						["@punctuation"] = { link = "GruvboxFg3" },
+						["@punctuation.bracket"] = { link = "@punctuation" },
+						["@punctuation.delimiter"] = { link = "@punctuation" },
+						["@operator"] = { link = "@punctuation" },
+						["@constructor"] = { link = "@punctuation" },
+
+						Function = { link = "GruvboxBlue" },
+						["@lsp.type.namespace"] = { link = "@module" },
+						["@lsp.type.method"] = { link = "Function" },
+						["@lsp.type.comment.lua"] = { link = "none" },
+
+						Keyword = { link = "GruvboxPurple" },
+						["@constant.macro"] = { link = "PreProc" },
+						["@function.macro.rust"] = { link = "PreProc" },
+						["@keyword.exception"] = { link = "PreProc" },
+						["@mutable_specifier"] = { link = "PreProc" },
+
+						Constant = { link = "GruvboxOrange" },
+						Number = { link = "Constant" },
+						DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
+						BlinkCmpDocBorder = { link = "FloatBorder" },
+						Directory = { link = "GruvboxBlueBold" },
+
+						LineNr = { link = "CursorLineFold" },
+
+						NormalFloat = { bg = choose(p.light1, p.dark1) },
+						FloatTitle = { link = "GruvboxGreenSign" },
+						SnacksNormal = { link = "NormalFloat" },
+						SnacksPicker = { link = "NormalFloat" },
+						SnacksPickerListCursorLine = { bg = choose(p.light2, p.dark2) },
+						SnacksPickerMatch = { fg = p.bright_aqua, bold = true },
+						SnacksInputNormal = { link = "NormalFloat" },
+						SnacksInputBorder = { link = "NormalFloat" },
+						SnacksInputTitle = { bg = choose(p.light1, p.dark1) },
+
+						Todo = { fg = p.bright_yellow, bg = "none" },
+						["@comment.error.comment"] = { fg = p.bright_red },
+						["@constant.comment"] = { fg = p.bright_purple },
+
+						-- NOTE: custom treesitter queries for accented keywords
+						["@accent"] = { link = "GruvboxYellow" },
+					},
+					dim_inactive = false,
+					transparent_mode = false,
+				}
+			end
+
+			gruvbox.setup(create_config())
+
+			-- HACK(nfejzic): force gruvbox to choose light and dark colors
+			--				  based on background when background changes
+			local grp = vim.api.nvim_create_augroup("gruvbox-background-change", { clear = true })
+			vim.api.nvim_create_autocmd("OptionSet", {
+				group = grp,
+				pattern = "background",
+				callback = function()
+					gruvbox.setup(create_config())
+					gruvbox.load()
+				end,
+			})
+		end,
+	},
+
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
