@@ -104,6 +104,10 @@ return {
 				group = grp,
 				pattern = "background",
 				callback = function()
+					if vim.g.colors_name ~= "gruvbox" then
+						return
+					end
+
 					gruvbox.setup(create_config())
 					gruvbox.load()
 				end,
