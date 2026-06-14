@@ -11,6 +11,7 @@ return {
 			end
 
 			local function create_config()
+				--- @type GruvboxConfig
 				return {
 					terminal_colors = true,
 					undercurl = true,
