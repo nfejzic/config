@@ -29,7 +29,7 @@ return {
 					invert_signs = false,
 					invert_tabline = false,
 					inverse = true,
-					contrast = "hard",
+					contrast = "",
 					palette_overrides = {},
 					overrides = {
 						-- QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
