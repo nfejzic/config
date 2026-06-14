@@ -44,6 +44,7 @@ return {
 						["@variable"] = { link = "Variable" },
 						["@variable.member"] = { link = "Variable" },
 						["@variable.parameter"] = { link = "Variable" },
+						["@variable.parameter.gitcommit"] = { link = "GruvboxFg1" },
 						["@lsp.type.variable"] = { link = "Variable" },
 						["@parameter"] = { link = "Variable" },
 						-- the '_' in Rust... who linked this to 'Character'
