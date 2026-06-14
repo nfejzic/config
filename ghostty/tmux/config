@@ -1,5 +1,5 @@
 # load font
-config-file = ../fonts/tx_02
+config-file = ../fonts/berkeley_mono
 
 # 100% is way too thin
 adjust-cursor-thickness = 200%
@@ -35,6 +35,18 @@ window-padding-y = 0
 window-padding-balance = true
 window-padding-color = background
 window-inherit-font-size = true
+
+# The color space to use when interpreting terminal colors. "Terminal colors"
+# refers to colors specified in your configuration and colors produced by
+# direct-color SGR sequences.
+#
+# Valid values:
+#
+#   * `srgb` - Interpret colors in the sRGB color space. This is the default.
+#   * `display-p3` - Interpret colors in the Display P3 color space.
+#
+# This setting is currently only supported on macOS.
+window-colorspace = srgb
 
 background-opacity = 1
 background-opacity-cells = true

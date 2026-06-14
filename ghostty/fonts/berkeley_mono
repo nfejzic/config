@@ -1,0 +1,8 @@
+font-family = Berkeley Mono
+font-size = 17
+font-synthetic-style = false
+adjust-cell-height = 0
+adjust-cell-width = 0
+
+# nicer 'r'
+font-feature = ss05
