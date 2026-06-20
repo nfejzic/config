@@ -1,3 +1,41 @@
+---@param theme_specific table<string,vim.api.keyset.highlight>
+local function link_highlights(theme_specific)
+	local linked = {
+		GitSignsAddInline = { link = "DiffText" },
+		GitSignsChangeInline = { link = "DiffText" },
+		GitSignsDeleteInline = { link = "DiffText" },
+		["@lsp.type.builtinType"] = { link = "@type.builtin" },
+		["@lsp.type.comment"] = { link = "@lsp" },
+
+		-- make coloring consistent...
+		["@variable"] = { link = "Variable" },
+		["@variable.member"] = { link = "Variable" },
+		["@variable.parameter"] = { link = "Variable" },
+		["@lsp.type.variable"] = { link = "Variable" },
+		["@parameter"] = { link = "Variable" },
+		-- the '_' in Rust... who linked this to 'Character'
+		["@character.special.rust"] = { link = "Variable" },
+		["@property"] = { link = "Variable" },
+
+		["@lsp.type.namespace"] = { link = "@module" },
+		["@lsp.mod.defaultLibrary"] = { bold = true },
+		["@lsp.type.const"] = { link = "Constant" },
+		["@lsp.type.comment.lua"] = { link = "none" },
+
+		["@keyword.operator"] = { link = "Keyword" },
+		["@constant.macro"] = { link = "PreProc" },
+		["@function.macro.rust"] = { link = "PreProc" },
+		["@keyword.exception"] = { link = "PreProc" },
+
+		DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
+
+		BlinkCmpDocBorder = { link = "FloatBorder" },
+	}
+
+	local final = vim.tbl_deep_extend("force", linked, theme_specific)
+	return final
+end
+
 return {
 	{
 		"ellisonleao/gruvbox.nvim",
@@ -29,27 +67,20 @@ return {
 					invert_signs = false,
 					invert_tabline = false,
 					inverse = true,
-					contrast = "",
+					contrast = vim.o.background == "light" and "" or "hard",
 					palette_overrides = {},
-					overrides = {
-						-- QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
-						GitSignsAddInline = { link = "DiffText" },
-						GitSignsChangeInline = { link = "DiffText" },
-						GitSignsDeleteInline = { link = "DiffText" },
-						-- ["@lsp.type.formatSpecifier"] = { fg = "love" },
-						["@lsp.type.builtinType"] = { link = "@type.builtin" },
+
+					overrides = link_highlights({
+						-- NOTE(nfejzic): figure out what we want to do with this
+						["@lsp.type.formatSpecifier"] = { link = "Operator" },
 						["@lsp.type.interface"] = { link = "Type" },
 
 						-- make coloring consistent...
-						["@variable"] = { link = "Variable" },
-						["@variable.member"] = { link = "Variable" },
-						["@variable.parameter"] = { link = "Variable" },
+						["@attribute.builtin"] = { fg = choose(p.faded_aqua, p.bright_aqua), bold = true },
+
+						Variable = { link = "GruvboxFg1" },
 						["@variable.parameter.gitcommit"] = { link = "GruvboxFg1" },
-						["@lsp.type.variable"] = { link = "Variable" },
-						["@parameter"] = { link = "Variable" },
-						-- the '_' in Rust... who linked this to 'Character'
-						["@character.special.rust"] = { link = "Variable" },
-						["@property"] = { link = "Variable" },
+
 						["@punctuation"] = { link = "GruvboxFg3" },
 						["@punctuation.bracket"] = { link = "@punctuation" },
 						["@punctuation.delimiter"] = { link = "@punctuation" },
@@ -57,41 +88,35 @@ return {
 						["@constructor"] = { link = "@punctuation" },
 
 						Function = { link = "GruvboxBlue" },
-						["@lsp.type.namespace"] = { link = "@module" },
 						["@lsp.type.method"] = { link = "Function" },
-						["@lsp.type.comment.lua"] = { link = "none" },
 
 						Keyword = { link = "GruvboxPurple" },
-						["@constant.macro"] = { link = "PreProc" },
-						["@function.macro.rust"] = { link = "PreProc" },
-						["@keyword.exception"] = { link = "PreProc" },
-						["@mutable_specifier"] = { link = "PreProc" },
 
 						Constant = { link = "GruvboxOrange" },
 						Number = { link = "Constant" },
-						DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
-						BlinkCmpDocBorder = { link = "FloatBorder" },
 						Directory = { link = "GruvboxBlueBold" },
 
 						LineNr = { link = "CursorLineFold" },
 
-						NormalFloat = { bg = choose(p.light1, p.dark1) },
 						FloatTitle = { link = "GruvboxGreenSign" },
+						NormalFloat = { bg = choose(p.light1, p.dark1) },
 						SnacksNormal = { link = "NormalFloat" },
 						SnacksPicker = { link = "NormalFloat" },
 						SnacksPickerListCursorLine = { bg = choose(p.light2, p.dark2) },
-						SnacksPickerMatch = { fg = p.bright_aqua, bold = true },
 						SnacksInputNormal = { link = "NormalFloat" },
 						SnacksInputBorder = { link = "NormalFloat" },
+
+						SnacksPickerMatch = { fg = choose(p.neutral_red, p.bright_aqua), bold = true },
 						SnacksInputTitle = { bg = choose(p.light1, p.dark1) },
 
-						Todo = { fg = p.bright_yellow, bg = "none" },
-						["@comment.error.comment"] = { fg = p.bright_red },
-						["@constant.comment"] = { fg = p.bright_purple },
+						Todo = { fg = choose(p.neutral_yellow, p.bright_yellow), bg = "none" },
+						["@comment.error.comment"] = { fg = choose(p.neutral_red, p.bright_red) },
+						["@constant.comment"] = { fg = choose(p.neutral_purple, p.bright_purple) },
 
 						-- NOTE: custom treesitter queries for accented keywords
 						["@accent"] = { link = "GruvboxYellow" },
-					},
+					}),
+
 					dim_inactive = false,
 					transparent_mode = false,
 				}
@@ -173,6 +198,18 @@ return {
 				dark = "wave", -- try "dragon" !
 				light = "lotus"
 			},
+			--- @module "kanagawa"
+			--- @param colors KanagawaColors
+			overrides = function(colors)
+				return link_highlights({
+					["@lsp.type.formatSpecifier"] = { fg = colors.palette.surimiOrange },
+
+					Variable = { fg = colors.theme.ui.fg },
+					["@variable.builtin"] = { fg = colors.palette.surimiOrange, italic = true },
+
+					["@accent"] = { fg = colors.theme.syn.preproc },
+				})
+			end
 		}
 	},
 
@@ -191,42 +228,18 @@ return {
 					italic = true,
 				},
 
-				highlight_groups = {
+				highlight_groups = link_highlights({
 					QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
-					GitSignsAddInline = { link = "DiffText" },
-					GitSignsChangeInline = { link = "DiffText" },
-					GitSignsDeleteInline = { link = "DiffText" },
 					["@lsp.type.formatSpecifier"] = { fg = "love" },
-					["@lsp.type.builtinType"] = { link = "@type.builtin" },
 
 					-- make coloring consistent...
 					Variable = { fg = "text" },
 					["@variable.builtin"] = { fg = "gold", italic = true },
-					["@variable"] = { link = "Variable" },
-					["@variable.member"] = { link = "Variable" },
-					["@variable.parameter"] = { link = "Variable" },
-					["@lsp.type.variable"] = { link = "Variable" },
-					["@parameter"] = { link = "Variable" },
-					-- the '_' in Rust... who linked this to 'Character'
-					["@character.special.rust"] = { link = "Variable" },
-					["@property"] = { link = "Variable" },
-
-					["@lsp.type.namespace"] = { link = "@module" },
-					["@lsp.mod.defaultLibrary"] = { bold = true },
-					["@lsp.type.const"] = { link = "Constant" },
-
-					["@keyword.operator"] = { link = "Keyword" },
-					["@constant.macro"] = { link = "PreProc" },
-					["@function.macro.rust"] = { link = "PreProc" },
-					["@keyword.exception"] = { link = "PreProc" },
-
-					DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
-
-					BlinkCmpDocBorder = { link = "FloatBorder" },
 
 					-- NOTE: custom treesitter queries for accented keywords
 					["@accent"] = { fg = "love" },
-				},
+				}
+				),
 			})
 		end
 	},
