@@ -80,6 +80,7 @@ return {
 
 						Variable = { link = "GruvboxFg1" },
 						["@variable.parameter.gitcommit"] = { link = "GruvboxFg1" },
+						["@markup.heading.gitcommit"] = { link = "GruvboxFg1" },
 
 						["@punctuation"] = { link = "GruvboxFg3" },
 						["@punctuation.bracket"] = { link = "@punctuation" },
