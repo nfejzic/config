@@ -23,9 +23,9 @@ function fish_title
     set -l cmd (test -n "$argv[1]"; and echo $argv[1]; or echo fish)
     set -l cmd (string split " " "$cmd")[1]
 
-    set -l is_bare_repo "$(git rev-parse --is-bare-repository)"
+    set -l is_bare_repo "$(git rev-parse --is-bare-repository 2>/dev/null)"
 
-    if "$is_bare_repo" = true
+    if test (string length "$is_bare_repo") -gt 0 -a "$is_bare_repo" = true
         set -l repo (git remote -vv 2>/dev/null \
             | awk '{print $2}' \
             | awk -F '/' '{print $NF}' \
