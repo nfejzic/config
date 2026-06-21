@@ -10,6 +10,8 @@ selection-invert-fg-bg = false
 cursor-invert-fg-bg = false
 cursor-opacity = 1
 
+command = "$SHELL -c 'tmux new -s default'"
+
 # The default, style of the cursor.
 #
 # Valid values are:
