@@ -1,6 +1,9 @@
 return {
 	settings = {
 		["rust-analyzer"] = {
+			cachePriming = {
+				enable = true,
+			},
 			hover = {
 				links = {
 					enable = false,
