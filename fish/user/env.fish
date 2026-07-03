@@ -3,10 +3,6 @@ set -gx EMAIL 'nadir@notfloor.com'
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 
-set -gx EDITOR (which nvim)
-set -gx VISUAL (which nvim)
-set -gx SUDO_EDITOR $(which nvim)
-
 # suppress starship warning messages
 set -gx STARSHIP_LOG error
 
