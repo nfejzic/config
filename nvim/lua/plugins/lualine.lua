@@ -1,34 +1,38 @@
-return {
-	"nvim-lualine/lualine.nvim",
-	lazy = true,
-	event = "UIEnter",
+local config = function()
+	require("lualine").setup({
+		options = {
+			icons_enabled = true,
+			theme = "auto",
+			component_separators = { left = "", right = "" },
+			section_separators = { left = "", right = "" },
+			globalstatus = true,
+		},
+		sections = {
+			lualine_a = { "mode" },
+			lualine_b = { "branch" },
+			-- lualine_c = { 'filename', { 'diagnostics', color = "StatusLine", colored = true } },
+			lualine_c = { "filename", "diagnostics" },
+			lualine_x = { "encoding", "location", { "filetype", icons_enabled = true } },
+			lualine_y = {},
+			lualine_z = {},
 
-	dependencies = {
-		"nvim-mini/mini.icons",
-		"nfejzic/colorize.nvim",
-	},
+			-- lualine_y = { 'progress' },
+			-- lualine_z = { 'location' }
+		},
+	})
+end
 
-	config = function()
-		require("lualine").setup({
-			options = {
-				icons_enabled = true,
-				theme = "auto",
-				component_separators = { left = "", right = "" },
-				section_separators = { left = "", right = "" },
-				globalstatus = true,
-			},
-			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { "branch" },
-				-- lualine_c = { 'filename', { 'diagnostics', color = "StatusLine", colored = true } },
-				lualine_c = { "filename", "diagnostics" },
-				lualine_x = { "encoding", "location", { "filetype", icons_enabled = true } },
-				lualine_y = {},
-				lualine_z = {},
+config()
 
-				-- lualine_y = { 'progress' },
-				-- lualine_z = { 'location' }
-			},
-		})
-	end,
-}
+-- return {
+-- 	"nvim-lualine/lualine.nvim",
+-- 	lazy = true,
+-- 	event = "UIEnter",
+--
+-- 	dependencies = {
+-- 		"nvim-mini/mini.icons",
+-- 		"nfejzic/colorize.nvim",
+-- 	},
+--
+-- 	config = config,
+-- }

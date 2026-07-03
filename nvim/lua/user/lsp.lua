@@ -1,3 +1,9 @@
+local utils = require("user.utils")
+
+if utils.is_llm_prompt() then
+	return
+end
+
 local M = {}
 
 function M.setup_ui()
@@ -57,7 +63,6 @@ local function on_attach(client, bufnr)
 		vim.diagnostic.jump({ count = -1, float = true })
 	end
 
-
 	local function code_action_fn()
 		local code_actions_available = false
 		local code_action_chck_grp = vim.api.nvim_create_augroup("CodeActionCheck", { clear = true })
@@ -78,7 +83,6 @@ local function on_attach(client, bufnr)
 		end
 	end
 
-
 	if inlay_hint_supported then
 		vim.keymap.set("n", "<leader>lh", "<cmd>LspToggleInlayHints<cr>", { desc = "Toggle inlay hints" })
 	end
@@ -88,51 +92,55 @@ local function on_attach(client, bufnr)
 	-- Diagnostic keymaps
 	keymaps.set_keys({
 		-- When lines are on, text is off. Text on, lines off. Minimize clutter.
-		{ '', 'gl', function()
-			vim.diagnostic.config({
-				virtual_lines = not vim.diagnostic.config().virtual_lines,
-				virtual_text = not vim.diagnostic.config().virtual_text,
-			})
-		end, 'Toggle dia[g]nostic [l]ines' },
+		{
+			"",
+			"gl",
+			function()
+				vim.diagnostic.config({
+					virtual_lines = not vim.diagnostic.config().virtual_lines,
+					virtual_text = not vim.diagnostic.config().virtual_text,
+				})
+			end,
+			"Toggle dia[g]nostic [l]ines",
+		},
 
-		{ "n", "<leader>lD", vim.lsp.buf.declaration,   "Go to Declaration" },
-		{ "n", "<leader>ld", picker.lsp_definitions,    "Go to definition" },
+		{ "n", "<leader>lD", vim.lsp.buf.declaration, "Go to Declaration" },
+		{ "n", "<leader>ld", picker.lsp_definitions, "Go to definition" },
 
 		{ "n", "<leader>le", vim.diagnostic.open_float, "Show diagnostics message" },
-		{ "n", "<leader>lj", next_diagnostic,           "Go to next LSP diagnostics problem" },
-		{ "n", "<leader>lk", prev_diagnostic,           "Go to previous LSP diagnostics problem" },
-		{ "n", "<leader>lp", vim.lsp.buf.hover,         "Show hover popup" },
-		{ "n", "<leader>lq", vim.diagnostic.setqflist,
-			"Populate quickfix list with diagnostics" },
+		{ "n", "<leader>lj", next_diagnostic, "Go to next LSP diagnostics problem" },
+		{ "n", "<leader>lk", prev_diagnostic, "Go to previous LSP diagnostics problem" },
+		{ "n", "<leader>lp", vim.lsp.buf.hover, "Show hover popup" },
+		{ "n", "<leader>lq", vim.diagnostic.setqflist, "Populate quickfix list with diagnostics" },
 
-		{ "n",          "<leader>lr", picker.lsp_references,        "Go to References" },
-		{ "n",          "<leader>li", picker.lsp_implementations,   "Implementations" },
-		{ "n",          "<leader>ls", picker.lsp_symbols,           "Document symbols" },
-		{ "n",          "<leader>lw", picker.lsp_workspace_symbols, "Workspace symbols" },
-		{ "n",          "<leader>lM", vim.diagnostic.setqflist,     "Diagnostic messages in all buffers" },
-		{ "n",          "<leader>lm", picker.diagnostics_buffer,    "Diagnostic messages in current buffer" },
-		{ { "n", "v" }, "<leader>.",  code_action_fn,               "Code actions" },
-		{ { "n", "v" }, "<leader>a",  code_action_fn,               "Code actions" },
-		{ { "n", "v" }, "<leader>ll", vim.lsp.codelens.run,         "Run Code Lens" },
+		{ "n", "<leader>lr", picker.lsp_references, "Go to References" },
+		{ "n", "<leader>li", picker.lsp_implementations, "Implementations" },
+		{ "n", "<leader>ls", picker.lsp_symbols, "Document symbols" },
+		{ "n", "<leader>lw", picker.lsp_workspace_symbols, "Workspace symbols" },
+		{ "n", "<leader>lM", vim.diagnostic.setqflist, "Diagnostic messages in all buffers" },
+		{ "n", "<leader>lm", picker.diagnostics_buffer, "Diagnostic messages in current buffer" },
+		{ { "n", "v" }, "<leader>.", code_action_fn, "Code actions" },
+		{ { "n", "v" }, "<leader>a", code_action_fn, "Code actions" },
+		{ { "n", "v" }, "<leader>ll", vim.lsp.codelens.run, "Run Code Lens" },
 
-		{ "n",          "gd",         vim.lsp.buf.definition,       "Definitions" },
-		{ "n",          "gI",         vim.lsp.buf.implementation,   "Implementations" },
-		{ "n",          "gD",         vim.lsp.buf.declaration,      "Go to Declaration" },
-		{ "n",          "gt",         vim.lsp.buf.type_definition,  "Go to Type Definition" },
-		{ "n",          "gh",         vim.diagnostic.open_float,    "Show diagnostics message/help" },
-		{ "n",          "K",          vim.lsp.buf.hover,            "LSP Hover" },
-		{ "n",          "gs",         vim.lsp.buf.signature_help,   "Show signature help" },
-		{ "i",          "<C-h>",      vim.lsp.buf.signature_help,   "Show signature help" },
+		{ "n", "gd", vim.lsp.buf.definition, "Definitions" },
+		{ "n", "gI", vim.lsp.buf.implementation, "Implementations" },
+		{ "n", "gD", vim.lsp.buf.declaration, "Go to Declaration" },
+		{ "n", "gt", vim.lsp.buf.type_definition, "Go to Type Definition" },
+		{ "n", "gh", vim.diagnostic.open_float, "Show diagnostics message/help" },
+		{ "n", "K", vim.lsp.buf.hover, "LSP Hover" },
+		{ "n", "gs", vim.lsp.buf.signature_help, "Show signature help" },
+		{ "i", "<C-h>", vim.lsp.buf.signature_help, "Show signature help" },
 
-		{ "n",          "]d",         next_diagnostic,              "Go to next LSP diagnostics problem" },
-		{ "n",          "[d",         prev_diagnostic,              "Go to previous LSP diagnostics problem" },
+		{ "n", "]d", next_diagnostic, "Go to next LSP diagnostics problem" },
+		{ "n", "[d", prev_diagnostic, "Go to previous LSP diagnostics problem" },
 	})
 
 	-- rust specific
-	if vim.fn.exists(':RustLsp') then
+	if vim.fn.exists(":RustLsp") then
 		keymaps.set_keys({
-			{ "n", "<leader>lx", "<cmd>RustLsp expandMacro<cr>",      "RustLsp expand macro" },
-			{ "n", "gh",         "<cmd>RustLsp renderDiagnostic<cr>", "RustLsp render diagnostic" },
+			{ "n", "<leader>lx", "<cmd>RustLsp expandMacro<cr>", "RustLsp expand macro" },
+			{ "n", "gh", "<cmd>RustLsp renderDiagnostic<cr>", "RustLsp render diagnostic" },
 		})
 	end
 
@@ -156,7 +164,8 @@ function M.setup()
 	local blink = require("blink.cmp")
 
 	-- NOTE: load mason to make binaries available
-	require("mason").setup()
+	-- NOTE: this is now managed with nix
+	-- require("mason").setup()
 
 	-- NOTE: make sure that lspconfig is loaded so that configs are setup
 	require("lspconfig")
@@ -169,7 +178,7 @@ function M.setup()
 			local bufnr = ev.buf
 
 			on_attach(client, bufnr)
-		end
+		end,
 	})
 
 	vim.lsp.config("*", {
@@ -178,37 +187,38 @@ function M.setup()
 
 	-- NOTE: no need to enable rust_analyzer. Rustaceanvim does that automatically
 	enable_if_installed({
-		{ binary = "clangd",                        server = "clangd" },
-		{ binary = "zls",                           server = "zig_lsp" },
-		{ binary = "gopls",                         server = "gopls" },
-		{ binary = "lua-language-server",           server = "lua_ls" },
-		{ binary = "fish-lsp",                      server = 'fish_lsp' },
-		{ binary = "nil",                           server = "nil_ls" },
-		{ binary = "buf",                           server = "buf_ls" },
-		{ binary = "ruff",                          server = "ruff" },
+		{ binary = "clangd", server = "clangd" },
+		{ binary = "zls", server = "zig_lsp" },
+		{ binary = "gopls", server = "gopls" },
+		{ binary = "lua-language-server", server = "lua_ls" },
+		{ binary = "fish-lsp", server = "fish_lsp" },
+		{ binary = "nil", server = "nil_ls" },
+		{ binary = "buf", server = "buf_ls" },
+		{ binary = "ruff", server = "ruff" },
+		{ binary = "nixd", server = "nixd" },
 
-		{ binary = "just-lsp",                      server = "just" },
-		{ binary = "gitlab-ci-ls",                  server = "gitlab_ci_ls" },
-		{ binary = "taplo",                         server = "taplo" },
+		{ binary = "just-lsp", server = "just" },
+		{ binary = "gitlab-ci-ls", server = "gitlab_ci_ls" },
+		{ binary = "taplo", server = "taplo" },
 
 		-- webdev
 		{ binary = "vscode-eslint-language-server", server = "eslint" },
-		{ binary = "vscode-json-language-server",   server = "jsonls" },
-		{ binary = "vue-language-server",           server = "vue_ls" },
+		{ binary = "vscode-json-language-server", server = "jsonls" },
+		{ binary = "vue-language-server", server = "vue_ls" },
 		-- { "vtsls",                         "vtsls" },
-		{ binary = "tsgo",                          server = "tsgo" },
+		{ binary = "tsgo", server = "tsgo" },
 
 		-- infrastructure
-		{ binary = "terraform-ls",                  server = "terraform-ls" },
-		{ binary = "bash-language-server",          server = "bashls" },
-		{ binary = "emmet-language-server",         server = "emmet_language_server" },
-		{ binary = "tailwindcss-language-server",   server = "tailwindcss" },
+		{ binary = "terraform-ls", server = "terraform-ls" },
+		{ binary = "bash-language-server", server = "bashls" },
+		{ binary = "emmet-language-server", server = "emmet_language_server" },
+		{ binary = "tailwindcss-language-server", server = "tailwindcss" },
 
 		-- Python
-		{ binary = "pyright",                       server = "pyright" },
+		{ binary = "pyright", server = "pyright" },
 
 		-- Svelte
-		{ binary = "svelteserver",                  server = "svelte" },
+		{ binary = "svelteserver", server = "svelte" },
 	})
 
 	M.setup_ui()

@@ -1,22 +1,29 @@
-return {
-	{
-		"folke/lazydev.nvim",
-
-		ft = "lua", -- only load on lua files
-
-		dependencies = {
-			{ 'justinsgithub/wezterm-types', lazy = true },
+local config = function()
+	require("lazydev").setup({
+		integrations = {
+			lspconfig = true,
+			blink = false,
 		},
-
-		opts = {
-			integrations = {
-				lspconfig = false,
-				blink = true,
-			},
-			library = {
-				{ path = "wezterm-types",      mods = { "wezterm" } },
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			}
+		library = {
+			{ path = "wezterm-types", mods = { "wezterm" } },
+			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 		},
-	},
-}
+	})
+end
+
+config()
+
+-- return {
+-- 	{
+-- 		"folke/lazydev.nvim",
+--
+-- 		ft = "lua", -- only load on lua files
+--
+-- 		dependencies = {
+-- 			{ "justinsgithub/wezterm-types", lazy = true },
+-- 		},
+--
+-- 		opts = {
+-- 		},
+-- 	},
+-- }

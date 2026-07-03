@@ -11,6 +11,12 @@ function M.set_keys(mappings)
 	end
 end
 
+-- require("lze").load({
+-- 	"which-key",
+-- 	enabled = true,
+-- 	lazy = false,
+-- })
+
 local wk = require("which-key")
 
 ---@diagnostic disable-next-line: missing-fields
@@ -40,11 +46,11 @@ wk.add({
 
 -- Buffer
 M.set_keys({
-	{ "n", "<leader>Bc",      "<cmd>BufferClose<CR>",  "Close buffer" },
-	{ "n", "<leader>BC",      "<cmd>BufferClose!<CR>", "Close buffer, ignore changes" },
-	{ "n", "<leader><space>", "<C-^>",                 "Switch to previous buffer" },
-	{ "n", "]b",              "<cmd>bnext<CR>",        "Go to next buffer" },
-	{ "n", "[b",              "<cmd>bprevious<CR>",    "Go to previous buffer" },
+	{ "n", "<leader>Bc", "<cmd>BufferClose<CR>", "Close buffer" },
+	{ "n", "<leader>BC", "<cmd>BufferClose!<CR>", "Close buffer, ignore changes" },
+	{ "n", "<leader><space>", "<C-^>", "Switch to previous buffer" },
+	{ "n", "]b", "<cmd>bnext<CR>", "Go to next buffer" },
+	{ "n", "[b", "<cmd>bprevious<CR>", "Go to previous buffer" },
 })
 
 --- @param direction 'next'|'prev'
@@ -52,20 +58,24 @@ local go_quickfix = function(direction)
 	return function()
 		local count = vim.v.count or 1
 
-		if direction == 'next' then
-			pcall(function(command) vim.cmd(command) end, count .. "cn")
-		elseif direction == 'prev' then
-			pcall(function(command) vim.cmd(command) end, count .. "cp")
+		if direction == "next" then
+			pcall(function(command)
+				vim.cmd(command)
+			end, count .. "cn")
+		elseif direction == "prev" then
+			pcall(function(command)
+				vim.cmd(command)
+			end, count .. "cp")
 		end
 	end
 end
 
 -- Quickfix
 M.set_keys({
-	{ "n", "]q",    go_quickfix('next'), "Next quickfix entry",     expr = true },
-	{ "n", "[q",    go_quickfix('prev'), "Previous quickfix entry", expr = true },
-	{ "n", "<C-j>", go_quickfix('next'), "Next quickfix entry",     expr = true },
-	{ "n", "<C-k>", go_quickfix('prev'), "Previous quickfix entry", expr = true },
+	{ "n", "]q", go_quickfix("next"), "Next quickfix entry", expr = true },
+	{ "n", "[q", go_quickfix("prev"), "Previous quickfix entry", expr = true },
+	{ "n", "<C-j>", go_quickfix("next"), "Next quickfix entry", expr = true },
+	{ "n", "<C-k>", go_quickfix("prev"), "Previous quickfix entry", expr = true },
 })
 
 -- Move lines using Ctrl = J|K (down|up) in visual mode
