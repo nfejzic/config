@@ -63,6 +63,7 @@ vim.g.fugitive_dynamic_colors = 1
 
 require("diffview").setup()
 
+require("neogit").setup()
 -- return {
 -- 	-- git signs in gutter
 -- 	{
