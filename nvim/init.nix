@@ -1,33 +1,10 @@
 {
-  pkgs,
   pkgsUnstable,
   inputs,
   config,
   lib,
   ...
 }:
-let
-  fromGitHub =
-    {
-      repo,
-      ref ? null,
-      rev ? null,
-    }:
-    let
-      gitArgs = lib.filterAttrs (name: value: value != null) {
-        url = "https://github.com/${repo}.git";
-        inherit ref;
-        inherit rev;
-      };
-      src = fetchGit gitArgs;
-    in
-    pkgs.vimUtils.buildVimPlugin {
-      inherit src;
-      pname = "${lib.strings.sanitizeDerivationName repo}";
-      version = if rev != null then rev else ref;
-    };
-
-in
 {
   imports = [
     (inputs.wrappers.lib.getInstallModule {
@@ -130,59 +107,3 @@ in
       MANPAGER = "${nvimpath} +Man!";
     };
 }
-
-# {
-#   programs.neovim = {
-#     enable = true;
-#     package = pkgs.neovim-unwrapped;
-#     defaultEditor = true;
-#     viAlias = true;
-#     vimAlias = true;
-#     plugins = with pkgs.vimPlugins; [
-#       { plugin = blink-cmp, config = builtins.readFile ./lua/plugins/blink.lua }
-#       { plugin = oil-nvim config = builtins.readFile ./lua/plugins/oil.lua }
-#       which-key-nvim
-#
-#       # (nvim-treesitter.withPlugins (p: [
-#       #   p.rust
-#       #   p.lua
-#       #   p.fish
-#       #   p.c
-#       #   p.cpp
-#       #   p.typescript
-#       #   p.javascript
-#       #   p.tsx
-#       #   # p.jsx
-#       #   p.markdown
-#       #   p.go
-#       #   p.json
-#       #
-#       #   p.toml
-#       #   p.yaml
-#       #   p.json
-#       #   p.nix
-#       #   p.css
-#       #   p.scss
-#       #   p.html
-#       #
-#       #   # git
-#       #   p.gitcommit
-#       #   p.gitignore
-#       #   p.gitattributes
-#       #   p.git_rebase
-#       #   p.git_config
-#       #   # neovim query langauges
-#       #   p.scheme
-#       #   p.query
-#       #
-#       #   # misc
-#       #   p.comment
-#       # ]))
-#     ];
-#
-#     initLua = builtins.readFile ./init.lua;
-#   };
-#
-#   xdg.configFile."nvim/lua".source = ./lua;
-#   xdg.configFile."nvim/after".source = ./after;
-# }
