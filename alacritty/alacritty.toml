@@ -25,9 +25,9 @@ bindings = [
 ]
 
 [font]
-normal      = { family = "MonoLisa", style = "Light" }
-italic      = { family = "MonoLisa", style = "Light Italic" }
-bold        = { family = "MonoLisa", style = "Regular" }
+normal      = { family = "Berkeley Mono", style = "Regular" }
+italic      = { family = "Berkeley Mono", style = "Regular Italic" }
+bold        = { family = "Berkeley Mono", style = "Bold" }
 size        = 16
 
 [general]

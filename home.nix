@@ -2,6 +2,8 @@
   imports = [
     ./nvim/init.nix
     ./fish/init.nix
+    ./alacritty/init.nix
+    # ./ghostty/init.nix
   ];
 
   home.username = "nfejzic";
