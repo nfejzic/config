@@ -1,6 +1,3 @@
-# load font
-config-file = ../fonts/berkeley_mono
-
 # 100% is way too thin
 adjust-cursor-thickness = 200%
 

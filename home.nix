@@ -4,7 +4,7 @@
     ./fish/init.nix
     ./alacritty/init.nix
     ./bat/init.nix
-    # ./ghostty/init.nix
+    ./ghostty/init.nix
   ];
 
   home.username = "nfejzic";
@@ -21,4 +21,7 @@
 
   manual.manpages.enable = false;
   programs.man.generateCaches = false;
+
+  # NOTE: some packages require font config to be available, for example 'ghostty-bin'
+  fonts.fontconfig.enable = true;
 }
