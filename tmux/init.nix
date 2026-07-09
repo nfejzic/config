@@ -1,5 +1,5 @@
 {
-  pkgs,
+  # pkgs,
   # pkgsUnstable,
   # inputs,
   # config,
@@ -11,7 +11,7 @@
     enable = true;
 
     extraConfig = ''
-        ${./tmux.conf}
+      ${builtins.readFile ./tmux.conf}
     '';
   };
 
