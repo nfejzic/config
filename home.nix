@@ -8,17 +8,25 @@
     ./tmux/init.nix
   ];
 
-  home.username = "nfejzic";
-  home.homeDirectory = "/Users/nfejzic";
-  home.stateVersion = "26.05";
+  home = rec {
+    username = "nfejzic";
+    homeDirectory = "/Users/${username}";
+    stateVersion = "26.05";
 
-  home.packages = with pkgs; [
-    fzf
-    just
-    nixfmt
-    ripgrep
-    zoxide
-  ];
+    sessionPath = [
+      "${homeDirectory}/.local/bin"
+      "${homeDirectory}/.cargo/bin"
+    ];
+
+    packages = with pkgs; [
+      eza
+      fzf
+      just
+      nixfmt
+      ripgrep
+      zoxide
+    ];
+  };
 
   manual.manpages.enable = false;
   programs.man.generateCaches = false;
