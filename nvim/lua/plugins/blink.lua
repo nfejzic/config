@@ -81,24 +81,3 @@ require("blink.cmp").setup({
 	snippets = { preset = "luasnip" },
 	fuzzy = { implementation = "prefer_rust_with_warning" },
 })
-
--- return {
--- 	'saghen/blink.cmp',
--- 	-- optional: provides snippets for the snippet source
--- 	dependencies = {
--- 		-- 'rafamadriz/friendly-snippets',
--- 		{ "L3MON4D3/LuaSnip", lazy = true },
--- 	},
---
--- 	lazy = true,
--- 	version = '1.*',
--- 	event = { "InsertEnter", "CmdwinEnter" },
---
--- 	cond = not ,
---
--- 	---@module 'blink.cmp'
--- 	---@type blink.cmp.Config
--- 	-- opts = {
--- 	-- },
--- 	opts_extend = { "sources.default" }
--- }

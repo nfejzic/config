@@ -86,11 +86,17 @@ end
 --- @return boolean `true` when running on a private host, otherwise `false`
 function M.is_private_machine()
 	local private_hostnames = {
-		['zenith'] = true,
-		['zenith.local'] = true,
+		["zenith"] = true,
+		["zenith.local"] = true,
 	}
 
 	return private_hostnames[vim.fn.hostname()] ~= nil
+end
+
+--- Checks whether the config is handled by nix in the current instance
+--- @return boolean `true` if the config is handled by nix
+function M.is_nix()
+	return vim.g.nix_info_plugin_name ~= nil
 end
 
 return M

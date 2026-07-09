@@ -31,7 +31,7 @@ local function link_highlights(theme_specific)
 		["@function.macro.rust"] = { link = "PreProc" },
 		["@keyword.exception"] = { link = "PreProc" },
 
-		DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn", },
+		DiagnosticUnnecessary = { link = "DiagnosticUnderlineWarn" },
 
 		BlinkCmpDocBorder = { link = "FloatBorder" },
 	}
@@ -46,7 +46,7 @@ local gruvbox = require("gruvbox")
 local p = gruvbox.palette
 
 local function choose(light, dark)
-	return vim.o.background == 'light' and light or dark
+	return vim.o.background == "light" and light or dark
 end
 
 local function create_config()
@@ -149,45 +149,13 @@ require("catppuccin").setup({
 	},
 })
 
--- {
--- 	'nfejzic/colorize.nvim',
--- 	lazy = false,
--- 	dev = true,
--- 	priority = 1000,
--- 	enabled = false,
---
--- 	config = function()
--- 		local colorize = require('colorize')
---
--- 		vim.g.colorize_lualine_bold = true
---
--- 		colorize.setup({
--- 			compile = true, -- enable compiling the colorscheme
--- 			undercurl = false, -- enable undercurls
--- 			commentStyle = { italic = false },
--- 			functionStyle = {},
--- 			keywordStyle = { italic = false, bold = false },
--- 			statementStyle = { bold = false },
--- 			typeStyle = { italic = false, bold = false },
--- 			transparent = false,
--- 			dimInactive = true,
--- 			terminalColors = true,
--- 			semantic_highlighting = "minimal",
--- 			background = {
--- 				dark = "kanagawa-wave",
--- 				light = "kanagawa-lotus",
--- 			}
--- 		})
--- 	end
--- },
-
 require("kanagawa").setup({
 	compile = true, -- enable compiling the colorscheme
 	theme = "wave", -- Load "wave" theme
 	transparent = false,
 	background = { -- map the value of 'background' option to a theme
 		dark = "wave", -- try "dragon" !
-		light = "lotus"
+		light = "lotus",
 	},
 	--- @module "kanagawa"
 	--- @param colors KanagawaColors
@@ -200,9 +168,8 @@ require("kanagawa").setup({
 
 			["@accent"] = { fg = colors.theme.syn.preproc },
 		})
-	end
+	end,
 })
-
 
 require("rose-pine").setup({
 	variant = "auto", -- auto, main, moon, or dawn

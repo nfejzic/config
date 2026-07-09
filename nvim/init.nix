@@ -32,26 +32,24 @@
       data = [ pkgs.vimPlugins.lze ];
     };
 
-    specs.general = with pkgs.vimPlugins; [
-      which-key-nvim
-      oil-nvim
-    ];
-
     specs.all = {
       lazy = false;
       before = [ "INIT_MAIN" ];
 
       data = with pkgs.vimPlugins; [
+        which-key-nvim
+        oil-nvim
+
         mini-icons
         lze
         snacks-nvim
         FixCursorHold-nvim
         quicker-nvim
         smart-splits-nvim
+        lualine-nvim
 
         blink-cmp
         luasnip
-        lualine-nvim
 
         # colorschemes
         gruvbox-nvim
@@ -95,6 +93,11 @@
         neotest
         neotest-rust
         neotest-go
+
+        # tpope
+        vim-repeat
+        vim-surround
+        vim-sleuth
       ];
     };
   };

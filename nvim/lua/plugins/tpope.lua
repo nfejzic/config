@@ -1,19 +1,4 @@
-return {
-	-- Enable repeat for more actions
-	{
-		"tpope/vim-repeat",
-	},
-
-	-- Surround
-	{
-		"tpope/vim-surround",
-	},
-
-	-- seems like it's not needed with treesitter...
-	-- Might be worth testing in some files without treesitter support
-	{
-		"tpope/vim-sleuth",
-		enabled = true,
-		lazy = false,
-	},
-}
+-- NOTE: there's nothing to setup, the following plugins should be installed:
+--       - "tpope/vim-repeat",
+--       - "tpope/vim-surround",
+--       - "tpope/vim-sleuth",

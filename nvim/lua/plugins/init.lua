@@ -1,3 +1,9 @@
+local utils = require("user.utils")
+
+if not utils.is_nix() then
+	require("plugins.install")
+end
+
 require("plugins.blink")
 require("plugins.colors")
 require("plugins.conform")
