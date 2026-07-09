@@ -3,6 +3,7 @@
     ./nvim/init.nix
     ./fish/init.nix
     ./alacritty/init.nix
+    ./bat/init.nix
     # ./ghostty/init.nix
   ];
 
