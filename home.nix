@@ -1,10 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
-    ./nvim/init.nix
-    ./fish/init.nix
     ./alacritty/init.nix
     ./bat/init.nix
+    ./fish/init.nix
     ./ghostty/init.nix
+    ./nvim/init.nix
+    ./starship/init.nix
     ./tmux/init.nix
   ];
 
