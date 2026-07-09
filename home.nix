@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./nvim/init.nix
+    ./fish/init.nix
   ];
 
   home.username = "nfejzic";
@@ -17,23 +18,4 @@
 
   manual.manpages.enable = false;
   programs.man.generateCaches = false;
-
-  programs.fish = {
-    enable = true;
-    plugins = [
-      {
-        name = "gruvbox";
-        src = pkgs.fishPlugins.gruvbox.src;
-      }
-      {
-        name = "fzf-fish";
-        src = pkgs.fishPlugins.fzf-fish.src;
-      }
-    ];
-    shellInit = "${builtins.readFile ./fish/config.fish}";
-  };
-
-  xdg.configFile."fish/user".source = ./fish/user;
-  xdg.configFile."fish/themes".source = ./fish/themes;
-
 }
