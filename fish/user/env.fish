@@ -1,3 +1,5 @@
+set --global fish_key_bindings fish_vi_key_bindings
+
 set -gx EMAIL 'nadir@notfloor.com'
 
 set -gx VOLTA_HOME "$HOME/.volta"
