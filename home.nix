@@ -5,6 +5,7 @@
     ./alacritty/init.nix
     ./bat/init.nix
     ./ghostty/init.nix
+    ./tmux/init.nix
   ];
 
   home.username = "nfejzic";
