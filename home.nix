@@ -27,8 +27,6 @@ in
   ];
 
   home = {
-    # Identity comes from the `nfejzic.*` options (see options.nix), so a
-    # consumer sets `nfejzic.username = "..."` and everything follows.
     username = config.nfejzic.username;
     homeDirectory = lib.mkDefault "/Users/${config.nfejzic.username}";
     stateVersion = lib.mkDefault "26.05";
@@ -39,14 +37,16 @@ in
     ];
 
     packages = with pkgs; [
+      bat
+      delta
       eza
       fzf
+      gh
       just
       nixfmt
       ripgrep
-      zoxide
-      gh
       tlrc
+      zoxide
 
       opencode
 
@@ -60,10 +60,10 @@ in
 
   # NOTE: install fonts
   fonts.fontconfig.enable = true;
+
   # NOTE: macOS doesn't use fontconfig for native apps (Font Book, Terminal, etc.)
   # This activation script copies fonts from the HM profile into ~/Library/Fonts/
   # so macOS Core Text can discover them.
-
   home.activation.installFonts = lib.mkIf pkgs.stdenv.isDarwin (
     lib.hm.dag.entryAfter [ "writeBoundary" ]
       # sh
