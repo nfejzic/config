@@ -133,7 +133,7 @@ inputs:
         after = [ "INIT_MAIN" ];
         data = null;
         config = ''
-          vim.api.nvim_create_autocmd("VimEnter", {
+          vim.api.nvim_create_autocmd("UIEnter", {
             once = true,
             callback = function()
               vim.cmd.colorscheme("${config.nfejzic.neovim.colorscheme}")
