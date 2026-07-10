@@ -38,14 +38,23 @@ in
 
     packages = with pkgs; [
       bat
+      cargo-insta
+      cargo-nextest
+      cargo-machete
       delta
       eza
       fzf
+      ffmpeg
       gh
+      graphviz
       just
+      jq
       nixfmt
       ripgrep
       tlrc
+      tokei
+      yq
+      zellij
       zoxide
 
       opencode
