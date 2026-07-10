@@ -68,8 +68,9 @@ require("nvim-treesitter-textobjects").setup({
 })
 
 local treesitter_grp = vim.api.nvim_create_augroup("treesitter-start", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	group = treesitter_grp,
+	once = true,
 	callback = function(e)
 		if pcall(vim.treesitter.start, e.buf) then
 			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
