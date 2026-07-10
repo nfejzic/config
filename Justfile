@@ -1,4 +1,7 @@
 alias s := switch
 
-switch: 
-    sudo darwin-rebuild switch --flake . --impure
+switch:
+    darwin-rebuild build --flake . --impure
+    sudo nix-env -p /nix/var/nix/profiles/system --set ./result
+    sudo ./result/activate
+    rm -r ./result

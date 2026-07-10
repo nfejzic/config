@@ -14,18 +14,29 @@
 
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     wrappers.inputs.nixpkgs.follows = "nixpkgs";
+
+    fonts.url = "git+https://github.com/nfejzic/fonts";
+    fonts.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     inputs@{
       self,
+      nixpkgs,
       nix-darwin,
       home-manager,
       nixpkgs-unstable,
+      fonts,
       ...
     }:
     let
       system = "aarch64-darwin";
+      pkgs = import nixpkgs {
+        system = system;
+        config = {
+          allowUnfree = true;
+        };
+      };
       pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
 
       configuration = { pkgs, ... }: {
@@ -41,6 +52,7 @@
         ];
 
         nix.settings.experimental-features = "nix-command flakes";
+        nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
 
         programs.fish.enable = true;
         users.users.nfejzic.shell = pkgs.fish;
@@ -65,7 +77,14 @@
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
-            home-manager.extraSpecialArgs = { inherit inputs pkgsUnstable; };
+            home-manager.extraSpecialArgs = {
+              inherit
+                inputs
+                pkgs
+                pkgsUnstable
+                fonts
+                ;
+            };
             home-manager.users.nfejzic = import ./home.nix;
           }
         ];
