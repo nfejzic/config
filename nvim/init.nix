@@ -130,15 +130,10 @@ inputs:
       # wins over the `vim.cmd("colo ...")` in nvim/lua/plugins/colors.lua
       # regardless of how/when that runs.
       specs.colorscheme = {
-        after = [ "INIT_MAIN" ];
+        before = [ "INIT_MAIN" ]; # runs before your config, just sets a global
         data = null;
         config = ''
-          vim.api.nvim_create_autocmd("UIEnter", {
-            once = true,
-            callback = function()
-              vim.cmd.colorscheme("${config.nfejzic.neovim.colorscheme}")
-            end,
-          })
+          vim.g.nfejzic_colorscheme = "${config.nfejzic.neovim.colorscheme}"
         '';
       };
     };

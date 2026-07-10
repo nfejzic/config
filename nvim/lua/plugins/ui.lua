@@ -1,7 +1,3 @@
--- require("lze").load({
--- 	{ "gruvbox.nvim" },
--- })
-
 ---@param theme_specific table<string,vim.api.keyset.highlight>
 local function link_highlights(theme_specific)
 	local linked = {
@@ -192,6 +188,28 @@ require("rose-pine").setup({
 		-- NOTE: custom treesitter queries for accented keywords
 		["@accent"] = { fg = "love" },
 	}),
+})
+
+require("lualine").setup({
+	options = {
+		icons_enabled = true,
+		theme = "auto",
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
+		globalstatus = true,
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch" },
+		-- lualine_c = { 'filename', { 'diagnostics', color = "StatusLine", colored = true } },
+		lualine_c = { "filename", "diagnostics" },
+		lualine_x = { "encoding", "location", { "filetype", icons_enabled = true } },
+		lualine_y = {},
+		lualine_z = {},
+
+		-- lualine_y = { 'progress' },
+		-- lualine_z = { 'location' }
+	},
 })
 
 vim.cmd("colo rose-pine")
