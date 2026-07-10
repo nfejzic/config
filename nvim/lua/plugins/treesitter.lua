@@ -1,4 +1,7 @@
+local utils = require("user.utils")
+
 local ctx = require("treesitter-context")
+
 ctx.setup({
 	max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
 	multiwindow = false, -- Enable multiwindow support.
@@ -16,19 +19,41 @@ local function only()
 		end)
 end
 
--- require('nvim-treesitter').install({
--- 	-- languages
--- 	"rust", "lua", "fish", "c", "cpp", "typescript", "javascript", "tsx", "jsx", "markdown",
--- 	"toml", "yaml", "json", "nix", "css", "scss", "html",
--- 	-- git
--- 	"gitcommit", "gitignore", "gitattributes", "git_rebase", "git_config",
---
--- 	-- neovim query langauges
--- 	"scheme", "query",
---
--- 	-- misc
--- 	"comment",
--- })
+if not utils.is_nix() then
+	require("nvim-treesitter").install({
+		-- languages
+		"rust",
+		"lua",
+		"fish",
+		"c",
+		"cpp",
+		"typescript",
+		"javascript",
+		"tsx",
+		"jsx",
+		"markdown",
+		"toml",
+		"yaml",
+		"json",
+		"nix",
+		"css",
+		"scss",
+		"html",
+		-- git
+		"gitcommit",
+		"gitignore",
+		"gitattributes",
+		"git_rebase",
+		"git_config",
+
+		-- neovim query langauges
+		"scheme",
+		"query",
+
+		-- misc
+		"comment",
+	})
+end
 
 require("nvim-treesitter-textobjects").setup({
 	select = {
@@ -42,18 +67,16 @@ require("nvim-treesitter-textobjects").setup({
 	},
 })
 
-local parsersInstalled = require("nvim-treesitter.config").get_installed("parsers")
-for _, parser in pairs(parsersInstalled) do
-	local filetypes = vim.treesitter.language.get_filetypes(parser)
-	vim.api.nvim_create_autocmd({ "FileType" }, {
-		pattern = filetypes,
-		callback = function(_)
-			vim.treesitter.start()
+local treesitter_grp = vim.api.nvim_create_augroup("treesitter-start", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = treesitter_grp,
+	callback = function(e)
+		if pcall(vim.treesitter.start, e.buf) then
 			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-		end,
-	})
-end
+		end
+	end,
+})
 
 local select = require("nvim-treesitter-textobjects.select")
 local move = require("nvim-treesitter-textobjects.move")
