@@ -22,70 +22,62 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       nix-darwin,
       home-manager,
-      nixpkgs-unstable,
-      fonts,
       ...
     }:
     let
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs {
-        system = system;
-        config = {
-          allowUnfree = true;
+      # The reusable home-manager configuration. `home.nix` keeps all the
+      # program imports and packages; it's a function of `inputs` so other
+      # flakes can `imports = [ dotfiles.homeModules.default ]` and get a
+      # self-contained module (blink, fonts, unstable plugins all baked in) —
+      # no extraSpecialArgs, no overlays to wire on their end. Per-machine
+      # differences (username, colorschemes) are set via the `nfejzic.*`
+      # options defined in options.nix.
+      homeModules.default = import ./home.nix inputs;
+
+      configuration =
+        { pkgs, ... }:
+        {
+          # prevent nix-darwin from managing nix, so determinate nix can do it instead
+          nix.enable = false;
+
+          users.knownUsers = [ "nfejzic" ];
+          users.users.nfejzic.uid = 501;
+          users.users.nfejzic.home = "/Users/nfejzic";
+
+          environment.systemPackages = with pkgs; [
+            vim
+          ];
+
+          nix.settings.experimental-features = "nix-command flakes";
+          nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
+
+          programs.fish.enable = true;
+          users.users.nfejzic.shell = pkgs.fish;
+
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+          system.stateVersion = 6;
+          nixpkgs.hostPlatform = "aarch64-darwin";
+
+          # Several packages this config uses are unfree (the private fonts,
+          # codelldb). The neovim module applies the blink.cmp overlay itself,
+          # so there's no need to set nixpkgs.overlays here.
+          nixpkgs.config.allowUnfree = true;
+
+          security.pam.services.sudo_local.touchIdAuth = true;
         };
-      };
-      pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
-
-      configuration = { pkgs, ... }: {
-        # prevent nix-darwin from managing nix, so determinate nix can do it instead
-        nix.enable = false;
-
-        users.knownUsers = [ "nfejzic" ];
-        users.users.nfejzic.uid = 501;
-        users.users.nfejzic.home = "/Users/nfejzic";
-
-        environment.systemPackages = with pkgs; [
-          vim
-        ];
-
-        nix.settings.experimental-features = "nix-command flakes";
-        nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
-
-        programs.fish.enable = true;
-        users.users.nfejzic.shell = pkgs.fish;
-
-        system.configurationRevision = self.rev or self.dirtyRev or null;
-        system.stateVersion = 6;
-        nixpkgs.hostPlatform = "aarch64-darwin";
-
-        security.pam.services.sudo_local.touchIdAuth = true;
-
-        # NOTE: make sure that blink has the rust fuzzy library
-        nixpkgs.overlays = [
-          inputs.blink-lib.overlays.default
-          inputs.blink-cmp.overlays.default
-        ];
-      };
     in
     {
+      inherit homeModules;
+
       darwinConfigurations."aeration" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
-            home-manager.extraSpecialArgs = {
-              inherit
-                inputs
-                pkgs
-                pkgsUnstable
-                fonts
-                ;
-            };
-            home-manager.users.nfejzic = import ./home.nix;
+            home-manager.users.nfejzic = homeModules.default;
           }
         ];
       };

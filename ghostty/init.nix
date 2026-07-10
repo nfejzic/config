@@ -1,8 +1,8 @@
 {
   pkgs,
+  config,
   # pkgsUnstable,
   # inputs,
-  # config,
   # lib,
   ...
 }:
@@ -14,6 +14,14 @@
     settings.config-file = [
       "${./fonts/berkeley_mono}"
       "${./tmux/config}"
+      # Theme override, driven by the `nfejzic.ghostty.theme` option. Listed
+      # last so it wins: Ghostty applies a file's config-file includes in order
+      # and the last-set `theme` takes effect (the theme inside tmux/config
+      # above can't be beaten by a top-level `theme` key, only by a later
+      # include).
+      "${pkgs.writeText "ghostty-theme" ''
+        theme = ${config.nfejzic.ghostty.theme}
+      ''}"
     ];
   };
 
