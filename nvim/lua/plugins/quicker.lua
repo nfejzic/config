@@ -20,13 +20,3 @@ local config = function()
 end
 
 config()
-
--- return {
--- 	"stevearc/quicker.nvim",
---
--- 	enabled = true,
--- 	lazy = true,
--- 	ft = "qf",
---
--- 	config = config,
--- }

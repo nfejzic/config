@@ -12,7 +12,7 @@ local config = function()
 	-- })
 
 	-- NOTE(nfejzic): this is a different than what I used before.
-	-- Previously I used the plugin that was installed with return statement below
+	-- Previously I used the plugin "crispgm/nvim-go"
 	-- However, this is config for https://github.com/ray-x/go.nvim/
 	require("go").setup(opts)
 	local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
@@ -26,13 +26,3 @@ local config = function()
 end
 
 config()
-
--- return {
--- 	{
--- 		"crispgm/nvim-go",
--- lazy = true,
--- filetype = { "go", "gomod" },
--- config = config,
--- 	},
---
--- }

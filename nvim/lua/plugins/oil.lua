@@ -24,14 +24,3 @@ local config = function()
 end
 
 config()
--- return {
--- 	"stevearc/oil.nvim",
--- 	dependencies = {
--- 		"nvim-mini/mini.icons",
--- 		-- NOTE: this makes sure icons are initialized
--- 		opts = {}
--- 	},
--- 	lazy = false,
---
--- 	config = config()
--- }

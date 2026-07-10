@@ -71,29 +71,3 @@ local config = function()
 end
 
 config()
-
--- ---@diagnostic disable: missing-fields
--- --- @module "lazy"
--- --- @type LazyPluginSpec
--- return {
--- 	"nvim-neotest/neotest",
---
--- 	lazy = true,
--- 	keys = "<space>d",
--- 	cmd = { "GoTestDebug" },
---
--- 	dependencies = {
--- 		"antoinemadec/FixCursorHold.nvim",
--- 		"leoluz/nvim-dap-go",
--- 		"marilari88/neotest-vitest",
--- 		"mfussenegger/nvim-dap",
--- 		"nvim-lua/plenary.nvim",
--- 		"nvim-neotest/neotest-go",
--- 		"nvim-neotest/neotest-jest",
--- 		"nvim-neotest/nvim-nio",
--- 		"nvim-treesitter/nvim-treesitter",
--- 		"rouge8/neotest-rust",
--- 	},
---
--- 	config = config,
--- }

@@ -23,16 +23,3 @@ local config = function()
 end
 
 config()
-
--- return {
--- 	"nvim-lualine/lualine.nvim",
--- 	lazy = true,
--- 	event = "UIEnter",
---
--- 	dependencies = {
--- 		"nvim-mini/mini.icons",
--- 		"nfejzic/colorize.nvim",
--- 	},
---
--- 	config = config,
--- }
