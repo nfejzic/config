@@ -4,8 +4,8 @@ font-synthetic-style = false
 adjust-cell-height = 0
 adjust-cell-width = 0
 
-# nicer 'r'
-font-feature = ss05
+# alternative 'r'
+# font-feature = ss05
 
 # alternative '|'
 # font-feature = ss06
