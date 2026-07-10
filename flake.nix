@@ -36,15 +36,17 @@
       # options defined in options.nix.
       homeModules.default = import ./home.nix inputs;
 
+      user = "nfejzic";
+
       configuration =
         { pkgs, ... }:
         {
           # prevent nix-darwin from managing nix, so determinate nix can do it instead
           nix.enable = false;
 
-          users.knownUsers = [ "nfejzic" ];
+          users.knownUsers = [ user ];
           users.users.nfejzic.uid = 501;
-          users.users.nfejzic.home = "/Users/nfejzic";
+          users.users.nfejzic.home = "/Users/${user}";
 
           environment.systemPackages = with pkgs; [
             vim
@@ -54,7 +56,7 @@
           nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
 
           programs.fish.enable = true;
-          users.users.nfejzic.shell = pkgs.fish;
+          users.users.${user}.shell = pkgs.fish;
 
           system.configurationRevision = self.rev or self.dirtyRev or null;
           system.stateVersion = 6;
@@ -77,7 +79,7 @@
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
-            home-manager.users.nfejzic = homeModules.default;
+            home-manager.users.${user} = homeModules.default;
           }
         ];
       };
