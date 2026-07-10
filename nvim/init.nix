@@ -138,12 +138,8 @@ inputs:
       };
     };
 
-  home.sessionVariables =
-    let
-      nvimpath = lib.getExe config.wrappers.neovim.wrapper;
-    in
-    {
-      EDITOR = nvimpath;
-      MANPAGER = "${nvimpath} +Man!";
-    };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    MANPAGER = "nvim +Man!";
+  };
 }
