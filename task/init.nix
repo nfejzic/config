@@ -30,5 +30,8 @@
       report.next.sort=start-,urgency-
       report.next.columns=id,start.age,project,due.relative,description
       report.next.labels=ID,Active,Proj,Due,Task
+
+      # disable verbosity for 'override' so we are not notified of TASKRC env variable override every time
+      verbose = blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,filter,unwait
     '';
 }
