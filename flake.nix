@@ -35,6 +35,18 @@
       # differences (username, colorschemes) are set via the `nfejzic.*`
       # options defined in options.nix.
       homeModules.default = import ./home.nix inputs;
+      darwinModules.fonts =
+        { pkgs, ... }:
+        let
+          my-fonts = inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system};
+        in
+        {
+          fonts.packages = [
+            my-fonts.berkeley-mono
+            my-fonts.comic-code-dotted-zero
+            pkgs.jetbrains-mono
+          ];
+        };
 
       user = "nfejzic";
 
@@ -82,11 +94,13 @@
     in
     {
       inherit homeModules;
+      inherit darwinModules;
 
       darwinConfigurations."aeration" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
           home-manager.darwinModules.home-manager
+          darwinModules.fonts
           {
             home-manager.useGlobalPkgs = true;
             home-manager.users.${user} = homeModules.default;
