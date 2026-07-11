@@ -11,18 +11,16 @@ inputs:
   config,
   ...
 }:
-let
-  fonts' = inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system};
-in
 {
   imports = [
-    ./options.nix
+    (import ./nvim/init.nix inputs)
     ./alacritty/init.nix
     ./bat/init.nix
     ./fish/init.nix
     ./ghostty/init.nix
-    (import ./nvim/init.nix inputs)
+    ./options.nix
     ./starship/init.nix
+    ./task/init.nix
     ./tmux/init.nix
   ];
 

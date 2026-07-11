@@ -93,8 +93,7 @@
         };
     in
     {
-      inherit homeModules;
-      inherit darwinModules;
+      inherit homeModules darwinModules;
 
       darwinConfigurations."aeration" = nix-darwin.lib.darwinSystem {
         modules = [
