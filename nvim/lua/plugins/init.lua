@@ -19,4 +19,5 @@ require("plugins.rust")
 require("plugins.smart_splits")
 require("plugins.snacks")
 require("plugins.treesitter")
+
 require("plugins.ui")

@@ -45,7 +45,7 @@ local function choose(light, dark)
 	return vim.o.background == "light" and light or dark
 end
 
-local function create_config()
+local function gruvbox_config()
 	--- @type GruvboxConfig
 	return {
 		terminal_colors = true,
@@ -92,6 +92,7 @@ local function create_config()
 
 			Constant = { link = "GruvboxOrange" },
 			Number = { link = "Constant" },
+			Boolean = { link = "Constant" },
 			Directory = { link = "GruvboxBlueBold" },
 
 			LineNr = { link = "CursorLineFold" },
@@ -120,23 +121,7 @@ local function create_config()
 	}
 end
 
-gruvbox.setup(create_config())
-
--- HACK(nfejzic): force gruvbox to choose light and dark colors
---				  based on background when background changes
-local grp = vim.api.nvim_create_augroup("gruvbox-background-change", { clear = true })
-vim.api.nvim_create_autocmd("OptionSet", {
-	group = grp,
-	pattern = "background",
-	callback = function()
-		if vim.g.colors_name ~= "gruvbox" then
-			return
-		end
-
-		gruvbox.setup(create_config())
-		gruvbox.load()
-	end,
-})
+gruvbox.setup(gruvbox_config())
 
 require("catppuccin").setup({
 	background = { -- :h background
@@ -212,4 +197,37 @@ require("lualine").setup({
 	},
 })
 
-vim.cmd("colo rose-pine")
+local function set_colo()
+	local colorscheme = vim.g.nfejzic_colorscheme or "rose-pine"
+	vim.cmd.colorscheme(colorscheme or "rose-pine")
+
+	vim.api.nvim_exec_autocmds("ColorScheme", { pattern = vim.g.colors_name })
+end
+
+set_colo()
+
+-- HACK: some plugins need the colorscheme ready as soon as possible, and some
+--       require it to be set later. This is stupid, and I hope there'll be a
+--       better solution to this
+-- TODO: figure out a better solution for this...
+local grp = vim.api.nvim_create_augroup("gruvbox-background-change", { clear = true })
+vim.api.nvim_create_autocmd("OptionSet", {
+	group = grp,
+	pattern = "background",
+	callback = function()
+		if vim.g.colors_name == "gruvbox" then
+			-- HACK(nfejzic): force gruvbox to choose light and dark colors
+			--				  based on background when background changes
+			gruvbox.setup(gruvbox_config())
+		end
+
+		set_colo()
+	end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		set_colo()
+	end,
+})
