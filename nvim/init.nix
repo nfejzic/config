@@ -132,9 +132,11 @@ inputs:
       specs.colorscheme = {
         before = [ "INIT_MAIN" ]; # runs before your config, just sets a global
         data = null;
-        config = ''
-          vim.g.nfejzic_colorscheme = "${config.nfejzic.neovim.colorscheme}"
-        '';
+        config =
+          # lua
+          ''
+            vim.g.nfejzic_colorscheme = "${config.nfejzic.neovim.colorscheme}"
+          '';
       };
     };
 
