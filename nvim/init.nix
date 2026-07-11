@@ -97,6 +97,7 @@ inputs:
           gitsigns-nvim
           vim-fugitive
           pkgsUnstable.vimPlugins.diffview-plus-nvim
+          codediff-nvim
           neogit
 
           lazydev-nvim
