@@ -17,7 +17,7 @@ echo "# read book X due:sat project:general" >>$temp_file
 echo "#" >>$temp_file
 echo "# @docs" >>$temp_file
 echo "# write the first draft due:wed" >>$temp_file
-echo "# send the draft for review due:thu" >>$temp_file
+echo -e "# send the draft for review due:thu\n" >>$temp_file
 
 set -l editor "$VISUAL"
 
@@ -29,10 +29,11 @@ if test -z "$editor"
     set editor nvim
 end
 
-set -l editor_flags ""
+set -l editor_flags
 
-if string match -q nvim $editor
-    set editor_flags -c "normal G" -c "normal o" -c "normal cc" -c w
+# make sure we're at the bottom of the file
+if string match -q "*nvim*" $editor
+    set editor_flags '+$' -c 'autocmd QuitPre <buffer> setlocal nomodified' -c startinsert
 end
 
 command $editor $temp_file $editor_flags
