@@ -37,17 +37,17 @@ inputs:
     packages = with pkgs; [
       bat
       cargo-insta
-      cargo-nextest
       cargo-machete
+      cargo-nextest
       delta
       eza
       fd
-      fzf
       ffmpeg
+      fzf
       gh
       graphviz
-      just
       jq
+      just
       nixfmt
       ripgrep
       tlrc
