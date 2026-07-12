@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 
-set temp_file (mktemp)
+set -g temp_file (mktemp)
+
+function _task_cleanup --on-event fish_exit --on-signal INT --on-signal TERM
+    test -n "$temp_file"; and rm -f $temp_file
+end
 
 echo "# This is a file for bulk task creation. Lines starting with '#' will be ignored" >>$temp_file
 echo "# Each line will be interpreted as a 'add' command" >>$temp_file
@@ -63,6 +67,3 @@ printf '\n✓ added\n'
 sleep 0.5
 
 tmux refresh-client -S
-
-# cleanup
-rm $temp_file
