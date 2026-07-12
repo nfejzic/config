@@ -56,7 +56,7 @@ for line in (cat $temp_file)
         continue
     end
 
-    set -l to_execute task add $project $line
+    set -l to_execute task add $project (string split -n " " -- $line)
     command $to_execute
 end <$temp_file
 
