@@ -6,7 +6,35 @@ gs.setup({
 	current_line_blame = false,
 })
 
+---@diagnostic disable-next-line: inject-field
+vim.g.fugitive_dynamic_colors = 1
+
+require("diffview").setup()
+
+require("neogit").setup({
+	signs = {
+		-- \Uf0da
+		hunk = { "", "" },
+		item = { "", "" },
+		section = { "", "" },
+	},
+
+	mappings = {
+		status = {
+			[">"] = "OpenFold",
+			---@diagnostic disable-next-line: assign-type-mismatch
+			["<"] = "CloseFold",
+		},
+	},
+})
+
 require("user.keymaps").set_keys({
+	{
+		"n",
+		"<leader>gg",
+		":Neogit<CR>",
+		"Open neogit",
+	},
 	{
 		"n",
 		"]g",
@@ -57,10 +85,3 @@ require("user.keymaps").set_keys({
 	{ "n", "<leader>gq", gs.setqflist, "Show changes in quickfix list" },
 	{ "n", "<leader>gl", "<CMD>Git log<CR>", "Show changes in quickfix list" },
 })
-
----@diagnostic disable-next-line: inject-field
-vim.g.fugitive_dynamic_colors = 1
-
-require("diffview").setup()
-
-require("neogit").setup({})
