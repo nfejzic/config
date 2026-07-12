@@ -38,9 +38,9 @@ end
 
 command $editor $temp_file $editor_flags
 
-set -l project ""
-while read -l line
+set -l project
 
+for line in (cat $temp_file)
     if test -z "$line"
         continue
     end
@@ -51,12 +51,8 @@ while read -l line
     end
 
     # figure out project name
-    if string match -q -r "^@" $line
-        set -l match (string match -r '^@.*\w' -n $line | string split " ")
-        set -l sub_start (math "$match[1] + 1")
-        set -l sub_end (math "$sub_start + $match[2]")
-        set project (string sub -s $sub_start -e $sub_end $line)
-        set project "project:$project"
+    if set -l proj_name (string match -rg "^@(\S+)" $line); and test -n "$proj_name"
+        set project "project:$proj_name"
         continue
     end
 
