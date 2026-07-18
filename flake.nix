@@ -47,10 +47,6 @@
           # prevent nix-darwin from managing nix, so determinate nix can do it instead
           nix.enable = false;
 
-          users.knownUsers = [ user ];
-          users.users.nfejzic.uid = 501;
-          users.users.nfejzic.home = "/Users/${user}";
-
           environment.systemPackages = with pkgs; [
             vim
           ];
@@ -64,7 +60,13 @@
           nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
 
           programs.fish.enable = true;
-          users.users.${user}.shell = pkgs.fish;
+
+          users.knownUsers = [ user ];
+          users.users.${user} = {
+            uid = 501;
+            home = "/Users/${user}";
+            shell = pkgs.fish;
+          };
 
           system.configurationRevision = self.rev or self.dirtyRev or null;
           system.stateVersion = 6;
