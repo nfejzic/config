@@ -40,6 +40,9 @@
 
       configuration =
         { pkgs, ... }:
+        let
+          fonts' = inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system};
+        in
         {
           # prevent nix-darwin from managing nix, so determinate nix can do it instead
           nix.enable = false;
@@ -50,6 +53,11 @@
 
           environment.systemPackages = with pkgs; [
             vim
+          ];
+
+          fonts.packages = [
+            fonts'.berkeley-mono
+            fonts'.comic-code-dotted-zero
           ];
 
           nix.settings.experimental-features = "nix-command flakes";
