@@ -43,6 +43,7 @@ in
       cargo-machete
       delta
       eza
+      fd
       fzf
       ffmpeg
       gh
