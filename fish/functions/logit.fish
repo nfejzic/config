@@ -22,7 +22,8 @@ function logit
                 set color blue
                 set lvl DEBUG
             case "*"
-                log --level=error -- "Log level can be one of 'info|debug|warn|error'."
+                logit --level=error -- "Log level can be one of 'info|debug|warn|error'."
+                exit 1
         end
     end
 
