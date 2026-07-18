@@ -24,4 +24,5 @@
 
   xdg.configFile."fish/user".source = ./user;
   xdg.configFile."fish/themes".source = ./themes;
+  xdg.configFile."fish/functions".source = ./functions;
 }
