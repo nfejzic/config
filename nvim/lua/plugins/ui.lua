@@ -89,6 +89,7 @@ local function gruvbox_config()
 			["@lsp.type.method"] = { link = "Function" },
 
 			Keyword = { link = "GruvboxPurple" },
+			Include = { link = "Keyword" },
 
 			Constant = { link = "GruvboxOrange" },
 			Number = { link = "Constant" },
