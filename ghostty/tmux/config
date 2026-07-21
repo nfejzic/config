@@ -70,7 +70,7 @@ shell-integration-features = no-cursor,no-sudo,no-title
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
-bold-is-bright = true
+bold-is-bright = false
 
 # Key bindings. The format is `trigger=action`. Duplicates will overwrite
 # previously set values.
