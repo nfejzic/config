@@ -33,5 +33,19 @@
 
       # disable verbosity for 'override' so we are not notified of TASKRC env variable override every time
       verbose = blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,filter,unwait
+
+      color.deleted = red
+      color.completed = green
+      color.active = black on blue
+      color.alternate = white on black
+      color.overdue = black on red
+      color.scheduled = white
+      color.due.today = yellow
+      color.due =
+      color.blocked = black on magenta
+      color.blocking = magenta
+      color.recurring = white
+      color.tagged = white
+      uda.taskwarrior-tui.style.report.selection = bold default
     '';
 }
