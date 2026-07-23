@@ -48,6 +48,7 @@ inputs:
         stylua
         vscode-extensions.vadimcn.vscode-lldb
         nixfmt
+        prettier
         prettierd
       ];
 
