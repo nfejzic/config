@@ -12,6 +12,8 @@ vim.g.fugitive_dynamic_colors = 1
 require("diffview").setup()
 
 require("neogit").setup({
+	-- highlight syntax in diff
+	treesitter_diff_highlight = true,
 	signs = {
 		-- \Uf0da
 		hunk = { "", "" },
