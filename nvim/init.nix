@@ -54,6 +54,7 @@ inputs:
 
       runtimePkgs = with pkgs'; [
         rust-analyzer
+        typescript-go
         lua-language-server
         nixd
         stylua
