@@ -64,6 +64,9 @@ zoxide init fish | source
 abbr -a cd z
 abbr -a cdi zi
 
+# nicer help
+abbr -a hh 'bat -p -lhelp'
+
 # makes sure zoxide is used instead of cd in scripts and commands from history
 # found by fzf, so it can cache the paths
 function cd
