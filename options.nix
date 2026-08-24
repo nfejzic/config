@@ -28,5 +28,15 @@
         theme set inside the bundled ghostty/tmux/config.
       '';
     };
+
+    ghostty.font = lib.mkOption {
+      type = lib.types.enum [
+        "berkeley-mono"
+        "comic-code"
+        "monolisa"
+      ];
+      default = "berkeley-mono";
+      description = "Font family for Ghostty.";
+    };
   };
 }
