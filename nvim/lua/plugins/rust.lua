@@ -1,7 +1,2 @@
--- return {
--- 	{
--- 		'mrcjkb/rustaceanvim',
--- 		version = '^8',
--- 		lazy = false, -- This plugin is already lazy
--- 	}
--- }
+-- Rustaceanvim auto-detects codelldb on PATH and configures the DAP adapter.
+-- No explicit vim.g.rustaceanvim needed.

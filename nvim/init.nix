@@ -47,6 +47,13 @@ inputs:
             url = "https://github.com/${repo}.git";
           };
         };
+      # The vscode-lldb extension buries codelldb under share/vscode/…
+      # with no bin/ entry. This derivation creates a bin/codelldb
+      # symlink so runtimePkgs puts it on PATH.
+      codelldb = pkgs'.runCommand "codelldb" { } ''
+        mkdir -p $out/bin
+        ln -s ${pkgs'.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb $out/bin/codelldb
+      '';
     in
     {
       enable = true;
@@ -58,7 +65,7 @@ inputs:
         lua-language-server
         nixd
         stylua
-        vscode-extensions.vadimcn.vscode-lldb
+        codelldb
         nixfmt
         prettier
         prettierd
@@ -122,7 +129,6 @@ inputs:
           fidget-nvim
 
           # debuggers
-          # TODO: figure out how to get codelldb
           nvim-dap
           nvim-dap-ui
           nvim-dap-virtual-text
@@ -154,6 +160,7 @@ inputs:
             vim.g.nfejzic_colorscheme = "${config.nfejzic.neovim.colorscheme}"
           '';
       };
+
     };
 
   home.sessionVariables = {
