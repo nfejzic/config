@@ -50,6 +50,7 @@ inputs:
       just
       nixfmt
       ripgrep
+      rustup
       tlrc
       tokei
       yq
