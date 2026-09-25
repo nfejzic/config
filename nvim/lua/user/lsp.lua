@@ -123,7 +123,7 @@ local function on_attach(client, bufnr)
 		{ { "n", "v" }, "<leader>a", code_action_fn, "Code actions" },
 		{ { "n", "v" }, "<leader>ll", vim.lsp.codelens.run, "Run Code Lens" },
 
-		{ "n",          "gc",         vim.lsp.buf.incoming_calls,   "Incoming Calls" },
+		{ "n", "grc", vim.lsp.buf.incoming_calls, "Incoming Calls" },
 		{ "n", "gd", vim.lsp.buf.definition, "Definitions" },
 		{ "n", "gI", vim.lsp.buf.implementation, "Implementations" },
 		{ "n", "gD", vim.lsp.buf.declaration, "Go to Declaration" },
