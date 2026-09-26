@@ -36,6 +36,17 @@ inputs:
         inherit (pkgs.stdenv.hostPlatform) system;
         config.allowUnfree = true;
       };
+
+      fromGitHub =
+        ref: repo:
+        pkgs'.vimUtils.buildVimPluginFrom2Nix {
+          pname = "${lib.strings.sanitizeDerivationName repo}";
+          version = ref;
+          src = fetchGit {
+            inherit ref;
+            url = "https://github.com/${repo}.git";
+          };
+        };
     in
     {
       enable = true;
@@ -82,6 +93,7 @@ inputs:
           catppuccin-nvim
           kanagawa-nvim
           rose-pine
+          (fromGitHub "HEAD" "RostislavArts/naysayer.nvim")
 
           # languages
           rustaceanvim
