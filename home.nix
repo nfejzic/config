@@ -49,6 +49,7 @@ inputs:
       jq
       just
       nixfmt
+      rectangle
       ripgrep
       rustup
       tlrc
