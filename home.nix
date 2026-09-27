@@ -11,6 +11,13 @@ inputs:
   config,
   ...
 }:
+let
+  onePassPath =
+    if pkgs.stdenv.isDarwin then
+      "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    else
+      "${config.home.homeDirectory}/.1password/agent.sock";
+in
 {
   imports = [
     (import ./nvim/init.nix inputs)
@@ -60,10 +67,33 @@ inputs:
 
       opencode
     ];
+
+    sessionVariables = {
+      SSH_AUTH_SOCK = onePassPath;
+    };
   };
 
   manual.manpages.enable = false;
   programs.man.generateCaches = false;
+
+  programs.git = {
+    enable = true;
+    settings = {
+      gpg = {
+        format = "ssh";
+      };
+      "gpg \"ssh\"" = {
+        program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+      };
+      commit = {
+        gpgsign = true;
+      };
+
+      user = {
+        signingKey = "...";
+      };
+    };
+  };
 
   # NOTE: install fonts
   fonts.fontconfig.enable = true;
