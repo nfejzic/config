@@ -176,6 +176,83 @@ require("rose-pine").setup({
 	}),
 })
 
+-- NAYSAYER --
+
+-- naysayer is a plain colorscheme (no setup() with overrides), so we apply
+-- our adjustments via a ColorScheme autocmd. Everything links to — or pulls
+-- colors from — the highlight groups the theme itself defines, so this keeps
+-- working if the theme's palette changes. Registered before `set_colo()`
+-- below, which re-fires ColorScheme and thus applies these right away.
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "naysayer",
+	callback = function()
+		local function fg_of(group)
+			return vim.api.nvim_get_hl(0, { name = group, link = false }).fg
+		end
+		local function bg_of(group)
+			return vim.api.nvim_get_hl(0, { name = group, link = false }).bg
+		end
+
+		-- read these upfront: NormalFloat etc. are (re)defined in the loop
+		-- below, and pairs() ordering is not deterministic
+		local normal_bg = bg_of("Normal")
+		local subtle_bg = bg_of("CursorLine")
+		local stronger_bg = fg_of("LineNr")
+		local accent = bg_of("StatusLine")
+
+		for group, hl in
+			pairs(link_highlights({
+				["@lsp.type.formatSpecifier"] = { link = "String" },
+
+				-- make coloring consistent...
+				Variable = { link = "Identifier" },
+				["@variable.builtin"] = { link = "Constant" },
+
+				-- the theme's Cursor has only a bg, making the text under it
+				-- unreadable when nvim renders the cursor (e.g. in floats)
+				Cursor = { fg = normal_bg, bg = fg_of("CursorLineNr") },
+
+				QuickFixLine = { bg = subtle_bg, bold = true },
+
+				-- naysayer doesn't set these, leaving nvim's off-palette
+				-- defaults (grey NonText, light-blue Directory) which clash
+				-- with the picker. The dim teal is also what snacks uses for
+				-- the "some/dir/" part of file paths
+				NonText = { fg = stronger_bg },
+				Directory = { link = "String" },
+				SnacksPickerDir = { fg = fg_of("Comment") },
+
+				-- floats are seamless with the editor background, naysayer is
+				-- a flat theme. This also keeps the picker list cursorline
+				-- (CursorLine when unfocused, a subtle bg) visible: if floats
+				-- used the CursorLine bg themselves, it would blend away
+				NormalFloat = { bg = normal_bg },
+				FloatBorder = { fg = stronger_bg, bg = normal_bg },
+				FloatTitle = { fg = accent, bg = normal_bg, bold = true },
+				SnacksNormal = { link = "NormalFloat" },
+				SnacksPicker = { link = "NormalFloat" },
+				SnacksPickerListCursorLine = { bg = stronger_bg },
+				SnacksPickerMatch = { fg = fg_of("Constant"), bold = true },
+				SnacksInputNormal = { link = "NormalFloat" },
+				SnacksInputBorder = { link = "FloatBorder" },
+				SnacksInputTitle = { link = "FloatTitle" },
+
+				Pmenu = { bg = subtle_bg },
+				PmenuSel = { link = "SnacksPickerListCursorLine" },
+
+				Todo = { fg = fg_of("WarningMsg"), bg = "none" },
+				["@comment.error.comment"] = { link = "Error" },
+				["@constant.comment"] = { link = "Constant" },
+
+				-- NOTE: custom treesitter queries for accented keywords
+				["@accent"] = { link = "Type" },
+			}))
+		do
+			vim.api.nvim_set_hl(0, group, hl)
+		end
+	end,
+})
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
