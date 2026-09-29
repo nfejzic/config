@@ -98,7 +98,7 @@ in
       };
 
       user = {
-        signingKey = "...";
+        signingKey = "~/.ssh/id_ed25519.pub";
       };
     };
   };
