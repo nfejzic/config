@@ -38,12 +38,12 @@ inputs:
       };
 
       fromGitHub =
-        ref: repo:
-        pkgs'.vimUtils.buildVimPluginFrom2Nix {
+        rev: repo:
+        pkgs'.vimUtils.buildVimPlugin {
           pname = "${lib.strings.sanitizeDerivationName repo}";
-          version = ref;
+          version = rev;
           src = fetchGit {
-            inherit ref;
+            inherit rev;
             url = "https://github.com/${repo}.git";
           };
         };
@@ -101,7 +101,7 @@ inputs:
           catppuccin-nvim
           kanagawa-nvim
           rose-pine
-          (fromGitHub "HEAD" "RostislavArts/naysayer.nvim")
+          (fromGitHub "6c641ea0cfc5fbbc0777996320b2304c3811f246" "RostislavArts/naysayer.nvim")
 
           # languages
           rustaceanvim
