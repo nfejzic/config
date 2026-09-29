@@ -34,6 +34,7 @@
         "berkeley-mono"
         "comic-code"
         "monolisa"
+        "atkinson-monolegible"
       ];
       default = "berkeley-mono";
       description = "Font family for Ghostty.";

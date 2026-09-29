@@ -11,6 +11,7 @@ let
     berkeley-mono = ./fonts/berkeley_mono;
     comic-code = ./fonts/comic_code;
     monolisa = ./fonts/monolisa;
+    atkinson-monolegible = ./fonts/atkinson_monolegible;
   };
   font_file = font_options.${config.nfejzic.ghostty.font};
 in
