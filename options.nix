@@ -38,5 +38,12 @@
       default = "berkeley-mono";
       description = "Font family for Ghostty.";
     };
+
+    excludePackages = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Package names to exclude from the default set.";
+    };
+
   };
 }

@@ -41,32 +41,36 @@ in
       "${config.home.homeDirectory}/.cargo/bin"
     ];
 
-    packages = with pkgs; [
-      bat
-      cargo-insta
-      cargo-machete
-      cargo-nextest
-      delta
-      eza
-      fd
-      ffmpeg
-      fzf
-      gh
-      graphviz
-      jq
-      just
-      nixfmt
-      rectangle
-      ripgrep
-      rustup
-      tlrc
-      tokei
-      yq
-      zellij
-      zoxide
+    packages =
+      let
+        allPackages = with pkgs; [
+          bat
+          cargo-insta
+          cargo-machete
+          cargo-nextest
+          delta
+          eza
+          fd
+          ffmpeg
+          fzf
+          gh
+          graphviz
+          jq
+          just
+          nixfmt
+          rectangle
+          ripgrep
+          rustup
+          tlrc
+          tokei
+          yq
+          zellij
+          zoxide
 
-      opencode
-    ];
+          opencode
+        ];
+      in
+      builtins.filter (p: !(builtins.elem (lib.getName p) config.nfejzic.excludePackages)) allPackages;
 
     sessionVariables = {
       SSH_AUTH_SOCK = onePassPath;
