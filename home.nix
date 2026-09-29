@@ -17,6 +17,12 @@ let
       "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
     else
       "${config.home.homeDirectory}/.1password/agent.sock";
+
+  op-ssh-sign =
+    if pkgs.stdenv.isDarwin then
+      "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    else
+      "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
 in
 {
   imports = [
@@ -86,9 +92,7 @@ in
       gpg = {
         format = "ssh";
       };
-      "gpg \"ssh\"" = {
-        program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
-      };
+      "gpg \"ssh\"".program = op-ssh-sign;
       commit = {
         gpgsign = true;
       };
