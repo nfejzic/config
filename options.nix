@@ -33,6 +33,7 @@
       type = lib.types.enum [
         "berkeley-mono"
         "comic-code"
+        "fira-code"
         "monolisa"
         "atkinson-monolegible"
       ];

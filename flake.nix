@@ -44,6 +44,7 @@
           fonts.packages = [
             my-fonts.berkeley-mono
             my-fonts.comic-code-dotted-zero
+            my-fonts.fira-code
             pkgs.jetbrains-mono
           ];
         };
@@ -66,6 +67,7 @@
           fonts.packages = [
             fonts'.berkeley-mono
             fonts'.comic-code-dotted-zero
+            fonts'.fira-code
           ];
 
           nix.settings.experimental-features = "nix-command flakes";

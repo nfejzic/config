@@ -1,13 +1,12 @@
 font-family = Fira Code
-font-size = 17
+font-size = 19.5
 font-synthetic-style = false
-adjust-cell-height = 4
+adjust-cell-height = 0
 adjust-cell-width = 0
+adjust-font-baseline = -3
 
 # slab 'l'
 font-feature = cv10
 
 # dotted 0
 font-feature = zero
-
-font-feature = ss01

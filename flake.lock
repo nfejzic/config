@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783678632,
-        "narHash": "sha256-JiiLONkxjyazbaGPe6xHVIWbSOU0+88iQ6lzeZyhxZ0=",
+        "lastModified": 1791296322,
+        "narHash": "sha256-fvTRARRSEDNVkdNz/iNL9E7ImtbViIeP400h5rjBt/8=",
         "ref": "refs/heads/main",
-        "rev": "6448d0491dd128115a412180594b5efafb56a7fa",
-        "revCount": 7,
+        "rev": "662ea1cd749bc66d8310cf6e8ae3b89c75125055",
+        "revCount": 8,
         "type": "git",
         "url": "https://github.com/nfejzic/fonts"
       },

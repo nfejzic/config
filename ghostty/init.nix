@@ -10,6 +10,7 @@ let
   font_options = {
     berkeley-mono = ./fonts/berkeley_mono;
     comic-code = ./fonts/comic_code;
+    fira-code = ./fonts/fira_code;
     monolisa = ./fonts/monolisa;
     atkinson-monolegible = ./fonts/atkinson_monolegible;
   };
