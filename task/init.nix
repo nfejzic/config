@@ -46,6 +46,7 @@
       color.blocking = magenta
       color.recurring = white
       color.tagged = white
+      color.tag.next = yellow
       uda.taskwarrior-tui.style.report.selection = bold default
     '';
 }
