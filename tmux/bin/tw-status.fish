@@ -44,7 +44,7 @@ else
     set tc red
 end
 
-set -l seg "#[fg=$wc]$LBL_WIP $wip#[fg=default] #[fg=$tc]$LBL_TODO $todo"
+set -l seg " #[fg=$wc]$LBL_WIP $wip #[fg=$tc]$LBL_TODO $todo"
 test "$over" -gt 0; and set seg "$seg #[fg=red]$LBL_OVER $over"
 
 printf '%s#[default]' "$seg"
