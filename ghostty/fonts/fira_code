@@ -6,7 +6,7 @@ adjust-cell-width = 0
 adjust-font-baseline = -3
 
 # slab 'l'
-font-feature = cv10
+# font-feature = cv10
 
 # dotted 0
-font-feature = zero
+# font-feature = zero

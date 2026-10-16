@@ -1,9 +1,9 @@
 {
   pkgs,
   config,
+  lib,
   # pkgsUnstable,
   # inputs,
-  # lib,
   ...
 }:
 let
@@ -15,6 +15,10 @@ let
     atkinson-monolegible = ./fonts/atkinson_monolegible;
   };
   font_file = font_options.${config.nfejzic.ghostty.font};
+
+  font_features_file = pkgs.writeText "ghostty-font-features" (
+    lib.concatMapStrings (f: "font-feature = ${f}\n") config.nfejzic.ghostty.font-features
+  );
 in
 {
   programs.ghostty = {
@@ -23,6 +27,7 @@ in
 
     settings.config-file = [
       "${font_file}"
+      "${font_features_file}"
       "${./tmux/config}"
       # Theme override, driven by the `nfejzic.ghostty.theme` option. Listed
       # last so it wins: Ghostty applies a file's config-file includes in order

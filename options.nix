@@ -35,10 +35,22 @@
         "comic-code"
         "fira-code"
         "monolisa"
-        "atkinson-monolegible"
       ];
       default = "berkeley-mono";
       description = "Font family for Ghostty.";
+    };
+
+    ghostty.font-features = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      example = [
+        "ss05"
+        "-calt"
+      ];
+      description = ''
+        Extra OpenType features passed to Ghostty as `font-feature` lines.
+        Added after the selected font's own config file.
+      '';
     };
 
     excludePackages = lib.mkOption {

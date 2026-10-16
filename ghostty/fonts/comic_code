@@ -5,8 +5,9 @@ adjust-cell-height = 0
 adjust-cell-width = 0
 
 # dotted zero
-font-feature = zero
+# font-feature = zero
+
 # enable ligatures
-font-feature = liga
-font-feature = dlig
-font-feature = calt
+# font-feature = liga
+# font-feature = dlig
+# font-feature = calt

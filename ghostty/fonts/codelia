@@ -5,7 +5,7 @@ adjust-cell-height = 1
 adjust-cell-width = 0
 
 # dotted '0'
-font-feature=zero
+# font-feature=zero
 
 # slab 'l'
-font-feature=ss02
+# font-feature=ss02

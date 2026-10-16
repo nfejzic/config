@@ -11,5 +11,5 @@ adjust-cell-width = 0
 # font-feature = ss06
 
 # disable ligatures
-font-feature = -dlig
-font-feature = -calt
+# font-feature = -dlig
+# font-feature = -calt
