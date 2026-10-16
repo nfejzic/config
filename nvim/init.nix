@@ -101,6 +101,7 @@ inputs:
           catppuccin-nvim
           kanagawa-nvim
           rose-pine
+          phha-zenburn
           (fromGitHub "6c641ea0cfc5fbbc0777996320b2304c3811f246" "RostislavArts/naysayer.nvim")
 
           # languages
