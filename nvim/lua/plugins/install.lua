@@ -17,6 +17,8 @@ vim.pack.add({
 	"https://github.com/catppuccin/nvim/",
 	"https://github.com/rebelot/kanagawa.nvim/",
 	"https://github.com/rose-pine/neovim/",
+	"https://github.com/zenbones-theme/zenbones.nvim",
+	"https://github.com/rktjmp/lush.nvim",
 
 	{ src = "https://github.com/mrcjkb/rustaceanvim", version = "v9.0.4" },
 	"https://github.com/ray-x/go.nvim/",

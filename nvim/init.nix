@@ -102,6 +102,10 @@ inputs:
           kanagawa-nvim
           rose-pine
           phha-zenburn
+          # zenbones builds its themes with lush at load time (unless
+          # `g:bones_compat` is set), so loading one fails without it
+          zenbones-nvim
+          lush-nvim
           (fromGitHub "6c641ea0cfc5fbbc0777996320b2304c3811f246" "RostislavArts/naysayer.nvim")
 
           # languages
