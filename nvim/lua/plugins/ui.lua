@@ -253,6 +253,64 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
+-- ZENBURN --
+
+-- zenburn has no setup() with overrides either, so let's define them manually
+vim.api.nvim_create_autocmd("ColorScheme", {
+	-- `:colorscheme zenburn` fires with "zenburn", but the theme sets
+	-- colors_name to "zenburn.nvim", which is what set_colo() re-fires with
+	pattern = { "zenburn", "zenburn.nvim" },
+	callback = function()
+		local function fg_of(group)
+			return vim.api.nvim_get_hl(0, { name = group, link = false }).fg
+		end
+
+		local function bg_of(group)
+			return vim.api.nvim_get_hl(0, { name = group, link = false }).bg
+		end
+
+		-- read these upfront: the Diff* groups are redefined in the loop below
+		local add_bg = bg_of("DiffAdd") -- muted green
+		local delete_bg = bg_of("DiffText") -- muted red
+
+		local overrides = link_highlights({
+			["@lsp.type.formatSpecifier"] = { link = "SpecialChar" },
+
+			-- make coloring consistent...
+			Variable = { fg = fg_of("Normal") },
+			["@variable.builtin"] = { link = "Number" },
+
+			-- background-only diff groups so syntax highlighting stays
+			-- visible. DiffText links to Visual, which is background-only
+			-- and a deeper green than DiffAdd, so intra-line changes stand
+			-- out within a changed line
+			DiffAdd = { bg = add_bg },
+			DiffChange = { bg = bg_of("DiffChange") },
+			DiffText = { link = "Visual" },
+			DiffDelete = { fg = fg_of("NonText"), bg = delete_bg },
+
+			-- same colors as zenburn's own gitsigns signs, so the sign column
+			-- and diffview's file panel agree
+			Added = { fg = fg_of("GitSignsAdd") },
+			Changed = { fg = fg_of("GitSignsChange") },
+			Removed = { fg = fg_of("GitSignsDelete") },
+
+			-- NOTE: custom treesitter queries for accented keywords
+			["@accent"] = { link = "PreProc" },
+		})
+
+		for group, hl in pairs(overrides) do
+			vim.api.nvim_set_hl(0, group, hl)
+		end
+
+		-- diffview builds groups such as DiffviewDiffAddAsDelete and the inline
+		-- overlays by copying DiffAdd/DiffDelete/DiffText on ColorScheme. Its
+		-- autocmd is registered in plugins/git.lua, so it runs before this one
+		-- and copies zenburn's original colors. Refresh it now that ours are set.
+		require("diffview").update_colors()
+	end,
+})
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
