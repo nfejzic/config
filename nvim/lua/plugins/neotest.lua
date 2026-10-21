@@ -11,7 +11,8 @@ local config = function()
 				args = { "-tags=unit,integration" },
 			}),
 			require("neotest-rust")({
-				dap_adapter = "codelldb",
+				-- Must match the adapter name in user/debug_adapters/c_cpp.lua.
+				dap_adapter = "lldb",
 			}),
 			-- require("neotest-vitest"),
 		},

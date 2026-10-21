@@ -1,2 +1,4 @@
--- Rustaceanvim auto-detects codelldb on PATH and configures the DAP adapter.
--- No explicit vim.g.rustaceanvim needed.
+-- Rustaceanvim finds the `lldb` nvim-dap adapter we register in
+-- user/debug_adapters/c_cpp.lua (lldb-dap) and uses it for :RustLsp debug.
+-- It also adds rustc's lldb pretty-printers to its sessions, so no explicit
+-- vim.g.rustaceanvim is needed.

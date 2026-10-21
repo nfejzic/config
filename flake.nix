@@ -95,8 +95,8 @@
           system.stateVersion = 6;
           nixpkgs.hostPlatform = "aarch64-darwin";
 
-          # Several packages this config uses are unfree (the private fonts,
-          # codelldb). The neovim module applies the blink.cmp overlay itself,
+          # Several packages this config uses are unfree (e.g. the private
+          # fonts). The neovim module applies the blink.cmp overlay itself,
           # so there's no need to set nixpkgs.overlays here.
           nixpkgs.config.allowUnfree = true;
 

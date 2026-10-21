@@ -47,13 +47,23 @@ inputs:
             url = "https://github.com/${repo}.git";
           };
         };
-      # The vscode-lldb extension buries codelldb under share/vscode/…
-      # with no bin/ entry. This derivation creates a bin/codelldb
-      # symlink so runtimePkgs puts it on PATH.
-      codelldb = pkgs'.runCommand "codelldb" { } ''
-        mkdir -p $out/bin
-        ln -s ${pkgs'.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb $out/bin/codelldb
-      '';
+      # Debug adapter for C, C++ and Rust: LLVM's `lldb-dap` (codelldb is
+      # not allowed at work). nvim-dap, rustaceanvim and neotest-rust all
+      # find it on PATH under this name.
+      #
+      # On macOS we use Apple's lldb-dap from the active Xcode / Command Line
+      # Tools rather than nixpkgs' lldb: Apple's build is codesigned and comes
+      # with the matching `debugserver`, so it can attach to processes without
+      # any extra entitlement setup. We clear DEVELOPER_DIR/SDKROOT and call
+      # /usr/bin/xcrun by absolute path because Nix devshells point both at a
+      # store SDK (and may shadow xcrun), where no lldb-dap exists.
+      lldb-dap =
+        if pkgs'.stdenv.isDarwin then
+          pkgs'.writeShellScriptBin "lldb-dap" ''
+            exec env -u DEVELOPER_DIR -u SDKROOT /usr/bin/xcrun lldb-dap "$@"
+          ''
+        else
+          pkgs'.lldb;
     in
     {
       enable = true;
@@ -65,7 +75,7 @@ inputs:
         lua-language-server
         nixd
         stylua
-        codelldb
+        lldb-dap
         nixfmt
         prettier
         prettierd
