@@ -57,10 +57,16 @@ inputs:
       # any extra entitlement setup. We clear DEVELOPER_DIR/SDKROOT and call
       # /usr/bin/xcrun by absolute path because Nix devshells point both at a
       # store SDK (and may shadow xcrun), where no lldb-dap exists.
+      #
+      # We only use xcrun to *find* lldb-dap and then exec it by absolute path.
+      # `xcrun lldb-dap` would start it with a bare `lldb-dap` as argv[0], and
+      # lldb-dap builds its runInTerminal launcher command from argv[0], so
+      # nvim-dap would try to run `<cwd>/lldb-dap`.
       lldb-dap =
         if pkgs'.stdenv.isDarwin then
           pkgs'.writeShellScriptBin "lldb-dap" ''
-            exec env -u DEVELOPER_DIR -u SDKROOT /usr/bin/xcrun lldb-dap "$@"
+            dap=$(env -u DEVELOPER_DIR -u SDKROOT /usr/bin/xcrun --find lldb-dap) || exit 1
+            exec env -u DEVELOPER_DIR -u SDKROOT "$dap" "$@"
           ''
         else
           pkgs'.lldb;

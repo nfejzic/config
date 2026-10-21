@@ -44,17 +44,35 @@ function M.setup(dap)
 		command = "lldb-dap",
 		name = "lldb",
 		-- nvim-dap runs this on every launch configuration before handing it
-		-- to the adapter. We use it to add the Rust formatters (see above).
-		--
-		-- We can't tell for certain whether the target is a Rust binary, so we
-		-- use the filetype of the buffer the session starts from. The
-		-- formatters match every type (`-x ".*"`), so we don't want them in
-		-- C/C++ sessions.
+		-- to the adapter.
 		enrich_config = function(config, on_config)
+			config = vim.deepcopy(config)
+
+			-- Run the program in lldb-dap's own process and send its output to
+			-- the DAP console (the dap-ui "console" pane), instead of a Neovim
+			-- terminal. rustaceanvim asks for `integratedTerminal`, but with
+			-- Apple's lldb-dap the in-terminal launcher times out
+			-- ("Timed out trying to get messages from the runInTerminal
+			-- launcher") and the session never starts.
+			--
+			-- The trade-off is that the program has no stdin. That's fine for
+			-- tests and most binaries.
+			-- TODO: find out why runInTerminal times out and switch back, so
+			-- that interactive programs can be debugged too.
+			if config.request == "launch" then
+				config.console = "internalConsole"
+			end
+
+			-- Add the Rust formatters (see above).
+			--
+			-- We can't tell for certain whether the target is a Rust binary, so
+			-- we use the filetype of the buffer the session starts from. The
+			-- formatters match every type (`-x ".*"`), so we don't want them in
+			-- C/C++ sessions.
 			if config.initCommands == nil and vim.bo.filetype == "rust" then
-				config = vim.deepcopy(config)
 				config.initCommands = get_rust_init_commands()
 			end
+
 			on_config(config)
 		end,
 	}
