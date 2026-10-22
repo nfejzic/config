@@ -64,7 +64,8 @@ local function gruvbox_config()
 		invert_signs = false,
 		invert_tabline = false,
 		inverse = true,
-		contrast = vim.o.background == "light" and "" or "hard",
+		-- contrast = vim.o.background == "light" and "" or "hard",
+		contrast = "",
 		palette_overrides = {},
 
 		overrides = link_highlights({
@@ -85,13 +86,13 @@ local function gruvbox_config()
 			["@operator"] = { link = "@punctuation" },
 			["@constructor"] = { link = "@punctuation" },
 
-			Function = { link = "GruvboxBlue" },
+			-- Function = { link = "GruvboxBlue" },
 			["@lsp.type.method"] = { link = "Function" },
 
-			Keyword = { link = "GruvboxPurple" },
+			-- Keyword = { link = "GruvboxPurple" },
 			Include = { link = "Keyword" },
 
-			Constant = { link = "GruvboxOrange" },
+			-- Constant = { link = "GruvboxOrange" },
 			Number = { link = "Constant" },
 			Boolean = { link = "Constant" },
 			Directory = { link = "GruvboxBlueBold" },
