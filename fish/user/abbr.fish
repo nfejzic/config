@@ -87,3 +87,6 @@ abbr -a curl3 /opt/homebrew/opt/curl/bin/curl
 
 bind -M insert \cf zi
 bind -M normal \cf zi
+
+abbr -a da 'direnv allow .'
+abbr -a dr 'direnv revoke .'
