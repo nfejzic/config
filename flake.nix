@@ -51,10 +51,14 @@
 
       user = "nfejzic";
 
-      configuration =
+      darwin-configuration =
         { pkgs, ... }:
         let
           fonts' = inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system};
+          unstable = import inputs.nixpkgs-unstable {
+            system = pkgs.stdenv.hostPlatform.system;
+            config.allowUnfree = true;
+          };
         in
         {
           # prevent nix-darwin from managing nix, so determinate nix can do it instead
@@ -74,6 +78,13 @@
           nix.settings.git-credential-helper = "!/run/current-system/sw/bin/gh auth git-credential";
 
           programs.fish.enable = true;
+
+          # NOTE(nfejzic): make sure we get the newest 1password available
+          nixpkgs.overlays = [
+            (final: prev: {
+              _1password-gui = unstable._1password-gui;
+            })
+          ];
 
           # install 1password
           programs._1password.enable = true;
@@ -108,7 +119,7 @@
 
       darwinConfigurations."aeration" = nix-darwin.lib.darwinSystem {
         modules = [
-          configuration
+          darwin-configuration
           home-manager.darwinModules.home-manager
           darwinModules.fonts
           {
