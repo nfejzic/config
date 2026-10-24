@@ -82,6 +82,11 @@ in
           zoxide
 
           crush
+
+          # very useful git tools
+          mergiraf
+          difftastic
+          diffsitter
         ];
       in
       builtins.filter (p: !(builtins.elem (lib.getName p) config.nfejzic.excludePackages)) allPackages;
@@ -97,10 +102,14 @@ in
   programs.git = {
     enable = true;
     settings = {
+      core.excludesFile = builtins.path { path = ./git/ignore; };
+
       gpg = {
         format = "ssh";
       };
+
       "gpg \"ssh\"".program = op-ssh-sign;
+
       commit = {
         gpgsign = true;
       };
@@ -108,7 +117,18 @@ in
       user = {
         signingKey = "~/.ssh/id_ed25519.pub";
       };
+
+      # NOTE: see https://mergiraf.org/usage.html#usage
+      merge = {
+        conflictStyle = "diff3";
+        mergiraf = {
+          name = "mergiraf";
+          driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
+        };
+      };
     };
+
+    attributes = [ "* merge=mergiraf" ];
   };
 
   # NOTE: install fonts
