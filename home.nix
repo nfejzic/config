@@ -73,7 +73,7 @@ in
           zellij
           zoxide
 
-          opencode
+          crush
         ];
       in
       builtins.filter (p: !(builtins.elem (lib.getName p) config.nfejzic.excludePackages)) allPackages;
