@@ -37,6 +37,14 @@ in
     ./tmux/init.nix
   ];
 
+  nfejzic.ghostty.font = "comic-code";
+  nfejzic.ghostty.font-features = [
+    "zero"
+    "liga"
+    "calt"
+    "dlig"
+  ];
+
   home = {
     username = config.nfejzic.username;
     homeDirectory = lib.mkDefault "/Users/${config.nfejzic.username}";
