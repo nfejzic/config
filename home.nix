@@ -101,14 +101,25 @@ in
 
   programs.git = {
     enable = true;
-    settings = {
-      core.excludesFile = builtins.path { path = ./git/ignore; };
+    # NOTE: everything here merges with the git config of any flake reusing this
+    # module, so consumers only add what differs (identity, extra ignores, ...).
 
+    # The global ignore list is fed through `ignores` (a list option, so
+    # consumers can append to it) rather than `core.excludesFile`. Setting
+    # `core.excludesFile` would make git skip `~/.config/git/ignore`, silently
+    # dropping every consumer's `programs.git.ignores` entries.
+    ignores = lib.filter (line: line != "" && !lib.hasPrefix "#" line) (
+      lib.splitString "\n" (builtins.readFile ./git/ignore)
+    );
+
+    settings = {
+      # Signing goes through 1Password's SSH agent.
       gpg = {
         format = "ssh";
+        # Nested (not a quoted `"gpg \"ssh\""` key) so it merges with, and can be
+        # overridden by, a consumer's `gpg.ssh.program`.
+        ssh.program = op-ssh-sign;
       };
-
-      "gpg \"ssh\"".program = op-ssh-sign;
 
       commit = {
         gpgsign = true;
@@ -117,6 +128,10 @@ in
       user = {
         signingKey = "~/.ssh/id_ed25519.pub";
       };
+
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      delta.navigate = true;
 
       # NOTE: see https://mergiraf.org/usage.html#usage
       merge = {
