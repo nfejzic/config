@@ -143,6 +143,12 @@ in
       };
 
       push.default = "current";
+
+      push.autoSetupRemote = true;
+      rerere = {
+        enabled = true;
+        autoUpdate = true;
+      };
     };
 
     attributes = [ "* merge=mergiraf" ];
