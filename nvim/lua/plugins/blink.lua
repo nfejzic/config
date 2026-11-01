@@ -35,7 +35,7 @@ require("blink.cmp").setup({
 			auto_show = true,
 		},
 		ghost_text = {
-			enabled = true,
+			enabled = false,
 		},
 	},
 
