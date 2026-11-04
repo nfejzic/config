@@ -37,16 +37,18 @@ inputs:
         config.allowUnfree = true;
       };
 
-      fromGitHub =
-        rev: repo:
-        pkgs'.vimUtils.buildVimPlugin {
-          pname = "${lib.strings.sanitizeDerivationName repo}";
-          version = rev;
-          src = fetchGit {
-            inherit rev;
-            url = "https://github.com/${repo}.git";
-          };
-        };
+      # NOTE: this is useful for installing plugins from github directly
+      # fromGitHub =
+      #   rev: repo:
+      #   pkgs'.vimUtils.buildVimPlugin {
+      #     pname = "${lib.strings.sanitizeDerivationName repo}";
+      #     version = rev;
+      #     src = fetchGit {
+      #       inherit rev;
+      #       url = "https://github.com/${repo}.git";
+      #     };
+      #   };
+
       # Debug adapter for C, C++ and Rust: LLVM's `lldb-dap` (codelldb is
       # not allowed at work). nvim-dap, rustaceanvim and neotest-rust all
       # find it on PATH under this name.
@@ -122,7 +124,6 @@ inputs:
           # `g:bones_compat` is set), so loading one fails without it
           zenbones-nvim
           lush-nvim
-          (fromGitHub "6c641ea0cfc5fbbc0777996320b2304c3811f246" "RostislavArts/naysayer.nvim")
 
           # languages
           rustaceanvim
