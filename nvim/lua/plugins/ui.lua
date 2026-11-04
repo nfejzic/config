@@ -168,6 +168,11 @@ require("rose-pine").setup({
 		QuickFixLine = { fg = "none", bg = "highlight_low", bold = true },
 		["@lsp.type.formatSpecifier"] = { fg = "love" },
 
+		-- WARN/HACK/FIX and FIXME/BUG/ERROR have no background by default;
+		-- give them the tint TODO/NOTE get so all tags read alike
+		["@comment.warning"] = { fg = "gold", bg = "gold", blend = 15 },
+		["@comment.error"] = { fg = "love", bg = "love", blend = 15 },
+
 		-- make coloring consistent...
 		Variable = { fg = "text" },
 		["@variable.builtin"] = { fg = "gold", italic = true },
